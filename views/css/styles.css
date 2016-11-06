@@ -1,0 +1,27 @@
+.sys_msg
+{
+	width:400px;
+	border:red 2px solid;
+	background:#FABBBB;
+	color:red;
+}
+.user_msg
+{
+	width:400px;
+	border:green 2px solid;
+	background:#74E770;
+	color:green;
+}
+.top-bar
+{
+	width:100%;
+	height:70px;
+	background:#ccc;
+	color:black;
+}
+.nav-button
+{
+	float:left;
+	border-right:2px solid white;
+	margin-left:5px;
+}

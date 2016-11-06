@@ -1,8 +1,19 @@
-<form action='user/login' method='POST'>
+<?php require(HEADER); ?>
+<?php if (!isset($_SESSION['user'])) :?>
+<form action='verify' method='POST'>
 <label>Name:</label><input type='text' name='name'/>
 <label>Email:</label><input type='text' name='email'/>
 <label>Password:</label><input type='password' name='password'/>
 <button type='submit'>Submit</button>
 </form>
+<?php endif; ?>
 
-<?php   echo number_format('2354.5000', 2, '.',''); ?>
+<?php 
+
+if (isset($_SESSION['user']))
+{
+	$user = $_SESSION['user'];
+	echo "Welcome " . $user->name . '!';
+}
+
+?>
