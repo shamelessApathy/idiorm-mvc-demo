@@ -1,11 +1,10 @@
 <?php
 
-function return_view($view, $data = null) 
+function return_view($view, $info =null) 
 {
-if (isset($data)){
-	$data = $data;
-}
+
 require(VIEWS . '/' . $view);
+$info = $info;
 }
 
 function sys_msg($msg)

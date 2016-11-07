@@ -1,4 +1,5 @@
 <?php 
+
 require_once('globals.php');
 $controller;
 $method;
@@ -19,6 +20,10 @@ function uri_router($uri) {
 	{
 		$param = $uri[3];
 	}
+if ($controller === 'home')
+{
+	return_view('view.home.php');
+}
 
 $controller_path = CONTROLLERS . '/' . $controller . '.php';
 // currently stuck on a way to call the controller function specified in the URI ambiguously
@@ -27,7 +32,12 @@ if (file_exists($controller_path))
 	$controllerConcat = "$controller" . "Controller";
 	require($controller_path);
 	$new = new $controllerConcat();
-	$new->$method();
+	// had original set the $param = null just in case there would be an error if there wasn't one, we'll see
+	if (!isset($param))
+	{
+		$param = '';
+	}
+	$new->$method($param);
 }
 elseif (!isset($controller))
 {

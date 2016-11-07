@@ -55,4 +55,10 @@ class User {
 
 		
 	}
+	public function info($id)
+	{
+		$id = intval($id);
+		$info = ORM::for_table('users')->where('id', $id)->find_one();
+		return $info;
+	}
 }

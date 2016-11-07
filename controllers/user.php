@@ -1,4 +1,5 @@
 <?php
+
 /*
 *
 *user controller
@@ -33,9 +34,10 @@ public function verify()
 	$user = $model->verify();
 	if ($user)
 	{
-		session_start();
-		$_SESSION['user'] = $user;
-		return_view('view.home.php');
+
+		$_SESSION['user_info'] = $user;
+		$_SESSION['logged_in'] = 1;
+		header('Location: /home');
 		user_msg('login successfull');
 	}
 	else
@@ -43,6 +45,14 @@ public function verify()
 		return_view('view.login.php');
 		sys_msg('Incorrect credentials');
 	}
+}
+public function info($id)
+{
+	require_once(MODELS .'/User.php');
+	$model = new User();
+	$info = $model->info($id);
+	$info =$info;
+	return_view('view.user_info.php',$info);
 }
 
 }
