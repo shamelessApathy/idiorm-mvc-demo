@@ -1,5 +1,6 @@
 <?php require(HEADER); ?>
 <?php //var_dump($_SESSION['data']); ?>
+<h1> This is the homepage </h1>
 <?php if (!isset($_SESSION['user_info'])) :?>
 <form action='/user/verify' method='POST'>
 <label>Name:</label><input type='text' name='name'/>
@@ -18,4 +19,6 @@ if (isset($_SESSION['user_info']))
 }
 
 ?>
-<h1> This is the homepage </h1>
+
+<?php if (isset($_SESSION['user_info'])):?><a href='/post/new_post'> Create a new post!</a><?php endif;?>
+

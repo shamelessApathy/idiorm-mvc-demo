@@ -23,6 +23,16 @@ public function create_new(){
 		sys_msg('Something went wrong and the user was not added');
 	}
 }
+public function get_user_posts()
+{
+	require_once(MODELS . '/User.php');
+	$model = new User();
+	$results = $model->get_user_posts();
+	if ($results)
+	{
+		return_view('view.user_posts.php', $results);
+	}
+}
 public function login()
 {
 	return_view('view.login.php');
@@ -53,6 +63,16 @@ public function info($id)
 	$info = $model->info($id);
 	$info =$info;
 	return_view('view.user_info.php',$info);
+}
+public function logout()
+{
+	require_once(MODELS . '/User.php');
+	$model = new User();
+	if ($model->logout())
+	{
+		return_view('view.home.php');
+		user_msg('Successfully Logged Out!');
+	}
 }
 
 }

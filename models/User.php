@@ -55,10 +55,46 @@ class User {
 
 		
 	}
+	public function get_user_posts()
+	{
+		$author_id = $_SESSION['user_info']->id;
+		$id = intval($author_id);
+		$name = ORM::for_table('users')->where('id', $author_id)->findOne();
+		$name = $name->name;
+		$posts = ORM::for_table('posts')->where('author_id', $author_id)->find_many();
+		$dataObject = ['posts'=>$posts, 'name'=> $name];
+		return $dataObject;
+	}
 	public function info($id)
 	{
 		$id = intval($id);
 		$info = ORM::for_table('users')->where('id', $id)->find_one();
 		return $info;
+	}
+	public function logout()
+	{
+		// Unset all of the session variables.
+		$_SESSION = array();
+
+		// If it's desired to kill the session, also delete the session cookie.
+		// Note: This will destroy the session, and not just the session data!
+		if (ini_get("session.use_cookies")) 
+		{
+    		$params = session_get_cookie_params();
+    		setcookie(session_name(), '', time() - 42000,
+        	$params["path"], $params["domain"],
+        	$params["secure"], $params["httponly"]
+    		);
+		}
+
+		// Finally, destroy the session.
+		if(session_destroy())
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
 	}
 }

@@ -20,10 +20,11 @@ function uri_router($uri) {
 	{
 		$param = $uri[3];
 	}
-if ($controller === 'home')
+if ($controller === 'home' || $controller === '')
 {
 	return_view('view.home.php');
 }
+
 
 $controller_path = CONTROLLERS . '/' . $controller . '.php';
 // currently stuck on a way to call the controller function specified in the URI ambiguously
