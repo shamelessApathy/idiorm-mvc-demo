@@ -1,5 +1,5 @@
 
-<?php require(HEADER);?>
+<?php require_once(HEADER);?>
 
 
 
@@ -24,3 +24,5 @@
 
 
 </body>
+
+<?php require_once(FOOTER); ?>

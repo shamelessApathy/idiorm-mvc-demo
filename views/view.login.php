@@ -1,5 +1,5 @@
 
-<?php require(HEADER); ?>
+<?php require_once(HEADER); ?>
 
 
 <h1> Login</h1>
@@ -12,3 +12,4 @@
 
 
 <a href='register'>Register</a>
+<?php require_once(FOOTER); ?>

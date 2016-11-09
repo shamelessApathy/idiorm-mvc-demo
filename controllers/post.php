@@ -38,4 +38,19 @@ class postController {
 		}
 
 	}
+	public function confirm_delete($id)
+	{
+		return_view('view.confirm_delete.php', $id);
+	}
+	public function delete($id)
+	{
+		require_once(MODELS . '/Post.php');
+		$model = new Post();
+		if ($model->delete($id))
+		{
+			return_view('view.home.php');
+			user_msg('Post successfully deleted');
+
+		}
+	}
 }

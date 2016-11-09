@@ -1,5 +1,5 @@
 
-<?php require(HEADER); ?>
+<?php require_once(HEADER); ?>
 
 
 <h1> Register</h1
@@ -9,3 +9,5 @@
 <label>Password:</label><input type='password' name='password'/>
 <button type='submit'>Submit</button>
 </form>
+
+<?php require_once(FOOTER); ?>

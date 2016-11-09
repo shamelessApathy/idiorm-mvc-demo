@@ -6,10 +6,12 @@ class Post {
 		$author_id = $_SESSION['user_info']->id;
 		$title = $_POST['title'];
 		$body = $_POST['body'];
+		$tags = $_POST['tags'];
 		$newPost = ORM::for_table('posts')->create();
 		$newPost->author_id = $author_id;
 		$newPost->title = $title;
 		$newPost->body = $body;
+		$newPost->tags = $tags;
 		if ($newPost->save())
 		{
 			return true;
@@ -34,6 +36,18 @@ class Post {
 		$post->set('title', $title);
 		$post->set('body', $body);
 		if($post->save())
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+	}
+	public function delete($id)
+	{
+		$post = ORM::for_table('posts')->where('post_id', $id)->find_one();
+		if($post->delete())
 		{
 			return true;
 		}
