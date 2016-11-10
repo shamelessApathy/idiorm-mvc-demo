@@ -55,6 +55,19 @@ class User {
 
 		
 	}
+	public function edit_profile()
+	{
+		$id = $_SESSION['user_info']->id;
+		$profile = ORM::for_table('user_profile')->where('user_id', $id)->find_one();
+		if ($profile)
+		{
+			return $profile;
+		}
+		else
+		{
+			return false;
+		}
+	}
 	public function get_user_posts()
 	{
 		$author_id = $_SESSION['user_info']->id;

@@ -74,5 +74,19 @@ public function logout()
 		user_msg('Successfully Logged Out!');
 	}
 }
+public function edit_profile()
+{
+	require_once(MODELS . '/User.php');
+	$model = new User();
+	$profile = $model->edit_profile();
+	if ($profile)
+	{
+		return_view('view.edit_profile.php', $profile);
+	}
+	else
+	{
+		return_view('view.create_profile.php');
+	}
+}
 
 }
