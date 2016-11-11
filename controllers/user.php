@@ -88,5 +88,23 @@ public function edit_profile()
 		return_view('view.create_profile.php');
 	}
 }
+public function validate_profile()
+{
+	echo $_POST['first_name'];
+}
+public function set_avatar(){
+	require_once(MODELS . '/User.php');
+	$model = new User();
+	$result = $model->set_avatar();
+	if ($result)
+	{
+		return_view('view.edit_profile.php');
+		user_msg('Avatar uploaded successfully');
+	}
+	else
+	{
+		echo $result;
+	}
+}
 
 }

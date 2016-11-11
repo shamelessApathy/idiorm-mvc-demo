@@ -68,6 +68,30 @@ class User {
 			return false;
 		}
 	}
+	public function set_avatar()
+	{
+		var_dump($_FILES);
+		if (isset($_FILES['user_avatar']))
+		{
+			$orig = $_FILES['user_avatar']['name'];
+			$orig = explode('.',$orig);
+			$ext = '.' . $orig[1];
+			$save_path = ROOT . "/users/avatars";
+			$myname = strtolower($_FILES['user_avatar']['tmp_name']); //You are renaming the file here
+  			if(move_uploaded_file($_FILES['user_avatar']['tmp_name'], $save_path.$myname.$ext))
+  			{
+  				$avatar = ORM::for_table('users')->where('id', $_SESSION['user_info']->id)->find_one();
+  				$avatar->set('avatar', '/users/avatars'.$myname.$ext);
+  				$avatar->save();
+  				$_SESSION['user_info']->avatar = '/users/avatars'.$myname.$ext;
+  				return true;
+  			} 
+		}
+		else
+		{
+			echo "not making it";
+		}
+	}
 	public function get_user_posts()
 	{
 		$author_id = $_SESSION['user_info']->id;

@@ -59,3 +59,28 @@
 	right:0;
 	position:absolute;
 }
+
+#blah
+{
+	width:75px;
+	height:75px;
+	display:none;
+}
+.note
+{
+	font-size:9px;
+	color:red;
+}
+.profile_edit_section
+{
+	width:100%;
+	border-top:2px solid black;
+}
+.dob
+{
+	width:30px;
+}
+.dob_year
+{
+	width:60px;
+}
