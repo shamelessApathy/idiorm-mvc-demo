@@ -1,12 +1,16 @@
 <?php
 
 class User {
-
+	/*
+	*
+	* Creates new user
+	*
+	*/
 	public function create_new()
 	{
 
 		//define post data
-		$name = $_POST['name'];
+		$username = $_POST['username'];
 		$email = $_POST['email'];
 		$password = $_POST['password'];
 		// password and salt function
@@ -18,10 +22,11 @@ class User {
 		// add new entry to database
 
 		$newPerson = ORM::for_table('users')->create();
-		$newPerson->name = $name;
 		$newPerson->email = $email;
 		$newPerson->password = $password;
 		$newPerson->salt = $salt;
+		$newPerson->username = $username;
+		$newPerson->level = 2;
 		if($newPerson->save())
 		{
 			return true;
@@ -32,6 +37,11 @@ class User {
 		}
 
 	}
+	/*
+	*
+	* Verifies user identity and checks salted password value against email
+	*
+	*/
 	public function verify()
 	{
 		$name = $_POST['name'];
@@ -51,10 +61,13 @@ class User {
 		else
 		{
 			return false;
-		}
-
-		
+		}		
 	}
+	/*
+	*
+	* Edits the user's profile 
+	*
+	*/
 	public function edit_profile()
 	{
 		$id = $_SESSION['user_info']->id;
@@ -68,6 +81,14 @@ class User {
 			return false;
 		}
 	}
+	/*
+	*
+	* Deals with file handling for setting the user's avatar
+	* Although it is called from the edit_profile view
+	* It was easier to write it seperate from the rest of the
+	* edit profile function due to the file handling
+	*
+	*/
 	public function set_avatar()
 	{
 		var_dump($_FILES);
@@ -92,22 +113,37 @@ class User {
 			echo "not making it";
 		}
 	}
+	/*
+	*
+	* Gets all posts from user currently logged in
+	*
+	*/
 	public function get_user_posts()
 	{
 		$author_id = $_SESSION['user_info']->id;
 		$id = intval($author_id);
-		$name = ORM::for_table('users')->where('id', $author_id)->findOne();
-		$name = $name->name;
+		$user = ORM::for_table('users')->where('id', $author_id)->findOne();
+		$username = $user->username;
 		$posts = ORM::for_table('posts')->where('author_id', $author_id)->find_many();
-		$dataObject = ['posts'=>$posts, 'name'=> $name];
+		$dataObject = ['posts'=>$posts, 'username'=> $username];
 		return $dataObject;
 	}
+	/*
+	*
+	* Gets all user info (don't know if I'm using this anywhere?)
+	*
+	*/
 	public function info($id)
 	{
 		$id = intval($id);
 		$info = ORM::for_table('users')->where('id', $id)->find_one();
 		return $info;
 	}
+	/*
+	*
+	* Logs user out
+	*
+	*/
 	public function logout()
 	{
 		// Unset all of the session variables.

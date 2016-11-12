@@ -2,14 +2,14 @@
 require_once(HEADER);
 
 $posts = $info['posts'];
-$name = $info['name'];
+$name = $info['username'];
 
 ?>
 <div class='container'>
 <div class='row'>
 <h1 class='center'> This is the User Posts page</h1>
 </div>
-
+<?php echo !$posts ? "no posts yet" : ''; ?>
 <?php 
 
 foreach($posts as $post)

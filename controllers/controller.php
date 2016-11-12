@@ -7,6 +7,13 @@ class Controller {
 	*/
 	public function validate($check, $type)
 	{
+		function test_input($data) 
+		{
+  			$data = trim($data);
+  			$data = stripslashes($data);
+  			$data = htmlspecialchars($data);
+  			return $data;
+		}
 		switch ($type)
 		{
 
@@ -23,6 +30,15 @@ class Controller {
 							return false;
 						}
 						break;
+		case 'email' :  $email = test_input($check);
+						if (!filter_var($email, FILTER_VALIDATE_EMAIL)) 
+						{
+  							return false;
+						}
+						else
+						{
+							return true;
+						}
 		default : return 'default';
 
 	}

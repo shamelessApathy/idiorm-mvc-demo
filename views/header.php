@@ -4,6 +4,7 @@
 <head>
 <!-- <meta name="viewport" content="width=device-width, initial-scale=1">-->
 <link href="<?php echo '/views/bootstrap/css/bootstrap.css';?>" rel='stylesheet' type='text/css'/>
+<link href='/views/js/jquery-ui-1.12.1/jquery-ui.css' rel='stylesheet' type='text/css'/>
 <link href="<?php echo '/'. CSS . '/styles.css';?>" rel='stylesheet' type='text/css'/>
 
 </head>
@@ -25,7 +26,7 @@
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
         <li class="active"><?php if(isset($user)):?>
-        <a href="/user/info/<?php echo $user->id;?>"><?php echo $user->name;?></a>
+        <a href="/user/info/<?php echo $user->id;?>"><?php echo $user->email;?></a>
       <?php else:?>
         <a href='/home'>Login</a>
       <?php endif;?>
@@ -54,17 +55,19 @@
         <button type="submit" class="btn btn-default">Submit</button>
       </form>
       <ul class="nav navbar-nav navbar-right">
-        <li><?php if ($_SESSION['user_info']):?><a href="/user/logout">Logout</a></li><?php endif;?>
+        <?php if (isset($user) && $user->level === '1'): ?> <!-- just found out this right here, the user->level returns a string, why? -->
         <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Admin Options <span class="caret"></span></a>
           <ul class="dropdown-menu">
-            <li><a href="#">Action</a></li>
+            <li><a href="/admin/post_manager">Post Manager</a></li>
             <li><a href="#">Another action</a></li>
             <li><a href="#">Something else here</a></li>
             <li role="separator" class="divider"></li>
             <li><a href="#">Separated link</a></li>
           </ul>
         </li>
+        <li><?php if (isset($_SESSION['user_info'])):?><a href="/user/logout">Logout</a></li><?php endif;?>
+      <?php endif; ?>
       </ul>
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
