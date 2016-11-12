@@ -66,6 +66,11 @@
 	height:75px;
 	display:none;
 }
+.user_avatar
+{
+	width:75px;
+	height:75px;
+}
 .note
 {
 	font-size:9px;

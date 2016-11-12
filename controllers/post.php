@@ -1,5 +1,6 @@
 <?php
-class postController {
+require_once(BASE_CONTROLLER);
+class postController extends Controller {
 	public function new_post(){
 		return_view('view.create_post.php');
 	}

@@ -1,11 +1,11 @@
 <?php
-
+require_once(BASE_CONTROLLER);
 /*
 *
 *user controller
 */
 
-Class userController {
+Class userController extends Controller {
 
 public function register(){
 	return_view('view.register.php');
@@ -85,26 +85,26 @@ public function edit_profile()
 	}
 	else
 	{
-		return_view('view.create_profile.php');
+		sys_msg('there was an error retrieving User information');
 	}
-}
-public function validate_profile()
-{
-	echo $_POST['first_name'];
 }
 public function set_avatar(){
-	require_once(MODELS . '/User.php');
-	$model = new User();
-	$result = $model->set_avatar();
-	if ($result)
-	{
+
+
+		require_once(MODELS . '/User.php');
+		$model = new User();
+		$result = $model->set_avatar();
 		return_view('view.edit_profile.php');
-		user_msg('Avatar uploaded successfully');
-	}
-	else
-	{
-		echo $result;
-	}
 }
 
+public function validate_file($function)
+{
+	$file = $_FILES['user_avatar']['tmp_name'];
+	$validate = $this->validate($file, 'image');
+	$function = $this->$function();
+	if ($validate)
+	{
+		$function;
+	}
+}
 }

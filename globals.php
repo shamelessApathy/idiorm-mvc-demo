@@ -3,7 +3,7 @@
 function return_view($view, $info =null) 
 {
 
-require(VIEWS . '/' . $view);
+include(VIEWS . '/' . $view);
 $info = $info;
 }
 

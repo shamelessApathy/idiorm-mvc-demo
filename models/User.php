@@ -58,7 +58,7 @@ class User {
 	public function edit_profile()
 	{
 		$id = $_SESSION['user_info']->id;
-		$profile = ORM::for_table('user_profile')->where('user_id', $id)->find_one();
+		$profile = ORM::for_table('users')->where('id', $id)->find_one();
 		if ($profile)
 		{
 			return $profile;
