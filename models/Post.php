@@ -82,6 +82,18 @@ class Post {
 	}
 	/*
 	*
+	*
+	* Gets author name from the user id
+	*
+	*/
+	public function author($id)
+	{
+		$author_name = ORM::for_table('users')->where('id', $id)->find_one();
+		$author_name = $author_name->username;
+		return $author_name;
+	}
+	/*
+	*
 	* Searches by date, converts dd/mm/yyyy to unix time stamp
 	*
 	*/
@@ -89,9 +101,32 @@ class Post {
 	{
 		$begin = $_POST['begin_range'];
 		$end = $_POST['end_range'];
+		$beginPost = $begin;
+		$endPost = $end;
 		$begin = strtotime($begin);
 		$end = strtotime($end);
 		$posts = ORM::for_table('posts')->where_gte('created_at', $begin)->find_many();
+		foreach ($posts as $post)
+		{
+			$id = $post->author_id;
+			$author_name = $this->author($id);
+			$post->author_name = $author_name;
+		}
+		$_SESSION['search_params'] = array('begin'=>$beginPost, 'end' => $endPost);
+		return $posts;
+	}
+	public function search_posts()
+	{
+		$param = $_POST['parameter'];
+		$query = $_POST['query'];
+		$posts = ORM::for_table('posts')->where($param, $query)->find_many();
+		foreach ($posts as $post)
+		{
+			$id = $post->author_id;
+			$author_name = $this->author($id);
+			$post->author_name = $author_name;
+		}
+		$_SESSION['search_params'] = array('Type' => $param, 'Search Field' => $query);
 		return $posts;
 	}
 }

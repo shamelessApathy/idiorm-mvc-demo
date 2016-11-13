@@ -38,7 +38,7 @@ public function create_new(){
 	}
 }
 /*
-* Call model's get_user_posts() function
+* Call model's get_user_posts() function   ** Why did I do this? It should be some one->toMany relationship to the posts model::: i think
 */
 public function get_user_posts()
 {
