@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "fb136c1efebec539bc74acee68be3b51",
-    "content-hash": "d2d7242e71a12cb5fd66645dae8f1ec0",
+    "hash": "10344b10301134ded4ec8f0042bb6b53",
+    "content-hash": "db67bd9e141c9a4f68c7fb8d9864b44c",
     "packages": [
         {
             "name": "j4mie/idiorm",
@@ -64,6 +64,66 @@
                 "query builder"
             ],
             "time": "2013-12-12 10:25:27"
+        },
+        {
+            "name": "j4mie/paris",
+            "version": "v1.5.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/j4mie/paris.git",
+                "reference": "974afe5fe85c36b5744d4fe2512c0d9771340cc7"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/j4mie/paris/zipball/974afe5fe85c36b5744d4fe2512c0d9771340cc7",
+                "reference": "974afe5fe85c36b5744d4fe2512c0d9771340cc7",
+                "shasum": ""
+            },
+            "require": {
+                "j4mie/idiorm": "1.4.*",
+                "php": ">=5.2.0"
+            },
+            "type": "library",
+            "autoload": {
+                "classmap": [
+                    "paris.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-2-Clause",
+                "BSD-3-Clause",
+                "BSD-4-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Simon Holywell",
+                    "email": "treffynnon@php.net",
+                    "homepage": "http://simonholywell.com",
+                    "role": "Maintainer"
+                },
+                {
+                    "name": "Jamie Matthews",
+                    "email": "jamie.matthews@gmail.com",
+                    "homepage": "http://j4mie.org",
+                    "role": "Developer"
+                },
+                {
+                    "name": "Durham Hale",
+                    "email": "me@durhamhale.com",
+                    "homepage": "http://durhamhale.com",
+                    "role": "Maintainer"
+                }
+            ],
+            "description": "A lightweight Active Record implementation for PHP5, built on top of Idiorm",
+            "homepage": "http://j4mie.github.com/idiormandparis",
+            "keywords": [
+                "Active Record",
+                "model",
+                "orm",
+                "paris"
+            ],
+            "time": "2014-06-22 01:26:35"
         }
     ],
     "packages-dev": [],

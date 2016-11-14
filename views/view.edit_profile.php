@@ -1,6 +1,7 @@
 <?php 
 
 require(HEADER);
+var_dump($info);
 if (isset($_SESSION['user_info']))
 {
 	$user = $_SESSION['user_info'];
@@ -30,7 +31,7 @@ if (isset($_SESSION['user_info']))
 </form>
 </div></div>
 </div>
-<form name="user_profile">
+<form name="user_profile" action='/profile/update' method='POST'>
 <div class='row'>
 <div class='profile_edit_section'>
 <div class='col-md-6'>

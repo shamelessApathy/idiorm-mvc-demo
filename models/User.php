@@ -1,22 +1,29 @@
 <?php
 
-class User {
+class User extends Model {
+
+	//new
+	public function id()
+	{
+		return $_SESSION['user_info']->id;
+	}
 	/*
 	*
 	* Creates new user
 	*
 	*/
-	public function create_new()
+	public function create_new($username,$email,$password)
 	{
 
-		//define post data
-		$username = $_POST['username'];
-		$email = $_POST['email'];
-		$password = $_POST['password'];
+
 		// password and salt function
 		$password = $password;
 		$password = hash('sha256', $password);
-		$salt = substr(md5(microtime()),rand(0,26),5);
+		$salt = openssl_random_psuedo_bytes(64, $crypto);
+		if (!$crypto)
+		{
+			trigger_error("This server does not support the cryptography method attempted.");
+		}
 		$password = $password . $salt;
 
 		// add new entry to database
@@ -42,15 +49,12 @@ class User {
 	* Verifies user identity and checks salted password value against email
 	*
 	*/
-	public function verify()
+	public function verify($email,$password)
 	{
-		$name = $_POST['name'];
-		$email = $_POST['email'];
-		$password = $_POST['password'];
 		// hash password to match
 		$password = hash('sha256', $password);
 		// retrieve salt hash
-		$user = ORM::for_table('users')->where('email' , $email)->findOne();
+		$user = ORM::for_table('user')->where('email' , $email)->findOne();
 		$salt = $user->salt;
 		// concatenate salt with password
 		$password = $password . $salt;
@@ -68,10 +72,10 @@ class User {
 	* Edits the user's profile 
 	*
 	*/
-	public function edit_profile()
+	public function edit_profile($id)
 	{
-		$id = $_SESSION['user_info']->id;
-		$profile = ORM::for_table('users')->where('id', $id)->find_one();
+		
+		$profile = ORM::for_table('user')->where('id', $id)->find_one();
 		if ($profile)
 		{
 			return $profile;
@@ -101,7 +105,7 @@ class User {
 			$myname = strtolower($_FILES['user_avatar']['tmp_name']); //You are renaming the file here
   			if(move_uploaded_file($_FILES['user_avatar']['tmp_name'], $save_path.$myname.$ext))
   			{
-  				$avatar = ORM::for_table('users')->where('id', $_SESSION['user_info']->id)->find_one();
+  				$avatar = ORM::for_table('user')->where('id', $_SESSION['user_info']->id)->find_one();
   				$avatar->set('avatar', '/users/avatars'.$myname.$ext);
   				$avatar->save();
   				$_SESSION['user_info']->avatar = '/users/avatars'.$myname.$ext;
@@ -122,9 +126,9 @@ class User {
 	{
 		$author_id = $_SESSION['user_info']->id;
 		$id = intval($author_id);
-		$user = ORM::for_table('users')->where('id', $author_id)->findOne();
+		$user = ORM::for_table('user')->where('id', $author_id)->findOne();
 		$username = $user->username;
-		$posts = ORM::for_table('posts')->where('author_id', $author_id)->find_many();
+		$posts = ORM::for_table('post')->where('author_id', $author_id)->find_many();
 		$dataObject = ['posts'=>$posts, 'username'=> $username];
 		return $dataObject;
 	}
@@ -136,7 +140,7 @@ class User {
 	public function info($id)
 	{
 		$id = intval($id);
-		$info = ORM::for_table('users')->where('id', $id)->find_one();
+		$info = ORM::for_table('user')->where('id', $id)->find_one();
 		return $info;
 	}
 	/*
@@ -172,14 +176,19 @@ class User {
 	}
 	public function get_all()
 	{
-		$users = ORM::for_table('users')->select('username')->select('email')->select('level')->select('id')->find_many();
+		$users = ORM::for_table('user')->select('username')->select('email')->select('level')->select('id')->find_many();
 		foreach ($users as $user)
 		{
 			$id = $user->id;
-			$posts = ORM::for_table('posts')->where('author_id', $id)->find_many();
+			$posts = ORM::for_table('post')->where('author_id', $id)->find_many();
 			$number = count($posts);
 			$user->number_posts = $number;
 		}
 		return $users;
+	}
+	//new
+	public function profile()
+	{
+		return $this->has_one('Profile');
 	}
 }

@@ -40,7 +40,7 @@
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Options <span class="caret"></span></a>
           <ul class="dropdown-menu">
             <li><a href="/post/new_post">New Post</a></li>
-            <li><a href="/user/edit_profile">Edit Profile</a></li>
+            <li><a href="/profile/edit_profile">Edit Profile</a></li>
             <li><a href="#">Something else here</a></li>
             <li role="separator" class="divider"></li>
             <li><a href="#">Separated link</a></li>

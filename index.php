@@ -1,6 +1,7 @@
 <?php 
 
 require('vendor/j4mie/idiorm/idiorm.php');
+require('vendor/j4mie/paris/paris.php');
 require('constants.php');
 require('globals.php');
 require('uri_router.php');

@@ -13,7 +13,7 @@ class Post {
 		$title = $_POST['title'];
 		$body = $_POST['body'];
 		$tags = $_POST['tags'];
-		$newPost = ORM::for_table('posts')->create();
+		$newPost = ORM::for_table('post')->create();
 		$newPost->author_id = $author_id;
 		$newPost->title = $title;
 		$newPost->body = $body;
@@ -36,7 +36,7 @@ class Post {
 	public function get_post($id)
 	{
 		$id = $id;
-		$post = ORM::for_table('posts')->where('post_id', $id)->find_one();
+		$post = ORM::for_table('post')->where('post_id', $id)->find_one();
 		return $post;
 	}
 	/*
@@ -50,7 +50,7 @@ class Post {
 		$time = time();
 		$title = $_POST['title'];
 		$body = $_POST['body'];
-		$post = ORM::for_table('posts')->where('post_id', $id)->find_one();
+		$post = ORM::for_table('post')->where('post_id', $id)->find_one();
 		$post->set('title', $title);
 		$post->set('body', $body);
 		$post->set('updated_at', $time );
@@ -70,7 +70,7 @@ class Post {
 	*/
 	public function delete($id)
 	{
-		$post = ORM::for_table('posts')->where('post_id', $id)->find_one();
+		$post = ORM::for_table('post')->where('post_id', $id)->find_one();
 		if($post->delete())
 		{
 			return true;
@@ -88,7 +88,7 @@ class Post {
 	*/
 	public function author($id)
 	{
-		$author_name = ORM::for_table('users')->where('id', $id)->find_one();
+		$author_name = ORM::for_table('user')->where('id', $id)->find_one();
 		$author_name = $author_name->username;
 		return $author_name;
 	}
@@ -105,7 +105,7 @@ class Post {
 		$endPost = $end;
 		$begin = strtotime($begin);
 		$end = strtotime($end);
-		$posts = ORM::for_table('posts')->where_gte('created_at', $begin)->find_many();
+		$posts = ORM::for_table('post')->where_gte('created_at', $begin)->find_many();
 		foreach ($posts as $post)
 		{
 			$id = $post->author_id;
@@ -127,7 +127,7 @@ class Post {
 			$param = 'author_id';
 			$query = $id;
 		}
-		$posts = ORM::for_table('posts')->where($param, $query)->find_many();
+		$posts = ORM::for_table('post')->where($param, $query)->find_many();
 		foreach ($posts as $post)
 		{
 			$id = $post->author_id;

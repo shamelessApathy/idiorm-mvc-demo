@@ -10,7 +10,10 @@ class ComposerStaticInit29ed2090a64a518d498089eaa7ea3306
         'IdiormResultSet' => __DIR__ . '/..' . '/j4mie/idiorm/idiorm.php',
         'IdiormString' => __DIR__ . '/..' . '/j4mie/idiorm/idiorm.php',
         'IdiormStringException' => __DIR__ . '/..' . '/j4mie/idiorm/idiorm.php',
+        'Model' => __DIR__ . '/..' . '/j4mie/paris/paris.php',
         'ORM' => __DIR__ . '/..' . '/j4mie/idiorm/idiorm.php',
+        'ORMWrapper' => __DIR__ . '/..' . '/j4mie/paris/paris.php',
+        'ParisMethodMissingException' => __DIR__ . '/..' . '/j4mie/paris/paris.php',
     );
 
     public static function getInitializer(ClassLoader $loader)

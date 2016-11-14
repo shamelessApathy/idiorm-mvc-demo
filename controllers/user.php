@@ -17,10 +17,14 @@ public function register(){
 */
 public function create_new(){
 	if ($this->validate($_POST['email'], 'email'))
-	{
+	{	
+		//define post data
+		$username = $_POST['username'];
+		$email = $_POST['email'];
+		$password = $_POST['password'];
 		require_once(MODELS . '/User.php');
 		$model = new User();
-		if($model->create_new())
+		if($model->create_new($username,$email,$password))
 		{
 			return_view('view.home.php');
 			user_msg('New User created successfully!');
@@ -62,9 +66,11 @@ public function login()
 */
 public function verify()
 {
+	$email = $_POST['email'];
+	$password = $_POST['password'];
 	require_once(MODELS . '/User.php');
 	$model = new User();
-	$user = $model->verify();
+	$user = $model->verify($email,$password);
 	if ($user)
 	{
 
@@ -108,9 +114,10 @@ public function logout()
 */ 
 public function edit_profile()
 {
+	$id = $_SESSION['user_info']->id;
 	require_once(MODELS . '/User.php');
 	$model = new User();
-	$profile = $model->edit_profile();
+	$profile = $model->profile();
 	if ($profile)
 	{
 		return_view('view.edit_profile.php', $profile);

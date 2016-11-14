@@ -1,5 +1,6 @@
 {
     "require": {
-        "j4mie/idiorm": "1.4.1"
+        "j4mie/idiorm": "1.4.1",
+        "j4mie/paris": "^1.5"
     }
 }
