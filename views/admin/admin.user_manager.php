@@ -14,7 +14,14 @@
 		<?php if (isset($info)): ?>
 		<?php 
 		foreach ($info as $user)
-		{
+		{ 
+			public function level($check){
+				$level = $user->level;
+				if ($level === $check)
+				{
+					return "selected='selected'";
+				}
+			}
 			echo "
 			<div class='post_preview'>
 			<p>Username : $user->username</p>
@@ -23,6 +30,14 @@
 			<p>Number of posts: $user->number_posts</p>
 			<div class='user_actions'>
 			<a href='/post/search_posts/$user->id'>Get Posts</a>
+			<form action='/user/set_level'>
+			<select name='level'>
+			<option  value='1'>Admin</option>
+			<option ($user->level == 2) ? selected='selected' : '' value='2'>User</option>
+			<option ($user->level == 3) ? selected='selected' : '' value='3'>Disabled</option>
+			</select>
+			<button type='submit'>Submit</button>
+			</form>
 			</div>
 			</div>
 			";

@@ -172,7 +172,7 @@ class User {
 	}
 	public function get_all()
 	{
-		$users = ORM::for_table('users')->select('username')->select('email')->select('id')->find_many();
+		$users = ORM::for_table('users')->select('username')->select('email')->select('level')->select('id')->find_many();
 		foreach ($users as $user)
 		{
 			$id = $user->id;
