@@ -5,4 +5,8 @@ class adminController extends Controller {
 	{
 		return_view('admin/admin.post_manager.php');
 	}
+	public function user_manager()
+	{
+		return_view('admin/admin.user_manager.php');
+	}
 }

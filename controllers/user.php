@@ -147,6 +147,13 @@ public function validate_file($function)
 		$function;
 	}
 }
+public function get_all()
+{
+	require_once(MODELS . '/User.php');
+	$model = new User();
+	$users = $model->get_all();
+	return_view('admin/admin.user_manager.php', $users);
+}
 /*
 *
 * Calls post_manager view

@@ -115,10 +115,18 @@ class Post {
 		$_SESSION['search_params'] = array('begin'=>$beginPost, 'end' => $endPost);
 		return $posts;
 	}
-	public function search_posts()
-	{
+	public function search_posts($id = null)
+	{	
+		if (isset($_POST['parameter']))
+		{
 		$param = $_POST['parameter'];
 		$query = $_POST['query'];
+		}
+		if (isset($id))
+		{
+			$param = 'author_id';
+			$query = $id;
+		}
 		$posts = ORM::for_table('posts')->where($param, $query)->find_many();
 		foreach ($posts as $post)
 		{

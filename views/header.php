@@ -35,6 +35,7 @@
         <?php if(isset($user)):?>
         <li><a href="/user/get_user_posts">My Posts</a></li>
       <?php endif;?>
+      <?php if (isset($user)):?>
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Options <span class="caret"></span></a>
           <ul class="dropdown-menu">
@@ -47,6 +48,12 @@
             <li><a href="#">One more separated link</a></li>
           </ul>
         </li>
+      <?php endif;?>
+      <?php if (!isset($user)):?>
+        <li>
+          <a href='/user/register'>Register</a>
+        </li>
+      <?php endif;?>
       </ul>
       <form class="navbar-form navbar-left">
         <div class="form-group">
@@ -60,7 +67,7 @@
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Admin Options <span class="caret"></span></a>
           <ul class="dropdown-menu">
             <li><a href="/admin/post_manager">Post Manager</a></li>
-            <li><a href="#">Another action</a></li>
+            <li><a href="/admin/user_manager">User Manager</a></li>
             <li><a href="#">Something else here</a></li>
             <li role="separator" class="divider"></li>
             <li><a href="#">Separated link</a></li>

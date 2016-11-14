@@ -110,3 +110,10 @@
 	margin:0 auto;
 	padding-bottom:10px;
 }
+.user_actions
+{
+	position:absolute;
+	right:0;
+	top:0;
+	width:100px;
+}

@@ -170,4 +170,16 @@ class User {
 			return false;
 		}
 	}
+	public function get_all()
+	{
+		$users = ORM::for_table('users')->select('username')->select('email')->select('id')->find_many();
+		foreach ($users as $user)
+		{
+			$id = $user->id;
+			$posts = ORM::for_table('posts')->where('author_id', $id)->find_many();
+			$number = count($posts);
+			$user->number_posts = $number;
+		}
+		return $users;
+	}
 }

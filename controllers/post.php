@@ -82,11 +82,11 @@ class postController extends Controller {
 		$posts = $model->search_by_date();
 		return_view('view.posts.php', $posts);
 	}
-	public function search_posts()
+	public function search_posts($id = null)
 	{
 		require_once(MODELS . '/Post.php');
 		$model = new Post();
-		$posts = $model->search_posts();
+		$posts = $model->search_posts($id);
 		return_view('view.posts.php', $posts);
 	}
 }
