@@ -161,4 +161,8 @@ public static $_table_use_short_name = true;
 	{
 		return $this->has_one('Profile','user_id','id');
 	}
+	public function posts()
+	{
+		return $this->has_many('Post','author_id','id');
+	}
 }

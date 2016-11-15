@@ -1,6 +1,6 @@
 <?php
 
-class Post {
+class Post extends Model {
 	/*
 	*
 	* Creates new post
@@ -69,17 +69,9 @@ class Post {
 	* Deletes post
 	*
 	*/
-	public function delete($id)
+	public function delete()
 	{
-		$post = ORM::for_table('post')->where('post_id', $id)->find_one();
-		if($post->delete())
-		{
-			return true;
-		}
-		else
-		{
-			return false;
-		}
+		$this->delete();
 	}
 	/*
 	*
@@ -123,7 +115,7 @@ class Post {
 		$param = $_POST['parameter'];
 		$query = $_POST['query'];
 		}
-		if (isset($id))
+		if (!empty($id))
 		{
 			$param = 'author_id';
 			$query = $id;
@@ -137,5 +129,9 @@ class Post {
 		}
 		$_SESSION['search_params'] = array('Type' => $param, 'Search Field' => $query);
 		return $posts;
+	}
+	public function user()
+	{
+		$this->belongs_to('User');
 	}
 }

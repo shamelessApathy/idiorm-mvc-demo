@@ -64,17 +64,15 @@ class postController extends Controller {
 	/*
 	* calls delete function
 	*/
-	public function delete($id)
+	public function delete($post_id)
 	{
 		require_once(MODELS . '/Post.php');
-		$model = new Post();
-		if ($model->delete($id))
-		{
-			return_view('view.home.php');
-			user_msg('Post successfully deleted');
-
-		}
+		$post = Model::factory('Post')->find_one($post_id);
+		$log = ORM::get_last_query();
+		var_dump($log);
+		$post->delete();
 	}
+
 	public function search_by_date()
 	{
 		require_once(MODELS . '/Post.php');
@@ -89,4 +87,14 @@ class postController extends Controller {
 		$posts = $model->search_posts($id);
 		return_view('view.posts.php', $posts);
 	}
+	public function test($user_id)
+	{
+		require_once(MODELS . "/User.php");
+		require_once(MODELS . '/Post.php');
+		$user = Model::factory('User')->find_one($user_id);
+		$posts =$user->posts()->find_many();
+		var_dump($posts);
+
+	}
+
 }

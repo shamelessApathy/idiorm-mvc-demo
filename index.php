@@ -8,6 +8,7 @@ require('uri_router.php');
 ORM::configure('mysql:host=localhost;dbname=idiorm');
 ORM::configure('username', 'root');
 ORM::configure('password', 'Poke8112');
+ORM::configure('logging', true);
 session_start();
 
 $uri = $_SERVER['REQUEST_URI'];
