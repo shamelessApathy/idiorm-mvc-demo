@@ -85,38 +85,8 @@ public static $_table_use_short_name = true;
 			return false;
 		}
 	}
-	/*
-	*
-	* Deals with file handling for setting the user's avatar
-	* Although it is called from the edit_profile view
-	* It was easier to write it seperate from the rest of the
-	* edit profile function due to the file handling
-	*
-	*/
-	public function set_avatar()
-	{
-		var_dump($_FILES);
-		if (isset($_FILES['user_avatar']))
-		{
-			$orig = $_FILES['user_avatar']['name'];
-			$orig = explode('.',$orig);
-			$ext = '.' . $orig[1];
-			$save_path = ROOT . "/users/avatars";
-			$myname = strtolower($_FILES['user_avatar']['tmp_name']); //You are renaming the file here
-  			if(move_uploaded_file($_FILES['user_avatar']['tmp_name'], $save_path.$myname.$ext))
-  			{
-  				$avatar = ORM::for_table('user')->where('id', $_SESSION['user_info']->id)->find_one();
-  				$avatar->set('avatar', '/users/avatars'.$myname.$ext);
-  				$avatar->save();
-  				$_SESSION['user_info']->avatar = '/users/avatars'.$myname.$ext;
-  				return true;
-  			} 
-		}
-		else
-		{
-			echo "not making it";
-		}
-	}
+
+	
 	/*
 	*
 	* Gets all posts from user currently logged in

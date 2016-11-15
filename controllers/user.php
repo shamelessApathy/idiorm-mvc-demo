@@ -127,17 +127,7 @@ public function edit_profile()
 		sys_msg('there was an error retrieving User information');
 	}
 }
-/*
-* calls set_avatar function
-*/
-public function set_avatar(){
 
-
-		require_once(MODELS . '/User.php');
-		$model = new User();
-		$result = $model->set_avatar();
-		header('Location: /user/edit_profile');;
-}
 /*
 * prepares data and sends it to validate() inherent function
 * I think this may be able to be avoided with careful structuring of
@@ -146,6 +136,7 @@ public function set_avatar(){
 */
 public function validate_file($function)
 {
+
 	$file = $_FILES['user_avatar']['tmp_name'];
 	$validate = $this->validate($file, 'image');
 	$function = $this->$function();
@@ -153,6 +144,7 @@ public function validate_file($function)
 	{
 		$function;
 	}
+	
 }
 public function get_all()
 {

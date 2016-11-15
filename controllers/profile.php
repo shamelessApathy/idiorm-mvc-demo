@@ -1,6 +1,23 @@
 <?php
 require_once(BASE_CONTROLLER);
 class profileController extends Controller {
+	public function edit_profile($bool = null)
+	{
+		require_once(MODELS . "/User.php");
+		require_once(MODELS . '/Profile.php');
+		$user_id = $_SESSION['user_info']->id;
+		$user = Model::factory('User')->find_one($user_id);
+		$profile =$user->profile()->find_one();
+		if($bool)
+		{
+		return_view('view.edit_profile.php', $profile);
+		user_msg('profile edited successfully!');
+		}
+		else
+		{
+		return_view('view.edit_profile.php', $profile);
+		}
+	}
 	public function update()
 	{
 		$id = $_SESSION['user_info']->id;
@@ -13,26 +30,48 @@ class profileController extends Controller {
 		$state = $_POST['state'];
 		$zipcode = $_POST['zip_code'];
 		$info = array('user_id' =>$id, 'first_name' => $firstname, 'middle_name' => $middlename, 'last_name' => $lastname, 'dob' => $dob, 'street_address' => $streetaddress, 'city' => $city, 'state' => $state, 'zip_code' => $zipcode);
-		require(MODELS . '/Profile.php');
+		require_once(MODELS . '/Profile.php');
 		$model = new Profile();
 		$model->update($info);
-		$profile = $model->user();
-		return_view('view.edit_profile.php', $profile );
+		$this->edit_profile(true);
 	}
-	public function edit_profile()
+/*
+* calls set_avatar function
+*/
+	public function set_avatar()
 	{
-		$user_id = $_SESSION['user_info']->id;
-		require(MODELS . '/Profile.php');
+		require_once(MODELS . '/Profile.php');
 		$model = new Profile();
-		$profile = $model->info($user_id);
-		return_view('view.edit_profile.php', $profile);
+		$result = $model->set_avatar();
+		if ($result)
+		{
+		header('Location: /profile/edit_profile');;
+		}
+		else
+		{
+			return_view('view.edit_profile.php');
+			sys_msg('Need to select a file for your avatar');
+		}
 	}
-	public function user()
+	public function validate_file($function)
 	{
-		require(MODELS . '/Profile.php');
-		$model = new Profile();
-		$model->user();
+	if (!isset($_FILES['user_avatar']['error']))
+	{
+		$file = $_FILES['user_avatar']['tmp_name'];
+		$validate = $this->validate($file, 'image');
+		$function = $this->$function();
+		if ($validate)
+		{
+			$function;
+		}
 	}
+	else
+	{
+		$this->edit_profile();
+	}
+}
+
+
 
 }
 
