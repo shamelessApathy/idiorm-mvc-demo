@@ -6,6 +6,7 @@ class Post {
 	* Creates new post
 	*
 	*/
+	public static $_table_use_short_name = true;
 	public function create_new()
 	{
 		$time = time();

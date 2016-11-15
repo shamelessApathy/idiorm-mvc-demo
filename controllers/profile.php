@@ -27,6 +27,12 @@ class profileController extends Controller {
 		$profile = $model->info($user_id);
 		return_view('view.edit_profile.php', $profile);
 	}
+	public function user()
+	{
+		require(MODELS . '/Profile.php');
+		$model = new Profile();
+		$model->user();
+	}
 
 }
 

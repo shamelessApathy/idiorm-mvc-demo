@@ -1,7 +1,7 @@
 <?php
 
 class User extends Model {
-
+public static $_table_use_short_name = true;
 	//new
 	public function id()
 	{
@@ -189,6 +189,6 @@ class User extends Model {
 	//new
 	public function profile()
 	{
-		return $this->has_one('Profile');
+		return $this->has_one('Profile','user_id','id');
 	}
 }
