@@ -11,7 +11,12 @@ class Post extends Model {
 	public function create_new()
 	{
 		$time = time();
+		var_dump($time);
 		$author_id = $_SESSION['user_info']->id;
+		require_once(MODELS . "/User.php");
+		$user = Model::factory('User')->find_one($author_id);
+		$author_name = $user->username;
+		var_dump($author_name);
 		$title = $_POST['title'];
 		$body = $_POST['body'];
 		$tags = $_POST['tags'];
@@ -19,7 +24,8 @@ class Post extends Model {
 		$newPost->author_id = $author_id;
 		$newPost->title = $title;
 		$newPost->body = $body;
-		$newPost->tags = $tags;
+		$newPost->author_name = $author_name;
+		$newPost->post_tags = $tags;
 		$newPost->created_at = $time;
 		if ($newPost->save())
 		{
@@ -27,7 +33,7 @@ class Post extends Model {
 		}
 		else
 		{
-			return false;
+			var_dump($e->getMessage());
 		}
 	}
 	/*
@@ -52,9 +58,12 @@ class Post extends Model {
 		$time = time();
 		$title = $_POST['title'];
 		$body = $_POST['body'];
+		$tags = $_POST['tags'];
+		var_dump($tags);
 		$post = ORM::for_table('post')->where('post_id', $id)->find_one();
 		$post->set('title', $title);
 		$post->set('body', $body);
+		$post->set('post_tags', $tags);
 		$post->set('updated_at', $time );
 		if($post->save())
 		{

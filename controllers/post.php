@@ -29,6 +29,10 @@ class postController extends Controller {
 			header('Location:/home');
 			user_msg('Post created successfully'); // <-- this doesn't work, why?
 		}
+		else
+		{
+			echo 'something went wrong';
+		}
 	}
 	/*
 	* Calls view to edit post
@@ -51,6 +55,10 @@ class postController extends Controller {
 		if ($model->update_post($id))
 		{
 			$this->show_post($id);
+		}
+		else
+		{
+			echo 'something happeneds';
 		}
 
 	}
