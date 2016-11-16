@@ -67,7 +67,9 @@ class postController extends Controller {
 	public function delete($post_id)
 	{
 		require_once(MODELS . '/Post.php');
+		$post_id = intval($post_id);
 		$post = Model::factory('Post')->find_one($post_id);
+		var_dump($post);
 		$log = ORM::get_last_query();
 		var_dump($log);
 		$post->delete();

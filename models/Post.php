@@ -7,6 +7,7 @@ class Post extends Model {
 	*
 	*/
 	public static $_table_use_short_name = true;
+	public static $_id_column = 'post_id';
 	public function create_new()
 	{
 		$time = time();
@@ -69,10 +70,7 @@ class Post extends Model {
 	* Deletes post
 	*
 	*/
-	public function delete()
-	{
-		$this->delete();
-	}
+
 	/*
 	*
 	*
