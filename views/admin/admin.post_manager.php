@@ -12,6 +12,7 @@ require(HEADER);
 	<option value='tags'>Tags</option>
 	<option value='title'>Title</option>
 	<option value='username'>Username</option>
+	<option value='post_id'>Post ID</option>
 </select>
 <input type='text' name='query'>
 <button type='submit'>Submit</button>

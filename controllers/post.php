@@ -22,9 +22,13 @@ class postController extends Controller {
 	*/
 	public function create_new()
 	{
+		$title = $_POST['title'];
+		$body = $_POST['body'];
+		$tags = $_POST['tags'];
+		$author_id = $_SESSION['user_info']->id;
 		require_once(MODELS . '/Post.php');
 		$model = new Post();
-		$result = $model->create_new();
+		$result = $model->create_new($title, $body, $tags, $author_id);
 		if ($result){
 			header('Location:/home');
 			user_msg('Post created successfully'); // <-- this doesn't work, why?
@@ -50,9 +54,12 @@ class postController extends Controller {
 	public function update_post($id)
 	{
 		$id = $id;
+		$title = $_POST['title'];
+		$body = $_POST['body'];
+		$tags = $_POST['tags'];
 		require_once(MODELS . '/Post.php');
 		$model = new Post();
-		if ($model->update_post($id))
+		if ($model->update_post($title, $body, $tags, $id))
 		{
 			$this->show_post($id);
 		}
@@ -92,9 +99,25 @@ class postController extends Controller {
 	}
 	public function search_posts($id = null)
 	{
+		if (isset($_POST['parameter']))
+		{
+		$param = $_POST['parameter'];
+		$query = $_POST['query'];
+		}
+		if (!empty($id))
+		{
+			$param = 'author_id';
+			$query = $id;
+		}
 		require_once(MODELS . '/Post.php');
 		$model = new Post();
-		$posts = $model->search_posts($id);
+		$posts = $model->search_posts($id, $param, $query);
+		foreach ($posts as $post)
+		{
+			$id = $post->author_id;
+			$author_name = $model->author($id);
+			$post->author_name = $author_name;
+		}
 		return_view('view.posts.php', $posts);
 	}
 	public function test($user_id)

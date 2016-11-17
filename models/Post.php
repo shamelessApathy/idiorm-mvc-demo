@@ -8,18 +8,12 @@ class Post extends Model {
 	*/
 	public static $_table_use_short_name = true;
 	public static $_id_column = 'post_id';
-	public function create_new()
+	public function create_new($title, $body, $tags = null, $author_id)
 	{
-		$time = time();
-		var_dump($time);
-		$author_id = $_SESSION['user_info']->id;
+		$time = time();		
 		require_once(MODELS . "/User.php");
 		$user = Model::factory('User')->find_one($author_id);
-		$author_name = $user->username;
-		var_dump($author_name);
-		$title = $_POST['title'];
-		$body = $_POST['body'];
-		$tags = $_POST['tags'];
+		$author_name = $user->username;		
 		$newPost = ORM::for_table('post')->create();
 		$newPost->author_id = $author_id;
 		$newPost->title = $title;
@@ -52,14 +46,10 @@ class Post extends Model {
 	* Get's a post by it's id, and then updates it
 	*
 	*/
-	public function update_post($id)
+	public function update_post($title, $body, $tags = null, $id)
 	{
 		$id = intval($id);
 		$time = time();
-		$title = $_POST['title'];
-		$body = $_POST['body'];
-		$tags = $_POST['tags'];
-		var_dump($tags);
 		$post = ORM::for_table('post')->where('post_id', $id)->find_one();
 		$post->set('title', $title);
 		$post->set('body', $body);
@@ -74,11 +64,6 @@ class Post extends Model {
 			return false;
 		}
 	}
-	/*
-	*
-	* Deletes post
-	*
-	*/
 
 	/*
 	*
@@ -115,25 +100,9 @@ class Post extends Model {
 		$_SESSION['search_params'] = array('begin'=>$beginPost, 'end' => $endPost);
 		return $posts;
 	}
-	public function search_posts($id = null)
+	public function search_posts($id = null, $param = null, $query = null)
 	{	
-		if (isset($_POST['parameter']))
-		{
-		$param = $_POST['parameter'];
-		$query = $_POST['query'];
-		}
-		if (!empty($id))
-		{
-			$param = 'author_id';
-			$query = $id;
-		}
 		$posts = ORM::for_table('post')->where($param, $query)->find_many();
-		foreach ($posts as $post)
-		{
-			$id = $post->author_id;
-			$author_name = $this->author($id);
-			$post->author_name = $author_name;
-		}
 		$_SESSION['search_params'] = array('Type' => $param, 'Search Field' => $query);
 		return $posts;
 	}
