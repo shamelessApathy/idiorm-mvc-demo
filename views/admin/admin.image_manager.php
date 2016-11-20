@@ -30,6 +30,7 @@ if(isset($info))
 			  <img class='admin_image' src='$image->path'/>
 			  <div class='image_controls'>
 			  <a href='/admin/authorize_image/$id'><button>Authorize</button></a>
+			  <a  href='/admin/reject_image/$id'><button style='margin-top:5px;'>Reject</button></a>
 			  </div>
 			  </div>
 			  </div>

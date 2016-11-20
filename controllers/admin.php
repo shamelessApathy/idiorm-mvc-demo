@@ -38,5 +38,20 @@ class adminController extends Controller {
 			$this->get_unauth_images();
 		}
 	}
+	public function delete_image($path)
+	{
+		unlink(ROOT .$path);
+	}
+	public function reject_image($id)
+	{
+		require_once(MODELS . '/Image.php');
+		$model = new Image();
+		$path = $model->reject_image($id);
+		if ($path)
+		{
+			$this->delete_image($path);
+			$this->get_unauth_images();
+		}
+	}
 
 }
