@@ -35,7 +35,7 @@ foreach($posts as $post)
 	<p class='title'>$post->title</p>
 	<div class='author'>Author:$name</div>
 	<div class='summary'>$summary ...</div>
-	<div class='tags'><strong>Tags:</strong> $post->post_tags</div>
+	<div class='tags'><strong>Tags:</strong> $post->tags</div>
 	<div class='post_controls'>
 	<a class='edit_post_link' href='/post/edit_post/$post->post_id'>Edit Post</a><br>
 	<a class='delete_post_link' href='/post/confirm_delete/$post->post_id'>Delete Post</a>

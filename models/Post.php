@@ -19,7 +19,7 @@ class Post extends Model {
 		$newPost->title = $title;
 		$newPost->body = $body;
 		$newPost->author_name = $author_name;
-		$newPost->post_tags = $tags;
+		$newPost->tags = $tags;
 		$newPost->created_at = $time;
 		if ($newPost->save())
 		{
@@ -53,7 +53,7 @@ class Post extends Model {
 		$post = ORM::for_table('post')->where('post_id', $id)->find_one();
 		$post->set('title', $title);
 		$post->set('body', $body);
-		$post->set('post_tags', $tags);
+		$post->set('tags', $tags);
 		$post->set('updated_at', $time );
 		if($post->save())
 		{

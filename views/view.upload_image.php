@@ -3,7 +3,7 @@ require(HEADER);
 ?>
 <div class='container'>
 <h1>This is the upload image page!</h1>
-<form enctype='multipart/form-data' action='/image/new' method="POST">
+<form enctype='multipart/form-data' action='/image/new_image' method="POST">
 <input type='file' name='image'>
 <button type='submit'>Submit</button>
 </form>

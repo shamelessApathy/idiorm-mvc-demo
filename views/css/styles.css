@@ -117,3 +117,31 @@
 	top:0;
 	width:100px;
 }
+.admin_image
+{
+  width: auto;
+  max-width: 150px;
+  height: auto;
+  max-height: 100px;
+}
+.admin_image_row
+{
+	width:100%;
+	background:#f8f8f8;
+	border-color:#e7e7e7;
+	border:1px solid;
+	padding:10px;
+	margin-top:5px;
+	position:relative;
+}
+.unauthorized
+{
+	background-color:rgba(255,0,0,0.5);
+}
+.image_controls
+{
+	top:0;
+	right:0;
+	position:absolute;
+	width:75px;
+}

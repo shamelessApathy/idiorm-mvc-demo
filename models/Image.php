@@ -21,11 +21,32 @@ class Image extends Model
 			return false;
 		}
 	}
-	public function user_images($id)
+	public function admin_search_images($param, $query)
 	{
-		echo 'getting this far';
-		$images = ORM::for_table('image')->where('user_id', $id)->find_many();
+		$images = ORM::for_table('image')->where($param, $query)->find_many();
 		return $images;
 	}
+	public function get_unauth_images($next = null)
+	{
+		if ($next)
+		{
+			$images = ORM::for_table('image')->where('auth', '0')->limit(10)->offset(10)->find_many();
+		}
+		else
+		{
+		$images = ORM::for_table('image')->where('auth', 0)->limit(10)->find_many();
+		}
+		return $images;
+	}
+	public function authorize_image($id)
+	{
+		$image = ORM::for_table('image')->where('id', $id)->find_one();
+		$image->auth = 1;
+		if($image->save())
+		{
+			return true;
+		}
+	}
+
 }
 ?>

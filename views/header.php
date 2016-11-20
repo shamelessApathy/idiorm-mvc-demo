@@ -41,7 +41,7 @@
           <ul class="dropdown-menu">
             <li><a href="/post/new_post">New Post</a></li>
             <li><a href="/profile/edit_profile">Edit Profile</a></li>
-            <li><a href="#">Something else here</a></li>
+            <li><a href="/image/upload_image">Upload an Image</a></li>
             <li role="separator" class="divider"></li>
             <li><a href="#">Separated link</a></li>
             <li role="separator" class="divider"></li>
@@ -68,7 +68,7 @@
           <ul class="dropdown-menu">
             <li><a href="/admin/post_manager">Post Manager</a></li>
             <li><a href="/admin/user_manager">User Manager</a></li>
-            <li><a href="#">Something else here</a></li>
+            <li><a href="/admin/image_manager">Image Manager</a></li>
             <li role="separator" class="divider"></li>
             <li><a href="#">Separated link</a></li>
           </ul>

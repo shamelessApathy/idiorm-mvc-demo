@@ -2,6 +2,13 @@
 require(BASE_CONTROLLER);
 require(MODELS . '/Image.php');
 class imageController extends Controller {
+	public function search_images($param, $query)
+	{
+		require (MODELS . '/Image.php');
+		$model = new Image();
+		$images = $model->search_images($param, $query);
+		return_view('view.images.php', $images);
+	}
 	public function user_images($id = null)
 	{
 		require(MODELS . '/User.php');
@@ -9,16 +16,17 @@ class imageController extends Controller {
 		{
 			$id = $_SESSION['user_info']->id;
 		}
-		$user = Model::factory('User')->find_one($id);
-		$images = $user->images()->find_many();
+		$model = new Image();
+		$images = $model->user_images();
 		return_view('view.user_images.php', $images);
 
 	}
+
 	public function upload_image()
 	{
 		return_view('view.upload_image.php');
 	}
-	public function new()
+	public function new_image()
 	{
 		$check = $_FILES['image']['tmp_name'];
 		$user_id = $_SESSION['user_info']->id;
@@ -28,6 +36,7 @@ class imageController extends Controller {
 		{
 			$ext = explode('.',$name);
 			$ext = '.'. $ext[1];
+			$tmp_name = $_FILES['image']['tmp_name'];
 			$save_path = ROOT . "/users/avatars";			
 			$myname = strtolower($_FILES['image']['tmp_name']); //You are renaming the file here
 			$newpath = '/users/avatars'.$myname.$ext;
@@ -37,7 +46,7 @@ class imageController extends Controller {
 				$model = new Image();
 				if ($model->create_new($tmp_name, $user_id, $newpath))
 				{
-					$this->user_images();
+					$this->user_images(); //sends you to function that renders view that shows all images from user (that are authorized!!!)
 				}
 				else
 				{
