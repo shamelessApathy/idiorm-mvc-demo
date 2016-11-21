@@ -9,6 +9,7 @@ class Controller {
 	{
 		function test_input($data) 
 		{
+			echo 'this far';
   			$data = trim($data);
   			$data = stripslashes($data);
   			$data = htmlspecialchars($data);

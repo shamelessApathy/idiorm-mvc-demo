@@ -31,7 +31,7 @@ class Profile extends Model {
 	}
 	public function set_avatar()
 	{
-		if (!isset($_FILES['user_avatar']['error']))
+		if (empty($_FILES['user_avatar']['error']))
 		{
 			$orig = $_FILES['user_avatar']['name'];
 			$orig = explode('.',$orig);

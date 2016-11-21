@@ -55,7 +55,7 @@ class profileController extends Controller {
 	}
 	public function validate_file($function)
 	{
-	if (!isset($_FILES['user_avatar']['error']))
+	if (empty($_FILES['user_avatar']['error']))
 	{
 		$file = $_FILES['user_avatar']['tmp_name'];
 		$validate = $this->validate($file, 'image');
@@ -67,6 +67,7 @@ class profileController extends Controller {
 	}
 	else
 	{
+		var_dump($_FILES['user_avatar']);
 		$this->edit_profile();
 	}
 }
