@@ -52,6 +52,8 @@ class imageController extends Controller {
 			$tmp_name = $_FILES['image']['tmp_name'];
 			$save_path = ROOT . "/users/images";			
 			$myname = strtolower($_FILES['image']['tmp_name']); //You are renaming the file here
+			$myname = explode('/',$myname);
+			$myname = $myname[1];
 			$newpath = '/users/images'.$myname.$ext;
 			$size = $this->image_size();
 			$width = $size[0];
