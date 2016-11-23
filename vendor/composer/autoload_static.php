@@ -6,6 +6,16 @@ namespace Composer\Autoload;
 
 class ComposerStaticInit29ed2090a64a518d498089eaa7ea3306
 {
+    public static $prefixesPsr0 = array (
+        'I' => 
+        array (
+            'Imagine' => 
+            array (
+                0 => __DIR__ . '/..' . '/imagine/imagine/lib',
+            ),
+        ),
+    );
+
     public static $classMap = array (
         'IdiormResultSet' => __DIR__ . '/..' . '/j4mie/idiorm/idiorm.php',
         'IdiormString' => __DIR__ . '/..' . '/j4mie/idiorm/idiorm.php',
@@ -19,6 +29,7 @@ class ComposerStaticInit29ed2090a64a518d498089eaa7ea3306
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
+            $loader->prefixesPsr0 = ComposerStaticInit29ed2090a64a518d498089eaa7ea3306::$prefixesPsr0;
             $loader->classMap = ComposerStaticInit29ed2090a64a518d498089eaa7ea3306::$classMap;
 
         }, null, ClassLoader::class);

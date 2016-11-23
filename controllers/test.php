@@ -1,4 +1,5 @@
 <?php
+		use Imagine\Image\Box;
 require(BASE_CONTROLLER);
 class testController extends Controller {
 	public function test()
@@ -8,14 +9,26 @@ class testController extends Controller {
 		$profile = $model->profile();
 		var_dump($profile);
 	}
-	public function image_size()
+	public function zebra()
 	{
 		$file = $_FILES['image']['tmp_name'];
-		$size = getimagesize($file);
-		$width = $size[0];
-		$height = $size[1];
-		$size_string = $size[3];
-		$mime_type = $size['mime'];
-		return $size;
+		$nodir = explode('/', $file);
+		$nodir = $nodir[2];
+		$name = $_FILES['image']['name'];
+		$ext = explode('.', $name);
+		if ($ext === 'jpg')
+		{
+			$ext = 'jpeg';
+		}
+		$ext = '.' . $ext[1];
+		$save_path = $nodir . $ext;
+		$imagine = new Imagine\Gd\Imagine();
+		$image = $imagine->open($file);
+		$image->resize(new Box(100,100));
+
+		if($image->save("/var/www/idiorm/idiorm-mvc-demo/users/images/thumbnails/$save_path"))
+		{
+			echo 'works so far';
+		}
 	}
 }
