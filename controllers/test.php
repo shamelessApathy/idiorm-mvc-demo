@@ -1,5 +1,6 @@
 <?php
-		use Imagine\Image\Box;
+		use Imagine\Image\BoxInterface;
+		use Imagine\Image\ImageInterface;
 require(BASE_CONTROLLER);
 class testController extends Controller {
 	public function test()
@@ -24,9 +25,10 @@ class testController extends Controller {
 		$save_path = $nodir . $ext;
 		$imagine = new Imagine\Gd\Imagine();
 		$image = $imagine->open($file);
-		$image->resize(new Box(100,100));
+		$interface = new BoxInterface();
+		$new = $image->thumbnail($interface, $mode = THUMBNAIL_INSET);
 
-		if($image->save("/var/www/idiorm/idiorm-mvc-demo/users/images/thumbnails/$save_path"))
+		if($new->save("/var/www/idiorm/idiorm-mvc-demo/users/images/thumbnails/$save_path"))
 		{
 			echo 'works so far';
 		}
