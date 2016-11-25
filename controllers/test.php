@@ -145,4 +145,106 @@ class testController extends Controller {
 		imagepng($im);
 		imagedestroy($im);
  	}
+ 	//this creates a thumbnail
+ 	public function magick()
+ 	{
+ 		$file = $_FILES['image']['tmp_name'];
+		$nodir = explode('/', $file);
+		$nodir = $nodir[2];
+		$name = $_FILES['image']['name'];
+		$ext = explode('.', $name);
+		if ($ext[1] === 'jpg')
+		{
+			$ext = 'jpeg';
+		}
+		else
+		{
+			$ext = $ext[1];
+		}
+		$ext2 = $ext;
+		$ext = '.' . $ext;
+		$save_path = '/var/www/idiorm/idiorm-mvc-demo/users/images/thumbnails/' . $nodir . $ext;
+ 		$imagick = new \Imagick(realpath($file));
+    	$imagick->thumbnailImage(100, 100, true, true);
+    	if ($imagick->writeImage($save_path))
+    	{
+    		echo 'it did it';
+    	}
+    	//header("Content-Type: image/jpg");
+    	//echo $imagick->getImageBlob();
+
+ 	}
+ 	function wordWrapAnnotation(&$image, &$draw, $text, $maxWidth)
+	{
+    	$words = explode(" ", $text);
+    	$lines = array();
+    	$i = 0;
+    	$lineHeight = 0;
+    	while($i < count($words) )
+    	{
+        	$currentLine = $words[$i];
+        	if($i+1 >= count($words))
+        	{
+            	$lines[] = $currentLine;
+            	break;
+        	}
+        	//Check to see if we can add another word to this line
+    	    $metrics = $image->queryFontMetrics($draw, $currentLine . ' ' . $words[$i+1]);
+	        while($metrics['textWidth'] <= $maxWidth)
+    	    {
+	            //If so, do it and keep doing it!
+            	$currentLine .= ' ' . $words[++$i];
+        	    if($i+1 >= count($words))
+    	            break;
+	            $metrics = $image->queryFontMetrics($draw, $currentLine . ' ' . $words[$i+1]);
+        	}
+        	//We can't add the next word to this line, so loop to the next line
+        	$lines[] = $currentLine;
+        	$i++;
+        	//Finally, update line height
+        	if($metrics['textHeight'] > $lineHeight)
+        	    $lineHeight = $metrics['textHeight'];
+    	}
+    	return array($lines, $lineHeight);
+	}
+
+ 	public function overlay()
+ 	{
+ 		$file = $_FILES['image']['tmp_name'];
+		$nodir = explode('/', $file);
+		$nodir = $nodir[2];
+		$name = $_FILES['image']['name'];
+		$ext = explode('.', $name);
+		if ($ext[1] === 'jpg')
+		{
+			$ext = 'jpeg';
+		}
+		else
+		{
+			$ext = $ext[1];
+		}
+		$ext2 = $ext;
+		$ext = '.' . $ext;
+		$save_path = '/var/www/idiorm/idiorm-mvc-demo/users/images/thumbnails/' . $nodir . $ext;
+		$string = '123dollarmedia.com                                                   123dollarmedia.com                                                             123dollarmedia.com                                                   123dollarmedia.com                                                    123dollarmedia.com                                                   123dollarmedia.com                                                             123dollarmedia.com                                                   123dollarmedia.com                                                    123dollarmedia.com                                                   123dollarmedia.com                                                             123dollarmedia.com                                                   123dollarmedia.com                                                    123dollarmedia.com                                                   123dollarmedia.com                                                             123dollarmedia.com                                                   123dollarmedia.com                                                    123dollarmedia.com                                                   123dollarmedia.com                                                             123dollarmedia.com                                                   123dollarmedia.com                                                    123dollarmedia.com                                                   123dollarmedia.com                                                             123dollarmedia.com                                                   123dollarmedia.com                                                    123dollarmedia.com                                                   123dollarmedia.com                                                             123dollarmedia.com                                                   123dollarmedia.com                                                    123dollarmedia.com                                                   123dollarmedia.com                                                             123dollarmedia.com                                                   123dollarmedia.com                                                    123dollarmedia.com                                                   123dollarmedia.com                                                             123dollarmedia.com                                                   123dollarmedia.com                                                    123dollarmedia.com                                                   123dollarmedia.com                                                             123dollarmedia.com                                                   123dollarmedia.com                                                    123dollarmedia.com                                                   123dollarmedia.com                                                             123dollarmedia.com                                                   123dollarmedia.com                                                    123dollarmedia.com                                                   123dollarmedia.com                                                             123dollarmedia.com                                                   123dollarmedia.com                                                    123dollarmedia.com                                                   123dollarmedia.com                                                             123dollarmedia.com                                                   123dollarmedia.com                                                    123dollarmedia.com                                                   123dollarmedia.com                                                             123dollarmedia.com                                                   123dollarmedia.com                                                    123dollarmedia.com                                                   123dollarmedia.com                                                             123dollarmedia.com                                                   123dollarmedia.com                                                    123dollarmedia.com                                                   123dollarmedia.com                                                             123dollarmedia.com                                                   123dollarmedia.com                                                    123dollarmedia.com                                                   123dollarmedia.com                                                             123dollarmedia.com                                                   123dollarmedia.com                                                    123dollarmedia.com                                                   123dollarmedia.com                                                             123dollarmedia.com                                                   123dollarmedia.com                                                    123dollarmedia.com                                                   123dollarmedia.com                                                             123dollarmedia.com                                                   123dollarmedia.com                                                    123dollarmedia.com                                                   123dollarmedia.com                                                             123dollarmedia.com                                                   123dollarmedia.com                                                    123dollarmedia.com                                                   123dollarmedia.com                                                             123dollarmedia.com                                                   123dollarmedia.com                                                    123dollarmedia.com                                                   123dollarmedia.com                                                             123dollarmedia.com                                                   123dollarmedia.com                                                    123dollarmedia.com                                                   123dollarmedia.com                                                             123dollarmedia.com                                                   123dollarmedia.com                                                    123dollarmedia.com                                                   123dollarmedia.com                                                             123dollarmedia.com                                                   123dollarmedia.com                                                    123dollarmedia.com                                                   123dollarmedia.com                                                             123dollarmedia.com                                                   123dollarmedia.com                                                    123dollarmedia.com                                                   123dollarmedia.com                                                             123dollarmedia.com                                                   123dollarmedia.com                                                    123dollarmedia.com                                                   123dollarmedia.com                                                             123dollarmedia.com                                                   123dollarmedia.com                                                    123dollarmedia.com                                                   123dollarmedia.com                                                             123dollarmedia.com                                                   123dollarmedia.com                                                    123dollarmedia.com                                                   123dollarmedia.com                                                             123dollarmedia.com                                                   123dollarmedia.com                                                    123dollarmedia.com                                                   123dollarmedia.com                                                             123dollarmedia.com                                                   123dollarmedia.com                                                    123dollarmedia.com                                                   123dollarmedia.com                                                             123dollarmedia.com                                                   123dollarmedia.com                                                    123dollarmedia.com                                                   123dollarmedia.com                                                             123dollarmedia.com                                                   123dollarmedia.com                                                    123dollarmedia.com                                                   123dollarmedia.com                                                             123dollarmedia.com                                                   123dollarmedia.com                                                    123dollarmedia.com                                                   123dollarmedia.com                                                             123dollarmedia.com                                                   123dollarmedia.com                                                    123dollarmedia.com                                                   123dollarmedia.com                                                             123dollarmedia.com                                                   123dollarmedia.com                                                    123dollarmedia.com                                                   123dollarmedia.com                                                             123dollarmedia.com                                                   123dollarmedia.com                                                    ';
+		$image = new \Imagick(realpath($file));
+		$width = $image->getImageWidth();
+		$draw = new ImagickDraw();
+		$draw->setFillColor('white');
+		$draw->setFillOpacity(0.1);
+		$draw->setStrokeColor('black');
+		$draw->setStrokeOpacity(0.1);
+		$draw->setFont('font/college.ttf');
+		$draw->setFontSize(30);
+		$xpos = 0;
+		$ypos = 0;
+		list($lines, $lineHeight) = $this->wordWrapAnnotation($image, $draw, $string, $width);
+
+		for($i = 0; $i < count($lines); $i++)
+		{
+    	$image->annotateImage($draw, $xpos, $ypos + $i*$lineHeight, 0, $lines[$i]);
+    	}
+		//$image->annotateImage($draw, 30, 30, 0, $string);
+		$image->writeImage($save_path);
+ 	}
 }
