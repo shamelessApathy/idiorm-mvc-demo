@@ -60,13 +60,15 @@ class imageController extends Controller {
 			$height = $size[1];
 			$size_string = $size[3];
 			$mime_type = $size['mime'];
+			$watermark = $this->watermark();
+			$thumbnail = $this->thumbnail();
 			// If the file is moved and stored successfully, call the model to make a DB entry for it
   			if(move_uploaded_file($_FILES['image']['tmp_name'], $save_path.$myname.$ext))
   			{
   				chmod($save_path.$myname.$ext, 0755);
   				require_once(MODELS . '/Image.php');
 				$model = new Image();
-				if ($model->create_new($tmp_name, $user_id, $newpath, $width, $height, $size_string, $mime_type, $user_image_name))
+				if ($model->create_new($tmp_name, $user_id, $newpath, $width, $height, $size_string, $mime_type, $user_image_name, $watermark, $thumbnail))
 				{
 					$this->user_owned_images(); //sends you to function that renders view that shows all images from user (that are authorized!!!)
 				}
@@ -85,5 +87,74 @@ class imageController extends Controller {
 			echo 'false';
 		}
 	}
+	public function watermark()
+ 	{
+ 		$file = $_FILES['image']['tmp_name'];
+ 		$name = $_FILES['image']['name'];
+ 		$type = 'image';
+		$nodir = explode('/', $file);
+		$nodir = $nodir[2];
+		$name = $_FILES['image']['name'];
+		$ext = explode('.', $name);
+		if ($ext[1] === 'jpg')
+		{
+			$ext = 'jpeg';
+		}
+		else
+		{
+			$ext = $ext[1];
+		}
+		$ext2 = $ext;
+		$ext = '.' . $ext;
+		$save_path = '/var/www/idiorm/idiorm-mvc-demo/users/images/preview/' . $nodir . $ext;
+		$image = new Imagick($file);
+		$watermark = new Imagick('watermark.png');
+		$width = $image->getImageWidth();
+		$height = $image->getImageHeight();
+		$watermark->scaleImage($width, $height);
+		$image->compositeImage($watermark, imagick::COMPOSITE_OVER, 0,0);
+		$new_path = '/users/images/preview/' . $nodir . $ext;
+
+		if($image->writeImage($save_path))
+		{
+			return $new_path;
+		}
+		else
+		{
+			return false;
+		}
+	}
+	public function thumbnail()
+	{
+		$file = $_FILES['image']['tmp_name'];
+ 		$name = $_FILES['image']['name'];
+ 		$type = 'image';
+		$nodir = explode('/', $file);
+		$nodir = $nodir[2];
+		$name = $_FILES['image']['name'];
+		$ext = explode('.', $name);
+		if ($ext[1] === 'jpg')
+		{
+			$ext = 'jpeg';
+		}
+		else
+		{
+			$ext = $ext[1];
+		}
+		$ext2 = $ext;
+		$ext = '.' . $ext;
+		$save_path = '/var/www/idiorm/idiorm-mvc-demo/users/images/thumbnails/' . $nodir . $ext;
+		$new_path = '/users/images/thumbnails/' . $nodir . $ext;
+		$image = new Imagick($file);
+		$image->thumbnailImage(100,100, true);
+		if ($image->writeImage($save_path))
+		{
+			return $new_path;
+		}
+		else
+		{
+			return false;
+		}
+	} 	
 }
 ?>

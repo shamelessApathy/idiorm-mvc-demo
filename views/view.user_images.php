@@ -10,7 +10,7 @@ foreach ($info as $image)
 	}
 	else
 	{
-	echo "<img src='$image->path'/><br>";
+	echo "<img src='$image->watermark'/><br>";
 	}
 }
 

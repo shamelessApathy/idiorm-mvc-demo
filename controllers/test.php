@@ -247,4 +247,65 @@ class testController extends Controller {
 		//$image->annotateImage($draw, 30, 30, 0, $string);
 		$image->writeImage($save_path);
  	}
+ 	public function watermark()
+ 	{
+ 		$file = $_FILES['image']['tmp_name'];
+		$nodir = explode('/', $file);
+		$nodir = $nodir[2];
+		$name = $_FILES['image']['name'];
+		$ext = explode('.', $name);
+		if ($ext[1] === 'jpg')
+		{
+			$ext = 'jpeg';
+		}
+		else
+		{
+			$ext = $ext[1];
+		}
+		$ext2 = $ext;
+		$ext = '.' . $ext;
+		$save_path = '/var/www/idiorm/idiorm-mvc-demo/users/images/thumbnails/' . $nodir . $ext;
+		$image = new Imagick($file);
+		$watermark = new Imagick('watermark.png');
+		$width = $image->getImageWidth();
+		$height = $image->getImageHeight();
+		$watermark->scaleImage($width, $height);
+		$image->compositeImage($watermark, imagick::COMPOSITE_OVER, 0,0);
+		if ($image->writeImage($save_path))
+		{
+			echo 'it saved';
+		}
+		else
+		{
+			echo 'there was a problem';
+		}
+ 	}
+ 	public function animatedWatermark()
+ 	{
+ 		$file = $_FILES['image']['tmp_name'];
+ 		var_dump($_FILES);
+		$nodir = explode('/', $file);
+		$nodir = $nodir[2];
+		$name = $_FILES['image']['name'];
+		$ext = explode('.', $name);
+		$ext = $ext[1];
+		$ext2 = $ext;
+		$ext = '.' . $ext;
+		$save_path = '/var/www/idiorm/idiorm-mvc-demo/users/images/thumbnails/' . $nodir . $ext;
+		$image = new Imagick($file);
+		$watermark = new Imagick('watermark.png');
+		$width = $image->getImageWidth();
+		$height = $image->getImageHeight();
+		$watermark->scaleImage($width, $height);
+		$image = $image->coalesceImages();
+		foreach ($image as $frame)
+		{
+			$frame->compositeImage($watermark, imagick::COMPOSITE_OVER, 0, 0);
+		}
+		$image = $image->deconstructImages();
+		if($image->writeImages($save_path, true))
+		{
+			echo ' gif saved';
+		}
+ 	}
 }

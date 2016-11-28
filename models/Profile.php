@@ -29,31 +29,13 @@ class Profile extends Model {
 	{
 		$info = ORM::for_table('profile')->where('user_id', $id)->find_one();
 	}
-	public function set_avatar()
+	public function set_avatar($newpath)
 	{
-		if (empty($_FILES['user_avatar']['error']))
-		{
-			$orig = $_FILES['user_avatar']['name'];
-			$orig = explode('.',$orig);
-			$ext = '.' . $orig[1];
-			$save_path = ROOT . "/users/avatars";
-			
-			$myname = strtolower($_FILES['user_avatar']['tmp_name']); //You are renaming the file here
-			$newpath = '/users/avatars'.$myname.$ext;
-  			if(move_uploaded_file($_FILES['user_avatar']['tmp_name'], $save_path.$myname.$ext))
-  			{ 
-  				echo 'making it this far';
-  				$avatar = ORM::for_table('profile')->where('user_id', $_SESSION['user_info']->id)->find_one();
-  				$avatar->avatar = $newpath;
-  				$avatar->save();
-  				$_SESSION['user_info']->avatar = '/users/avatars'.$myname.$ext;
-  				return true;
-  			} 
-		}
-		else
-		{
-			echo "not making it";
-		}
-	}
+  		$avatar = ORM::for_table('profile')->where('user_id', $_SESSION['user_info']->id)->find_one();
+  		$avatar->avatar = $newpath;
+  		$avatar->save();
+  		$_SESSION['user_info']->avatar = $newpath;
+  		return true;
+  	} 
 }
 ?>

@@ -40,17 +40,34 @@ class profileController extends Controller {
 */
 	public function set_avatar()
 	{
-		require_once(MODELS . '/Profile.php');
-		$model = new Profile();
-		$result = $model->set_avatar();
-		if ($result)
+		if (empty($_FILES['user_avatar']['error']))
 		{
-		header('Location: /profile/edit_profile');;
+			$orig = $_FILES['user_avatar']['name'];
+			$file = $_FILES['user_avatar']['tmp_name'];
+			$nodir = explode('/', $file);
+			$nodir = $nodir[2];
+			var_dump($file);
+			$orig = explode('.',$orig);
+			$ext = '.' . $orig[1];
+			$save_path = ROOT . "/users/avatars";
+			
+			$myname = $nodir; //You are renaming the file here
+			$newpath = '/users/avatars'.$myname.$ext;
 		}
 		else
 		{
 			return_view('view.edit_profile.php');
 			sys_msg('Need to select a file for your avatar');
+		}
+  		if(move_uploaded_file($_FILES['user_avatar']['tmp_name'], $save_path.$myname.$ext))
+  		{
+			require_once(MODELS . '/Profile.php');
+			$model = new Profile();
+			$result = $model->set_avatar($newpath);
+			if ($result)
+			{
+			header('Location: /profile/edit_profile');;
+			}
 		}
 	}
 	public function validate_file($function)
