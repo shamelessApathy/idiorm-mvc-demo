@@ -4,7 +4,8 @@ require_once('globals.php');
 $controller;
 $method;
 $param;
-function uri_router($uri) {
+
+function uri_router($uri, $query = null) {
 	$full_uri = $uri;
 	$uri = explode('/', $uri);
 	if(isset($uri[1]))
@@ -19,6 +20,10 @@ function uri_router($uri) {
 	if(isset($uri[3]))
 	{
 		$param = $uri[3];
+	}
+	if (isset($query))
+	{
+		$param = $query;
 	}
 if ($controller === 'home' || $controller === '')
 {

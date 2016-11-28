@@ -62,6 +62,16 @@
         <button type="submit" class="btn btn-default">Submit</button>
       </form>
       <ul class="nav navbar-nav navbar-right">
+        <?php if (!isset($_SESSION['user_info'])):?>
+          <form style='top:+15px; position:relative; display:block;' action='/user/verify' method='POST'>
+          <label>Email:</label><input type='text' name='email'/>
+          <label>Password:</label><input type='password' name='password'/>
+          <button type='submit'>Login</button>
+          <a href='/user/register'>Register</a>
+          </form>
+        <?php endif;?>
+
+
         <?php if (isset($user) && $user->level === '1'): ?> <!-- just found out this right here, the user->level returns a string, why? -->
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Admin Options <span class="caret"></span></a>

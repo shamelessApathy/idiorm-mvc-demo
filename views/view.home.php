@@ -1,16 +1,16 @@
 <?php require_once(HEADER); ?>
-<?php //var_dump($_SESSION['data']); ?>
-<?php if (!isset($_SESSION['user_info'])) :?>
 <div class='container'>
-<h1> This is the homepage </h1>
-<h2>Login</h2>
-<form action='/user/verify' method='POST'>
-<label>Email:</label><input type='text' name='email'/>
-<label>Password:</label><input type='password' name='password'/>
-<button type='submit'>Submit</button>
-</form>
-<a href='/user/register'>Need to Register?</a>
-<?php endif; ?>
+	<div class='row'>
+		<div class='col-md-2'></div>
+		<div class='col-md-8'>
+			<form action='image/search_by_tag' method='GET'>
+				<input id='big_search'  type='text' name='query'>
+				<button type='submit' class='big_submit'>Search</button>
+			</form>
+		</div>
+		<div class='col-md-2'></div>
+	</div>
+</div>
 <?php 
 
 if (isset($_SESSION['user_info']))

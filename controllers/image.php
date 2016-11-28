@@ -33,6 +33,7 @@ class imageController extends Controller {
 		$check = $_FILES['image']['tmp_name'];
 		$user_id = $_SESSION['user_info']->id;
 		$name = $_FILES['image']['name'];
+		$tags = $_POST['tags'];
 		$type = 'image';
 		if (!empty($_POST['user_image_name']))
 		{
@@ -68,7 +69,7 @@ class imageController extends Controller {
   				chmod($save_path.$myname.$ext, 0755);
   				require_once(MODELS . '/Image.php');
 				$model = new Image();
-				if ($model->create_new($tmp_name, $user_id, $newpath, $width, $height, $size_string, $mime_type, $user_image_name, $watermark, $thumbnail))
+				if ($model->create_new($tmp_name, $user_id, $newpath, $width, $height, $size_string, $mime_type, $user_image_name, $watermark, $thumbnail, $tags))
 				{
 					$this->user_owned_images(); //sends you to function that renders view that shows all images from user (that are authorized!!!)
 				}
@@ -154,6 +155,28 @@ class imageController extends Controller {
 		else
 		{
 			return false;
+		}
+	}
+	public function search_by_tag()
+	{
+		if (!empty($_GET['query']))
+		{
+			$query = $_GET['query'];
+			//if (str_pos($query, " ") !== false)
+			//{
+				//$query = explode(" " ,$query);
+			//}
+			require_once(MODELS . '/Image.php');
+			$model = new Image();
+			$results = $model->search_by_tag($query);
+			if($results)
+			{
+				return_view('view.image_search_results.php', $results);
+			}
+			else
+			{
+				echo 'something happened';
+			}
 		}
 	} 	
 }

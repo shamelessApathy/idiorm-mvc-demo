@@ -13,8 +13,17 @@ ORM::configure('logging', true);
 session_start();
 
 $uri = $_SERVER['REQUEST_URI'];
-
-uri_router($uri)
+if (strpos($uri, '?'))
+{
+	$explode = explode('?',$uri);
+	$uri = $explode[0];
+	$query = $explode[1];
+	uri_router($uri, $query);
+}
+else
+{
+uri_router($uri);
+}
 
 
 
