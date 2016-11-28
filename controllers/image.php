@@ -51,7 +51,7 @@ class imageController extends Controller {
 			$ext = explode('.',$name);
 			$ext = '.'. $ext[1];
 			$tmp_name = $_FILES['image']['tmp_name'];
-			$save_path = ROOT . "/users/images";			
+			$save_path = ROOT . "/users/images/raw_images";			
 			$myname = strtolower($_FILES['image']['tmp_name']); //You are renaming the file here
 			$myname = explode('/',$myname);
 			$myname = $myname[1];
@@ -112,7 +112,7 @@ class imageController extends Controller {
 		$watermark = new Imagick('watermark.png');
 		$width = $image->getImageWidth();
 		$height = $image->getImageHeight();
-		$watermark->scaleImage($width, $height);
+		$watermark->scaleImage($width, $height, 0,0);
 		$image->compositeImage($watermark, imagick::COMPOSITE_OVER, 0,0);
 		$new_path = '/users/images/preview/' . $nodir . $ext;
 

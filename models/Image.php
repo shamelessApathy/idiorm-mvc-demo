@@ -61,7 +61,7 @@ class Image extends Model
 		$image->auth = 2;
 		if ($image->save())
 		{
-			return $image->path;
+			return $image;
 		}
 	}
 
