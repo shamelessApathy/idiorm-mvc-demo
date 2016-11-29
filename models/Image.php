@@ -70,6 +70,7 @@ class Image extends Model
 		$query = '%'.$query.'%';
 		$images = ORM::for_table('image')
             ->where_like('tags', $query)
+            ->where('auth','1')
             ->find_many();
             $last = ORM::get_last_query();
             var_dump($last);

@@ -31,11 +31,12 @@ class Profile extends Model {
 	}
 	public function set_avatar($newpath)
 	{
-  		$avatar = ORM::for_table('profile')->where('user_id', $_SESSION['user_info']->id)->find_one();
-  		$avatar->avatar = $newpath;
-  		$avatar->save();
-  		$_SESSION['user_info']->avatar = $newpath;
-  		return true;
-  	} 
-}
+  			$avatar = ORM::for_table('user')->where('id', $_SESSION['user_info']->id)->find_one();
+  			$avatar->avatar = $newpath;
+  			$avatar->save();
+  			$_SESSION['user_info']->avatar = $newpath;
+  			return true;
+    }
+   }
+
 ?>

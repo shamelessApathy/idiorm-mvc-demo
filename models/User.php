@@ -169,4 +169,8 @@ public static $_table_use_short_name = true;
 	{
 		return $this->has_many('Image','user_id','id');
 	}
+	public function store()
+	{
+		return $this->has_one('Store');
+	}
 }

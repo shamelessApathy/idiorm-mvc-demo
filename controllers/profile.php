@@ -49,10 +49,10 @@ class profileController extends Controller {
 			var_dump($file);
 			$orig = explode('.',$orig);
 			$ext = '.' . $orig[1];
-			$save_path = ROOT . "/users/avatars";
+			$save_path = ROOT . "/users/avatars/";
 			
 			$myname = $nodir; //You are renaming the file here
-			$newpath = '/users/avatars'.$myname.$ext;
+			$newpath = '/users/avatars/'.$myname.$ext;
 		}
 		else
 		{
@@ -75,7 +75,8 @@ class profileController extends Controller {
 	if (empty($_FILES['user_avatar']['error']))
 	{
 		$file = $_FILES['user_avatar']['tmp_name'];
-		$validate = $this->validate($file, 'image');
+		$name = $_FILES['user_avatar']['name'];
+		$validate = $this->validate($file, 'image', $name);
 		$function = $this->$function();
 		if ($validate)
 		{
