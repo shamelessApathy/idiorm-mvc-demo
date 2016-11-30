@@ -19,16 +19,12 @@ public static $_table_use_short_name = true;
 		// password and salt function
 		$password = $password;
 		$password = hash('sha256', $password);
-		$salt = openssl_random_psuedo_bytes(64, $crypto);
-		if (!$crypto)
-		{
-			trigger_error("This server does not support the cryptography method attempted.");
-		}
+		$salt = random_bytes(8);
 		$password = $password . $salt;
 
 		// add new entry to database
 
-		$newPerson = ORM::for_table('users')->create();
+		$newPerson = ORM::for_table('user')->create();
 		$newPerson->email = $email;
 		$newPerson->password = $password;
 		$newPerson->salt = $salt;

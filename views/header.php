@@ -43,7 +43,7 @@
             <li><a href="/profile/edit_profile">Edit Profile</a></li>
             <li><a href="/image/upload_image">Upload an Image</a></li>
             <li role="separator" class="divider"></li>
-            <li><a href="#">Separated link</a></li>
+            <li><a href="/store/admin">Your Store</a></li>
             <li role="separator" class="divider"></li>
             <li><a href="#">One more separated link</a></li>
           </ul>
