@@ -76,6 +76,10 @@ class Image extends Model
             var_dump($last);
             return $images;
 	}
+	public function album()
+	{
+		return $this->has_many('Album');
+	}
 
 
 }

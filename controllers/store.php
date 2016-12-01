@@ -9,6 +9,10 @@ class storeController extends Controller{
 		$user_id = $_SESSION['user_info']['id'];
 		$model = new Store();
 		$store = $model->admin($user_id);
+		require_once(MODELS . '/Album.php');
+		$album = new Album();
+		$albums = $album->get_all($user_id);
+		$store = array('store'=>$store, 'albums'=>$albums);
 		if ($store)
 		{
 			return_view('store/store.admin.php' , $store);
@@ -46,6 +50,16 @@ class storeController extends Controller{
 			echo 'it returned false someqwhere';
 		}
 	}
+	public function get_user_images()
+	{
+		$user_id = $_SESSION['user_info']['id'];
+		require_once(MODELS . '/User.php');
+		require_once(MODELS . '/Image.php');
+		$model = Model::factory('User')->find_one($user_id);
+		$images = $model->images()->find_many();
+		return_view('store/store.album_manager.php',$images);
+	}
+	
 }
 
 
