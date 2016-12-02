@@ -22,21 +22,43 @@ class Album{
 			return $album->album_id;
 		}
 	}
+	public function add_image($images, $album_id)
+	{
+		var_dump($images);
+		$time = time();
+		$image = ORM::for_table('album_image')->create();
+		$image->image_id = $images[0];
+		$image->album_id = $album_id;
+		$image->created_at = $time;
+		$image->save();
+
+	}
 	public function get_all($user_id)
 	{
 		$albums = ORM::for_table('album')->where('user_id', $user_id)->find_many();
 		return $albums;
 	}
-	public function add_image_to_album($album_id, $images)
+
+	public function get_album_images($album_id)
 	{
-		foreach ($images as $image)
+		$album = ORM::for_table('album_image')->where('album_id', $album_id)->find_many();
+		$album_images = array();
+		foreach ($album as $image)
 		{
-			$time = time();
-			$album = ORM::for_table('album_image')->create();
-			$album->album_id = $album_id;
-			$album->image_id = $image;
-			$album->created_at = $time;
-			$album->save();
+			$id = $image->image_id;
+			$im = ORM::for_table('image')->where('id', $id )->find_one();
+			array_push($album_images, $im);
+		}
+		return $album_images;
+	}
+	public function remove_image($image, $album_id)
+	{
+		var_dump($album_id);
+		$album = ORM::for_table('album_image')->where('image_id', $image)->find_one();
+		var_dump($album);
+		if($album->delete())
+		{
+			return true;
 		}
 	}
 }

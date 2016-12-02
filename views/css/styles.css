@@ -193,6 +193,7 @@
 	height:500px;
 	border:1px solid blue;
 	display:none;
+	position:relative;
 }
 .image_thumb
 {
