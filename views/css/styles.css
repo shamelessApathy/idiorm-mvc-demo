@@ -195,6 +195,19 @@
 	display:none;
 	position:relative;
 }
+.album_thumb
+{
+	text-align:center;
+	height:200px;
+	width:120px;
+	float:left;
+}
+.album_thumb h3
+{
+	font-size:16px;
+	text-transform:uppercase;
+	text-decoration:underline;
+}
 .image_thumb
 {
 	width:100px;
@@ -204,6 +217,12 @@
 	margin-top:10px;
 	margin-left:10px;
 	float:left;
+}
+.album_thumb .image_thumb
+{
+	margin:auto;
+	position:relative;
+	float:none;
 }
 .image_thumb img
 {
