@@ -194,6 +194,7 @@
 	border:1px solid blue;
 	display:none;
 	position:relative;
+	overflow-y:scroll;
 }
 .album_thumb
 {
@@ -217,6 +218,7 @@
 	margin-top:10px;
 	margin-left:10px;
 	float:left;
+	text-align:center;
 }
 .album_thumb .image_thumb
 {
@@ -227,6 +229,9 @@
 .image_thumb img
 {
 	max-width:100%;
+	margin-left:auto;
+	margin-right:auto;
+	display:inline-block;
 }
 .image_checkbox
 {
@@ -236,3 +241,8 @@
 	width:30px;
 	height:30px;
 }
+.modal_button
+{
+	position:relative;
+}
+

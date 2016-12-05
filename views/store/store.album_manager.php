@@ -19,7 +19,18 @@ if (isset($info['album_images']))
 ?>
 
 <div class='container'>
+	<div class='row'>
+	<div class='col-md-2'></div>
+	<div class='col-md-8'>
+		<form action='/album/create_new' method='POST'>
+		<label>Create new album:</label>
+		<input type='text' name='album_name'/>
+		<button type='submit'>Submit</button>
+		</form>
+	</div>
+	<div class='col-md-2'></div>
 
+	</div>
 <div class='row'>
 <div class='col-md-2'></div>
 <div class='col-md-8'>
@@ -47,21 +58,36 @@ for ($i = 0; $i < $num; $i++)
 <button style='position:absolute; display:block; bottom:0; right:15;' type='submit'>Select</button>
 </form>
 </div>
+</div>
+<div class='col-md-2'></div>
+</div>
+<!-- album images area -->
 <?php if (isset($album_images)):?>
+<div class='row'>
+<div class='col-md-2'></div>
+<div class='col-md-8'>
 <div class='album_modal' style='display:block;'>
 <h1> Images Currently in Album: <?php echo $album->album_name;?></h1>
-<form action="/album/add_image ?>" method='POST'>
+<form action="/album/remove_image/<?php echo $album->album_id; ?>" method='POST'>
 	<?php 
 		foreach ($album_images as $image)
 		{
 			echo "<div class='image_thumb'><img src='$image->thumbnail'/><input type='checkbox' class='image_checkbox' name='image[]' value='$image->id'/></div>";
 		}
 	?>
+</div>
+<div class='modal_button'>
+	<button style='position:absolute; display:block; bottom:0; right:15;' type='submit'>Remove</button>
+</div>
 </form>
 </div>
+<div class='col-md-2'></div>
+</div>
 <?php endif; ?>
+<!-- this is the all user images area -->
 <?php if (isset($user_images)):?>
 <div class='album_modal' style='display:block;'>
+<h1>All User Images</h1>
 <form action="/album/add_image/<?php echo $album->album_id; ?>" method='POST'>
 	<?php 
 		foreach ($user_images as $image)
@@ -69,12 +95,13 @@ for ($i = 0; $i < $num; $i++)
 			echo "<div class='image_thumb'><img src='$image->thumbnail'/><input type='checkbox' class='image_checkbox' name='image[]' value='$image->id'/></div>";
 		}
 	?>
-	<button style='position:absolute; display:block; bottom:0; right:15;' type='submit'>Submit</button>
-</form>
 </div>
+<div class='modal_button'>
+	<button style='position:absolute; display:block; bottom:0; right:15;' type='submit'>Submit</button>
+</div>
+</form>
 <?php endif; ?>
 </div>
-<div class='col-md-2'></div>
 </div>
 </div>
 <?php require(FOOTER);?>

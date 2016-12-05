@@ -153,6 +153,37 @@ public function get_all()
 	$users = $model->get_all();
 	return_view('admin/admin.user_manager.php', $users);
 }
+public function new_password()
+{
+	return_view('view.change_password.php');
+}
+public function change_password()
+{
+	$new_password = $_POST['new_password'];
+	$new_verify = $_POST['new_verify'];
+	if ($new_password === $new_verify)
+	{
+	$email = $_POST['email'];
+	$old_password = $_POST['old_password'];
+	$user_id = $_SESSION['user_info']['id'];
+	require_once(MODELS . '/User.php');
+	$model = new User();
+	if ($model->verify($email, $old_password))
+	{
+		if($model->change_password($user_id, $new_password))
+		{
+			return_view('view.change_password.php');
+			user_msg('Password changed successfully!');
+		}
+	}
+	}
+	else
+	{
+		return_view('view.change_password.php');
+		sys_msg('Your new passwords did not match!');
+	}
+
+}
 /*
 *
 * Calls post_manager view

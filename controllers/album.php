@@ -22,11 +22,11 @@ class albumController extends Controller{
 		$model = new Album();
 		foreach ($_POST['image'] as $image)
 		{
-			$model->add_image($_POST['image'], $album_id);
+			$model->add_image($image, $album_id);
 		}
-		$this->album_manager($album_id);
+		$this->edit_album($album_id);
 	}
-	public function album_manager()
+	public function album_manager($album_id = null)
 	{	
 		$user_id = $_SESSION['user_info']['id'];
 		require_once(MODELS . '/User.php');
@@ -42,21 +42,21 @@ class albumController extends Controller{
 	}
 	public function remove_image($album_id)
 	{
-		$image = $_POST['image'];
+		$images = $_POST['image'];
 		require_once(MODELS . '/Album.php');
 		$model = new Album();
-		if($model->remove_image($image, $album_id))
+		foreach ($images as $image)
 		{
-			$this->album_manager($album_id);
+			$model->remove_image($image, $album_id);		
 		}
-		else
-		{
-			echo ' there was a problem';
-		}
+		$this->edit_album($album_id);
 	}
-	public function edit_album()
+	public function edit_album($album_id = null)
 	{
+		if (empty($album_id))
+		{
 		$album_id = $_POST['album_id'];
+		}
 		require_once(MODELS . '/Album.php');
 		require_once(MODELS . '/User.php');
 		require_once(MODELS . '/Image.php');

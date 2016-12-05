@@ -83,9 +83,12 @@
             <li><a href="#">Separated link</a></li>
           </ul>
         </li>
-        <li><?php if (isset($_SESSION['user_info'])):?><a href="/user/logout">Logout</a></li><?php endif;?>
+      
       <?php endif; ?>
       </ul>
+      <?php if (isset($user)):?>
+      <a class='navbar-brand' style='float:right;' href='/user/logout'>Logout</a>
+    <?php endif; ?>
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
 </nav>

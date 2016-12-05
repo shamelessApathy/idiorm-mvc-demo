@@ -19,16 +19,14 @@ class Album{
 		$album->created_at = $time;
 		if ($album->save())
 		{
-			var_dump(ORM::get_last_query());
 			return $album->album_id;
 		}
 	}
-	public function add_image($images, $album_id)
+	public function add_image($image_id, $album_id)
 	{
-		var_dump($images);
 		$time = time();
 		$image = ORM::for_table('album_image')->create();
-		$image->image_id = $images[0];
+		$image->image_id = $image_id;
 		$image->album_id = $album_id;
 		$image->created_at = $time;
 		$image->save();
@@ -46,7 +44,6 @@ class Album{
 
 	public function get_album_images($album_id)
 	{
-		var_dump($album_id);
 		$album = ORM::for_table('album_image')->where('album_id', $album_id)->find_many();
 		$album_images = array();
 		foreach ($album as $image)
@@ -59,9 +56,7 @@ class Album{
 	}
 	public function remove_image($image, $album_id)
 	{
-		var_dump($album_id);
 		$album = ORM::for_table('album_image')->where('image_id', $image)->find_one();
-		var_dump($album);
 		if($album->delete())
 		{
 			return true;
@@ -75,7 +70,6 @@ class Album{
 		$i = 0;
 		foreach ($albums as $album)
 		{
-			echo $albums[$i]->album_id;
 			$instance = ORM::for_table('album_image')->where('album_id', $album->album_id)->find_one();
 			$image_id = $instance['image_id'];
 			array_push($second, $image_id);
@@ -86,7 +80,6 @@ class Album{
 			array_push($first, $image['thumbnail']);
 			$i++;
 		}
-		var_dump($first);
 		return $first;
 	}
 }

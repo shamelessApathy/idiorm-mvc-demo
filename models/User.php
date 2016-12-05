@@ -152,6 +152,19 @@ public static $_table_use_short_name = true;
 		}
 		return $users;
 	}
+	public function change_password($user_id, $new_password)
+	{
+		$user = ORM::for_table('user')->find_one($user_id);
+		$password = hash('sha256', $new_password);
+		$salt = random_bytes(8);
+		$password = $password . $salt;
+		$user->password = $password;
+		$user->salt = $salt;
+		if($user->save())
+		{
+			return true;
+		}
+	}
 	//new
 	public function profile()
 	{
