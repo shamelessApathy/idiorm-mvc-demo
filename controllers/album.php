@@ -13,7 +13,10 @@ class albumController extends Controller{
 		$user_id = $_SESSION['user_info']['id'];
 		require_once(MODELS . '/Album.php');
 		$model = new Album();
-		$album_id = $model->create_album($album_name , $user_id);
+		if($album_id = $model->create_album($album_name , $user_id))
+		{
+			$this->album_manager();
+		}
 	}
 	public function add_image($album_id)
 	{
@@ -53,6 +56,14 @@ class albumController extends Controller{
 	}
 	public function edit_album($album_id = null)
 	{
+		if (isset($_POST['param']) && $_POST['param'] === 'delete')
+		{
+			if($this->delete_album($album_id))
+			{
+				$this->album_manager();
+			}
+			return;
+		}
 		if (empty($album_id))
 		{
 		$album_id = $_POST['album_id'];
@@ -68,6 +79,24 @@ class albumController extends Controller{
 		$album = $model->get_album_images($album_id);
 		$album = array('album_images'=> $album , 'user_images' => $images, 'album' => $full);
 		return_view('store/store.album_manager.php', $album);
+	}
+	public function delete_album($album_id = null)
+	{
+		if(empty($album_id))
+		{
+			$album_id = $_POST['album_id'];
+		}
+		require_once(MODELS . '/Album.php');
+		$model = new Album();
+		$images = $model->get_album_images($album_id);
+		foreach ($images as $image)
+		{
+			$model->remove_image($image->id, $album_id);
+		}
+		if($model->remove_album($album_id))
+		{
+			return true;
+		}
 	}
 
 }

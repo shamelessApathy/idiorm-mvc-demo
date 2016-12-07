@@ -1,0 +1,18 @@
+[core]
+	repositoryformatversion = 0
+	filemode = true
+	bare = false
+	logallrefupdates = true
+[remote "origin"]
+	url = https://github.com/shamelessApathy/idiorm-mvc-demo.git
+	fetch = +refs/heads/*:refs/remotes/origin/*
+[branch "master"]
+	remote = origin
+	merge = refs/heads/master
+[branch "paris"]
+	remote = origin
+	merge = refs/heads/paris
+[user]
+	emal = bcm811@gmail.com
+	name = B
+	email = bcm811@gmail.com

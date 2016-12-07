@@ -184,6 +184,20 @@ public function change_password()
 	}
 
 }
+public function get_images($user_id = null)
+{
+	if (empty($user_id))
+	{
+		$user_id = $_SESSION['user_info']['id'];
+	}
+	require_once(MODELS . '/User.php');
+	require_once(MODELS . '/Image.php');
+	$model = Model::factory('User')->find_one($user_id);
+	var_dump($model);
+	$images = $model->images()->find_many();
+	$images = array('user_images' => $images);
+	return_view('store/store.album_manager.php', $images);
+}
 /*
 *
 * Calls post_manager view

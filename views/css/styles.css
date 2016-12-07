@@ -245,4 +245,10 @@
 {
 	position:relative;
 }
-
+.album-options
+{
+	position:absolute; 
+	display:block; 
+	bottom:0; 
+	right:15;
+}

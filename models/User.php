@@ -1,7 +1,7 @@
 <?php
 
 class User extends Model {
-public static $_table_use_short_name = true;
+
 	//new
 	public function id()
 	{

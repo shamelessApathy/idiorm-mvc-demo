@@ -22,6 +22,12 @@ if (isset($info['album_images']))
 	<div class='row'>
 	<div class='col-md-2'></div>
 	<div class='col-md-8'>
+	<?php if (!isset($info['album_images'])):?>
+		<a href='/user/get_images'>Get All Your Images</a>
+	<?php endif; ?>
+	<?php if (isset($info['album_images'])):?>
+	<a href='/album/album_manager'>Go back to Album Manager</a>
+<?php endif; ?>
 		<form action='/album/create_new' method='POST'>
 		<label>Create new album:</label>
 		<input type='text' name='album_name'/>
@@ -54,8 +60,14 @@ for ($i = 0; $i < $num; $i++)
 }
 	
 ?>
+<div class='album-options'>
+<select name='param'>
+	<option value='edit' name='param'>Edit</option>
+	<option value='delete' name='param'>Delete</option>
+</select>
+<button  type='submit'>Submit</button>
+</div>
 
-<button style='position:absolute; display:block; bottom:0; right:15;' type='submit'>Select</button>
 </form>
 </div>
 </div>

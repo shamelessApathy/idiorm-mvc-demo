@@ -1,7 +1,7 @@
 <?php
-
 class Album{
-	public static $_id_column = 'album_id';
+
+	
 	public function user()
 	{
 		return $this->belongs_to('User');
@@ -57,6 +57,14 @@ class Album{
 	public function remove_image($image, $album_id)
 	{
 		$album = ORM::for_table('album_image')->where('image_id', $image)->find_one();
+		if($album->delete())
+		{
+			return true;
+		}
+	}
+	public function remove_album($album_id)
+	{
+		$album = ORM::for_table('album')->where('album_id', $album_id)->find_one();
 		if($album->delete())
 		{
 			return true;
