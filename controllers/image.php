@@ -178,6 +178,18 @@ class imageController extends Controller {
 				echo 'something happened';
 			}
 		}
+	}
+	public function info($id)
+	{
+		$image = $this->get_image($id);
+		return_view('store/store.image.php', $image);
+	}
+	public function get_image($id)
+	{
+		require_once(MODELS . '/Image.php');
+		$model = Model::factory('Image')->find_one($id);
+		$image = array('image' => $model);
+		return $image;
 	} 	
 }
 ?>

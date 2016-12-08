@@ -78,7 +78,7 @@ for ($i = 0; $i < $num; $i++)
 <div class='row'>
 <div class='col-md-2'></div>
 <div class='col-md-8'>
-<div class='album_modal' style='display:block;'>
+<div class='album_modal' style='display:block; height:250px;'>
 <h1> Images Currently in Album: <?php echo $album->album_name;?></h1>
 <form action="/album/remove_image/<?php echo $album->album_id; ?>" method='POST'>
 	<?php 
@@ -98,13 +98,25 @@ for ($i = 0; $i < $num; $i++)
 <?php endif; ?>
 <!-- this is the all user images area -->
 <?php if (isset($user_images)):?>
+<div class='row'>
+<div class='col-md-2'></div>
+<div class='col-md-8'>
 <div class='album_modal' style='display:block;'>
 <h1>All User Images</h1>
 <form action="/album/add_image/<?php echo $album->album_id; ?>" method='POST'>
 	<?php 
 		foreach ($user_images as $image)
 		{
-			echo "<div class='image_thumb'><img src='$image->thumbnail'/><input type='checkbox' class='image_checkbox' name='image[]' value='$image->id'/></div>";
+			$uploaded = $image->created_at;
+			$uploaded = date("m/d/Y", $uploaded);
+			echo "<div class='image_thumb'><input type='checkbox' class='image_checkbox' name='image[]' value='$image->id'/><div class='image_holder'><img src='$image->thumbnail'/><button type='button' class='image_details_button'>DETAILS</button></div><div class='image_details'>
+				<ul>
+					<li>Name: $image->user_image_name</li>
+					<li>Width: $image->width</li>
+					<li>Height: $image->height</li>
+					<li>Uploaded: $uploaded</li>
+					<li>Tags: $image->tags</li>
+				</ul></div></div>";
 		}
 	?>
 </div>
@@ -112,8 +124,13 @@ for ($i = 0; $i < $num; $i++)
 	<button style='position:absolute; display:block; bottom:0; right:15;' type='submit'>Submit</button>
 </div>
 </form>
+</div>
+<div class='col-md-2'></div>
+</div>
+
 <?php endif; ?>
 </div>
 </div>
 </div>
 <?php require(FOOTER);?>
+<script src='/views/js/album_manager.js' type='text/javascript' rel='javascript'></script>
