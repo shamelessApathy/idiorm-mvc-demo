@@ -4,7 +4,7 @@
 
 foreach ($info as $image)
 {
-	echo "<a href='/image/info/$image->id'><img src='$image->thumbnail'/></a>";
+	echo "<a href='/image/info?id=$image->id'><img src='$image->thumbnail'/></a>";
 }
 
  ?>

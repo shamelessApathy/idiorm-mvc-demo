@@ -29,4 +29,26 @@ $(function(){
 			$(sibling).css("display",'block');
 		});
 	}
+	var update_tags_array = document.getElementsByClassName('tags_button');
+	console.log(update_tags_array);
+	for (var i =0; i < update_tags_array.length; i++)
+	{
+		var instance = update_tags_array[i];
+		instance.addEventListener('click', function(e){
+			var target = e.target;
+			var tags_input = target.parentNode.getElementsByClassName('tags_input')[0];
+			var tags = tags_input.value;
+			var image_id = $(tags_input).attr('data-attribute');
+			var data = {'tags' : tags, "id" : image_id };
+			$.ajax({
+				url: "/image/edit_tags",
+				data: data,
+				method:'POST',
+				success: function(){
+					console.log('success');
+					$(tags_input).css("border-color","green");
+				}
+			});
+		});
+	}
 })

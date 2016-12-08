@@ -26,13 +26,20 @@ if(isset($info))
 		echo "<div class='row'>
 			  <div class='col-md-3'></div>
 			  <div class='col-md-6'>
+			  <a href='/image/info?id=$image->id'>
 			  <div class='admin_image_row unauthorized'>
+			  <ul>
+			  	<li>Name: $image->user_image_name</li>
+			  	<li>Size: $image->size_string</li>
+			  	<li>Tags: $image->tags</li>
+			  </ul>
 			  <img class='admin_image' src='$image->path'/>
 			  <div class='image_controls'>
 			  <a href='/admin/authorize_image/$id'><button>Authorize</button></a>
 			  <a  href='/admin/reject_image/$id'><button style='margin-top:5px;'>Reject</button></a>
 			  </div>
 			  </div>
+			  </a>
 			  </div>
 			  <div class='col-md-3'></div>
 			  </div>";
@@ -42,9 +49,16 @@ if(isset($info))
 		echo "<div class='row'>
 			  <div class='col-md-3'></div>
 			  <div class='col-md-6'>
+			   <a href='/image/info?id=$image->id'>
 			  <div class='admin_image_row'>
+			  <ul>
+			  	<li>Name: $image->user_image_name</li>
+			  	<li>Size: $image->size_string</li>
+			  	<li>Tags: $image->tags</li>
+			  </ul>
 			  <img class='admin_image' src='$image->path'/>
 			  </div>
+			  </a>
 			  </div>
 			  <div class='col-md-3'></div>
 			  </div>";

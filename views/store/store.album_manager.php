@@ -115,7 +115,9 @@ for ($i = 0; $i < $num; $i++)
 					<li>Width: $image->width</li>
 					<li>Height: $image->height</li>
 					<li>Uploaded: $uploaded</li>
-					<li>Tags: $image->tags</li>
+					<a href='#'><li>Tags: $image->tags</li></a>
+					<li class='edit_tags'><input type='text' data-attribute='$image->id' value='$image->tags'  class='tags_input' name='tags'/></li>
+					<button type='button' class='tags_button'>Update</button>	
 				</ul></div></div>";
 		}
 	?>

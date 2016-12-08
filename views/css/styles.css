@@ -217,7 +217,7 @@
 .image_thumb
 {
 	width:100px;
-	height:100px;
+	height:120px;
 	position:relative;
 	margin-top:10px;
 	margin-left:10px;
@@ -295,3 +295,15 @@
 	list-style-type:none;
 }
 
+.admin_image_row ul
+{
+	float:right;
+}
+.edit_tags
+{
+
+}
+.tags_input
+{
+	width:90%;
+}

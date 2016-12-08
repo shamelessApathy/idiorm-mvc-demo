@@ -17,9 +17,13 @@ class imageController extends Controller {
 		$images = $user->images()->find_many();
 		return_view('view.user_images.php', $images);
 	}
-	public function upload_image()
+	public function upload_image($success = null)
 	{
 		return_view('view.upload_image.php');
+		if (isset($success) && $success === true)
+		{
+			user_msg('Image uploaded successfully!');
+		}
 	}
 	public function image_size()
 	{
@@ -71,7 +75,7 @@ class imageController extends Controller {
 				$model = new Image();
 				if ($model->create_new($tmp_name, $user_id, $newpath, $width, $height, $size_string, $mime_type, $user_image_name, $watermark, $thumbnail, $tags))
 				{
-					$this->user_owned_images(); //sends you to function that renders view that shows all images from user (that are authorized!!!)
+					$this->upload_image(true); //sends you to function that renders view that shows all images from user (that are authorized!!!)
 				}
 				else
 				{
@@ -179,8 +183,9 @@ class imageController extends Controller {
 			}
 		}
 	}
-	public function info($id)
+	public function info()
 	{
+		$id = $_GET['id'];
 		$image = $this->get_image($id);
 		return_view('store/store.image.php', $image);
 	}
@@ -190,6 +195,18 @@ class imageController extends Controller {
 		$model = Model::factory('Image')->find_one($id);
 		$image = array('image' => $model);
 		return $image;
-	} 	
+	}
+	public function edit_tags() 	
+	{
+		$id = $_POST['id'];
+		$tags = $_POST['tags'];
+		require_once(MODELS . "/Image.php");
+		$model = Model::factory('Image')->find_one($id);
+		$model->tags = $tags;
+		if ($model->save())
+		{
+			return true;
+		}
+	}
 }
 ?>
