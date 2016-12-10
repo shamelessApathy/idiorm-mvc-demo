@@ -274,6 +274,7 @@
 .image_details_button
 {
 	display:none;
+	z-index:-1;
 }
 .image_thumb:hover .image_details_button
 {
@@ -306,4 +307,32 @@
 .tags_input
 {
 	width:90%;
+}
+.focus_modal
+{
+	width:100%;
+	border:1px solid red;
+	height:0;
+	transition:.1s;
+	-o-transition:.1s;
+	-moz-transition:.1s;
+	-webkit-transition:.1s;
+}
+.focus_details
+{
+	display:none;
+	transition:.5s;
+	-o-transition:.5s;
+	-moz-transition:.5s;
+	-webkit-transition:.5s;
+}
+.focus_details ul
+{
+	list-style-type:none;
+}
+.focus_image img
+{
+	max-height:300px;
+	right:0;
+	position:absolute;
 }

@@ -4,6 +4,32 @@ $(function(){
 		this.init = function(){
 			this.element = $('.album_modal');
 			this.user_id = $('#user_id').attr('data-attribute');
+			// puts image info and preview image in focus_modal
+			this.populate_details = function(el)
+			{
+				$('.focus_modal').attr('style','height:300px;');
+				$('.focus_details').attr('style','display:block');
+				var image = el.getElementsByTagName('IMG')[0];
+				var watermark = $(image).attr('data-watermark');
+				var name = $(image).attr('data-name');
+				var width = $(image).attr('data-width');
+				var height = $(image).attr('data-height');
+				var tags = $(image).attr('data-tags');
+				$('.focus_image').html('<img class="img-responsive" src="'+ watermark +'"/>');
+				$('#focus_name').html('<strong>Name:</strong>' + name );
+				$('#focus_width').html('<strong>Width:</strong>' + width );
+				$('#focus_height').html('<strong>Height:</strong>' + height );
+				$('#focus_tags').html('<strong>Tags:</strong>' + tags );
+
+			}
+			// attaches event listener to each element thats passed in, assigns action function
+			this.thumbListeners = function(el)
+			{
+				var element = el;
+				$(el).on('click', function(){
+					this.populate_details(element);
+				}.bind(this))
+			}.bind(this);
 		}
 		this.albums = function(){
 			// Get all albums via ajax for current user
@@ -50,5 +76,10 @@ $(function(){
 				}
 			});
 		});
+	}
+	var image_thumb_array = document.getElementsByClassName('image_thumb');
+	for ( var i =0; i < image_thumb_array.length; i++)
+	{
+		album.thumbListeners(image_thumb_array[i]);
 	}
 })

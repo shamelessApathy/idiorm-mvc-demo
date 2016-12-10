@@ -19,6 +19,23 @@ if (isset($info['album_images']))
 ?>
 
 <div class='container'>
+<div class='row'>
+	<div class='focus_modal'>
+		<div class='col-md-6'>
+			<div class='focus_details'>
+				<ul>
+					<li id='focus_name'></li>
+					<li id='focus_width'></li>
+					<li id='focus_height'></li>
+					<li id='focus_tags'></li>
+				</ul>
+			</div>
+		</div>
+		<div class='col-md-6'>
+		<div class='focus_image'></div>
+		</div>		
+	</div>
+</div>
 	<div class='row'>
 	<div class='col-md-2'></div>
 	<div class='col-md-8'>
@@ -109,7 +126,7 @@ for ($i = 0; $i < $num; $i++)
 		{
 			$uploaded = $image->created_at;
 			$uploaded = date("m/d/Y", $uploaded);
-			echo "<div class='image_thumb'><input type='checkbox' class='image_checkbox' name='image[]' value='$image->id'/><div class='image_holder'><img src='$image->thumbnail'/><button type='button' class='image_details_button'>DETAILS</button></div><div class='image_details'>
+			echo "<div class='image_thumb'><input type='checkbox' class='image_checkbox' name='image[]' value='$image->id'/><div class='image_holder'><img data-name='$image->user_image_name'  data-tags='$image->tags' data-width='$image->width' data-height='$image->height' data-watermark='$image->watermark' src='$image->thumbnail'/><button type='button' class='image_details_button'>DETAILS</button></div><div class='image_details'>
 				<ul>
 					<li>Name: $image->user_image_name</li>
 					<li>Width: $image->width</li>
