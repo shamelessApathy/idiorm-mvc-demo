@@ -196,17 +196,43 @@ class imageController extends Controller {
 		$image = array('image' => $model);
 		return $image;
 	}
-	public function edit_tags() 	
+	public function edit_tags($tags = null, $id = null) 	
 	{
+		if (empty($tags))
+		{
 		$id = $_POST['id'];
 		$tags = $_POST['tags'];
-		require_once(MODELS . "/Image.php");
-		$model = Model::factory('Image')->find_one($id);
-		$model->tags = $tags;
-		if ($model->save())
-		{
-			return true;
 		}
+		else
+		{
+			require_once(MODELS . "/Image.php");
+			$model = Model::factory('Image')->find_one($id);
+			$model->tags = $tags;
+			if ($model->save())
+			{
+				return true;
+			}
+		}
+	}
+	public function remove_tag()
+	{
+		$id = $_POST['id'];
+		$tag = $_POST['tag'];
+		require_once(MODELS . '/Image.php');
+		$image = Model::factory('Image')->find_one($id);
+		$tags = $image->tags;
+		$tags = str_ireplace($tag, '', $tags);
+		$tags = explode(' ', $tags);
+		var_dump($tags);
+		/*if ($this->edit_tags($tags, $id))
+		{
+			echo 'it worked';
+		}
+		else
+		{
+			echo 'didnt work';
+		}*/
+
 	}
 }
 ?>

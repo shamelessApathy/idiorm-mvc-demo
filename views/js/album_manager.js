@@ -1,27 +1,59 @@
 $(function(){
 	var AlbumManager = function()
 	{
+			this.id;
 		this.init = function(){
 			this.element = $('.album_modal');
 			this.user_id = $('#user_id').attr('data-attribute');
 			// puts image info and preview image in focus_modal
 			this.populate_details = function(el)
 			{
-				$('.focus_modal').attr('style','height:300px;');
+				$('.focus_move').attr('style', 'margin-top:0');
+				$('.focus_modal').attr('style','opacity:1');
 				$('.focus_details').attr('style','display:block');
 				var image = el.getElementsByTagName('IMG')[0];
+				this.id = $(image).attr('data-id');
 				var watermark = $(image).attr('data-watermark');
 				var name = $(image).attr('data-name');
 				var width = $(image).attr('data-width');
 				var height = $(image).attr('data-height');
 				var tags = $(image).attr('data-tags');
+				var tags = tags.split("|");
+				console.log(tags);
 				$('.focus_image').html('<img class="img-responsive" src="'+ watermark +'"/>');
-				$('#focus_name').html('<strong>Name:</strong>' + name );
+				document.getElementById('focus_name').value = name;
 				$('#focus_width').html('<strong>Width:</strong>' + width );
 				$('#focus_height').html('<strong>Height:</strong>' + height );
-				$('#focus_tags').html('<strong>Tags:</strong>' + tags );
+				$('#focus_tags').html('<strong>Tags:</strong>');
+				for (var i = 0; i < tags.length; i++)
+				{
+					//tags[i] = "<span class='tag'"
+					$('#focus_tags').append('<span class="tag">' + tags[i] + '</span>');
+				}
+				this.tagListeners();
 
 			}
+			// adds listeners on tag elements so we can remove them when clicked
+			this.tagListeners = function(){
+				var tags = document.getElementsByClassName('tag');
+				for (var i = 0; i < tags.length; i++)
+				{
+					tags[i].addEventListener('click', function(e){
+						target = e.target;
+						var tag = target.innerHTML;
+						var data = {'tag' : tag, 'id' : this.id}
+						console.log(data);
+						$.ajax({
+							url: "/image/remove_tag",
+							type: "POST",
+							data: data, 
+							success: function(results){
+								console.log(results);
+							}
+						})
+					}.bind(this))
+				}
+			}.bind(this);
 			// attaches event listener to each element thats passed in, assigns action function
 			this.thumbListeners = function(el)
 			{
