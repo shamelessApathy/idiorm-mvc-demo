@@ -1,3 +1,4 @@
+var tags;
 $(function(){
 	var AlbumManager = function()
 	{
@@ -5,6 +6,19 @@ $(function(){
 		this.init = function(){
 			this.element = $('.album_modal');
 			this.user_id = $('#user_id').attr('data-attribute');
+			this.setTags = function(results)
+			{
+				tags = results;
+				tags = JSON.parse(tags);
+				length = tags.length;
+				$('#focus_tags').html('');
+				$('#focus_tags').val('<strong>Tags:</strong>');
+				for (var i = 0; i < length; i++)
+				{
+					//tags[i] = "<span class='tag'"
+					$('#focus_tags').append('<span class="tag" data-id='+ tags[i]["id"] +'>' + tags[i]["text"] + '</span>');
+				}
+			}
 			// puts image info and preview image in focus_modal
 			this.populate_details = function(el)
 			{
@@ -17,21 +31,46 @@ $(function(){
 				var name = $(image).attr('data-name');
 				var width = $(image).attr('data-width');
 				var height = $(image).attr('data-height');
-				var tags = $(image).attr('data-tags');
-				var tags = tags.split("|");
-				console.log(tags);
-				$('.focus_image').html('<img class="img-responsive" src="'+ watermark +'"/>');
+				
+				var data = {'id':this.id};
+				$.ajax({
+					url: '/tag/get_tags',
+					type: 'POST',
+					data: data,
+					success: function(results){
+						this.setTags(results);
+						this.tagListeners();
+						this.addTagListener();
+					}.bind(this)
+				});
+				$('.focus_image').html('<img data-id='+ this.id +' class="img-responsive" src="'+ watermark +'"/>');
 				document.getElementById('focus_name').value = name;
 				$('#focus_width').html('<strong>Width:</strong>' + width );
 				$('#focus_height').html('<strong>Height:</strong>' + height );
 				$('#focus_tags').html('<strong>Tags:</strong>');
-				for (var i = 0; i < tags.length; i++)
-				{
-					//tags[i] = "<span class='tag'"
-					$('#focus_tags').append('<span class="tag">' + tags[i] + '</span>');
-				}
-				this.tagListeners();
+				
 
+			}
+			this.addTags = function(){
+				var tag = $('#add_tag').val();
+				var focus = document.getElementsByClassName('focus_modal')[0];
+				var id = focus.getElementsByTagName('img')[0];
+				var id = id.getAttribute('data-id');
+				var data = {'image_id': id, 'tag':tag};
+				$.ajax({
+					url: "/tag/add_tag",
+					type: "POST",
+					data: data,
+					success: function(results)
+					{
+						this.setTags(results);
+					}.bind(this)
+				})
+				$(tag).val("");
+			}.bind(this);
+			this.addTagListener = function(){
+				var button = $('#add_tag_button');
+				button.on('click', this.addTags);
 			}
 			// adds listeners on tag elements so we can remove them when clicked
 			this.tagListeners = function(){
@@ -40,16 +79,15 @@ $(function(){
 				{
 					tags[i].addEventListener('click', function(e){
 						target = e.target;
-						var tag = target.innerHTML;
-						var data = {'tag' : tag, 'id' : this.id}
-						console.log(data);
+						var tag = $(target).attr('data-id');
+						var data = {'tag_id' : tag, 'image_id' : this.id}
 						$.ajax({
-							url: "/image/remove_tag",
+							url: "/tag/remove_tag",
 							type: "POST",
 							data: data, 
 							success: function(results){
-								console.log(results);
-							}
+								this.setTags(results);
+							}.bind(this)
 						})
 					}.bind(this))
 				}
@@ -68,7 +106,6 @@ $(function(){
 		}
 		this.show_details = function(e){
 			var element = e;
-			console.log(element);
 		}
 		this.init();
 	}
@@ -88,7 +125,6 @@ $(function(){
 		});
 	}
 	var update_tags_array = document.getElementsByClassName('tags_button');
-	console.log(update_tags_array);
 	for (var i =0; i < update_tags_array.length; i++)
 	{
 		var instance = update_tags_array[i];
@@ -103,7 +139,6 @@ $(function(){
 				data: data,
 				method:'POST',
 				success: function(){
-					console.log('success');
 					$(tags_input).css("border-color","green");
 				}
 			});

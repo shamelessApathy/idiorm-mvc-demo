@@ -5,7 +5,7 @@ class Image extends Model
 	{
 		$this->belongs_to('User');
 	}
-	public function create_new($tmp_name, $user_id, $new_path, $width, $height, $size_string, $mime_type, $user_image_name, $watermark, $thumbnail, $tags)
+	public function create_new($tmp_name, $user_id, $new_path, $width, $height, $size_string, $mime_type, $user_image_name, $watermark, $thumbnail)
 	{
 		$time = time();
 		$new_image = ORM::for_table('image')->create();
@@ -19,10 +19,9 @@ class Image extends Model
 		$new_image->user_image_name = $user_image_name;
 		$new_image->watermark = $watermark;
 		$new_image->thumbnail = $thumbnail;
-		$new_image->tags = $tags;
 		if ($new_image->save())
 		{
-			return true;
+			return $new_image->id();
 		}
 		else
 		{

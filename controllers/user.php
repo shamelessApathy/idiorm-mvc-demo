@@ -195,6 +195,7 @@ public function get_images($user_id = null)
 	$model = Model::factory('User')->find_one($user_id);
 	$images = $model->images()->find_many();
 	$images = array('user_images' => $images);
+
 	return_view('store/store.album_manager.php', $images);
 }
 /*

@@ -29,6 +29,8 @@ if (isset($info['album_images']))
 					<li id='focus_height'></li>
 					<li id='focus_tags'></li>
 				</ul>
+				<input type='text' id='add_tag'>
+				<button type='button' id='add_tag_button'>Add Tag</button>
 			</div>
 		</div>
 		<div class='col-md-6'>
@@ -122,11 +124,12 @@ for ($i = 0; $i < $num; $i++)
 <h1>All User Images</h1>
 <form action="/album/add_image/<?php echo $album->album_id; ?>" method='POST'>
 	<?php 
+	$counter = 0;
 		foreach ($user_images as $image)
 		{
 			$uploaded = $image->created_at;
 			$uploaded = date("m/d/Y", $uploaded);
-			echo "<div class='image_thumb'><input type='checkbox' class='image_checkbox' name='image[]' value='$image->id'/><div class='image_holder'><img data-name='$image->user_image_name'  data-tags='$image->tags' data-width='$image->width' data-height='$image->height' data-watermark='$image->watermark' data-id='$image->id' src='$image->thumbnail'/><button type='button' class='image_details_button'>DETAILS</button></div><div class='image_details'>
+			echo "<div class='image_thumb'><input type='checkbox' class='image_checkbox' name='image[]' value='$image->id'/><div class='image_holder'><img data-name='$image->user_image_name'  data-width='$image->width' data-height='$image->height' data-watermark='$image->watermark' data-id='$image->id' src='$image->thumbnail'/><button type='button' class='image_details_button'>DETAILS</button></div><div class='image_details'>
 				<ul>
 					<li>Name: $image->user_image_name</li>
 					<li>Width: $image->width</li>

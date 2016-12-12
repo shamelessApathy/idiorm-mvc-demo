@@ -38,6 +38,8 @@ class imageController extends Controller {
 		$user_id = $_SESSION['user_info']->id;
 		$name = $_FILES['image']['name'];
 		$tags = $_POST['tags'];
+		$tags = explode('|', $tags);
+		array_pop($tags);
 		$type = 'image';
 		if (!empty($_POST['user_image_name']))
 		{
@@ -73,9 +75,11 @@ class imageController extends Controller {
   				chmod($save_path.$myname.$ext, 0755);
   				require_once(MODELS . '/Image.php');
 				$model = new Image();
-				if ($model->create_new($tmp_name, $user_id, $newpath, $width, $height, $size_string, $mime_type, $user_image_name, $watermark, $thumbnail, $tags))
+				$return = $model->create_new($tmp_name, $user_id, $newpath, $width, $height, $size_string, $mime_type, $user_image_name, $watermark, $thumbnail);
+				if ($return)
 				{
-					$this->upload_image(true); //sends you to function that renders view that shows all images from user (that are authorized!!!)
+					//$this->upload_image(true); //sends you to function that renders view that shows all images from user (that are authorized!!!)
+					$this->add_tag($tags, $return);
 				}
 				else
 				{
@@ -196,22 +200,14 @@ class imageController extends Controller {
 		$image = array('image' => $model);
 		return $image;
 	}
-	public function edit_tags($tags = null, $id = null) 	
+	public function add_tag($tags = null, $image_id = null) 	
 	{
-		if (empty($tags))
+		require_once(CONTROLLERS . '/tag.php');
+		$controller = new tagController();
+		if($controller->add_tag($tags, $image_id))
 		{
-		$id = $_POST['id'];
-		$tags = $_POST['tags'];
-		}
-		else
-		{
-			require_once(MODELS . "/Image.php");
-			$model = Model::factory('Image')->find_one($id);
-			$model->tags = $tags;
-			if ($model->save())
-			{
-				return true;
-			}
+			return_view('view.upload_image.php');
+			user_msg('Image Uploaded Successfully!');
 		}
 	}
 	public function remove_tag()
