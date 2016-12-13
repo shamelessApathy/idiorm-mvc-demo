@@ -6,6 +6,20 @@ class Tag {
 	}
 	public function add_tag($tag_string, $image_id)
 	{
+		$test = ORM::for_table('tag')->where('text', $tag_string)->find_one();
+		if ($test)
+		{
+			$tag_id = $test->id;
+			$many = ORM::for_table('tag_to_image')->create();
+			$many->tag_id = $tag_id;
+			$many->image_id = $image_id;
+			if ($many->save())
+			{
+				return true;
+			}
+		}
+		else
+		{
 		$tag = ORM::for_table('tag')->create();
 		$tag->text = $tag_string;
 		if ($tag->save())
@@ -23,6 +37,7 @@ class Tag {
 		{
 			return false;
 		}
+	}
 	}
 	public function get_tags($image_id)
 	{

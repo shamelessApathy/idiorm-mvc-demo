@@ -25,6 +25,8 @@ class tagController extends Controller {
 		require_once(MODELS . '/Tag.php');
 		$model = new Tag();
 		$tags = $model->get_tags($image_id);
+		if ($tags)
+		{	
 		$tags_array = array();
 		foreach($tags as $tag)
 		{
@@ -32,11 +34,19 @@ class tagController extends Controller {
 			$table = ORM::for_table('tag')->where('id', $id)->find_one();
 			array_push($tags_array, array('text' =>$table->text, 'id'=>$table->id));
 		}
+
 		$tags = json_encode($tags_array);
 		echo $tags;
 	}
-	public function remove_tag()
+		else
+		{
+			echo "{}";
+		}
+	}
+	public function remove_tag($tag_id = null, $image_id = null)
 	{
+		if (empty($tag_id))
+		{
 		$image_id = $_POST['image_id'];
 		$tag_id = $_POST['tag_id'];
 		require_once(MODELS . '/Tag.php');
@@ -45,6 +55,7 @@ class tagController extends Controller {
 		if ($result)
 		{
 			$this->get_tags($image_id);
+		}
 		}
 	}
 }

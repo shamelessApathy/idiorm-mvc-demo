@@ -129,16 +129,7 @@ for ($i = 0; $i < $num; $i++)
 		{
 			$uploaded = $image->created_at;
 			$uploaded = date("m/d/Y", $uploaded);
-			echo "<div class='image_thumb'><input type='checkbox' class='image_checkbox' name='image[]' value='$image->id'/><div class='image_holder'><img data-name='$image->user_image_name'  data-width='$image->width' data-height='$image->height' data-watermark='$image->watermark' data-id='$image->id' src='$image->thumbnail'/><button type='button' class='image_details_button'>DETAILS</button></div><div class='image_details'>
-				<ul>
-					<li>Name: $image->user_image_name</li>
-					<li>Width: $image->width</li>
-					<li>Height: $image->height</li>
-					<li>Uploaded: $uploaded</li>
-					<a href='#'><li>Tags: $image->tags</li></a>
-					<li class='edit_tags'><input type='text' data-attribute='$image->id' value='$image->tags'  class='tags_input' name='tags'/></li>
-					<button type='button' class='tags_button'>Update</button>	
-				</ul></div></div>";
+			echo "<div class='image_thumb'><input type='checkbox' class='image_checkbox' name='image[]' value='$image->id'/><div class='image_holder'><img data-name='$image->user_image_name'  data-width='$image->width' data-height='$image->height' data-watermark='$image->watermark' data-id='$image->id' src='$image->thumbnail'/></div></div>";
 		}
 	?>
 </div>
