@@ -224,6 +224,16 @@
 	float:left;
 	text-align:center;
 }
+._thumb
+{
+	width:100px;
+	height:120px;
+	position:relative;
+	margin-top:10px;
+	margin-left:10px;
+	float:left;
+	text-align:center;
+}
 .album_thumb .image_thumb
 {
 	margin:auto;

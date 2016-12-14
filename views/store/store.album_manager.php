@@ -32,6 +32,7 @@ if (isset($info['album_images']))
 				<input type='text' id='add_tag'>
 				<button type='button' id='add_tag_button'>Add Tag</button>
 			</div>
+			<button style='margin-top:15px;' id='delete_image' type='button'>Delete</button>
 		</div>
 		<div class='col-md-6'>
 		<div class='focus_image'></div>
@@ -73,7 +74,7 @@ for ($i = 0; $i < $num; $i++)
 	echo "
 	<div class='album_thumb'>
 	<h3>$name</h3>
-	<div class='image_thumb'><img src='$img'/><input type='checkbox' value='$album_id' name='album_id' class='image_checkbox'/></div>
+	<div class='_thumb'><img src='$img'/><input type='checkbox' value='$album_id' name='album_id' class='image_checkbox'/></div>
 	</div>
 	";
 }

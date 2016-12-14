@@ -45,6 +45,14 @@ class Image extends Model
 		}
 		return $images;
 	}
+	public function delete_image($image_id)
+	{
+		$image = ORM::for_table('image')->where('id', $image_id)->find_one();
+		if ($image->delete())
+		{
+			return true;
+		}
+	}
 	public function authorize_image($id)
 	{
 		$image = ORM::for_table('image')->where('id', $id)->find_one();

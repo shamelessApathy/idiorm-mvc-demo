@@ -165,6 +165,32 @@ class imageController extends Controller {
 			return false;
 		}
 	}
+	// delete's image from db and file
+	public function delete_image($image_id = null)
+	{
+
+		if (empty($image_id))
+		{
+			$image_id = $_POST['image_id'];
+		}
+		require_once(MODELS . '/Image.php');
+		$image_model = Model::factory('Image')->find_one($image_id);
+		$path = $image_model->path;
+		if (unlink(ROOT . $image_model->path))
+		{
+			echo ' it deleted';
+			$image_model->delete();
+		}
+		require_once(MODELS . '/Tag.php');
+		$tag_model = new Tag();
+		$tags = $tag_model->get_tags($image_id);
+		foreach ($tags as $tag)
+		{
+			$tag_model->remove_tag($image_id, $tag->tag_id);
+		}
+
+
+	}
 	public function search_by_tag()
 	{
 		if (!empty($_GET['query']))

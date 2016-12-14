@@ -1,4 +1,5 @@
 var tags;
+var orig;
 $(function(){
 	var AlbumManager = function()
 	{
@@ -24,6 +25,7 @@ $(function(){
 			// puts image info and preview image in focus_modal
 			this.populate_details = function(el)
 			{
+				orig = el;
 				$('.focus_move').attr('style', 'margin-top:0');
 				$('.focus_modal').attr('style','opacity:1');
 				$('.focus_details').attr('style','display:block');
@@ -33,7 +35,7 @@ $(function(){
 				var name = $(image).attr('data-name');
 				var width = $(image).attr('data-width');
 				var height = $(image).attr('data-height');
-				$('.focus_image').html('<img data-id='+ this.id +' class="img-responsive" src="'+ watermark +'"/>');
+				$('.focus_image').html('<img  id="the_image" data-id='+ this.id +' class="img-responsive" src="'+ watermark +'"/>');
 				document.getElementById('focus_name').value = name;
 				$('#focus_width').html('<strong>Width:</strong>' + width );
 				$('#focus_height').html('<strong>Height:</strong>' + height );
@@ -69,10 +71,42 @@ $(function(){
 				})
 				$(tag).val("");
 			}.bind(this);
-			this.addTagListener = function(){
+			this.delete = function()
+			{
+				var image_id = document.getElementById('the_image');
+				image_id = image_id.getAttribute('data-id');
+				console.log(image_id);
+				var data = {'image_id': image_id};
+				$.ajax({
+					url: '/image/delete_image',
+					type: "POST",
+					data: data,
+					success: function(results){
+						console.log(results);
+					}
+				})
+				$('.focus_modal').attr('style','');
+				orig.remove();
+			}
+			this.addDeleteListener = function()
+			{
+				var button = $('#delete_image');
+				button.on('click', this.delete);
+			}.bind(this)
+			this.addTagListener = function()
+			{
 				var button = $('#add_tag_button');
 				button.on('click', this.addTags);
 			}
+			this.keyListeners = function()
+			{
+				$("#add_tag").on('keyup', function (e) {
+    				if (e.keyCode == 13) 
+    				{
+        				this.addTags();
+    				}
+				}.bind(this));
+			}.bind(this);
 			
 			// adds listeners on tag elements so we can remove them when clicked
 			this.tagListeners = function(){
@@ -86,12 +120,14 @@ $(function(){
 			this.thumbListeners = function(el)
 			{
 				var element = el;
-				$(el).on('click', function(){
+				$(el).on('click', function()
+				{
 					this.populate_details(element);
 				}.bind(this))
 			}.bind(this);
 		}
-		this.albums = function(){
+		this.albums = function()
+		{
 			// Get all albums via ajax for current user
 		}
 		this.show_details = function(e){
@@ -99,6 +135,8 @@ $(function(){
 		}
 		this.init();
 		this.addTagListener();
+		this.addDeleteListener();
+		this.keyListeners();
 		this.remove_tag = function(e){
 						target = e.target;
 						var tag = $(target).attr('data-id');
