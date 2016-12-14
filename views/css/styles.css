@@ -376,3 +376,15 @@
 {
 	z-index:-1;
 }
+.preview_thumb
+{
+	float:left;
+	height:100px;
+	display:flex;
+	align-items:center;
+	justify-content: center;
+}
+.preview_thumb img
+{
+
+}

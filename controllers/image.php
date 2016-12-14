@@ -80,6 +80,7 @@ class imageController extends Controller {
 				{
 					//$this->upload_image(true); //sends you to function that renders view that shows all images from user (that are authorized!!!)
 					$this->add_tag($tags, $return);
+					$this->upload_image(true);
 				}
 				else
 				{
@@ -191,32 +192,21 @@ class imageController extends Controller {
 
 
 	}
-	public function search_by_tag()
-	{
-		if (!empty($_GET['query']))
-		{
-			$query = $_GET['query'];
-			//if (str_pos($query, " ") !== false)
-			//{
-				//$query = explode(" " ,$query);
-			//}
-			require_once(MODELS . '/Image.php');
-			$model = new Image();
-			$results = $model->search_by_tag($query);
-			if($results)
-			{
-				return_view('view.image_search_results.php', $results);
-			}
-			else
-			{
-				echo 'something happened';
-			}
-		}
-	}
+	
 	public function info()
 	{
 		$id = $_GET['id'];
 		$image = $this->get_image($id);
+		require_once(MODELS . '/Tag.php');
+		$tag_model = new Tag();
+		$tags = $tag_model->get_tags($id);
+		$tag_array = array();
+		foreach ($tags as $tag)
+		{
+			$text = $tag_model->get_tag_text($tag->tag_id);
+			array_push($tag_array, $text);
+		}
+		$image = array('image'=>$image, 'tags'=>$tag_array);
 		return_view('store/store.image.php', $image);
 	}
 	public function get_image($id)

@@ -55,7 +55,7 @@
         </li>
       <?php endif;?>
       </ul>
-      <form class="navbar-form navbar-left" action='/image/search_by_tag' method="GET">
+      <form class="navbar-form navbar-left" action='/tag/search_by_tag' method="GET">
         <div class="form-group" >
           <input type="text" class="form-control" name='query' placeholder="Search">
         </div>

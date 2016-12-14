@@ -58,6 +58,57 @@ class tagController extends Controller {
 		}
 		}
 	}
+	public function search_by_tag()
+	{
+		if (!empty($_GET['query']))
+		{
+			$query = $_GET['query'];
+			//if (str_pos($query, " ") !== false)
+			//{
+				//$query = explode(" " ,$query);
+			//}
+			require_once(MODELS . '/Tag.php');
+			$model = new Tag();
+			$results = $model->search_by_tag($query);
+			// if we find related tags to the query, search for images in tag_to_image table that are linked with each tag_id
+			if($results)
+			{
+				$image_ids = array();
+				foreach ($results as $tag)
+				{
+					var_dump($tag->id);
+					$image_id = $model->get_images($tag->id);
+					if ($image_id)
+					{
+						foreach ($image_id as $image)
+						{
+							array_push($image_ids, $image->image_id);
+						}
+					}
+				}
+				if (empty($image_ids))
+				{
+					return_view('view.home.php');
+					user_msg('Sorry, no images matched your query!');
+				}
+				$image_array = array();
+				require_once(MODELS . '/Image.php');
+				foreach ($image_ids as $image_id)
+				{
+					$image_model = Model::factory('Image')->find_one($image_id);
+					if ($image_model->auth == '1')
+					{
+						array_push($image_array, $image_model);
+					}
+				}
+				return_view('view.image_search_results.php', $image_array);
+			}
+			else
+			{
+				echo 'something happened';
+			}
+		}
+	}
 }
 
 ?>

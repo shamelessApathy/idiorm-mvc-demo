@@ -5,6 +5,26 @@ class Image extends Model
 	{
 		$this->belongs_to('User');
 	}
+	public function get_newest()
+	{
+		$images = ORM::for_table('image')->order_by_asc('created_at')->where('auth', 1)->find_many();
+		$image_array = array();
+		if (count($images) < 50)
+		{
+			foreach($images as $image)
+			{
+				array_push($image_array, $image);
+			}
+		}
+		else 
+		{
+			for ($i = 0; $i < 50; $i++)
+			{
+				array_push($image_array, $images[$i]);
+			}
+		}
+		return $image_array;
+	}
 	public function create_new($tmp_name, $user_id, $new_path, $width, $height, $size_string, $mime_type, $user_image_name, $watermark, $thumbnail)
 	{
 		$time = time();
@@ -70,18 +90,6 @@ class Image extends Model
 		{
 			return $image;
 		}
-	}
-
-	public function search_by_tag($query)
-	{
-		$query = '%'.$query.'%';
-		$images = ORM::for_table('image')
-            ->where_like('tags', $query)
-            ->where('auth','1')
-            ->find_many();
-            $last = ORM::get_last_query();
-            var_dump($last);
-            return $images;
 	}
 	public function album()
 	{

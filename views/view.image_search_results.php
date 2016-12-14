@@ -1,4 +1,6 @@
-<?php require(HEADER); ?>
+<?php require(HEADER);
+
+?>
 <h1> this is the image search results page </h1>
 <?php
 

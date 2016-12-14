@@ -44,6 +44,11 @@ class Tag {
 		$tags = ORM::for_table('tag_to_image')->where('image_id', $image_id)->find_many();
 		return $tags;
 	}
+	public function get_images($tag_id)
+	{
+		$images = ORM::for_table('tag_to_image')->where('tag_id', $tag_id)->find_many();
+		return $images;
+	}
 	public function remove_tag($image_id, $tag_id)
 	{
 		$tag = ORM::for_table('tag_to_image')->where('tag_id', $tag_id)->where('image_id', $image_id)->find_one();
@@ -51,6 +56,20 @@ class Tag {
 		{
 			return true;
 		}
+	}
+	public function get_tag_text($tag_id)
+	{
+		$tag = ORM::for_table('tag')->where('id', $tag_id)->find_one();
+		return $tag;
+	}
+	public function search_by_tag($query)
+	{
+		$query = '%'.$query.'%';
+		$images = ORM::for_table('tag')
+            ->where_like('text', $query)
+            ->find_many();
+            $last = ORM::get_last_query();
+            return $images;
 	}
 
 }
