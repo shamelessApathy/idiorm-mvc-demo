@@ -10,7 +10,6 @@ function uri_router($uri, $query = null) {
 	$uri = explode('/', $uri);
 	if (empty($uri[1]))
 	{
-		echo 'running';
 		require_once(CONTROLLERS . '/home.php');
 		$home = new homeController();
 		$home->load();

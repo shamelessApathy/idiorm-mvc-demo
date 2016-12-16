@@ -1,5 +1,6 @@
 <?php 
 require(HEADER);
+
 if (isset($info['user_images']))
 {
 	$user_images = $info['user_images'];
@@ -16,6 +17,11 @@ if (isset($info['album_images']))
 	$album = $info['album'];
 	$album_images = $info['album_images'];
 }
+if (isset($info['categories']))
+{
+	$categories = $info['categories'];
+
+}
 ?>
 
 <div class='container'>
@@ -27,10 +33,17 @@ if (isset($info['album_images']))
 					<li><label>Name:</label><input id='focus_name' name='user_image_name'></li>
 					<li id='focus_width'></li>
 					<li id='focus_height'></li>
-					<li id='focus_tags'></li>
+					<li id='categories'><strong>Categories:</strong></li>
+					<li id='focus_tags'><strong>Tags:</strong></li>
 				</ul>
 				<input type='text' id='add_tag'>
 				<button type='button' id='add_tag_button'>Add Tag</button>
+				<select id='add_category'>
+					<option value='1' name='people'>People</option>
+					<option value='2' name='places'>Places</option>
+					<option value='3' name='things'>Things</option>
+				</select>
+				<button id='add_category_button'>Add Category</button>
 			</div>
 			<button style='margin-top:15px;' id='delete_image' type='button'>Delete</button>
 		</div>

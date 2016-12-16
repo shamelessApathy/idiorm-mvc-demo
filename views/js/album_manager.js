@@ -3,8 +3,8 @@ var orig;
 $(function(){
 	var AlbumManager = function()
 	{
-			this.id;
 		this.init = function(){
+			this.id;
 			this.element = $('.album_modal');
 			this.user_id = $('#user_id').attr('data-attribute');
 			this.setTags = function(results)
@@ -13,7 +13,7 @@ $(function(){
 				tags = JSON.parse(tags);
 				length = tags.length;
 				$('#focus_tags').html('');
-				$('#focus_tags').val('<strong>Tags:</strong>');
+				$('#focus_tags').html('<strong>Tags:</strong>');
 				for (var i = 0; i < length; i++)
 				{
 					//tags[i] = "<span class='tag'"
@@ -31,6 +31,7 @@ $(function(){
 				$('.focus_details').attr('style','display:block');
 				var image = el.getElementsByTagName('IMG')[0];
 				this.id = $(image).attr('data-id');
+				this.get_categories(this.id);
 				var watermark = $(image).attr('data-watermark');
 				var name = $(image).attr('data-name');
 				var width = $(image).attr('data-width');
@@ -39,8 +40,7 @@ $(function(){
 				document.getElementById('focus_name').value = name;
 				$('#focus_width').html('<strong>Width:</strong>' + width );
 				$('#focus_height').html('<strong>Height:</strong>' + height );
-				$('#focus_tags').html('<strong>Tags:</strong>');
-				var data = {'id':this.id};
+				var data = {'id': this.id};
 				$.ajax({
 					url: '/tag/get_tags',
 					type: 'POST',
@@ -52,7 +52,7 @@ $(function(){
 				
 				
 
-			}
+			}.bind(this);
 			this.addTags = function(){
 				console.log('running addTags() func');
 				var tag = $('#add_tag').val();
@@ -88,6 +88,11 @@ $(function(){
 				$('.focus_modal').attr('style','');
 				orig.remove();
 			}
+			this.addCategoryListener = function()
+			{
+				var button = ('#add_category_button');
+				$(button).on('click', this.add_category);
+			}.bind(this)
 			this.addDeleteListener = function()
 			{
 				var button = $('#delete_image');
@@ -133,10 +138,51 @@ $(function(){
 		this.show_details = function(e){
 			var element = e;
 		}
+		this.set_category = function (results)
+		{
+			if(results != null)
+			{
+
+				var categories = $('#categories');
+			for (var i = 0; i < results.length; i++)
+			{
+			categories.append("<span class='category'>"+results[i]['category_title'] +"</span>");
+					
+			}
+		}
+		}
+		this.add_category = function()
+		{
+			var input = $('#add_category').val();
+			var data = {'image_id':this.id, 'category_id': input};
+			$.ajax({
+				type:'POST',
+				data: data,
+				dataType: 'json',
+				url: '/category/add_cat_to_image',
+				success: function(results){
+					this.set_category(results);
+				}.bind(this)
+			});
+		}.bind(this)
+		this.get_categories = function(image_id){
+			console.log('running!!!');
+				var data = {'image_id': image_id};
+			$.ajax({
+				type:'POST',
+				data: data,
+				url:'/category/get_categories',
+				success: function(results){
+					console.log(results);
+					this.set_category(results);
+				}.bind(this)
+			});
+		}.bind(this)
 		this.init();
 		this.addTagListener();
 		this.addDeleteListener();
 		this.keyListeners();
+		this.addCategoryListener();
 		this.remove_tag = function(e){
 						target = e.target;
 						var tag = $(target).attr('data-id');

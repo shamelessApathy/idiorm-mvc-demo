@@ -8,7 +8,7 @@ define('FOOTER', VIEWS . '/footer.php');
 define('CSS', 'views/css');
 define('BOOTSTRAP', 'views/bootstrap-3.3.7-dist');
 define('BASE_CONTROLLER', ROOT . '/controllers/controller.php');
-
+define('SIDEBAR', ROOT . '/views/view.sidebar.php');
 
 /* DB INFO */
 define('DB_NAME', 'idiorm');

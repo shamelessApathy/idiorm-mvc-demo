@@ -380,11 +380,51 @@
 {
 	float:left;
 	height:100px;
+	width:150px;
 	display:flex;
 	align-items:center;
 	justify-content: center;
 }
 .preview_thumb img
 {
+	max-width:100%;
+}
 
+
+/* CATEGORIES AREA */
+.categories
+{
+	width:100%;
+	border:1px solid black;
+	margin-bottom:20px;
+}
+.categories ul
+{
+	display:inline;
+	list-style:none;
+}
+.categories ul li
+{
+	display:inline;
+	font-size:16px;
+	font-weight:700;
+	color:black;
+	padding-left:10px;
+	padding-right:10px;
+}
+.category
+{
+	border-radius:5px;
+	color:#f8f8f8;
+	background-color:black;
+	font-size:16px;
+	padding:5px;
+	font-weight:700;
+}
+
+@media only screen and (max-width:900px){
+	.sidebar
+	{
+		display:none;
+	}
 }

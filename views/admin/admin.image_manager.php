@@ -1,5 +1,6 @@
 <?php
 require(HEADER);
+
 ?>
 <div class='container'>
 	<h1>This is the Image Manager Page</h1>
@@ -67,6 +68,10 @@ if(isset($info))
 	echo "</div>";
 }
 ?>
+<form action='/category/add_category' method='POST'>
+<input type='text' name='category'>
+<button type='submit'>submit</button>
+</form>
 <?php
 require(FOOTER);
 ?>
