@@ -17,7 +17,7 @@ $(function(){
 				for (var i = 0; i < length; i++)
 				{
 					//tags[i] = "<span class='tag'"
-					$('#focus_tags').append('<span class="tag" data-id='+ tags[i]["id"] +'>' + tags[i]["text"] + '</span>');
+					$('#focus_tags').append('<span class="tag" data-id='+ tags[i]["tag_id"] +'>' + tags[i]["text"] + '</span>');
 				}
 				$('#add_tag').val('');
 				this.tagListeners();
@@ -40,12 +40,13 @@ $(function(){
 				document.getElementById('focus_name').value = name;
 				$('#focus_width').html('<strong>Width:</strong>' + width );
 				$('#focus_height').html('<strong>Height:</strong>' + height );
-				var data = {'id': this.id};
+				var data = {'image_id': this.id};
 				$.ajax({
-					url: '/tag/get_tags',
+					url: '/image/get_tags',
 					type: 'POST',
 					data: data,
 					success: function(results){
+						console.log(results);
 						this.setTags(results);
 					}.bind(this)
 				});

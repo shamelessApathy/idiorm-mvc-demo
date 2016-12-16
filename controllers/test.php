@@ -308,4 +308,12 @@ class testController extends Controller {
 			echo ' gif saved';
 		}
  	}
+ 	public function get_tags()
+ 	{
+ 		$image_id = $_GET['image_id'];
+ 		require_once(MODELS . '/Image.php');
+ 		$model = Model::factory('Image')->find_one($image_id);
+ 		$tags = $model->get_tags();
+ 		var_dump($tags);
+ 	}
 }

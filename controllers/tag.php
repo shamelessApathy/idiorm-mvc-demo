@@ -70,7 +70,7 @@ class tagController extends Controller {
 			require_once(MODELS . '/Tag.php');
 			$model = new Tag();
 			$results = $model->search_by_tag($query);
-			// if we find related tags to the query, search for images in tag_to_image table that are linked with each tag_id
+			// if we find related tags to the query, search for images in image_to_tag table that are linked with each tag_id
 			if($results)
 			{
 				$image_ids = array();

@@ -25,6 +25,12 @@ class Image extends Model
 		}
 		return $image_array;
 	}
+	public function get_tags()
+	{
+		//$tags = ORM::for_table('image_to_tag')->where('image_id', $this->id)->find_many();
+		$tags = ORM::for_table('image_to_tag')->join('tag', 'tag.id = image_to_tag.tag_id')->select('image_to_tag.*')->select('tag.*')->where('image_id', $this->id)->find_many();
+		return $tags;
+	}
 	public function create_new($tmp_name, $user_id, $new_path, $width, $height, $size_string, $mime_type, $user_image_name, $watermark, $thumbnail)
 	{
 		$time = time();

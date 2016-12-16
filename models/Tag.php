@@ -10,7 +10,7 @@ class Tag {
 		if ($test)
 		{
 			$tag_id = $test->id;
-			$many = ORM::for_table('tag_to_image')->create();
+			$many = ORM::for_table('image_to_tag')->create();
 			$many->tag_id = $tag_id;
 			$many->image_id = $image_id;
 			if ($many->save())
@@ -25,7 +25,7 @@ class Tag {
 		if ($tag->save())
 		{
 			$tag_id = $tag->id;
-			$many = ORM::for_table('tag_to_image')->create();
+			$many = ORM::for_table('image_to_tag')->create();
 			$many->tag_id = $tag_id;
 			$many->image_id = $image_id;
 			if($many->save())
@@ -39,19 +39,14 @@ class Tag {
 		}
 	}
 	}
-	public function get_tags($image_id)
-	{
-		$tags = ORM::for_table('tag_to_image')->where('image_id', $image_id)->find_many();
-		return $tags;
-	}
 	public function get_images($tag_id)
 	{
-		$images = ORM::for_table('tag_to_image')->where('tag_id', $tag_id)->find_many();
+		$images = ORM::for_table('image_to_tag')->where('tag_id', $tag_id)->find_many();
 		return $images;
 	}
 	public function remove_tag($image_id, $tag_id)
 	{
-		$tag = ORM::for_table('tag_to_image')->where('tag_id', $tag_id)->where('image_id', $image_id)->find_one();
+		$tag = ORM::for_table('image_to_tag')->where('tag_id', $tag_id)->where('image_id', $image_id)->find_one();
 		if ($tag->delete())
 		{
 			return true;

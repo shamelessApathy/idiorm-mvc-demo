@@ -9,6 +9,34 @@ class imageController extends Controller {
 		$images = $model->search_images($param, $query);
 		return_view('view.images.php', $images);
 	}
+	public function get_tags()
+	{
+		if (empty($image_id))
+		{
+			$image_id = $_POST['image_id'];
+		}
+		require_once(MODELS . '/Image.php');
+		$model = Model::factory('Image')->find_one($image_id);
+		$image_to_tag = $model->get_tags();
+		if (isset($_POST['image_id']))
+		{	
+			$image_array = array();
+			$i = 0;
+			foreach ($image_to_tag as $image)
+			{
+				$stuff = ['text'=>$image_to_tag[$i]['text'], 'tag_id'=>$image_to_tag[$i]['tag_id']];
+				array_push($image_array, $stuff);
+				$i++;
+			}
+			
+			$image_array = json_encode($image_array);
+			echo $image_array;
+		}
+		else
+		{
+			return $image_to_tag;
+		}
+	}
 	public function user_owned_images()
 	{
 		require(MODELS . '/User.php');
@@ -197,24 +225,15 @@ class imageController extends Controller {
 	{
 		$id = $_GET['id'];
 		$image = $this->get_image($id);
-		require_once(MODELS . '/Tag.php');
-		$tag_model = new Tag();
-		$tags = $tag_model->get_tags($id);
-		$tag_array = array();
-		foreach ($tags as $tag)
-		{
-			$text = $tag_model->get_tag_text($tag->tag_id);
-			array_push($tag_array, $text);
-		}
-		$image = array('image'=>$image, 'tags'=>$tag_array);
+		$tags = $image->get_tags();
+		$image = array('image'=>$image, 'tags'=>$tags);
 		return_view('store/store.image.php', $image);
 	}
 	public function get_image($id)
 	{
 		require_once(MODELS . '/Image.php');
 		$model = Model::factory('Image')->find_one($id);
-		$image = array('image' => $model);
-		return $image;
+		return $model;
 	}
 	public function add_tag($tags = null, $image_id = null) 	
 	{

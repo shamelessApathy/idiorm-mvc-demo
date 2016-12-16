@@ -1,6 +1,6 @@
 <?php 
 require(HEADER);
-$image = $info['image']['image'];
+$image = $info['image'];
 $tags = $info['tags'];
 ?>
 
