@@ -9,6 +9,23 @@ class imageController extends Controller {
 		$images = $model->search_images($param, $query);
 		return_view('view.images.php', $images);
 	}
+	public function get_categories($image_id = null)
+	{
+		if (empty($image_id))
+		{
+			$image_id = $_POST['image_id'];
+		}
+		require_once(MODELS . '/Image.php');
+		$model = Model::factory('Image')->find_one($image_id);
+		$categories = $model->get_categories();
+		$cat_array = array();
+		foreach ($categories as $category)
+		{
+			array_push($cat_array, ['title'=> $category->title, 'cat_id'=>$category->id]);
+		}
+		$categories = json_encode($cat_array);
+		echo $categories;
+	}
 	public function get_tags()
 	{
 		if (empty($image_id))

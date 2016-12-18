@@ -46,7 +46,6 @@ $(function(){
 					type: 'POST',
 					data: data,
 					success: function(results){
-						console.log(results);
 						this.setTags(results);
 					}.bind(this)
 				});
@@ -142,15 +141,14 @@ $(function(){
 		this.set_category = function (results)
 		{
 			if(results != null)
-			{
-
+			{	
+				$('#categories').html('');
 				var categories = $('#categories');
-			for (var i = 0; i < results.length; i++)
-			{
-			categories.append("<span class='category'>"+results[i]['category_title'] +"</span>");
-					
+				for (var i = 0; i < results.length; i++)
+				{
+					categories.append("<span class='category'>"+results[i]['title']+"</span>");
+				}
 			}
-		}
 		}
 		this.add_category = function()
 		{
@@ -172,7 +170,8 @@ $(function(){
 			$.ajax({
 				type:'POST',
 				data: data,
-				url:'/category/get_categories',
+				dataType: 'json',
+				url:'/image/get_categories',
 				success: function(results){
 					console.log(results);
 					this.set_category(results);

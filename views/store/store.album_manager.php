@@ -20,7 +20,6 @@ if (isset($info['album_images']))
 if (isset($info['categories']))
 {
 	$categories = $info['categories'];
-
 }
 ?>
 
