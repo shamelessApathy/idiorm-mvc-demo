@@ -86,7 +86,7 @@ for ($i = 0; $i < $num; $i++)
 	echo "
 	<div class='album_thumb'>
 	<h3>$name</h3>
-	<div class='_thumb'><img src='$img'/><input type='checkbox' value='$album_id' name='album_id' class='image_checkbox'/></div>
+	<div class='_thumb'><img src='$img'/></div>
 	</div>
 	";
 }
@@ -116,7 +116,7 @@ for ($i = 0; $i < $num; $i++)
 	<?php 
 		foreach ($album_images as $image)
 		{
-			echo "<div class='image_thumb'><img src='$image->thumbnail'/><input type='checkbox' class='image_checkbox' name='image[]' value='$image->id'/></div>";
+			echo "<div class='image_thumb'><img src='$image->thumbnail'/></div>";
 		}
 	?>
 </div>
@@ -142,7 +142,7 @@ for ($i = 0; $i < $num; $i++)
 		{
 			$uploaded = $image->created_at;
 			$uploaded = date("m/d/Y", $uploaded);
-			echo "<div class='image_thumb'><input type='checkbox' class='image_checkbox' name='image[]' value='$image->id'/><div class='image_holder'><img data-name='$image->user_image_name'  data-width='$image->width' data-height='$image->height' data-watermark='$image->watermark' data-id='$image->id' src='$image->thumbnail'/></div></div>";
+			echo "<div class='image_thumb'><div class='image_holder'><img data-name='$image->user_image_name'  data-width='$image->width' data-height='$image->height' data-watermark='$image->watermark' data-id='$image->id' src='$image->thumbnail'/></div></div>";
 		}
 	?>
 </div>

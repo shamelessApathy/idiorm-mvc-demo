@@ -220,16 +220,17 @@ class imageController extends Controller {
 			$image_id = $_POST['image_id'];
 		}
 		require_once(MODELS . '/Image.php');
+		require_once(MODELS . '/Tag.php');
 		$image_model = Model::factory('Image')->find_one($image_id);
 		$path = $image_model->path;
+		$tags = $image_model->get_tags();
+		$tag_model = new Tag();
 		if (unlink(ROOT . $image_model->path))
 		{
 			echo ' it deleted';
 			$image_model->delete();
 		}
-		require_once(MODELS . '/Tag.php');
-		$tag_model = new Tag();
-		$tags = $tag_model->get_tags($image_id);
+		
 		foreach ($tags as $tag)
 		{
 			$tag_model->remove_tag($image_id, $tag->tag_id);
@@ -237,15 +238,17 @@ class imageController extends Controller {
 
 
 	}
-	
+	// get info to be able to display on the single store.image.php view
 	public function info()
 	{
 		$id = $_GET['id'];
 		$image = $this->get_image($id);
 		$tags = $image->get_tags();
-		$image = array('image'=>$image, 'tags'=>$tags);
+		$categories = $image->get_categories();
+		$image = array('image'=>$image, 'tags'=>$tags, 'categories'=> $categories);
 		return_view('store/store.image.php', $image);
 	}
+	// instantiates an image class based on image_id using ORM Model::factory
 	public function get_image($id)
 	{
 		require_once(MODELS . '/Image.php');

@@ -70,14 +70,16 @@ public function verify()
 	$password = $_POST['password'];
 	require_once(MODELS . '/User.php');
 	$model = new User();
-	$user = $model->verify($email,$password);
-	if ($user)
+	if (!empty($email) && !empty($password))
 	{
-
-		$_SESSION['user_info'] = $user;
-		$_SESSION['logged_in'] = 1;
-		header('Location: /home');
-		user_msg('login successfull');
+		$user = $model->verify($email,$password);	
+		if ($user)
+		{
+			$_SESSION['user_info'] = $user;
+			$_SESSION['logged_in'] = 1;
+			header('Location: /home');
+			user_msg('login successfull');
+		}
 	}
 	else
 	{

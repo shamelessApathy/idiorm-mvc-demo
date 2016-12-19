@@ -2,6 +2,7 @@
 require(HEADER);
 $image = $info['image'];
 $tags = $info['tags'];
+$categories = $info['categories'];
 ?>
 
 <div class='container'>
@@ -25,6 +26,13 @@ $tags = $info['tags'];
 			}
 			?>
 				
+			</li>
+			<li>Categories: <?php 
+			foreach ($categories as $category)
+			{
+				echo "<span class='category'>$category->title</span>";
+			}
+			?>
 			</li>
 			</ul>
 			</div>
