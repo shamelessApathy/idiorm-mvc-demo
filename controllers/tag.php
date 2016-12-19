@@ -1,7 +1,7 @@
 <?php
 require_once(BASE_CONTROLLER);
 class tagController extends Controller {
-	public function add_tag($tags = null, $image_id = null)
+	public function add_tag($tags = null, $image_id = null, $bool)
 	{
 		if (empty($tags))
 		{
@@ -14,7 +14,10 @@ class tagController extends Controller {
 		{
 			$model->add_tag($tag, $image_id);
 		}
-		$this->get_tags($image_id);
+		if ($bool)
+		{
+			$this->get_tags($image_id);
+		}
 	}
 	public function get_tags($image_id = null)
 	{

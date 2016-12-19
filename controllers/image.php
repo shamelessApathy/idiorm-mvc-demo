@@ -64,10 +64,13 @@ class imageController extends Controller {
 	}
 	public function upload_image($success = null)
 	{
-		return_view('view.upload_image.php');
-		if (isset($success) && $success === true)
+		require_once(CONTROLLERS . '/category.php');
+		$category = new categoryController();
+		$categories = $category->get_all();
+		return_view('view.upload_image.php', $categories);
+		if (!empty($_GET['success']))
 		{
-			user_msg('Image uploaded successfully!');
+			user_msg('Image upload succesful!');
 		}
 	}
 	public function image_size()
@@ -83,6 +86,19 @@ class imageController extends Controller {
 		$user_id = $_SESSION['user_info']->id;
 		$name = $_FILES['image']['name'];
 		$tags = $_POST['tags'];
+		if (!empty($_POST['category']))
+		{
+		$category = $_POST['category'];
+		}
+		if (empty($category))
+		{
+			require_once(CONTROLLERS . '/category.php');
+			$category = new categoryController();
+			$categories = $category->get_all();
+			return_view('view.upload_image.php', $categories);
+			sys_msg('You must select a base category for your image!');
+			return;
+		}
 		$tags = explode('|', $tags);
 		array_pop($tags);
 		$type = 'image';
@@ -125,7 +141,8 @@ class imageController extends Controller {
 				{
 					//$this->upload_image(true); //sends you to function that renders view that shows all images from user (that are authorized!!!)
 					$this->add_tag($tags, $return);
-					$this->upload_image(true);
+					$this->add_category($category, $return);
+					header("Location:/image/upload_image?success=true");
 				}
 				else
 				{
@@ -141,6 +158,12 @@ class imageController extends Controller {
 		{
 			echo 'false';
 		}
+	}
+	public function add_category($cat_id, $image_id)
+	{
+		require_once(MODELS . '/Category.php');
+		$model = new Category();
+		$model->add_cat_to_image($cat_id, $image_id);
 	}
 	public function watermark()
  	{
@@ -259,10 +282,9 @@ class imageController extends Controller {
 	{
 		require_once(CONTROLLERS . '/tag.php');
 		$controller = new tagController();
-		if($controller->add_tag($tags, $image_id))
+		if($controller->add_tag($tags, $image_id, false))
 		{
-			return_view('view.upload_image.php');
-			user_msg('Image Uploaded Successfully!');
+			return true;
 		}
 	}
 	public function remove_tag()
