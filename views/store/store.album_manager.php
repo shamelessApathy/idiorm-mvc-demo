@@ -142,6 +142,11 @@ for ($i = 0; $i < $num; $i++)
 		{
 			$uploaded = $image->created_at;
 			$uploaded = date("m/d/Y", $uploaded);
+			if ($image->auth == 2)
+			{
+				$image->thumbnail = '/views/img/unauth.png';
+				$image->watermark = '/views/img/unauth.png';
+			}
 			echo "<div class='image_thumb'><div class='image_holder'><img data-name='$image->user_image_name'  data-width='$image->width' data-height='$image->height' data-watermark='$image->watermark' data-id='$image->id' src='$image->thumbnail'/></div></div>";
 		}
 	?>

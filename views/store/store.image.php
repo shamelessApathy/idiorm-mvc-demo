@@ -3,12 +3,17 @@ require(HEADER);
 $image = $info['image'];
 $tags = $info['tags'];
 $categories = $info['categories'];
+if (isset($_SESSION['user_info']))
+{
+	$user_info = $_SESSION['user_info'];
+}
 ?>
 
 <div class='container'>
+<div class='user_info' data-user-id="<?php echo $user_info['id'];?>">
 	<div class='row'>
 		<div class='col-md-3'>
-			<div class='image_info'>
+			<div class='image_info' data-id="<?php echo $image->id; ?>">
 			<ul>
 			<?php echo "
 				
@@ -19,20 +24,22 @@ $categories = $info['categories'];
 				
 			";
 			?>
-			<li style='margin-top:10px;'>Tags: <?php 
+			<li style='margin-top:10px;'><h3>TAGS</h3><div class='store_tags'> <?php 
 			foreach ($tags as $tag)
 			{
-				echo "<span class='tag'>$tag->text</span>";
+
+				echo "<div class='vote_control'><button class='up relevance_button' data-tag-id='$tag->tag_id' data-value='1'>+</button><button class='down relevance_button' data-tag-id='$tag->tag_id' data-value='0'>-</button><div class='tag'>$tag->text</div><div class='clear'></div></div>";
 			}
 			?>
-				
+				</div>
 			</li>
-			<li>Categories: <?php 
+			<li>Categories:<div class='store_categories'> <?php 
 			foreach ($categories as $category)
 			{
 				echo "<span class='category'>$category->title</span>";
 			}
 			?>
+			</div>
 			</li>
 			</ul>
 			</div>
@@ -44,3 +51,4 @@ $categories = $info['categories'];
 </div>
 
 <?php require(FOOTER);?>
+<script src='/views/js/single.js' rel='javascript' type='text/javascript'></script>

@@ -45,9 +45,8 @@ class adminController extends Controller {
 	public function reject_image($id)
 	{
 		require_once(MODELS . '/Image.php');
-		$model = new Image();
-		$path = $model->reject_image($id);
-		var_dump($path);
+		$model = Model::factory('Image')->find_one($id);
+		$path = $model->reject_image();
 		if ($path)
 		{
 			// needs to delete all instances of the image

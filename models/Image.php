@@ -93,8 +93,12 @@ class Image extends Model
 			return true;
 		}
 	}
-	public function reject_image($id)
+	public function reject_image($id  = null)
 	{
+		if (!isset($id))
+		{
+			$id = $this->id;
+		}
 		$image = ORM::for_table('image')->where('id', $id)->find_one();
 		$image->auth = 2;
 		if ($image->save())

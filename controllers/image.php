@@ -73,12 +73,14 @@ class imageController extends Controller {
 			user_msg('Image upload succesful!');
 		}
 	}
+	// returns image_size, that's it
 	public function image_size()
 	{
 		$file = $_FILES['image']['tmp_name'];
 		$size = getimagesize($file);
 		return $size;
 	}
+	// runs through list of everything that needs to be done and recorded to create an instance of an image
 	public function new_image()
 	{
 		
@@ -165,6 +167,7 @@ class imageController extends Controller {
 		$model = new Category();
 		$model->add_cat_to_image($cat_id, $image_id);
 	}
+	// creates watermarked image for preview
 	public function watermark()
  	{
  		$file = $_FILES['image']['tmp_name'];
@@ -202,6 +205,7 @@ class imageController extends Controller {
 			return false;
 		}
 	}
+	// creates thumbnail version of the image
 	public function thumbnail()
 	{
 		$file = $_FILES['image']['tmp_name'];
