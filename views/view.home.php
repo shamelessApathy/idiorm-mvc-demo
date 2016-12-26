@@ -28,9 +28,12 @@ if (isset($_SESSION['user_info']))
 	</ul>
 </div>
 <?php 
+if (isset($info))
+{
 foreach ($info as $image)
 {
 	echo "<a href='/image/info?id=$image->id'><div class='preview_thumb'><img class='img-responsive' src='$image->thumbnail'/></div></a>";
+}
 }
 ?>
 

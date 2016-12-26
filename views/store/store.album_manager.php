@@ -28,13 +28,16 @@ if (isset($info['categories']))
 	<div class='focus_modal'>
 		<div class='col-md-6'>
 			<div class='focus_details'>
+			<h3 id='focus_type'></h3>
 				<ul>
 					<li><label>Name:</label><input id='focus_name' name='user_image_name'></li>
+					<li id='focus_price'></li>
 					<li id='focus_width'></li>
 					<li id='focus_height'></li>
 					<li id='categories'><strong>Categories:</strong></li>
-					<li id='focus_tags'><strong>Tags:</strong></li>
-				</ul>
+					<li><strong>Tags:</strong></li>
+					<li id='focus_tags'></li><br>
+				</ul><br>
 				<input type='text' id='add_tag'>
 				<button type='button' id='add_tag_button'>Add Tag</button>
 				<select id='add_category'>
@@ -147,7 +150,7 @@ for ($i = 0; $i < $num; $i++)
 				$image->thumbnail = '/views/img/unauth.png';
 				$image->watermark = '/views/img/unauth.png';
 			}
-			echo "<div class='image_thumb'><div class='image_holder'><img data-name='$image->user_image_name'  data-width='$image->width' data-height='$image->height' data-watermark='$image->watermark' data-id='$image->id' src='$image->thumbnail'/></div></div>";
+			echo "<div class='image_thumb'><div class='image_holder'><img data-name='$image->user_image_name'  data-width='$image->width' data-height='$image->height' data-watermark='$image->watermark' data-price='$image->price' data-premium='$image->premium' data-id='$image->id' src='$image->thumbnail'/></div></div>";
 		}
 	?>
 </div>

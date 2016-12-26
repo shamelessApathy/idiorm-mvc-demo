@@ -36,7 +36,7 @@ class Image extends Model
 		$tags = ORM::for_table('image_to_tag')->join('tag', 'tag.id = image_to_tag.tag_id')->select('image_to_tag.*')->select('tag.*')->where('image_id', $this->id)->find_many();
 		return $tags;
 	}
-	public function create_new($tmp_name, $user_id, $new_path, $width, $height, $size_string, $mime_type, $user_image_name, $watermark, $thumbnail)
+	public function create_new($tmp_name, $user_id, $new_path, $width, $height, $size_string, $mime_type, $user_image_name, $watermark, $thumbnail, $price, $premium)
 	{
 		$time = time();
 		$new_image = ORM::for_table('image')->create();
@@ -50,6 +50,8 @@ class Image extends Model
 		$new_image->user_image_name = $user_image_name;
 		$new_image->watermark = $watermark;
 		$new_image->thumbnail = $thumbnail;
+		$new_image->price = $price;
+		$new_image->premium = $premium;
 		if ($new_image->save())
 		{
 			return $new_image->id();

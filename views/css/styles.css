@@ -323,7 +323,7 @@
 	width:100%;
 	border:1px solid red;
 	opacity:0;
-	min-height:320px;
+	min-height:350px;
 	padding:10px;
 	transition:1s;
 	-o-transition:1s;
@@ -442,7 +442,10 @@
 	clear:both;
 	float:none;
 }
-
+#upload_price
+{
+	display:none;
+}
 @media only screen and (max-width:900px){
 	.sidebar
 	{

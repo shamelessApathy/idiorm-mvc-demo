@@ -24,6 +24,7 @@ if (isset($_SESSION['user_info']))
 				
 			";
 			?>
+			<?php if (isset($_SESSION['user_info'])):?>
 			<li style='margin-top:10px;'><h3>TAGS</h3><div class='store_tags'> <?php 
 			foreach ($tags as $tag)
 			{
@@ -32,7 +33,18 @@ if (isset($_SESSION['user_info']))
 			}
 			?>
 				</div>
+			<?php endif;?>
+	<?php if (!isset($_SESSION['user_info'])): ?>
+		<li style='margin-top:10px;'><h3>TAGS</h3><div class='store_tags'> <?php 
+			foreach ($tags as $tag)
+			{
+
+				echo "<div class='vote_control'><div class='tag'>$tag->text</div><div class='clear'></div></div>";
+			}
+			?>
+		<?php endif; ?>
 			</li>
+
 			<li>Categories:<div class='store_categories'> <?php 
 			foreach ($categories as $category)
 			{

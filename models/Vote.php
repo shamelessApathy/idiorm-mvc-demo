@@ -7,6 +7,11 @@ class Vote {
 		$votes = ORM::for_table('vote')->where('image_id', $image_id)->find_many();
 		return $votes;
 	}
+	public function delete_vote($vote_id)
+	{
+		$vote = ORM::for_table('vote')->where('id', $vote_id)->find_one();
+		$vote->delete();
+	}
 	// model function to add a vote entry to the vote table
 	public function add_vote($vote, $ip, $user_id, $image_id, $tag_id)
 	{
@@ -18,6 +23,7 @@ class Vote {
 		$model->tag_id = $tag_id;
 		if ($model->save())
 		{
+			var_dump(ORM::get_last_query());
 			return true;
 		}
 	}

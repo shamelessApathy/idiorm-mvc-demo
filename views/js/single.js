@@ -26,6 +26,7 @@ $(function(){
 				data: data,
 				type: "POST",
 				success: function(results){
+					console.log(results);
 					this.add_message();
 				}.bind(this)
 			});

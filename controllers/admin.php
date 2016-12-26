@@ -49,10 +49,6 @@ class adminController extends Controller {
 		$path = $model->reject_image();
 		if ($path)
 		{
-			// needs to delete all instances of the image
-			$this->delete_image($path->path);
-			$this->delete_image($path->watermark);
-			$this->delete_image($path->thumbnail);
 			$this->get_unauth_images();
 		}
 	}

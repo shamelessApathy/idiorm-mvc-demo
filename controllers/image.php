@@ -88,6 +88,30 @@ class imageController extends Controller {
 		$user_id = $_SESSION['user_info']->id;
 		$name = $_FILES['image']['name'];
 		$tags = $_POST['tags'];
+		if (isset($_POST['price']))
+			{
+				$price = $_POST['price'];
+				if (strpos($price, '.') === false)
+				{
+					$price.= '.00';
+				}
+				$premium = 1;
+				if (!is_numeric($price))
+				{
+					require_once(CONTROLLERS . '/category.php');
+					$category = new categoryController();
+					$categories = $category->get_all();
+					return_view('view.upload_image.php', $categories);
+					sys_msg('Your price is not an integer!');
+					return;
+				}
+			}
+		else
+		{
+			$price = null;
+			$premium = null;
+		}
+
 		if (!empty($_POST['category']))
 		{
 		$category = $_POST['category'];
@@ -138,7 +162,7 @@ class imageController extends Controller {
   				chmod($save_path.$myname.$ext, 0755);
   				require_once(MODELS . '/Image.php');
 				$model = new Image();
-				$return = $model->create_new($tmp_name, $user_id, $newpath, $width, $height, $size_string, $mime_type, $user_image_name, $watermark, $thumbnail);
+				$return = $model->create_new($tmp_name, $user_id, $newpath, $width, $height, $size_string, $mime_type, $user_image_name, $watermark, $thumbnail, $price, $premium);
 				if ($return)
 				{
 					//$this->upload_image(true); //sends you to function that renders view that shows all images from user (that are authorized!!!)
@@ -248,6 +272,7 @@ class imageController extends Controller {
 		}
 		require_once(MODELS . '/Image.php');
 		require_once(MODELS . '/Tag.php');
+		require_once(MODELS . '/Vote.php');
 		$image_model = Model::factory('Image')->find_one($image_id);
 		$path = $image_model->path;
 		$tags = $image_model->get_tags();
@@ -261,6 +286,12 @@ class imageController extends Controller {
 		foreach ($tags as $tag)
 		{
 			$tag_model->remove_tag($image_id, $tag->tag_id);
+		}
+		$vote_model = new Vote();
+		$votes = $vote_model->get_all_for_image($image_id);
+		foreach ($votes as $vote)
+		{
+			$vote_model->delete_vote($vote->id);
 		}
 
 
