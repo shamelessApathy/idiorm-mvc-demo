@@ -60,6 +60,7 @@ class tagController extends Controller {
 	}
 	public function search_by_tag()
 	{
+		require_once(MODELS . '/Vote.php');
 		if (!empty($_GET['query']))
 		{
 			$query = $_GET['query'];
@@ -76,7 +77,6 @@ class tagController extends Controller {
 				$image_ids = array();
 				foreach ($results as $tag)
 				{
-					var_dump($tag->id);
 					$image_id = $model->get_images($tag->id);
 					if ($image_id)
 					{

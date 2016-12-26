@@ -10,6 +10,9 @@ class Tag {
 		if ($test)
 		{
 			$tag_id = $test->id;
+			$test2 = ORM::for_table('image_to_tag')->where('image_id', $image_id)->where('tag_id', $tag_id)->find_one();
+			if (!$test2)
+			{
 			$many = ORM::for_table('image_to_tag')->create();
 			$many->tag_id = $tag_id;
 			$many->image_id = $image_id;
@@ -17,6 +20,7 @@ class Tag {
 			{
 				return true;
 			}
+		}
 		}
 		else
 		{

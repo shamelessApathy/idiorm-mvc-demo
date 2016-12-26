@@ -12,6 +12,11 @@ class Vote {
 		$vote = ORM::for_table('vote')->where('id', $vote_id)->find_one();
 		$vote->delete();
 	}
+	public function get_all_for_tag_and_image($tag_id, $image_id)
+	{
+		$votes = ORM::for_table('vote')->where('tag_id', $tag_id)->where('image_id', $image_id)->find_many();
+		return $votes;
+	}
 	// model function to add a vote entry to the vote table
 	public function add_vote($vote, $ip, $user_id, $image_id, $tag_id)
 	{
