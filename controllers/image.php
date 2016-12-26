@@ -88,13 +88,9 @@ class imageController extends Controller {
 		$user_id = $_SESSION['user_info']->id;
 		$name = $_FILES['image']['name'];
 		$tags = $_POST['tags'];
-		if (isset($_POST['price']))
+		if ($_POST['price'] !== '3')
 			{
 				$price = $_POST['price'];
-				if (strpos($price, '.') === false)
-				{
-					$price.= '.00';
-				}
 				$premium = 1;
 				if (!is_numeric($price))
 				{
@@ -108,8 +104,8 @@ class imageController extends Controller {
 			}
 		else
 		{
-			$price = null;
-			$premium = null;
+			$price = 3;
+			$premium = 0;
 		}
 
 		if (!empty($_POST['category']))

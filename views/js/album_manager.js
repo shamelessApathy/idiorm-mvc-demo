@@ -66,7 +66,6 @@ $(function(){
 
 			}.bind(this);
 			this.addTags = function(){
-				console.log('running addTags() func');
 				var tag = $('#add_tag').val();
 				var focus = document.getElementsByClassName('focus_modal')[0];
 				var id = focus.getElementsByTagName('img')[0];
@@ -87,14 +86,12 @@ $(function(){
 			{
 				var image_id = document.getElementById('the_image');
 				image_id = image_id.getAttribute('data-id');
-				console.log(image_id);
 				var data = {'image_id': image_id};
 				$.ajax({
 					url: '/image/delete_image',
 					type: "POST",
 					data: data,
 					success: function(results){
-						console.log(results);
 					}
 				})
 				$('.focus_modal').attr('style','');
@@ -177,7 +174,6 @@ $(function(){
 			});
 		}.bind(this)
 		this.get_categories = function(image_id){
-			console.log('running!!!');
 				var data = {'image_id': image_id};
 			$.ajax({
 				type:'POST',
@@ -185,7 +181,6 @@ $(function(){
 				dataType: 'json',
 				url:'/image/get_categories',
 				success: function(results){
-					console.log(results);
 					this.set_category(results);
 				}.bind(this)
 			});

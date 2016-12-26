@@ -7,7 +7,7 @@ $categories = $info;
 <form enctype='multipart/form-data' action='/image/new_image' method="POST">
 <label>Check here for Premium &nbsp</label><input id='premium' type='checkbox' name='premium'><br>
 <div id='upload_price'><label>Price</label><span style='font-size:8px; color:red;'>  Format like 10.99 no "$"</span><br>
-<input type='text' id='input_price' name='price'>
+<input type='text' id='input_price' value='3' name='price'>
 </div>
 <br>
 <input type='file' name='image'><br>

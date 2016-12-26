@@ -1,7 +1,7 @@
 <?php
 require_once(BASE_CONTROLLER);
 class tagController extends Controller {
-	public function add_tag($tags = null, $image_id = null, $bool)
+	public function add_tag($tags = null, $image_id = null, $bool = null)
 	{
 		if (empty($tags))
 		{
@@ -14,10 +14,7 @@ class tagController extends Controller {
 		{
 			$model->add_tag($tag, $image_id);
 		}
-		if ($bool)
-		{
 			$this->get_tags($image_id);
-		}
 	}
 	public function get_tags($image_id = null)
 	{
@@ -25,8 +22,8 @@ class tagController extends Controller {
 		{
 			$image_id = $_POST['id'];
 		}
-		require_once(MODELS . '/Tag.php');
-		$model = new Tag();
+		require_once(MODELS . '/Image.php');
+		$model = Model::factory('Image')->find_one($image_id);
 		$tags = $model->get_tags($image_id);
 		if ($tags)
 		{	
