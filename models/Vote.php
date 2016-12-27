@@ -32,6 +32,11 @@ class Vote {
 			return true;
 		}
 	}
+	public function weighted($image_id, $tag_id)
+	{
+		$votes = ORM::for_table('vote')->where('image_id', $image_id)->where('tag_id', $tag_id)->find_many();
+		return $votes;
+	}
 }
 
 ?>

@@ -58,9 +58,12 @@ class tagController extends Controller {
 		}
 		}
 	}
+
 	public function search_by_tag()
 	{
 		require_once(MODELS . '/Vote.php');
+		$vote_model = new Vote();
+		
 		if (!empty($_GET['query']))
 		{
 			$query = $_GET['query'];
@@ -69,24 +72,37 @@ class tagController extends Controller {
 				//$query = explode(" " ,$query);
 			//}
 			require_once(MODELS . '/Tag.php');
+			require_once(MODELS . '/Image.php');
 			$model = new Tag();
 			$results = $model->search_by_tag($query);
+			$id = $results[0];
+			
 			// if we find related tags to the query, search for images in image_to_tag table that are linked with each tag_id
 			if($results)
 			{
-				$image_ids = array();
-				foreach ($results as $tag)
-				{
-					$image_id = $model->get_images($tag->id);
-					if ($image_id)
+				$images = array();
+					$image_id = $model->get_images($id->id);
+					if (isset($image_id))
 					{
 						foreach ($image_id as $image)
 						{
-							array_push($image_ids, $image->image_id);
+							if (empty($image->vote))
+							{
+								$image->vote = 0;
+								$image_factory = Model::factory('Image')->find_one($image->image_id);
+								$image->thumbnail = $image_factory->thumbnail;
+							}
+							$get_votes = $vote_model->weighted($image->image_id, $id->id);
+							foreach ($get_votes as $vote)
+							{
+								$image->vote = $image->vote + $vote->vote;
+							}
+							array_push($images, $image);
 						}
+						return_view('view.image_search_results.php', $images);
 					}
-				}
-				if (empty($image_ids))
+				
+				/*if (empty($image_ids))
 				{
 					return_view('view.home.php');
 					user_msg('Sorry, no images matched your query!');
@@ -106,9 +122,12 @@ class tagController extends Controller {
 			else
 			{
 				echo 'something happened';
-			}
+			}*/
 		}
+		
+	
 	}
+}
 }
 
 ?>

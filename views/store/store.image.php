@@ -29,7 +29,7 @@ if (isset($_SESSION['user_info']))
 			foreach ($tags as $tag)
 			{
 
-				echo "<div class='vote_control'><button class='up relevance_button' data-tag-id='$tag->tag_id' data-value='1'>+</button><button class='down relevance_button' data-tag-id='$tag->tag_id' data-value='0'>-</button><div class='tag'>$tag->text</div><div class='clear'></div></div>";
+				echo "<div class='vote_control'><button class='up relevance_button' data-tag-id='$tag->tag_id' data-value='1'>+</button><button class='down relevance_button' data-tag-id='$tag->tag_id' data-value='-1'>-</button><div class='tag'>$tag->text</div><div class='clear'></div></div>";
 			}
 			?>
 				</div>

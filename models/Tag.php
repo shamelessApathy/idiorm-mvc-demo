@@ -4,6 +4,10 @@ class Tag {
 	{
 		return $this->hasMany('Image');
 	}
+	public function vote()
+	{
+		return $this->has_many('Vote');
+	}
 	public function add_tag($tag_string, $image_id)
 	{
 		$test = ORM::for_table('tag')->where('text', $tag_string)->find_one();
