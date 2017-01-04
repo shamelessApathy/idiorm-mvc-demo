@@ -43,7 +43,7 @@ class voteController extends Controller {
 		$vote = $_POST['vote'];
 		$ip = $_SERVER['REMOTE_ADDR'];
 		// get the bool value of this function, if no vote has been cast for this tag on this image, vote may be cast
-		$bool = $this->test_vote($user_id, $image_id, $tag_id, $ip);
+		$bool = false;//$this->test_vote($user_id, $image_id, $tag_id, $ip);
 		
 		if(!$bool)
 		{
@@ -63,5 +63,17 @@ class voteController extends Controller {
 			echo false;
 		}
 		
+	}
+	public function weighted_vote($image_id = null, $tag_id = null)
+	{
+		if (empty($image_id))
+		{
+			$image_id = $_POST['image_id'];
+			$tag_id = $_POST['tag_id'];
+		}
+		require_once(MODELS . '/Vote.php');
+		$model = new Vote();
+		$value = $model->weighted_vote($image_id, $tag_id);
+		return $value;
 	}
 }

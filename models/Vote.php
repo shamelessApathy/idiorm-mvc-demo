@@ -37,6 +37,13 @@ class Vote {
 		$votes = ORM::for_table('vote')->where('image_id', $image_id)->where('tag_id', $tag_id)->find_many();
 		return $votes;
 	}
+	public function weighted_vote($image_id, $tag_id)
+	{
+
+		$votes = ORM::for_table('vote')->where('image_id', $image_id)->where('tag_id', $tag_id)->sum('vote');
+		return $votes;
+		/*ORM::for_table('vote')->select_many_expr('images.*', array('vote_value' => 'SUM(image_votes.vote_value)'))->join('image_votes', array('image_votes.image_id', '=', 'images.id'))->order_by_desc('vote_value')->find_many();*/
+	}
 }
 
 ?>

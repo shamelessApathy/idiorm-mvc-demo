@@ -1,15 +1,12 @@
 <?php
 require(HEADER);
 ?>
-<form action='/test/add_vote' method='POST'>
-<select name='vote'>
-<option value='0'>Down</option>
-<option value='1'>Up</option>
-</select><br>
-<label>Image ID</label><br>
-<input type='text' value='25' name='image_id' readonly><br>
+<form action='/vote/weighted_vote' method='POST'>
 <label>Tag ID</label><br>
-<input type='text' value='30' name='tag_id' readonly><br>
+<input type='text' name='tag_id'><br>
+<label>Image ID</label><br>
+<input type='text' name='image_id'><br>
+<label>Tag ID</label><br>
 <button type='submit'>Vote</button>
 </form>
 

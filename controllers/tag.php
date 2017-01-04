@@ -92,13 +92,19 @@ class tagController extends Controller {
 								$image_factory = Model::factory('Image')->find_one($image->image_id);
 								$image->thumbnail = $image_factory->thumbnail;
 							}
-							$get_votes = $vote_model->weighted($image->image_id, $id->id);
-							foreach ($get_votes as $vote)
-							{
-								$image->vote = $image->vote + $vote->vote;
-							}
+							$get_votes = $vote_model->weighted_vote($image->image_id, $id->id);
+							$image->vote = (Int) $get_votes;
 							array_push($images, $image);
 						}
+						function cmp($a, $b)
+						{
+							if ($a->vote === $b->vote)
+							{
+								return 0;
+							}
+							return ($a->vote > $b->vote) ? -1:1;
+						}
+						uasort($images, 'cmp');
 						return_view('view.image_search_results.php', $images);
 					}
 				
