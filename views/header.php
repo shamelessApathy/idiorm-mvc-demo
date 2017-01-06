@@ -45,7 +45,7 @@
             <li role="separator" class="divider"></li>
             <li><a href="/store/admin">Your Store</a></li>
             <li role="separator" class="divider"></li>
-            <li><a href="/album/album_manager">Album Manager</a></li>
+            <li><a href="/user/get_images">Image Manager</a></li>
           </ul>
         </li>
       <?php endif;?>

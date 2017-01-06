@@ -72,6 +72,11 @@
 	width:75px;
 	height:75px;
 }
+.user_avatar2
+{
+	height:25px;
+	width:25px;
+}
 .note
 {
 	font-size:9px;
@@ -304,6 +309,7 @@
 .image_info ul
 {
 	list-style-type:none;
+	padding:0;
 }
 
 .admin_image_row ul
@@ -321,14 +327,16 @@
 .focus_modal
 {
 	width:100%;
-	border:1px solid red;
-	opacity:0;
+	border:1px solid #e7e7e7;
+	position:relative;
 	min-height:350px;
 	padding:10px;
 	transition:1s;
 	-o-transition:1s;
 	-moz-transition:1s;
 	-webkit-transition:1s;
+	display:none;
+	margin-bottom:20px;
 }
 .focus_details
 {
@@ -385,6 +393,7 @@
 	display:flex;
 	align-items:center;
 	justify-content: center;
+	margin-top:10px;
 }
 .preview_thumb img
 {
@@ -442,9 +451,28 @@
 	clear:both;
 	float:none;
 }
+.close
+{
+	font-size:20px; 
+	height:22px; 
+	width:22px; 
+	position:absolute; 
+	top:0; 
+	right:0;
+	text-align:center;
+}
+.close:hover
+{
+	background:black;
+	color:white;
+}
 #upload_price
 {
 	display:none;
+}
+.upload_preview_holder
+{
+	margin-top:50px;
 }
 @media only screen and (max-width:900px){
 	.sidebar

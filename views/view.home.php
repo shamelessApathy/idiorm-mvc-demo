@@ -20,13 +20,7 @@ if (isset($_SESSION['user_info']))
 }
 
 ?>
-<div class='categories'>
-	<ul>
-		<li>People</li>
-		<li>Places</li>
-		<li>Things</li>
-	</ul>
-</div>
+
 <?php 
 if (isset($info))
 {

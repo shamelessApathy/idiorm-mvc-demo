@@ -5,6 +5,7 @@ $(function(){
 	{
 		this.init = function(){
 			this.id;
+			this.close = $('.close');
 			this.element = $('.album_modal');
 			this.user_id = $('#user_id').attr('data-attribute');
 			this.setTags = function(results)
@@ -23,9 +24,9 @@ $(function(){
 			// puts image info and preview image in focus_modal
 			this.populate_details = function(el)
 			{
+				console.log('runniung');
 				orig = el;
-				$('.focus_move').attr('style', 'margin-top:0');
-				$('.focus_modal').attr('style','opacity:1');
+				$('.focus_modal').css({'display':'block'});
 				$('.focus_details').attr('style','display:block');
 				$('#focus_type').html('');
 				$('#focus_price').html('');
@@ -102,6 +103,13 @@ $(function(){
 				var button = ('#add_category_button');
 				$(button).on('click', this.add_category);
 			}.bind(this)
+			this.addCloseListener = function()
+			{
+				this.close.on('click', function(){
+					$('.focus_move').attr('style','');
+					$('.focus_modal').attr('style','display:none');
+				})
+			}
 			this.addDeleteListener = function()
 			{
 				var button = $('#delete_image');
@@ -186,6 +194,7 @@ $(function(){
 			});
 		}.bind(this)
 		this.init();
+		this.addCloseListener();
 		this.addTagListener();
 		this.addDeleteListener();
 		this.keyListeners();

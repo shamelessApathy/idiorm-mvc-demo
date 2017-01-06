@@ -51,27 +51,11 @@ if (isset($info['categories']))
 		</div>
 		<div class='col-md-6'>
 		<div class='focus_image'></div>
-		</div>		
+		</div>	
+		<div class='close'>X</div>
 	</div>
 </div>
-	<div class='row focus_move'>
-	<div class='col-md-2'></div>
-	<div class='col-md-8'>
-	<?php if (!isset($info['album_images'])):?>
-		<a href='/user/get_images'>Get All Your Images</a>
-	<?php endif; ?>
-	<?php if (isset($info['album_images'])):?>
-	<a href='/album/album_manager'>Go back to Album Manager</a>
-<?php endif; ?>
-		<form action='/album/create_new' method='POST'>
-		<label>Create new album:</label>
-		<input type='text' name='album_name'/>
-		<button type='submit'>Submit</button>
-		</form>
-	</div>
-	<div class='col-md-2'></div>
-
-	</div>
+	
 <div class='row'>
 <div class='col-md-2'></div>
 <div class='col-md-8'>
@@ -95,13 +79,7 @@ for ($i = 0; $i < $num; $i++)
 }
 	
 ?>
-<div class='album-options'>
-<select name='param'>
-	<option value='edit' name='param'>Edit</option>
-	<option value='delete' name='param'>Delete</option>
-</select>
-<button  type='submit'>Submit</button>
-</div>
+
 
 </form>
 </div>
@@ -110,7 +88,7 @@ for ($i = 0; $i < $num; $i++)
 </div>
 <!-- album images area -->
 <?php if (isset($album_images)):?>
-<div class='row'>
+<div class='row '>
 <div class='col-md-2'></div>
 <div class='col-md-8'>
 <div class='album_modal' style='display:block; height:250px;'>
@@ -133,7 +111,7 @@ for ($i = 0; $i < $num; $i++)
 <?php endif; ?>
 <!-- this is the all user images area -->
 <?php if (isset($user_images)):?>
-<div class='row'>
+<div class='row focus_move_two'>
 <div class='col-md-2'></div>
 <div class='col-md-8'>
 <div class='album_modal' style='display:block;'>
@@ -154,9 +132,7 @@ for ($i = 0; $i < $num; $i++)
 		}
 	?>
 </div>
-<div class='modal_button'>
-	<button style='position:absolute; display:block; bottom:0; right:15;' type='submit'>Submit</button>
-</div>
+
 </form>
 </div>
 <div class='col-md-2'></div>

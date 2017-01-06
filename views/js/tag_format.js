@@ -61,6 +61,24 @@ $(function(){
 		field.value = "";
 		}
 	}
+	function readURL(input) {
+
+    if (input.files && input.files[0]) {
+        var reader = new FileReader();
+
+        reader.onload = function (e) {
+		console.log('running');
+            $('#upload_preview').attr('src', e.target.result);
+            $('#upload_preview').attr('style','display:block');
+        }
+
+        reader.readAsDataURL(input.files[0]);
+    }
+
+}
+	$("#image_file").change(function(){
+    	readURL(this);
+	});
 	$(field).on('keypress', runThat);
 	button.on('click', add_tags);
 	$(premium).on('click', show_price);

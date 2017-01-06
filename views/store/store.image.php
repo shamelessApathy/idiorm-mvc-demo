@@ -2,7 +2,9 @@
 require(HEADER);
 $image = $info['image'];
 $tags = $info['tags'];
+$profile = $info['profile'];
 $categories = $info['categories'];
+$user = $info['user'];
 if (isset($_SESSION['user_info']))
 {
 	$user_info = $_SESSION['user_info'];
@@ -12,20 +14,27 @@ if (isset($_SESSION['user_info']))
 <div class='container'>
 <div class='user_info' data-user-id="<?php echo $user_info['id'];?>">
 	<div class='row'>
-		<div class='col-md-3'>
-			<div class='image_info' data-id="<?php echo $image->id; ?>">
+	<div class='col-md-2'>
+				<div class='image_info' data-id="<?php echo $image->id; ?>">
 			<ul>
 			<?php echo "
-				
+				<li>Uploaded By: </li>
+				<li >$user->username <img class='user_avatar2' src='$user->avatar'/></li>
 				<li>Name: $image->user_image_name</li>
-				<li>Tags: $image->tags</li>
-				<li>Width: $image->width</li>
-				<li>Height: $image->height</li>
+				<li>Dimensions: $image->width x $image->height</li>
 				
 			";
 			?>
-			<?php if (isset($_SESSION['user_info'])):?>
-			<li style='margin-top:10px;'><h3>TAGS</h3><div class='store_tags'> <?php 
+			</ul>
+			</div>
+			</div>
+		<div class='col-md-8'>
+			<img class='watermark' src="<?php echo $image->watermark;?>"/>
+		</div>
+				<div class='col-md-2'>
+
+				<?php if (isset($_SESSION['user_info'])):?>
+			<div style='margin-top:10px;'><h3>TAGS</h3><div class='store_tags'> <?php 
 			foreach ($tags as $tag)
 			{
 
@@ -35,7 +44,7 @@ if (isset($_SESSION['user_info']))
 				</div>
 			<?php endif;?>
 	<?php if (!isset($_SESSION['user_info'])): ?>
-		<li style='margin-top:10px;'><h3>TAGS</h3><div class='store_tags'> <?php 
+		<div style='margin-top:10px;'><h3>TAGS</h3><div class='store_tags'> <?php 
 			foreach ($tags as $tag)
 			{
 
@@ -43,24 +52,16 @@ if (isset($_SESSION['user_info']))
 			}
 			?>
 		<?php endif; ?>
-			</li>
-
-			<li>Categories:<div class='store_categories'> <?php 
-			foreach ($categories as $category)
-			{
-				echo "<span class='category'>$category->title</span>";
-			}
-			?>
 			</div>
-			</li>
-			</ul>
-			</div>
-			</div>
-		<div class='col-md-9'>
-			<img class='watermark' src="<?php echo $image->watermark;?>"/>
-		</div>
 	</div>
 </div>
+<form action='/token/create_token' method='POST'>
+<input name='image_id' hidden value="<?php echo $image->id;?>">
+<button type='submit'>BUY NOW</button>
+</form>
+</div>
+</div>
+
 
 <?php require(FOOTER);?>
 <script src='/views/js/single.js' rel='javascript' type='text/javascript'></script>

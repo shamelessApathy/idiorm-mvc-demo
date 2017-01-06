@@ -108,19 +108,6 @@ class imageController extends Controller {
 			$premium = 0;
 		}
 
-		if (!empty($_POST['category']))
-		{
-		$category = $_POST['category'];
-		}
-		if (empty($category))
-		{
-			require_once(CONTROLLERS . '/category.php');
-			$category = new categoryController();
-			$categories = $category->get_all();
-			return_view('view.upload_image.php', $categories);
-			sys_msg('You must select a base category for your image!');
-			return;
-		}
 		$tags = explode('|', $tags);
 		array_pop($tags);
 		$type = 'image';
@@ -163,7 +150,6 @@ class imageController extends Controller {
 				{
 					//$this->upload_image(true); //sends you to function that renders view that shows all images from user (that are authorized!!!)
 					$this->add_tag($tags, $return);
-					$this->add_category($category, $return);
 					header("Location:/image/upload_image?success=true");
 				}
 				else
@@ -295,11 +281,16 @@ class imageController extends Controller {
 	// get info to be able to display on the single store.image.php view
 	public function info()
 	{
+		require_once(MODELS . '/User.php');
+		require_once(MODELS . '/Profile.php');
+		$user_model = new User();
 		$id = $_GET['id'];
 		$image = $this->get_image($id);
+		$user_info = Model::factory('User')->find_one($image->user_id);
 		$tags = $image->get_tags();
 		$categories = $image->get_categories();
-		$image = array('image'=>$image, 'tags'=>$tags, 'categories'=> $categories);
+		$user_profile = $user_info->profile();
+		$image = array('image'=>$image, 'tags'=>$tags, 'categories'=> $categories, 'user'=>$user_info, 'profile' => $user_profile);
 		return_view('store/store.image.php', $image);
 	}
 	// instantiates an image class based on image_id using ORM Model::factory
