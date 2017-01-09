@@ -18,6 +18,18 @@ class Token {
 		$hash_model = ORM::for_table('token')->where('hash', $hash)->find_one();
 		return $hash_model;
 	}
+	public function delete_token($hash)
+	{
+		$token = ORM::for_table('token')->where('hash', $hash)->find_one();
+		if ($token->delete())
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+	}
 }
 
 

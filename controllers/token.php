@@ -1,4 +1,5 @@
 <?php
+require_once('globals.php');
 require_once(BASE_CONTROLLER);
 
 class tokenController extends Controller {
@@ -20,21 +21,43 @@ class tokenController extends Controller {
 		$hash = $_GET['hash'];
 		require_once(MODELS . '/Token.php');
 		$token_model = ORM::for_table('token')->where('hash', $hash)->find_one();
+		if (!empty($_SESSION['user_info']['id']))
+		{
+			$user_id = $_SESSION['user_info']['id'];
+		}
+		else
+		{
+			return_view('view.home.php');
+			sys_msg('You must be logged in to view that page!');
+			return;
+		}
+		$id = $token_model->user_id;
+		if ($user_id == $token_model->user_id)
+		{
 		$image_id = $token_model->image_id;
 		require_once(MODELS . '/Image.php');
 		$image_model = ORM::for_table('image')->find_one($image_id);
 		$image_path = $image_model->path;
-		if (file_exists(ROOT . $image_path)) {
-    header('Content-Description: File Transfer');
-    header('Content-Type: application/octet-stream');
-    header('Content-Disposition: attachment; filename="'.basename(ROOT . $image_path).'"');
-    header('Expires: 0');
-    header('Cache-Control: must-revalidate');
-    header('Pragma: public');
-    header('Content-Length: ' . filesize(ROOT . $image_path));
-    readfile(ROOT . $image_path);
-    exit;
-}
+		if (file_exists(ROOT . $image_path)) 
+		{
+			$token_model->delete($hash);
+    		header('Content-Description: File Transfer');
+    		header('Content-Type: application/octet-stream');
+    		header('Content-Disposition: attachment; filename="'.basename(ROOT . $image_path).'"');
+    		header('Expires: 0');
+    		header('Cache-Control: must-revalidate');
+    		header('Pragma: public');
+    		header('Content-Length: ' . filesize(ROOT . $image_path));
+    		readfile(ROOT . $image_path);
+    		exit;
+		}
+	}
+		else
+		{
+			return_view('view.home.php');
+			sys_msg("You are not the user who purchased this image!");
+			return;
+		}
 	}
 
 }
