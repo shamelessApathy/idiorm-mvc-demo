@@ -19,14 +19,14 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="/">BLOG</a>
+      <a class="navbar-brand" href="/">photoBlog</a>
     </div>
 
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
         <li class="active"><?php if(isset($user)):?>
-        <a href="/user/info/<?php echo $user->id;?>"><?php echo $user->email;?></a>
+        <a href="/user/info/<?php echo $user->id;?>"><?php echo $user->username . "  <img style='width:25px;height:25px;' src='$user->avatar'/>";?></a>
       <?php else:?>
         <a href='/home'>Login</a>
       <?php endif;?>
@@ -40,12 +40,13 @@
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Options <span class="caret"></span></a>
           <ul class="dropdown-menu">
             <li><a href="/post/new_post">New Post</a></li>
-            <li><a href="/user/edit_profile">Edit Profile</a></li>
-            <li><a href="#">Something else here</a></li>
+            <li><a href="/profile/edit_profile">Edit Profile</a></li>
+            <li><a href="/image/upload_image">Upload an Image</a></li>
             <li role="separator" class="divider"></li>
-            <li><a href="#">Separated link</a></li>
+            <li><a href="/store/admin">Your Store</a></li>
             <li role="separator" class="divider"></li>
-            <li><a href="#">One more separated link</a></li>
+            <li><a href="/user/get_images">Image Manager</a></li>
+            <li><a href='/user/purchased'>Purchased Images</a></li>
           </ul>
         </li>
       <?php endif;?>
@@ -55,27 +56,40 @@
         </li>
       <?php endif;?>
       </ul>
-      <form class="navbar-form navbar-left">
-        <div class="form-group">
-          <input type="text" class="form-control" placeholder="Search">
+      <form class="navbar-form navbar-left" action='/tag/search_by_tag' method="GET">
+        <div class="form-group" >
+          <input type="text" class="form-control" name='query' placeholder="Search">
         </div>
         <button type="submit" class="btn btn-default">Submit</button>
       </form>
       <ul class="nav navbar-nav navbar-right">
+        <?php if (!isset($_SESSION['user_info'])):?>
+          <form style='top:+15px; position:relative; display:block;' action='/user/verify' method='POST'>
+          <label>Email:</label><input type='text' name='email'/>
+          <label>Password:</label><input type='password' name='password'/>
+          <button type='submit'>Login</button>
+          <a href='/user/register'>Register</a>
+          </form>
+        <?php endif;?>
+
+
         <?php if (isset($user) && $user->level === '1'): ?> <!-- just found out this right here, the user->level returns a string, why? -->
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Admin Options <span class="caret"></span></a>
           <ul class="dropdown-menu">
             <li><a href="/admin/post_manager">Post Manager</a></li>
             <li><a href="/admin/user_manager">User Manager</a></li>
-            <li><a href="#">Something else here</a></li>
+            <li><a href="/admin/image_manager">Image Manager</a></li>
             <li role="separator" class="divider"></li>
             <li><a href="#">Separated link</a></li>
           </ul>
         </li>
-        <li><?php if (isset($_SESSION['user_info'])):?><a href="/user/logout">Logout</a></li><?php endif;?>
+      
       <?php endif; ?>
       </ul>
+      <?php if (isset($user)):?>
+      <a class='navbar-brand' style='float:right;' href='/user/logout'>Logout</a>
+    <?php endif; ?>
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
 </nav>

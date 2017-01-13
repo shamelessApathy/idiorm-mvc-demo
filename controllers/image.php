@@ -1,0 +1,388 @@
+<?php
+require(BASE_CONTROLLER);
+require(MODELS . '/Image.php');
+class imageController extends Controller {
+	public function search_images($param, $query)
+	{
+		require (MODELS . '/Image.php');
+		$model = new Image();
+		$images = $model->search_images($param, $query);
+		return_view('view.images.php', $images);
+	}
+	public function get_categories($image_id = null)
+	{
+		if (empty($image_id))
+		{
+			$image_id = $_POST['image_id'];
+		}
+		require_once(MODELS . '/Image.php');
+		$model = Model::factory('Image')->find_one($image_id);
+		$categories = $model->get_categories();
+		$cat_array = array();
+		foreach ($categories as $category)
+		{
+			array_push($cat_array, ['title'=> $category->title, 'cat_id'=>$category->id]);
+		}
+		$categories = json_encode($cat_array);
+		echo $categories;
+	}
+	public function get_tags()
+	{
+		if (empty($image_id))
+		{
+			$image_id = $_POST['image_id'];
+		}
+		require_once(MODELS . '/Image.php');
+		$model = Model::factory('Image')->find_one($image_id);
+		$image_to_tag = $model->get_tags();
+		if (isset($_POST['image_id']))
+		{	
+			$image_array = array();
+			$i = 0;
+			foreach ($image_to_tag as $image)
+			{
+				$stuff = ['text'=>$image_to_tag[$i]['text'], 'tag_id'=>$image_to_tag[$i]['tag_id']];
+				array_push($image_array, $stuff);
+				$i++;
+			}
+			
+			$image_array = json_encode($image_array);
+			echo $image_array;
+		}
+		else
+		{
+			return $image_to_tag;
+		}
+	}
+	public function user_owned_images()
+	{
+		require(MODELS . '/User.php');
+		$id = $_SESSION['user_info']->id;
+		$user = Model::factory('User')->find_one($id);
+		$images = $user->images()->find_many();
+		return_view('view.user_images.php', $images);
+	}
+	public function upload_image($success = null)
+	{
+		require_once(CONTROLLERS . '/category.php');
+		$category = new categoryController();
+		$categories = $category->get_all();
+		return_view('view.upload_image.php', $categories);
+		if (!empty($_GET['success']))
+		{
+			user_msg('Image upload succesful!');
+		}
+	}
+	// returns image_size, that's it
+	public function image_size()
+	{
+		$file = $_FILES['image']['tmp_name'];
+		$size = getimagesize($file);
+		return $size;
+	}
+	// runs through list of everything that needs to be done and recorded to create an instance of an image
+	public function new_image()
+	{
+		
+		$check = $_FILES['image']['tmp_name'];
+		$user_id = $_SESSION['user_info']->id;
+		$name = $_FILES['image']['name'];
+		$tags = $_POST['tags'];
+		if ($_POST['price'] !== '3')
+			{
+				$price = $_POST['price'];
+				$premium = 1;
+				if (!is_numeric($price))
+				{
+					require_once(CONTROLLERS . '/category.php');
+					$category = new categoryController();
+					$categories = $category->get_all();
+					return_view('view.upload_image.php', $categories);
+					sys_msg('Your price is not an integer!');
+					return;
+				}
+			}
+		else
+		{
+			$price = 3;
+			$premium = 0;
+		}
+
+		$tags = explode('|', $tags);
+		array_pop($tags);
+		$type = 'image';
+		if (!empty($_POST['user_image_name']))
+		{
+		$user_image_name = $_POST['user_image_name'];
+		}
+		else
+		{
+			return_view('view.upload_image.php');
+			sys_msg('You need to name the image for tracking purposes!');
+			return;
+		}
+		// Better Validate the file
+		if ($this->validate($check, $type, $name))
+		{
+			$ext = explode('.',$name);
+			$ext = '.'. $ext[1];
+			$tmp_name = $_FILES['image']['tmp_name'];
+			$save_path = ROOT . "/users/images/raw_images/";			
+			$myname = strtolower($_FILES['image']['tmp_name']); //You are renaming the file here
+			$myname = explode('/',$myname);
+			$myname = $myname[2];
+			$newpath = '/users/images/raw_images/'.$myname.$ext;
+			$size = $this->image_size();
+			$width = $size[0];
+			$height = $size[1];
+			$size_string = $size[3];
+			$mime_type = $size['mime'];
+			$watermark = $this->watermark();
+			$thumbnail = $this->thumbnail();
+			// If the file is moved and stored successfully, call the model to make a DB entry for it
+  			if(move_uploaded_file($_FILES['image']['tmp_name'], $save_path.$myname.$ext))
+  			{
+  				chmod($save_path.$myname.$ext, 0755);
+  				require_once(MODELS . '/Image.php');
+				$model = new Image();
+				$return = $model->create_new($tmp_name, $user_id, $newpath, $width, $height, $size_string, $mime_type, $user_image_name, $watermark, $thumbnail, $price, $premium);
+				if ($return)
+				{
+					//$this->upload_image(true); //sends you to function that renders view that shows all images from user (that are authorized!!!)
+					$this->add_tag($tags, $return);
+					header("Location:/image/upload_image?success=true");
+				}
+				else
+				{
+					echo 'there was a problem';
+				}
+			}
+			else
+			{
+				echo 'problem saving file';
+			}
+		}
+		else
+		{
+			echo 'false';
+		}
+	}
+	public function add_category($cat_id, $image_id)
+	{
+		require_once(MODELS . '/Category.php');
+		$model = new Category();
+		$model->add_cat_to_image($cat_id, $image_id);
+	}
+	// creates watermarked image for preview
+	public function watermark()
+ 	{
+ 		$file = $_FILES['image']['tmp_name'];
+ 		$name = $_FILES['image']['name'];
+ 		$type = 'image';
+		$nodir = explode('/', $file);
+		$nodir = $nodir[2];
+		$name = $_FILES['image']['name'];
+		$ext = explode('.', $name);
+		if ($ext[1] === 'jpg')
+		{
+			$ext = 'jpeg';
+		}
+		else
+		{
+			$ext = $ext[1];
+		}
+		$ext2 = $ext;
+		$ext = '.' . $ext;
+		$save_path = '/var/www/idiorm/idiorm-mvc-demo/users/images/preview/' . $nodir . $ext;
+		$image = new Imagick($file);
+		$watermark = new Imagick('watermark.png');
+		$width = $image->getImageWidth();
+		$height = $image->getImageHeight();
+		$watermark->scaleImage($width, $height, 0,0);
+		$image->compositeImage($watermark, imagick::COMPOSITE_OVER, 0,0);
+		$new_path = '/users/images/preview/' . $nodir . $ext;
+
+		if($image->writeImage($save_path))
+		{
+			return $new_path;
+		}
+		else
+		{
+			return false;
+		}
+	}
+	// creates thumbnail version of the image
+	public function thumbnail()
+	{
+		$file = $_FILES['image']['tmp_name'];
+ 		$name = $_FILES['image']['name'];
+ 		$type = 'image';
+		$nodir = explode('/', $file);
+		$nodir = $nodir[2];
+		$name = $_FILES['image']['name'];
+		$ext = explode('.', $name);
+		if ($ext[1] === 'jpg')
+		{
+			$ext = 'jpeg';
+		}
+		else
+		{
+			$ext = $ext[1];
+		}
+		$ext2 = $ext;
+		$ext = '.' . $ext;
+		$save_path = '/var/www/idiorm/idiorm-mvc-demo/users/images/thumbnails/' . $nodir . $ext;
+		$new_path = '/users/images/thumbnails/' . $nodir . $ext;
+		$image = new Imagick($file);
+		$image->thumbnailImage(100,100, true);
+		if ($image->writeImage($save_path))
+		{
+			return $new_path;
+		}
+		else
+		{
+			return false;
+		}
+	}
+	// delete's image from db and file
+	public function delete_image($image_id = null)
+	{
+
+		if (empty($image_id))
+		{
+			$image_id = $_POST['image_id'];
+		}
+		require_once(MODELS . '/Image.php');
+		require_once(MODELS . '/Tag.php');
+		require_once(MODELS . '/Vote.php');
+		$image_model = Model::factory('Image')->find_one($image_id);
+		$path = $image_model->path;
+		$tags = $image_model->get_tags();
+		$tag_model = new Tag();
+		if (unlink(ROOT . $image_model->path))
+		{
+			echo ' it deleted';
+			$image_model->delete();
+		}
+		
+		foreach ($tags as $tag)
+		{
+			$tag_model->remove_tag($image_id, $tag->tag_id);
+		}
+		$vote_model = new Vote();
+		$votes = $vote_model->get_all_for_image($image_id);
+		foreach ($votes as $vote)
+		{
+			$vote_model->delete_vote($vote->id);
+		}
+
+
+	}
+	// get info to be able to display on the single store.image.php view
+	public function info()
+	{
+		require_once(MODELS . '/User.php');
+		require_once(MODELS . '/Profile.php');
+		$user_model = new User();
+		$id = $_GET['id'];
+		$image = $this->get_image($id);
+		$user_info = Model::factory('User')->find_one($image->user_id);
+		$tags = $image->get_tags();
+		$categories = $image->get_categories();
+		$user_profile = $user_info->profile();
+		$image = array('image'=>$image, 'tags'=>$tags, 'categories'=> $categories, 'user'=>$user_info, 'profile' => $user_profile);
+		return_view('store/store.image.php', $image);
+	}
+	// instantiates an image class based on image_id using ORM Model::factory
+	public function get_image($id)
+	{
+		require_once(MODELS . '/Image.php');
+		$model = Model::factory('Image')->find_one($id);
+		return $model;
+	}
+	public function add_tag($tags = null, $image_id = null) 	
+	{
+		require_once(CONTROLLERS . '/tag.php');
+		$controller = new tagController();
+		if($controller->add_tag($tags, $image_id, false))
+		{
+			return true;
+		}
+	}
+	public function remove_tag()
+	{
+		$id = $_POST['id'];
+		$tag = $_POST['tag'];
+		require_once(MODELS . '/Image.php');
+		$image = Model::factory('Image')->find_one($id);
+		$tags = $image->tags;
+		$tags = str_ireplace($tag, '', $tags);
+		$tags = explode(' ', $tags);
+		var_dump($tags);
+		/*if ($this->edit_tags($tags, $id))
+		{
+			echo 'it worked';
+		}
+		else
+		{
+			echo 'didnt work';
+		}*/
+
+	}
+	public function buy()
+	{
+		$image_id = $_POST['image_id'];
+		$this->purchase($image_id);
+	}
+	private function purchase($image_id)
+	{
+		$user_id = $_SESSION['user_info']['id'];
+		require_once(MODELS . '/Image.php');
+		$model = new Image();
+		if($model->purchase($image_id, $user_id))
+		{
+			$link = "/image/download/$image_id";
+			return_view("store/store.image_success.php", $link);
+		}
+	}
+	public function download($image_id = null)
+	{
+		require_once(MODELS . '/Image.php');
+		if (!empty($_SESSION['user_info'])) 
+		{		
+			$user_id = $_SESSION['user_info']['id'];
+			$model = new Image();
+			$test = $model->ownership($image_id, $user_id);
+			if ($test)
+			{
+				require_once(MODELS . '/Image.php');
+				$image_model = Model::factory('Image')->find_one($image_id);
+				$image_path = $image_model->path;
+				if (file_exists(ROOT . $image_path)) 
+				{
+		    		header('Content-Description: File Transfer');
+		    		header('Content-Type: application/octet-stream');
+		    		header('Content-Disposition: attachment; filename="'.basename(ROOT . $image_path).'"');
+		    		header('Expires: 0');
+		    		header('Cache-Control: must-revalidate');
+		    		header('Pragma: public');
+		    		header('Content-Length: ' . filesize(ROOT . $image_path));
+		    		readfile(ROOT . $image_path);
+		    		exit;
+				}
+			}
+		else
+		{
+			return_view('view.home.php');
+			sys_msg("You are not the user who purchased this image!");
+			return;
+		}
+		}
+		else
+		{
+			return_view('view.home.php');
+			sys_msg('You must be logged in first!');
+		}
+	}
+}
+?>

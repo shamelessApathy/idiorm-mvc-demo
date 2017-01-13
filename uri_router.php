@@ -4,9 +4,16 @@ require_once('globals.php');
 $controller;
 $method;
 $param;
-function uri_router($uri) {
+
+function uri_router($uri, $query = null) {
 	$full_uri = $uri;
 	$uri = explode('/', $uri);
+	if (empty($uri[1]))
+	{
+		require_once(CONTROLLERS . '/home.php');
+		$home = new homeController();
+		$home->load();
+	}
 	if(isset($uri[1]))
 	{
 		$controller = $uri[1];
@@ -20,16 +27,26 @@ function uri_router($uri) {
 	{
 		$param = $uri[3];
 	}
-if ($controller === 'home' || $controller === '')
+	if (isset($query))
+	{
+		$param = $query;
+	}
+if ($controller === 'home')
 {
-	return_view('view.home.php');
+	require_once(CONTROLLERS . '/home.php');
+	$home = new homeController();
+	$home->load();
 }
+else
+{
+
 
 
 $controller_path = CONTROLLERS . '/' . $controller . '.php';
 // currently stuck on a way to call the controller function specified in the URI ambiguously
 if (file_exists($controller_path))
 {
+
 	$controllerConcat = "$controller" . "Controller";
 	require($controller_path);
 	$new = new $controllerConcat();
@@ -44,6 +61,7 @@ elseif (!isset($controller))
 {
 	return_view('view.home.php');
 	sys_msg('No Controller Found!');
+}
 }
 }
 

@@ -5,10 +5,11 @@ class Controller {
 	* Checks to make sure an uploaded file what its supposed to be
 	* @params $check = file to be checked    $type = string
 	*/
-	public function validate($check, $type)
+	public function validate($check, $type, $name = null)
 	{
 		function test_input($data) 
 		{
+			echo 'this far';
   			$data = trim($data);
   			$data = stripslashes($data);
   			$data = htmlspecialchars($data);
@@ -21,7 +22,15 @@ class Controller {
 						$fileinfo = finfo_open();
 						$fileinfo = finfo_file($fileinfo, $check);
 						$fileinfo = explode(" ",$fileinfo);
-						if (in_array($fileinfo[0], $ext_array))
+						$name = explode('.',$name);
+						$ext = $name[1];
+						$ext = strtoupper($ext);
+						if ($ext === 'JPG')
+						{
+							$ext = 'JPEG';
+						}
+						$test = ($fileinfo[0] === $ext);
+						if (in_array($fileinfo[0], $ext_array) && ($test))
 						{
 							return true;
 						}

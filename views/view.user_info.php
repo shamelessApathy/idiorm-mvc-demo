@@ -1,5 +1,9 @@
 
-<?php require_once(HEADER);?>
+<?php require_once(HEADER);
+var_dump($info);
+$date = $info->created_at;
+$memberSince = date("F j, Y, g:i a");  
+?>
 
 
 
@@ -7,20 +11,11 @@
 
 <body>
 <h1> USER INFO: </h1>	
-<table>
-	<tr>
-		<td>Name:</td>
-		<td><?php echo $info['name'];?></td>
-	</tr>
-	<tr>
-		<td>Email:</td>
-		<td><?php echo $info['email'];?></td>
-	</tr>
-	<tr>
-		<td>ID Number:</td>
-		<td><?php echo $info['id'];?></td>
-	</tr>
-</table>
+<ul class='user_info_list'>
+	<li>Username: <?php echo "$info->username" ;?></li>
+	<li>Member Since: <?php echo $memberSince; ?></li>
+	<li>Website: <?php echo (!empty($info->website)) ? $info->website : null ?></li>
+</ul>
 
 
 </body>
