@@ -1,3 +1,41 @@
+.navbar, .navbar ul li a, .navbar-brand, .dropdown-menu, .btn, .btn-default
+{
+	background-color:#6666ff !important;
+	color:#e7e7e7 !important;
+	font-weight:700;
+}
+.navbar-default .navbar-nav > .active > a, .navbar-default .navbar-nav > .open > a 
+{
+	color:#6666ff !important;
+	border-top:2px #6666ff solid !important;
+	border-bottom:2px #6666ff solid !important;
+	box-sizing:border-box !important;
+	-o-box-sizing:border-box !important;
+	-moz-box-sizing:border-box !important;
+	-webkit-box-sizing:border-box !important;
+	background-color:#e7e7e7 !important;
+}
+
+#nav_search
+{
+	margin-top:10px;
+}
+.navbar-default .collapsed, .form-control, .big_submit:hover
+{
+	color:#6666ff !important;
+	background-color:#e7e7e7 !important;
+}
+.navbar-default .collapsed .icon-bar
+{
+	background-color:#6666ff;
+}
+.dropdown-menu > li > a:hover , .btn-default:hover
+{
+	background-color:#e7e7e7 !important;
+	color:#6666ff !important;
+}
+
+
 .sys_msg
 {
 	width:400px;
@@ -167,7 +205,9 @@
 	height:75px;
 	border-radius:5px;
 	font-size:2.0em;
-	background-color:#f8f8f8;
+	background-color:#6666ff !important;
+	color:#e7e7e7 !important;
+	font-weight:700;
 }
 .album_manager
 {

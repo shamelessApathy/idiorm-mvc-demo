@@ -33,13 +33,11 @@
 
             <span class="sr-only">(current)</span></li>
         <?php if(isset($user)):?>
-        <li><a href="/user/get_user_posts">My Posts</a></li>
       <?php endif;?>
       <?php if (isset($user)):?>
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Options <span class="caret"></span></a>
           <ul class="dropdown-menu">
-            <li><a href="/post/new_post">New Post</a></li>
             <li><a href="/profile/edit_profile">Edit Profile</a></li>
             <li><a href="/image/upload_image">Upload an Image</a></li>
             <li role="separator" class="divider"></li>
@@ -56,7 +54,7 @@
         </li>
       <?php endif;?>
       </ul>
-      <form class="navbar-form navbar-left" action='/tag/search_by_tag' method="GET">
+      <form class="navbar-form navbar-left" id='nav_search' action='/tag/search_by_tag' method="GET">
         <div class="form-group" >
           <input type="text" class="form-control" name='query' placeholder="Search">
         </div>

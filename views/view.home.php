@@ -1,6 +1,14 @@
 <?php require_once(HEADER); 
 ?>
 <div class='container' >
+<div class='row'>
+<div class='col-md-4'></div>
+<div class='col-md-4'>
+	<h1 style='text-align:center; color:#6666ff;'>sharefuly</h1>
+	<p style='text-align:center; color:#6666ff;'>monetize your photos</p>
+</div>
+<div class='col-md-4'></div>
+</div>
 	<div class='row'>
 		<div class='col-md-2'></div>
 		<div class='col-md-8'>
