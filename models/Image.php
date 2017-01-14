@@ -10,6 +10,11 @@ class Image extends Model
 		$cats = ORM::for_table('category_to_image')->join('category', 'category.id = category_to_image.category_id')->select('category_to_image.*')->select('category.*')->where('image_id', $this->id)->find_many();
 		return $cats;
 	}
+	public function change_name($name)
+	{
+		$this->user_image_name = $name;
+		$this->save();
+	}
 	public function get_newest()
 	{
 		$images = ORM::for_table('image')->order_by_asc('created_at')->where('auth', 1)->find_many();

@@ -28,24 +28,18 @@ if (isset($info['categories']))
 	<div class='focus_modal'>
 		<div class='col-md-6'>
 			<div class='focus_details'>
-			<h3 id='focus_type'></h3>
+			<p id='focus_type'></p>
 				<ul>
-					<li><label>Name:</label><input id='focus_name' name='user_image_name'></li>
+					<li id='focus_name'></li>
+					<li id='focus_edit_name'><input id='edit_name'><button id='save_name'>save</button></li>
 					<li id='focus_price'></li>
 					<li id='focus_width'></li>
 					<li id='focus_height'></li>
-					<li id='categories'><strong>Categories:</strong></li>
 					<li><strong>Tags:</strong></li>
 					<li id='focus_tags'></li><br>
 				</ul><br>
 				<input type='text' id='add_tag'>
 				<button type='button' id='add_tag_button'>Add Tag</button>
-				<select id='add_category'>
-					<option value='1' name='people'>People</option>
-					<option value='2' name='places'>Places</option>
-					<option value='3' name='things'>Things</option>
-				</select>
-				<button id='add_category_button'>Add Category</button>
 			</div>
 			<div id='download_image'></div>
 			<button style='margin-top:15px;' id='delete_image' type='button'>Delete</button>
@@ -115,6 +109,8 @@ for ($i = 0; $i < $num; $i++)
 <div class='row focus_move_two'>
 <div class='col-md-2'></div>
 <div class='col-md-8'>
+<div class='scroll_hide'>
+<div class='hider_div'></div>
 <div class='album_modal' style='display:block;'>
 <h1>All User Images</h1>
 <form action="/album/add_image/<?php echo $album->album_id; ?>" method='POST'>
@@ -135,6 +131,7 @@ for ($i = 0; $i < $num; $i++)
 </div>
 
 </form>
+</div>
 </div>
 <div class='col-md-2'></div>
 </div>

@@ -6,7 +6,7 @@ require_once(HEADER);
 ?>
 
 <div class='container'>
-<p>You have successfully purchased this image! You can download in the "Purchased Images" section, or from the link right here 
+<p>You have successfully purchased this image! You can download in the <a href='/user/purchased'>"Purchased Images"</a> section, or from the link right here 
 <?php echo "<a href='$info'>here</a>"; ?>
 </p>
 </div>

@@ -167,6 +167,14 @@ class imageController extends Controller {
 			echo 'false';
 		}
 	}
+	public function change_name()
+	{
+		$name = $_POST['name'];
+		$image_id = $_POST['image_id'];
+		require_once(MODELS . '/Image.php');
+		$image = Model::factory('Image')->find_one($image_id);
+		$image->change_name($name);
+	}
 	public function add_category($cat_id, $image_id)
 	{
 		require_once(MODELS . '/Category.php');

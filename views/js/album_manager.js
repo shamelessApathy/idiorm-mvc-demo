@@ -41,7 +41,6 @@ $(function(){
 				}
 				var image = el.getElementsByTagName('IMG')[0];
 				this.id = $(image).attr('data-id');
-				this.get_categories(this.id);
 				var download = $('#download_image');
 				var watermark = $(image).attr('data-watermark');
 				var name = $(image).attr('data-name');
@@ -53,7 +52,8 @@ $(function(){
 				$('#focus_price').html(price_string);
 				$(download).html(download_string);
 				$('.focus_image').html('<img  id="the_image" data-id='+ this.id +' class="img-responsive" src="'+ watermark +'"/>');
-				document.getElementById('focus_name').value = name;
+				$('#focus_name').html('<strong>Name:</strong>' + name + "  <sup><a href='#' class='tiny_link'>edit</a></sup>");
+				this.addEditNameListener();
 				$('#focus_width').html('<strong>Width:</strong>' + width );
 				$('#focus_height').html('<strong>Height:</strong>' + height );
 				var data = {'image_id': this.id};
@@ -101,6 +101,38 @@ $(function(){
 				$('.focus_modal').attr('style','');
 				orig.remove();
 			}
+			this.change_name = function(new_name)
+			{
+				var image_id = document.getElementById('the_image');
+				image_id = image_id.getAttribute('data-id');
+				var data = {'image_id': image_id, 'name':new_name};
+				$.ajax({
+					url: '/image/change_name',
+					type: "POST",
+					data: data,
+					success: function(results){
+					}
+				})
+			}
+			this.editName = function()
+			{
+				console.log('edit name running');
+				$('#focus_edit_name').css({"display":"block"});
+				$('#save_name').on('click', function(){
+					var new_name = $('#edit_name').val();
+					this.change_name(new_name);
+					$('#focus_edit_name').css({"display":"none"});
+					$('#focus_name').html('<strong>Name:</strong>' + new_name + "<sup><a href='#' class='tiny_link'>edit</a></sup>");
+					$('#edit_name').val(' ');
+					this.addEditNameListener();
+				}.bind(this))
+			}.bind(this)
+			this.addEditNameListener = function()
+			{
+				console.log('add listener running');
+				var button = $('.tiny_link');
+				button.on('click', this.editName);
+			}.bind(this)
 			this.addCategoryListener = function()
 			{
 				var button = ('#add_category_button');
@@ -202,6 +234,7 @@ $(function(){
 		this.addDeleteListener();
 		this.keyListeners();
 		this.addCategoryListener();
+
 		this.remove_tag = function(e){
 						target = e.target;
 						var tag = $(target).attr('data-id');
