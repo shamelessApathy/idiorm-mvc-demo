@@ -9,6 +9,7 @@
 
 </head>
 <?php if (isset($_SESSION['user_info'])) {$user = $_SESSION['user_info'];}?>
+<div class='nav-mod'>
 <nav class="navbar navbar-default">
   <div class="container-fluid">
     <!-- Brand and toggle get grouped for better mobile display -->
@@ -86,10 +87,11 @@
       <?php endif; ?>
       </ul>
       <?php if (isset($user)):?>
-      <a class='navbar-brand' style='float:right;' href='/user/logout'>Logout</a>
+      <a class='navbar-brand logout' href='/user/logout'>Logout</a>
     <?php endif; ?>
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
 </nav>
+</div>
 <div class='spacer'></div>
 </html>

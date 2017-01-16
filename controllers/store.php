@@ -36,9 +36,18 @@ class storeController extends Controller{
 		{
 		$website =	null;
 		}
+		if (isset($_POST['location']))
+		{
+			$location = $_POST['location'];
+		}
+		else
+		{
+			$location = null;
+		}
 		$info = array(
 			'intro' => $_POST['intro'],
-			'website' => $website
+			'website' => $website,
+			'location' => $location
 			);
 		$results = $model->edit($info, $user_id);
 		if ($results)
@@ -58,6 +67,15 @@ class storeController extends Controller{
 		$model = Model::factory('User')->find_one($user_id);
 		$images = $model->images()->find_many();
 		return_view('store/store.album_manager.php',$images);
+	}
+	public function show($user_id)
+	{
+		require_once(MODELS . '/Store.php');
+		require_once(MODELS . '/User.php');
+		$user_model = Model::factory('User')->find_one($user_id);
+		$model = Model::factory('Store')->find_one($user_id);
+		$array = array('user'=>$user_model, 'store'=>$model);
+		return_view('store/store.user.php', $array);
 	}
 	
 }

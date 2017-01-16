@@ -1,6 +1,5 @@
 <?php
-class Store {
-	public static $_table_use_short_name = true;
+class Store extends Model {
 public static $_id_column = 'user_id';
 	public function user()
 	{
