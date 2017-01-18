@@ -562,6 +562,43 @@
 {
 	display:none;
 }
+/* New FRONTPAGE UI */
+.front-container
+{
+	width:450px;
+	margin:0 auto;
+}
+.looking-glass
+{
+	width:150px;
+	height:150px;
+	float:left;
+	border:2px solid white;
+	box-sizing:border-box;
+	-o-box-sizing:border-box;
+	-moz-box-sizing:border-box;
+	-webkit-box-sizing:border-box;
+	overflow-x:hidden;
+	overflow-y:hidden;
+}
+.looking-glass img
+{
+	width:300px;
+}
+.left-container
+{
+	width:450px;
+	margin:0 auto;
+}
+.left-glass
+{
+	width:450px;
+	margin-top:20px;
+}
+.left-glass img
+{
+	max-width:100%;
+}
 
 
 /* SIDEBAR */

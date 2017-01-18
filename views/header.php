@@ -57,17 +57,16 @@
       </ul>
       <form class="navbar-form navbar-left" id='nav_search' action='/tag/search_by_tag' method="GET">
         <div class="form-group" >
-          <input type="text" class="form-control" name='query' placeholder="Search">
+          <input type="text" class="form-control" style='width:100px;' name='query' placeholder="Search">
         </div>
         <button type="submit" class="btn btn-default">Submit</button>
       </form>
       <ul class="nav navbar-nav navbar-right">
         <?php if (!isset($_SESSION['user_info'])):?>
           <form style='top:+15px; position:relative; display:block;' action='/user/verify' method='POST'>
-          <label>Email:</label><input type='text' name='email'/>
-          <label>Password:</label><input type='password' name='password'/>
+          <input type='text' name='email' value='email'/>
+          <input type='password' name='password' value='password'/>
           <button type='submit'>Login</button>
-          <a href='/user/register'>Register</a>
           </form>
         <?php endif;?>
 

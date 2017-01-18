@@ -1,4 +1,6 @@
 <?php require_once(HEADER); 
+$images = $info['images'];
+$featured = $info['featured'];
 ?>
 <div class='container' >
 <div class='row'>
@@ -28,16 +30,33 @@ if (isset($_SESSION['user_info']))
 }
 
 ?>
-
+<div class='row'>
+<div class='col-md-6'>
+	<div class='left-container'>
+		<?php 
+			if (isset($info))
+			{
+				foreach ($featured as $image)
+				{
+					echo "<a href='/image/info?id=$image->id'><div class='left-glass'><img src='$image->watermark'/></div></a>";
+				}
+			}
+		?>
+	</div> 
+</div>
+<div class='col-md-6'>
+<div class='front-container'>
 <?php 
 if (isset($info))
 {
-foreach ($info as $image)
+foreach ($images as $image)
 {
-	echo "<a href='/image/info?id=$image->id'><div class='preview_thumb'><img class='img-responsive' src='$image->thumbnail'/></div></a>";
+	echo "<a href='/image/info?id=$image->id'><div class='looking-glass'><img class='aimg-responsive' src='$image->watermark'/></div></a>";
 }
 }
 ?>
-
+</div>
+</div>
+</div>
 </div>
 <?php require_once(FOOTER); ?>

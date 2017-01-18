@@ -6,7 +6,9 @@ class homeController extends Controller{
 		require_once(MODELS . '/Image.php');
 		$model = new Image();
 		$images = $model->get_newest();
-		return_view('view.home.php' , $images);		
+		$featured = $model->get_featured();
+		$array = array('images' => $images, 'featured' => $featured);
+		return_view('view.home.php' , $array );		
 	}
 }
 

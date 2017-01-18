@@ -5,6 +5,11 @@ class Image extends Model
 	{
 		$this->belongs_to('User');
 	}
+	public function get_featured()
+	{
+		$featured = ORM::for_table('image')->where('featured', 1)->find_many();
+		return $featured;
+	}
 	public function get_categories()
 	{
 		$cats = ORM::for_table('category_to_image')->join('category', 'category.id = category_to_image.category_id')->select('category_to_image.*')->select('category.*')->where('image_id', $this->id)->find_many();
@@ -17,9 +22,9 @@ class Image extends Model
 	}
 	public function get_newest()
 	{
-		$images = ORM::for_table('image')->order_by_asc('created_at')->where('auth', 1)->find_many();
+		$images = ORM::for_table('image')->order_by_desc('created_at')->where('auth', 1)->find_many();
 		$image_array = array();
-		if (count($images) < 50)
+		if (count($images) < 30)
 		{
 			foreach($images as $image)
 			{
@@ -28,7 +33,7 @@ class Image extends Model
 		}
 		else 
 		{
-			for ($i = 0; $i < 50; $i++)
+			for ($i = 0; $i < 30; $i++)
 			{
 				array_push($image_array, $images[$i]);
 			}
