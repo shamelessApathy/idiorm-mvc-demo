@@ -1,3 +1,8 @@
+body
+{
+	background:#e0ffff;
+}
+
 .navbar, .navbar ul li a, .navbar-brand, .dropdown-menu, .btn, .btn-default, button 
 {
 	background-color:#6666ff !important;
@@ -545,7 +550,7 @@
 .hider_div
 {
 	width:30px;
-	background-color:white;
+	background-color:#e0ffff;
 	height:500px;
 	position:absolute;
 	right:0;
@@ -566,7 +571,16 @@
 .front-container
 {
 	width:450px;
+	height:700px;
+	overflow-x:hidden;
+	overflow-y:hidden;
 	margin:0 auto;
+}
+.extra-inside
+{
+	width:470px;
+	height:700px;
+	overflow-x:hidden;
 }
 .looking-glass
 {
@@ -584,11 +598,15 @@
 .looking-glass img
 {
 	width:300px;
+	left:-150px;
+	position:relative;
 }
 .left-container
 {
 	width:450px;
 	margin:0 auto;
+		overflow-x:hidden;
+	overflow-y:hidden;
 }
 .left-glass
 {
@@ -597,9 +615,8 @@
 }
 .left-glass img
 {
-	max-width:100%;
+	width:100%;
 }
-
 
 /* SIDEBAR */
 .left-sidebar
@@ -608,7 +625,15 @@
 	height:800px;
 	border-right:2px solid black;
 }
+.admin_image_row ul li
+{
+	list-style-type:none;
+}
 @media only screen and (max-width:900px){
+#login_form
+{
+	margin-left:10px;
+}
 	.sidebar
 	{
 		display:none;
@@ -616,5 +641,9 @@
 	.logout
 	{
 		float:left !important;
+	}
+	#login-form
+	{
+		margin-left:15px;
 	}
 }

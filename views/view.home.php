@@ -33,28 +33,32 @@ if (isset($_SESSION['user_info']))
 <div class='row'>
 <div class='col-md-6'>
 	<div class='left-container'>
+	<div class='extra-inside'>
 		<?php 
 			if (isset($info))
 			{
 				foreach ($featured as $image)
 				{
-					echo "<a href='/image/info?id=$image->id'><div class='left-glass'><img src='$image->watermark'/></div></a>";
+					echo "<a href='/image/info?id=$image->id'><div class='left-glass'><img src='$image->thumbnail'/></div></a>";
 				}
 			}
 		?>
+		</div>
 	</div> 
 </div>
 <div class='col-md-6'>
 <div class='front-container'>
+<div class='extra-inside'>
 <?php 
 if (isset($info))
 {
 foreach ($images as $image)
 {
-	echo "<a href='/image/info?id=$image->id'><div class='looking-glass'><img class='aimg-responsive' src='$image->watermark'/></div></a>";
+	echo "<a href='/image/info?id=$image->id'><div class='looking-glass'><img class='aimg-responsive' src='$image->thumbnail'/></div></a>";
 }
 }
 ?>
+</div>
 </div>
 </div>
 </div>

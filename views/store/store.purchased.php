@@ -8,14 +8,14 @@ require_once(HEADER);
 	echo "<div class='row'>
 			  <div class='col-md-3'></div>
 			  <div class='col-md-6'>
-			  <a href='/image/info?id=$image->id'>
 			  <div class='admin_image_row'>
 			  <ul>
 			  	<li>Name: $image->user_image_name</li>
 			  	<li>Size: $image->size_string</li>
 			  	<li><a href='/image/download/$image->id'>DOWNLOAD</a></li>
 			  </ul>
-			  <img class='admin_image' src='$image->path'/>
+			  <a href='/image/info?id=$image->id'>
+			  <img class='admin_image' src='$image->thumbnail'/>
 			  </div>
 			  </a>
 			  </div>

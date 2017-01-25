@@ -29,7 +29,7 @@
         <li class="active"><?php if(isset($user)):?>
         <a href="/user/info/<?php echo $user->id;?>"><?php echo $user->username . "  <img style='width:25px;height:25px;' src='$user->avatar'/>";?></a>
       <?php else:?>
-        <a href='/home'>Login</a>
+       <!-- <a href='/home'>Login</a>-->
       <?php endif;?>
 
             <span class="sr-only">(current)</span></li>
@@ -53,6 +53,13 @@
         <li>
           <a href='/user/register'>Register</a>
         </li>
+        <li>
+          <form id='login_form' style='top:+15px; position:relative; display:block;' action='/user/verify' method='POST'>
+          <input type='text' name='email' placeholder='email' style='width:90px;'/>
+          <input type='password' name='password' placeholder='password' style='width:90px;' />
+          <button type='submit'>Login</button>
+          </form>
+        </li>
       <?php endif;?>
       </ul>
       <form class="navbar-form navbar-left" id='nav_search' action='/tag/search_by_tag' method="GET">
@@ -61,14 +68,8 @@
         </div>
         <button type="submit" class="btn btn-default">Submit</button>
       </form>
-      <ul class="nav navbar-nav navbar-right">
-        <?php if (!isset($_SESSION['user_info'])):?>
-          <form style='top:+15px; position:relative; display:block;' action='/user/verify' method='POST'>
-          <input type='text' name='email' value='email'/>
-          <input type='password' name='password' value='password'/>
-          <button type='submit'>Login</button>
-          </form>
-        <?php endif;?>
+      <ul  id='login-form' class="nav navbar-nav navbar-right">
+     
 
 
         <?php if (isset($user) && $user->level === '1'): ?> <!-- just found out this right here, the user->level returns a string, why? -->

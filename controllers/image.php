@@ -242,7 +242,7 @@ class imageController extends Controller {
 		$save_path = '/var/www/idiorm/idiorm-mvc-demo/users/images/thumbnails/' . $nodir . $ext;
 		$new_path = '/users/images/thumbnails/' . $nodir . $ext;
 		$image = new Imagick($file);
-		$image->thumbnailImage(100,100, true);
+		$image->thumbnailImage(300,300, true);
 		if ($image->writeImage($save_path))
 		{
 			return $new_path;

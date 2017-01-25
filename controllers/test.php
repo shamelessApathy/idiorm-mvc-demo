@@ -69,4 +69,44 @@ class testController extends Controller {
 			$this->move($image);
 		}
 	}
+	public function thumbnail($path)
+	{
+ 		$type = 'image';
+		$nodir = explode('/', $path);
+		$nodir = $nodir[4];
+		$ext = explode('.', $nodir);
+		var_dump($ext);
+		if ($ext[1] === 'jpg')
+		{
+			$ext = 'jpeg';
+		}
+		else
+		{
+			$ext = $ext[1];
+		}
+		$ext = '.' . $ext;
+		$save_path = '/var/www/idiorm/idiorm-mvc-demo/users/images/thumbnails/' . $nodir . $ext;
+		$new_path = '/users/images/thumbnails/' . $nodir . $ext;
+		$image = new Imagick('/var/www/idiorm/idiorm-mvc-demo' . $path);
+		$image->thumbnailImage(300,300, true);
+		if ($image->writeImage($save_path))
+		{
+			return $new_path;
+		}
+		else
+		{
+			return false;
+		}
+	}
+	public function thumb()
+	{
+		require_once(MODELS . '/Image.php');
+		$all = Model::factory('image')->find_many();
+		foreach ($all as $image)
+		{
+			$path = $this->thumbnail($image->path);
+			$image->thumbnail = $path;
+			$image->save();
+		}
+	}
 }
