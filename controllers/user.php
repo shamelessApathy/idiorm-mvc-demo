@@ -226,6 +226,36 @@ public function purchased()
 }
 /*
 *
+* Loads subscription options view
+*
+*/
+public function subscription()
+{
+	if (isset($_SESSION['user_info']))
+	{
+		return_view('store/store.subscription.php');
+	}
+	else
+	{
+		return_view('view.home.php');
+		sys_msg('You must be logged in!');
+	}
+}
+public function add_subscription()
+{
+	$user_id = $_SESSION['user_info']['id'];
+	$subscription = $_POST['subscription'];
+	require_once(MODELS . '/User.php');
+	$user_model = new User();
+	if($user_model->add_subscription($user_id, $subscription))
+	{
+		user_msg('Subscription Added Successfully!');
+	}
+
+}
+
+/*
+*
 * Calls post_manager view
 *
 */

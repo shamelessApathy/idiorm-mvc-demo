@@ -337,10 +337,31 @@ class imageController extends Controller {
 		}*/
 
 	}
+	/*
+	*
+	* Calls the purchase function, this will be replaced with a payment portal once site is live
+	*
+	*/
 	public function buy()
 	{
 		$image_id = $_POST['image_id'];
 		$this->purchase($image_id);
+	}
+	/*
+	*
+	* This will use up a subscription point to purchase the image
+	*
+	*/
+	public function subscription()
+	{
+		$user_id = $_SESSION['user_info']['id'];
+		$image_id = $_POST['image_id'];
+		require_once(MODELS . '/Image.php');
+		$model = new Image();
+		if($model->subscription_purchase($image_id, $user_id))
+		{
+			$this->purchase($image_id);
+		}
 	}
 	private function purchase($image_id)
 	{

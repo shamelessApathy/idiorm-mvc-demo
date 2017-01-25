@@ -59,6 +59,10 @@ if (isset($_SESSION['user_info']))
 <input name='image_id' hidden value="<?php echo $image->id;?>">
 <button type='submit'>BUY NOW</button>
 </form>
+<form action='/image/subscription' method='POST'>
+	<input name='image_id' hidden value="<?php echo $image->id;?>">
+	<button type='submit'>USE SUBSCRIPTION</button>
+</form>
 </div>
 </div>
 

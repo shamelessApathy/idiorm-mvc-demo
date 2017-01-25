@@ -149,6 +149,18 @@ class Image extends Model
 			return false;
 		}
 	}
+	public function subscription_purchase($image_id, $user_id)
+	{
+		$time = time();
+		$table = ORM::for_table('subscription_purchase')->create();
+		$table->user_id = $user_id;
+		$table->image_id = $image_id;
+		$table->created_at = $time;
+		if ($table->save())
+		{
+			return true;
+		}
+	}
 
 
 }

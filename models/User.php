@@ -165,6 +165,23 @@ class User extends Model {
 			return true;
 		}
 	}
+	/*
+	*
+	* Adds new user subscription information to subscription_to_user table
+	*
+	*/
+	public function add_subscription($user_id, $subscription)
+	{
+		$time = time();
+		$table = ORM::for_table('subscription_to_user')->create();
+		$table->user_id = $user_id;
+		$table->subscription_id = $subscription;
+		$table->created_at = $time;
+		if($table->save())
+		{
+			return true;
+		}
+	}
 	//new
 	public function profile()
 	{
