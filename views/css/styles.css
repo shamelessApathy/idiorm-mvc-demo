@@ -62,6 +62,9 @@ body
 	border:red 2px solid;
 	background:#FABBBB;
 	color:red;
+	position:fixed;
+	top:100px;
+	left:10px;
 }
 .user_msg
 {
@@ -69,6 +72,9 @@ body
 	border:green 2px solid;
 	background:#74E770;
 	color:green;
+	position:fixed;
+	top:100px;
+	left:10px;
 }
 .top-bar
 {

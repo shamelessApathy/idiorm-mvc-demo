@@ -357,10 +357,22 @@ class imageController extends Controller {
 		$user_id = $_SESSION['user_info']['id'];
 		$image_id = $_POST['image_id'];
 		require_once(MODELS . '/Image.php');
+		require_once(MODELS . '/User.php');
+		$user_model = new User();
 		$model = new Image();
-		if($model->subscription_purchase($image_id, $user_id))
+		$count = $user_model->subscription_count($user_id);
+		if($count != 0)
 		{
-			$this->purchase($image_id);
+			if($model->subscription_purchase($image_id, $user_id))
+			{
+				$_SESSION['sub_count'] = $user_model->subscription_count($user_id);
+				$this->purchase($image_id);
+			}
+		}
+		else
+		{
+			return_view('view.home.php');
+			sys_msg("You've hit your subscription max download for the month! Upgrade your plan for more images!");
 		}
 	}
 	private function purchase($image_id)

@@ -109,4 +109,24 @@ class testController extends Controller {
 			$image->save();
 		}
 	}
+	public function time()
+	{
+		$user_id = 1;
+		$sub = ORM::for_table('subscription_to_user')->where('user_id', $user_id)->find_one();
+		$details = ORM::for_table('subscription_details')->where('subscription_id', $sub->subscription_id)->find_one();
+		$number = $details->number;
+		$initial = $sub->created_at;
+		$time = time();
+		$modulo = $time - $initial;
+		$month = 86400*30;
+		$howmany = floor($modulo/$month);
+		$change = $month*$howmany;
+		$change = $change + $initial;
+		$after = $change + $month;
+		var_dump($time);
+		var_dump($change);
+		var_dump($after);
+		$purchases = ORM::for_table('subscription_purchase')->where('user_id', $user_id)->where_gt('created_at', $change)->where_lt('created_at',$after)->find_many();
+		var_dump(count($purchases));
+	}
 }

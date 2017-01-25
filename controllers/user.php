@@ -75,6 +75,7 @@ public function verify()
 		$user = $model->verify($email,$password);	
 		if ($user)
 		{
+			$_SESSION['sub_count'] = $this->subscription_count($user->user_id);
 			$_SESSION['user_info'] = $user;
 			$_SESSION['logged_in'] = 1;
 			header('Location: /home');
@@ -252,6 +253,13 @@ public function add_subscription()
 		user_msg('Subscription Added Successfully!');
 	}
 
+}
+public function subscription_count($user_id)
+{
+	require_once(MODELS . '/User.php');
+	$model = Model::factory('User')->find_one($user_id);
+	$count = $model->subscription_count();
+	return $count;
 }
 
 /*

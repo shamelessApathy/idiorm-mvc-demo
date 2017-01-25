@@ -40,6 +40,28 @@ class User extends Model {
 		}
 
 	}
+	public function subscription_count($user_id = null)
+	{
+		if (empty($user_id))
+		{
+		$user_id = $this->id;
+		}
+		$sub = ORM::for_table('subscription_to_user')->where('user_id', $user_id)->find_one();
+		$details = ORM::for_table('subscription_details')->where('subscription_id', $sub->subscription_id)->find_one();
+		$number = $details->number;
+		$initial = $sub->created_at;
+		$time = time();
+		$modulo = $time - $initial;
+		$month = 86400*30;
+		$howmany = floor($modulo/$month);
+		$change = $month*$howmany;
+		$change = $change + $initial;
+		$after = $change + $month;
+		$purchases = ORM::for_table('subscription_purchase')->where('user_id', $user_id)->where_gt('created_at', $change)->where_lt('created_at',$after)->find_many();
+		$left = $number - count($purchases);
+		return $left;
+
+	}
 	/*
 	*
 	* Verifies user identity and checks salted password value against email

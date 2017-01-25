@@ -27,7 +27,7 @@
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
         <li class="active"><?php if(isset($user)):?>
-        <a href="/user/info/<?php echo $user->id;?>"><?php echo $user->username . "  <img style='width:25px;height:25px;' src='$user->avatar'/>";?></a>
+        <a href="/user/info/<?php echo $user->id;?>"><?php echo $user->username . "  <img style='width:25px;height:25px;' src='$user->avatar'/>  ". $_SESSION['sub_count'];?></a>
       <?php else:?>
        <!-- <a href='/home'>Login</a>-->
       <?php endif;?>
