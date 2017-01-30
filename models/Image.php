@@ -161,6 +161,13 @@ class Image extends Model
 			return true;
 		}
 	}
+	public function get_info ($id)
+	{
+		$id = (int) $id;
+		$image = ORM::for_table('image')->where('id', $id)->find_one();
+		return $image;
+
+	}
 
 
 }

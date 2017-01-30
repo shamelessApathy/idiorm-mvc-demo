@@ -37,6 +37,12 @@ if ($controller === 'home')
 	$home = new homeController();
 	$home->load();
 }
+if ($controller === 'cart' && !isset($method))
+{
+	require_once(CONTROLLERS . '/cart.php');
+	$cart = new cartController();
+	$cart->display_cart();
+}
 else
 {
 

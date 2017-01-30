@@ -62,6 +62,7 @@ if (isset($_SESSION['user_info']))
 <input id='price' name='price' hidden value="<?php echo $image->price;?>">
 <button type='submit'>BUY NOW</button>
 </form>
+<button class='add_to_cart' data-id="<?php echo $image->id; ?>">Add to cart</button>
 <script src="https://checkout.stripe.com/checkout.js"></script>
 
 <button id="customButton">Purchase</button>
