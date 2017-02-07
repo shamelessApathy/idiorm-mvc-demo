@@ -129,4 +129,10 @@ class testController extends Controller {
 		$purchases = ORM::for_table('subscription_purchase')->where('user_id', $user_id)->where_gt('created_at', $change)->where_lt('created_at',$after)->find_many();
 		var_dump(count($purchases));
 	}
+	public function cart($item)
+	{
+		require_once(ROOT . '/app/libraries/cart.php');
+		$cart = new Cart();
+		$cart->remove_item($item);
+	}
 }

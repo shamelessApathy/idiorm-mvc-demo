@@ -56,52 +56,15 @@ if (isset($_SESSION['user_info']))
 			</div>
 	</div>
 </div>
-<form id='form_buy' action='/image/buy' method='POST'>
-<input name='image_id' hidden value="<?php echo $image->id;?>">
-<input id='token' name='token' hidden value="">
-<input id='price' name='price' hidden value="<?php echo $image->price;?>">
-<button type='submit'>BUY NOW</button>
-</form>
+
 <button class='add_to_cart' data-id="<?php echo $image->id; ?>">Add to cart</button>
-<script src="https://checkout.stripe.com/checkout.js"></script>
 
-<button id="customButton">Purchase</button>
-
-<script>
-var handler = StripeCheckout.configure({
-  key: 'pk_test_THNgelG59hWBD2E9l16SZqsj',
-  image: 'https://stripe.com/img/documentation/checkout/marketplace.png',
-  locale: 'auto',
-  token: function(token) {
-    // You can access the token ID with `token.id`.
-    // Get the token ID to your server-side code for use.
-    var token = token.id;
-    $('#token').val(token);
-    document.getElementById('form_buy').submit();
-    }
-  });
-
-document.getElementById('customButton').addEventListener('click', function(e) {
-  // Open Checkout with further options:
-  handler.open({
-    name: 'Stripe.com',
-    description: '2 widgets',
-    zipCode: true,
-    amount: <?php echo $image->price*100 ;?>,
-    description: "image_id =<?php echo $image->id ;?>"
-  });
-  e.preventDefault();
-});
-
-// Close Checkout on page navigation:
-window.addEventListener('popstate', function() {
-  handler.close();
-});
-</script>
+<?php if(!$image->premium && isset($_SESSION['user_info'])) :?>
 <form action='/image/subscription' method='POST'>
 	<input name='image_id' hidden value="<?php echo $image->id;?>">
 	<button type='submit'>USE SUBSCRIPTION</button>
 </form>
+<?php endif; ?>
 </div>
 </div>
 

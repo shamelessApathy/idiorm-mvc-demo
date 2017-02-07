@@ -15,6 +15,7 @@ ORM::configure('id_column_overrides', array(
     'user' => 'user_id'
 ));
 session_start();
+$_SESSION['start'] = true;
 
 $uri = $_SERVER['REQUEST_URI'];
 if (strpos($uri, '?'))

@@ -1,11 +1,15 @@
 
-
+<?php
+require('app/libraries/cart.php');
+$cart2 = new Cart();
+ ?>
 <html>
 <head>
 <!-- <meta name="viewport" content="width=device-width, initial-scale=1">-->
 <link href="<?php echo '/views/bootstrap/css/bootstrap.css';?>" rel='stylesheet' type='text/css'/>
 <link href='/views/js/jquery-ui-1.12.1/jquery-ui.css' rel='stylesheet' type='text/css'/>
 <link href="<?php echo '/'. CSS . '/styles.css';?>" rel='stylesheet' type='text/css'/>
+<link href='/views/css/font-awesome-4.7.0/css/font-awesome.min.css' type='text/css' rel='stylesheet'/>
 
 </head>
 <?php if (isset($_SESSION['user_info'])) {$user = $_SESSION['user_info'];}?>
@@ -14,13 +18,14 @@
   <div class="container-fluid">
     <!-- Brand and toggle get grouped for better mobile display -->
     <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+      <button type="button" class="navbar-toggle collapsed" id='barz' data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
         <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
+        <span class="barz-span icon-bar"></span>
+        <span class="barz-span icon-bar"></span>
+        <span class="barz-span icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="/">sharefuly</a>
+      <div class='cart-nav'><a href='/cart'><i class='fa fa-shopping-cart'></i></a><?php if ($cart2->count_items() > 0) : ?><div class='cart-circle'><?php echo $cart2->count_items(); ?></div><?php endif; ?></div>
+      <a class="navbar-brand" href="/"><img style='max-width:200px;margin-top:-10px;' src='/sharefuly-lite.png'/></a>
     </div>
 
     <!-- Collect the nav links, forms, and other content for toggling -->
@@ -89,6 +94,7 @@
       <?php if (isset($user)):?>
       <a class='navbar-brand logout' href='/user/logout'>Logout</a>
     <?php endif; ?>
+
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
 </nav>

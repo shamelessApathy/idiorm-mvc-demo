@@ -635,6 +635,145 @@ body
 {
 	list-style-type:none;
 }
+/* CART STYLES */
+/*.cart-container
+{
+	width:100%;
+	height:400px;
+	background-color:#b3b3ff;
+	padding:10px;
+}
+
+.cart-item
+{
+	width:100px;
+	height:120px;
+	margin-left:10px;
+	background-color:white;
+	text-align:center;
+	float:left;
+}
+.cart-image
+{
+	width:100px;
+	height:100px;
+}*/
+/* these two #barz don't work, don't know why, maybe bootstrap JS is manipulating something that affects these rules be applied... OR it
+could be simply that some of the other rules are being applied with a greater importance level */
+#barz:hover
+{
+	background-color:#6666ff !important;
+}
+#barz:hover .barz-span
+{
+	background-color:#e7e7e7 !important;
+}
+.add_to_cart
+{
+	margin-top:10px;
+}
+#nav-li-adjust
+{
+	float:left;
+}
+.cart-nav
+{
+	border-radius:5px;
+	border:1px solid #e7e7e7;
+	margin:8;
+	float:right;
+	width:44px;
+	height:34px;
+	background-color:#e7e7e7;
+	color:#6666ff;
+	font-size:30px;
+	padding-left:6px;
+}
+.cart-nav a
+{
+	color:#6666ff;
+}
+.cart-circle
+{
+	width:12px;
+	height:12px;
+	border-radius:3px;
+	border:1px solid white;
+	background-color:white;
+	position:relative;
+	left:+28px;
+	text-align:center;
+	font-size:8px;
+}
+.cart-nav:hover 
+{
+	background-color:#6666ff;
+	color:#e7e7e7;
+}
+.cart-nav:hover a
+{
+	color:#e7e7e7;
+}
+.cart-outside
+{
+	overflow-y:hidden;
+	overflow-x:hidden;
+	height:420px;
+	width:100%;
+}
+#cart-container
+{
+	width:102%;
+	height:420px;
+	background-color:#b3b3ff;
+	overflow-x:hidden;
+}
+.cart-item
+{
+	width:100%;
+	height:150px;
+	padding-left:10px;
+	margin-top:10px;
+	border-top:2px solid #e6e6ff;
+	border-bottom:2px solid #e6e6ff;
+	box-sizing:border-box;
+	-o-box-sizing:border-box;
+	-moz-box-sizing:border-box;
+	-webkit-box-sizing:border-box;
+	overflow-y:hidden;
+}
+.cart-item p
+{
+	width:150px;
+	text-align:center;
+	background-color:white;
+}
+.cart-image
+{
+	width:150px;
+	height:150px;
+	background-color:white;
+	float:left;
+}
+.remove-item
+{
+	float:right;
+	margin-right:5px;
+}
+.item-info
+{
+	margin-left:20px;
+	float:left;
+	position:relative;
+	margin-top:30px;
+	font-weight:700;
+	color:#e7e7e7;
+
+}
+.item-info ul
+{
+	list-style-type:none;
+}
 @media only screen and (max-width:900px){
 #login_form
 {
