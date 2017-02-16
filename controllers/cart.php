@@ -44,6 +44,21 @@ class cartController extends Controller {
 	}
 	public function send_info()
 	{
+		require_once(MODELS . '/Image.php');
+		$items = $_SESSION['cart'];
+		$price =0;
+		foreach ($items as $item)
+		{
+			$model = Model::factory('Image')->find_one($item['image_id']);
+			$price += $model->price;
+
+		}
+		if ($price < 10)
+		{
+			$price = $price + .30;
+		}
+		$price = $price *100;
+
 		// Set your secret key: remember to change this to your live secret key in production
 		// See your keys here: https://dashboard.stripe.com/account/apikeys
 		\Stripe\Stripe::setApiKey("sk_test_u05I8eb3Re5YPyHaTeJpgSZx");
@@ -57,7 +72,20 @@ class cartController extends Controller {
 		  "currency" => "usd",
 		  "description" => "Example charge",
 		  "source" => $token,
+		  'amount' => $price
 		));
+		if ($charge)
+		{
+			require_once(MODELS . '/Image.php');
+			$image_model = new Image();
+			foreach ($items as $item)
+			{
+				$image_model->purchase($item['image_id'], $_SESSION['user_info']['id']);
+			}
+			$_SESSION['cart'] = null;
+			return_view('store/store.image_success.php');
+		}
+		
 	}
 	public function add_item($item = null)
 	{

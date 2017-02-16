@@ -342,33 +342,6 @@ class imageController extends Controller {
 	* Calls the purchase function, this will be replaced with a payment portal once site is live
 	*
 	*/
-	public function buy()
-	{
-		$image_id = $_POST['image_id'];
-		$token = $_POST['token'];
-		$price = $_POST['price']*100;
-		var_dump($token);
-		// Set your secret key: remember to change this to your live secret key in production
-		// See your keys here: https://dashboard.stripe.com/account/apikeys
-		\Stripe\Stripe::setApiKey("sk_test_u05I8eb3Re5YPyHaTeJpgSZx");
-
-		// Token is created using Stripe.js or Checkout!
-		// Get the payment token submitted by the form:
-
-		// Charge the user's card:
-		$charge = \Stripe\Charge::create(array(
-  		"amount" => $price,
-  		"currency" => "usd",
-  		"description" => "Image ID: $image_id",
-  		"source" => $token,
-
-	));
-		 if($charge)
-  		{
-  			$this->purchase($image_id);
-  		}
-		
-	}
 	/*
 	*
 	* This will use up a subscription point to purchase the image
