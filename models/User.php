@@ -192,12 +192,18 @@ class User extends Model {
 	* Adds new user subscription information to subscription_to_user table
 	*
 	*/
-	public function add_subscription($user_id, $subscription)
+	public function add_subscription($user_id, $subscription, $period_start, $period_end)
 	{
+		$table = ORM::for_table('subscription_to_user')->where('user_id', $user_id)->find_one();
+		if (!$table)
+		{
+			$table = ORM::for_table('subscription_to_user')->create();
+		}		
 		$time = time();
-		$table = ORM::for_table('subscription_to_user')->create();
 		$table->user_id = $user_id;
 		$table->subscription_id = $subscription;
+		$table->period_start = $period_start;
+		$table->period_end = $period_end;
 		$table->created_at = $time;
 		if($table->save())
 		{

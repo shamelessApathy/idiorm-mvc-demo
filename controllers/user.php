@@ -238,18 +238,7 @@ public function subscription_pay()
 	$details = ORM::for_table('subscription_details')->where('subscription_id', $plan)->find_one();
 	return_view('store/store.subscription_pay.php', $details);
 }
-public function add_subscription()
-{
-	/*$user_id = $_SESSION['user_info']['id'];
-	$subscription = $_POST['subscription'];
-	require_once(MODELS . '/User.php');
-	$user_model = new User();
-	if($user_model->add_subscription($user_id, $subscription))
-	{
-		user_msg('Subscription Added Successfully!');
-	}*/
 
-}
 public function subscription_count($user_id)
 {
 	require_once(MODELS . '/User.php');

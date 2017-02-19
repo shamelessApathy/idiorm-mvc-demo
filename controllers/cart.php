@@ -41,6 +41,22 @@ class cartController extends Controller {
 	}
 	/*
 	*
+	* Adds subscription to database once create_stripe_subscription returns true
+	*
+	*/
+	public function add_subscription($period_start, $period_end)
+	{
+		$plan_id = $_SESSION['plan_id'];
+		$user_id = $_SESSION['user_info']['id'];
+		require_once(MODELS . '/User.php');
+		$user_model = new User();
+		if($user_model->add_subscription($user_id, $plan_id, $period_start, $period_end))
+		{
+			user_msg('Subscription Added Successfully!');
+		}
+	}
+	/*
+	*
 	* After Stripe token is created, begins process of creating and adding subscription
 	*
 	*/
@@ -56,6 +72,11 @@ class cartController extends Controller {
 		}
 		$this->create_stripe_subscription($stripe_token, $user->stripe_id, $plan);
 	}
+	/*
+	*
+	* Creates a subscription for the current user with stripe's API
+	*
+	*/
 	private function create_stripe_subscription($stripe_token, $stripe_id, $plan)
 	{
 		\Stripe\Stripe::setApiKey("sk_test_u05I8eb3Re5YPyHaTeJpgSZx");
@@ -63,8 +84,13 @@ class cartController extends Controller {
 		$response = \Stripe\Subscription::create(array(
 		  "customer" => "$stripe_id",
 		  "plan" => "$plan"
-			));	
-		var_dump($response);
+			));
+			if($response)
+			{	
+				$period_start = $response['current_period_start'];
+				$period_end = $response['current_period_end'];
+				$this->add_subscription($period_start, $period_end);
+			}
 	}
 	/*
 	*
