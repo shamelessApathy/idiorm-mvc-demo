@@ -12,6 +12,73 @@ class cartController extends Controller {
 		$this->items = $_SESSION['cart'];
 		}
 	}
+	/*
+	*
+	* Creates a customer with stripe for the current user, gets return results
+	*
+	*/
+	private function create_stripe_customer($stripe_token)
+	{
+		$user_id = $_SESSION['user_info']['id'];
+		$email = $_SESSION['user_info']['email'];
+		\Stripe\Stripe::setApiKey("sk_test_u05I8eb3Re5YPyHaTeJpgSZx");
+		// Make request
+		$response = \Stripe\Customer::create(array(
+		  "description" => "sharefuly cust_id = $user_id",
+		  "source" => "$stripe_token", // obtained with Stripe.js
+		  "email" => "$email"
+		));
+		// Set Stripe ID
+		$stripe_customer_id = $response['id'];
+		require_once(MODELS . '/User.php');
+		// Instantiate User Model
+		$cust_model = Model::factory('User')->find_one($user_id);
+		$cust_model->stripe_id = $stripe_customer_id;
+		if ($cust_model->save())
+		{
+			echo 'stripe id added successfully';
+		}
+	}
+	/*
+	*
+	* After Stripe token is created, begins process of creating and adding subscription
+	*
+	*/
+	public function process_subscription()
+	{
+		$stripe_token = $_POST['stripeToken'];
+		$plan = strtolower($_SESSION['plan']);
+		require_once(MODELS . '/User.php');
+		$user = Model::factory('User')->find_one($_SESSION['user_info']['id']);
+		if ($user->stripe_id == null)
+		{
+			$this->create_stripe_customer($stripe_token);
+		}
+		$this->create_stripe_subscription($stripe_token, $user->stripe_id, $plan);
+	}
+	private function create_stripe_subscription($stripe_token, $stripe_id, $plan)
+	{
+		\Stripe\Stripe::setApiKey("sk_test_u05I8eb3Re5YPyHaTeJpgSZx");
+
+		$response = \Stripe\Subscription::create(array(
+		  "customer" => "$stripe_id",
+		  "plan" => "$plan"
+			));	
+		var_dump($response);
+	}
+	/*
+	*
+	* Brings up subscription view
+	*/
+	public function create_subscription()
+	{
+		return_view('store/store.subscription.php');
+	}
+	private function create_customer()
+	{
+
+	}
+
 	public function display_cart()
 	{
 		require_once(MODELS . '/Image.php');

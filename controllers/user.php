@@ -6,6 +6,8 @@ require_once(BASE_CONTROLLER);
 */
 
 Class userController extends Controller {
+
+
 /*
 * Brings up register view
 */
@@ -227,31 +229,25 @@ public function purchased()
 }
 /*
 *
-* Loads subscription options view
+* Subscription Pay View
 *
 */
-public function subscription()
+public function subscription_pay()
 {
-	if (isset($_SESSION['user_info']))
-	{
-		return_view('store/store.subscription.php');
-	}
-	else
-	{
-		return_view('view.home.php');
-		sys_msg('You must be logged in!');
-	}
+	$plan = $_POST['plan'];
+	$details = ORM::for_table('subscription_details')->where('subscription_id', $plan)->find_one();
+	return_view('store/store.subscription_pay.php', $details);
 }
 public function add_subscription()
 {
-	$user_id = $_SESSION['user_info']['id'];
+	/*$user_id = $_SESSION['user_info']['id'];
 	$subscription = $_POST['subscription'];
 	require_once(MODELS . '/User.php');
 	$user_model = new User();
 	if($user_model->add_subscription($user_id, $subscription))
 	{
 		user_msg('Subscription Added Successfully!');
-	}
+	}*/
 
 }
 public function subscription_count($user_id)

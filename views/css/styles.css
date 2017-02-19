@@ -774,6 +774,69 @@ could be simply that some of the other rules are being applied with a greater im
 {
 	list-style-type:none;
 }
+
+/* subscribe css */
+.bronze-name
+{
+	background-color:#cd7f32;
+	color:#333;
+	font-size:28px;
+	float:left;
+	margin-top:25px;
+	padding-top:25px;
+	padding-left:5px;
+	width:100px;
+	border:2px solid #333;
+	height:100px;
+	border-radius:50px;
+}
+.silver-name
+{
+	margin-top:25px;
+	padding-top:20px;
+	padding-left:4px;
+	width:100px;
+	height:100px;
+	border-radius:50px;
+	font-size:36px;
+	background-color:black;
+	color:#c0c0c0;
+	border:2px solid #c0c0c0;
+	float:left;
+}
+.gold-name
+{
+	margin-top:25px;
+	padding-top:20px;
+	padding-left:8px;
+	width:100px;
+	height:100px;
+	border-radius:50px;
+	float:left;
+	color:#D4AF37;
+	border:2px solid #D4AF37;
+	background-color:#333;
+	font-size:36px;
+}
+.subscription-number
+{
+	margin-top:50px;
+	float:left;
+	font-size:24px;
+	margin-left:20px;
+}
+.subscription-price
+{
+	margin-top:57px;
+	font-size:16px;
+	float:left;
+	margin-left:20px;
+}
+.subscription-agreement
+{
+	margin-top:50px;
+	margin-left:10px;
+}
 @media only screen and (max-width:900px){
 #login_form
 {

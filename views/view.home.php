@@ -1,7 +1,6 @@
 <?php require_once(HEADER); 
 $images = $info['images'];
 $featured = $info['featured'];
-var_dump($_SESSION);
 ?>
 <div class='container' >
 <div class='row'>
