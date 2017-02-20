@@ -1,6 +1,7 @@
 <?php require(HEADER);?>
 <?php $price = $info['price'] * 100; ?>
 <?php $_SESSION['plan'] = $info['name'];?>
+<?php var_dump($_SESSION['plan']);?>
 <?php $_SESSION['plan_id'] = $info['subscription_id'];?>
 <div class='container'>
 <div class='cart-outside'>

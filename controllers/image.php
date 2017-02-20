@@ -350,24 +350,44 @@ class imageController extends Controller {
 	public function subscription()
 	{
 		$user_id = $_SESSION['user_info']['id'];
+		$stripe_sub_id = ORM::for_table('subscription_to_user')->where('user_id', $user_id)->find_one();
+		$stripe_sub_id = $stripe_sub_id['stripe_subscription_id'];
 		$image_id = $_POST['image_id'];
 		require_once(MODELS . '/Image.php');
 		require_once(MODELS . '/User.php');
 		$user_model = new User();
 		$model = new Image();
-		$count = $user_model->subscription_count($user_id);
-		if($count != 0)
+		\Stripe\Stripe::setApiKey("sk_test_u05I8eb3Re5YPyHaTeJpgSZx");
+		// Request information on the subscription
+		$response = \Stripe\Subscription::retrieve($stripe_sub_id);
+
+		// If the subscription has not ended, proceed
+		if ($response['ended_at'] === null)
 		{
-			if($model->subscription_purchase($image_id, $user_id))
+			// Update database values to match current period_start and period_end values
+			$user_sub = ORM::for_table('subscription_to_user')->where('user_id', $user_id)->find_one();
+			$user_sub->period_start = $response['current_period_start'];
+			$user_sub->period_end = $response['current_period_end'];
+			$user_sub->save();
+			$count = $user_model->subscription_count($user_id);
+			if($count != 0)
 			{
-				$_SESSION['sub_count'] = $user_model->subscription_count($user_id);
-				$this->purchase($image_id);
+				if($model->subscription_purchase($image_id, $user_id))
+				{
+					$_SESSION['sub_count'] = $user_model->subscription_count($user_id);
+					$this->purchase($image_id);
+				}
+			}
+			else
+			{
+				return_view('view.home.php');
+				sys_msg("You've hit your subscription max download for the month! Upgrade your plan for more images!");
 			}
 		}
 		else
 		{
 			return_view('view.home.php');
-			sys_msg("You've hit your subscription max download for the month! Upgrade your plan for more images!");
+			sys_msg('Your subscription is no longer active. Sign up for another to download more images!');
 		}
 	}
 	private function purchase($image_id)

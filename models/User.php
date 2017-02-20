@@ -40,7 +40,7 @@ class User extends Model {
 		}
 
 	}
-	public function subscription_count($user_id = null)
+	public function subscription_count( $user_id = null)
 	{
 		if (empty($user_id))
 		{
@@ -49,15 +49,17 @@ class User extends Model {
 		$sub = ORM::for_table('subscription_to_user')->where('user_id', $user_id)->find_one();
 		$details = ORM::for_table('subscription_details')->where('subscription_id', $sub->subscription_id)->find_one();
 		$number = $details->number;
-		$initial = $sub->created_at;
-		$time = time();
-		$modulo = $time - $initial;
-		$month = 86400*30;
-		$howmany = floor($modulo/$month);
-		$change = $month*$howmany;
-		$change = $change + $initial;
-		$after = $change + $month;
-		$purchases = ORM::for_table('subscription_purchase')->where('user_id', $user_id)->where_gt('created_at', $change)->where_lt('created_at',$after)->find_many();
+		//$initial = $sub->period_start;
+		$period_start = $sub->period_start;
+		$period_end = $sub->period_end;
+		//$time = time();
+		//$modulo = $time - $initial;
+		//$month = 86400*30;
+		//$howmany = floor($modulo/$month);
+		//$change = $month*$howmany;
+		//$change = $change + $initial;
+		//$after = $change + $month;
+		$purchases = ORM::for_table('subscription_purchase')->where('user_id', $user_id)->where_gt('created_at', $period_start)->where_lt('created_at',$period_end)->find_many();
 		$left = $number - count($purchases);
 		return $left;
 
@@ -200,7 +202,7 @@ class User extends Model {
 	* Adds new user subscription information to subscription_to_user table
 	*
 	*/
-	public function add_subscription($user_id, $subscription, $period_start, $period_end)
+	public function add_subscription($user_id, $subscription, $period_start, $period_end, $stripe_sub_id)
 	{
 		$table = ORM::for_table('subscription_to_user')->where('user_id', $user_id)->find_one();
 		if (!$table)
@@ -209,6 +211,7 @@ class User extends Model {
 		}		
 		$time = time();
 		$table->user_id = $user_id;
+		$table->stripe_subscription_id = $stripe_sub_id;
 		$table->subscription_id = $subscription;
 		$table->period_start = $period_start;
 		$table->period_end = $period_end;

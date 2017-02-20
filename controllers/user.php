@@ -229,22 +229,17 @@ public function purchased()
 }
 /*
 *
-* Subscription Pay View
+* count how many downloads left for the month with current subscription
 *
 */
-public function subscription_pay()
-{
-	$plan = $_POST['plan'];
-	$details = ORM::for_table('subscription_details')->where('subscription_id', $plan)->find_one();
-	return_view('store/store.subscription_pay.php', $details);
-}
 
 public function subscription_count($user_id)
 {
-	require_once(MODELS . '/User.php');
-	$model = Model::factory('User')->find_one($user_id);
-	$count = $model->subscription_count();
-	return $count;
+	
+		require_once(MODELS . '/User.php');
+		$model = Model::factory('User')->find_one($user_id);
+		$count = $model->subscription_count();
+		return $count;
 }
 
 /*

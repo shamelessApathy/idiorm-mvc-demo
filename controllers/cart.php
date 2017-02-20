@@ -44,13 +44,13 @@ class cartController extends Controller {
 	* Adds subscription to database once create_stripe_subscription returns true
 	*
 	*/
-	public function add_subscription($period_start, $period_end)
+	public function add_subscription($period_start, $period_end, $stripe_sub_id)
 	{
 		$plan_id = $_SESSION['plan_id'];
 		$user_id = $_SESSION['user_info']['id'];
 		require_once(MODELS . '/User.php');
 		$user_model = new User();
-		if($user_model->add_subscription($user_id, $plan_id, $period_start, $period_end))
+		if($user_model->add_subscription($user_id, $plan_id, $period_start, $period_end, $stripe_sub_id))
 		{
 			user_msg('Subscription Added Successfully!');
 		}
@@ -66,7 +66,7 @@ class cartController extends Controller {
 		$plan = strtolower($_SESSION['plan']);
 		require_once(MODELS . '/User.php');
 		$user = Model::factory('User')->find_one($_SESSION['user_info']['id']);
-		if ($user->stripe_id == null)
+		if ($user->stripe_id === null)
 		{
 			$this->create_stripe_customer($stripe_token);
 		}
@@ -89,7 +89,8 @@ class cartController extends Controller {
 			{	
 				$period_start = $response['current_period_start'];
 				$period_end = $response['current_period_end'];
-				$this->add_subscription($period_start, $period_end);
+				$stripe_sub_id = $response['id'];
+				$this->add_subscription($period_start, $period_end, $stripe_sub_id);
 			}
 	}
 	/*

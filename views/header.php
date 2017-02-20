@@ -51,6 +51,7 @@ $cart2 = new Cart();
             <li role="separator" class="divider"></li>
             <li><a href="/user/get_images">Image Manager</a></li>
             <li><a href='/user/purchased'>Purchased Images</a></li>
+            <li><a href='/cart/create_subscription'>Create Subscription</a></li>
           </ul>
         </li>
       <?php endif;?>
