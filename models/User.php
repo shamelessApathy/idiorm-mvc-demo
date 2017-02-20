@@ -73,17 +73,25 @@ class User extends Model {
 		$password = hash('sha256', $password);
 		// retrieve salt hash
 		$user = ORM::for_table('user')->where('email' , $email)->findOne();
-		$salt = $user->salt;
-		// concatenate salt with password
-		$password = $password . $salt;
-		if ($password === $user->password)
+		if ($user)
 		{
-			return $user;
+			$salt = $user->salt;
+			// concatenate salt with password
+			$password = $password . $salt;
+			if ($password === $user->password)
+			{
+				return $user;
+			}
+			else
+			{
+				return false;
+			}
 		}
 		else
 		{
-			return false;
-		}		
+			return_view('view.home.php');
+			sys_msg('That username or password doesn\'t exist!');
+		}			
 	}
 	/*
 	*
