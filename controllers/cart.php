@@ -74,6 +74,8 @@ class cartController extends Controller {
 		$this->create_stripe_subscription($stripe_token, $user->stripe_id, $plan);
 		$count = $user->subscription_count();
 		$_SESSION['sub_count'] = $count;
+		return_view('view.home.php');
+		user_msg('Subscription created successfully!');
 	}
 	/*
 	*

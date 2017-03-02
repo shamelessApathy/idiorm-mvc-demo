@@ -18,11 +18,13 @@
 	<?php foreach ($info as $purchase){ ?>
 		<tr>
 			<td><?php echo $purchase->user_id; ?></td>
-			<td><?php echo "NEED JOIN TABLE" ?></td>
+			<td><?php echo $purchase->owner_id; ?></td>
 			<td><?php echo $purchase->image_id; ?></td>
 			<td><?php echo gmdate("Y-m-d\TH:i:s\Z", $purchase->created_at); ?></td>
 		</tr>
 		<?php };?>
 <?php endif; ?>
+
+
 </div>
 <?php require(FOOTER);?>
