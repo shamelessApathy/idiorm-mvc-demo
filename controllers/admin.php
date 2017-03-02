@@ -13,6 +13,15 @@ class adminController extends Controller {
 	{
 		return_view('admin/admin.image_manager.php');
 	}
+	public function subscription_manager()
+	{
+		return_view('admin/admin.subscription_manager.php');
+	}
+	public function get_subscription_purchases()
+	{
+		$purchases = ORM::for_table('subscription_purchase')->find_many();
+		return_view('admin/admin.subscription_manager.php', $purchases);
+	}
 	public function search_images()
 	{
 		$param = $_POST['parameter'];

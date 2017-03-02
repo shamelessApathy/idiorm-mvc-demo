@@ -1,6 +1,12 @@
 body
 {
-	background:#e0ffff;
+	background:#e0e0eb;
+}
+.header-top
+{
+	width:100%;
+	height:50px;
+	background-color:white;
 }
 
 .navbar, .navbar ul li a, .navbar-brand, .dropdown-menu, .btn, .btn-default, button 
@@ -593,13 +599,17 @@ body
 	width:150px;
 	height:150px;
 	float:left;
-	border:2px solid white;
+	border:2px solid #e0e0eb;
 	box-sizing:border-box;
 	-o-box-sizing:border-box;
 	-moz-box-sizing:border-box;
 	-webkit-box-sizing:border-box;
 	overflow-x:hidden;
 	overflow-y:hidden;
+}
+.looking-glass:hover
+{
+	border-color:white;
 }
 .looking-glass img
 {

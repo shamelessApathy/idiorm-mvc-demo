@@ -12,7 +12,7 @@ $cart2 = new Cart();
 <link href='/views/css/font-awesome-4.7.0/css/font-awesome.min.css' type='text/css' rel='stylesheet'/>
 
 </head>
-<?php if (isset($_SESSION['user_info'])) {$user = $_SESSION['user_info'];}?>
+<?php if (isset($_SESSION['user_info'])) {$user = $_SESSION['user_info'];} ?>
 <div class='nav-mod'>
 <nav class="navbar navbar-default">
   <div class="container-fluid">
@@ -85,6 +85,7 @@ $cart2 = new Cart();
             <li><a href="/admin/post_manager">Post Manager</a></li>
             <li><a href="/admin/user_manager">User Manager</a></li>
             <li><a href="/admin/image_manager">Image Manager</a></li>
+            <li><a href="/admin/subscription_manager">Subscription Manager</a></li>
             <li role="separator" class="divider"></li>
             <li><a href="#">Separated link</a></li>
           </ul>

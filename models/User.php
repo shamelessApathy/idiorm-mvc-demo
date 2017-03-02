@@ -23,13 +23,14 @@ class User extends Model {
 		$password = $password . $salt;
 
 		// add new entry to database
-
+		$time = time;
 		$newPerson = ORM::for_table('user')->create();
 		$newPerson->email = $email;
 		$newPerson->password = $password;
 		$newPerson->salt = $salt;
 		$newPerson->username = $username;
 		$newPerson->level = 2;
+		$newPerson->created_at = $time;
 		if($newPerson->save())
 		{
 			return true;

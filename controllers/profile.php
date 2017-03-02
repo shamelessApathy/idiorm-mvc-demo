@@ -61,13 +61,13 @@ class profileController extends Controller {
 		}
   		if(move_uploaded_file($_FILES['user_avatar']['tmp_name'], $save_path.$myname.$ext))
   		{
-			require_once(MODELS . '/Profile.php');
-			$model = new Profile();
-			$result = $model->set_avatar($newpath);
-			if ($result)
-			{
-			header('Location: /profile/edit_profile');;
-			}
+  			require_once(MODELS .  '/User.php');
+			$user_id = $_SESSION['user_info']['id'];
+			$model = Model::factory('User')->find_one($user_id);
+			$model->avatar = $newpath;
+			$model->save();
+			$_SESSION['user_info']['avatar'] = $newpath;
+			header('Location: /profile/edit_profile');
 		}
 	}
 	public function validate_file($function)

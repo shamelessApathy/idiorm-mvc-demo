@@ -1,0 +1,10 @@
+- Change overlay watermark to be sharefuly.com , less obtrusive but still there
+
+- Change colors of UI to be less autistic child looking
+
+- Make images on front page appear clearer, add more content to front page
+
+- Make logo look better, thicker lines and whatnot
+
+- Comprehensive way to track subscriptions and images downloaded, for both admin and regular users
+

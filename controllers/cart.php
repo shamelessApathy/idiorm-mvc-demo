@@ -36,7 +36,7 @@ class cartController extends Controller {
 		$cust_model->stripe_id = $stripe_customer_id;
 		if ($cust_model->save())
 		{
-			echo 'stripe id added successfully';
+			return true;
 		}
 	}
 	/*
@@ -66,11 +66,14 @@ class cartController extends Controller {
 		$plan = strtolower($_SESSION['plan']);
 		require_once(MODELS . '/User.php');
 		$user = Model::factory('User')->find_one($_SESSION['user_info']['id']);
-		if ($user->stripe_id === null)
+		if ($user->stripe_id === NULL)
 		{
 			$this->create_stripe_customer($stripe_token);
 		}
+		$user = Model::factory('User')->find_one($_SESSION['user_info']['id']);
 		$this->create_stripe_subscription($stripe_token, $user->stripe_id, $plan);
+		$count = $user->subscription_count();
+		$_SESSION['sub_count'] = $count;
 	}
 	/*
 	*

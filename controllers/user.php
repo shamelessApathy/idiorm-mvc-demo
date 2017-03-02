@@ -7,12 +7,22 @@ require_once(BASE_CONTROLLER);
 
 Class userController extends Controller {
 
-
+/*
+*
+* Brings up view to pay for subscription
+*/
+public function subscription_pay()
+{
+	var_dump($_POST);
+	$plan = $_POST['plan'];
+	$sub = ORM::for_table('subscription_details')->where('subscription_id', $plan)->find_one();
+	return_view('store/store.subscription_pay.php', $sub);
+}
 /*
 * Brings up register view
 */
 public function register(){
-	return_view('view.register.php');
+	return_view('view.register.php', $sub);
 }
 /*
 * Call model's create_new function
@@ -31,7 +41,7 @@ public function create_new(){
 			return_view('view.home.php');
 			user_msg('New User created successfully!');
 		}
-		else
+		else  
 		{
 			return_view('view.home.php');
 			sys_msg('Something went wrong and the user was not added');
@@ -77,11 +87,16 @@ public function verify()
 		$user = $model->verify($email,$password);	
 		if ($user)
 		{
-			$_SESSION['sub_count'] = $this->subscription_count($user->user_id);
+			$_SESSION['sub_count'] = $this->subscription_count($user->id);
 			$_SESSION['user_info'] = $user;
 			$_SESSION['logged_in'] = 1;
 			header('Location: /home');
 			user_msg('login successfull');
+		}
+		else
+		{
+			return_view('view.login.php');
+			sys_msg('Incorrect Credentials');
 		}
 	}
 	else
