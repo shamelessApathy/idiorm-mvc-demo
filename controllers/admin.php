@@ -19,8 +19,37 @@ class adminController extends Controller {
 	}
 	public function get_subscription_purchases()
 	{
-		$purchases = ORM::for_table('subscription_purchase')->find_many();
-		return_view('admin/admin.subscription_manager.php', $purchases);
+		$purchases = ORM::for_table('subscription_purchase')->order_by_asc('owner_id')->find_many();
+    	$results = array();
+    	$array_holder = array();
+    	foreach ($purchases as $owner)
+    	{
+    		if (!in_array($owner['owner_id'], $results))
+    		{
+    			array_push($results, $owner['owner_id']);
+    		}
+    	}
+    	/*if (is_array($purchases)) 
+    	{
+        	if (isset($purchases[$key]) && $purchases[$key] == $value) 
+        	{
+            	$results[] = $purchases;
+        	}*/
+	        foreach ($results as $owner) 
+	        {
+            	$all = array();
+            	foreach($purchases as $purchase)
+            	{
+            		if ($purchase['owner_id'] === $owner)
+            		{
+            			array_push($all, $purchase);
+            		}
+            	}
+            	array_push($array_holder, array( $owner=> $all));
+         	}
+    	
+    	$stuff = array('results'=> $results, 'purchases'=>$purchases, 'extra'=>$array_holder);
+		return_view('admin/admin.subscription_manager.php', $stuff);
 	}
 	public function search_images()
 	{
