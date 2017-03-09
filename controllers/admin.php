@@ -19,37 +19,64 @@ class adminController extends Controller {
 	}
 	public function get_subscription_purchases()
 	{
-		$purchases = ORM::for_table('subscription_purchase')->order_by_asc('owner_id')->find_many();
-    	$results = array();
-    	$array_holder = array();
-    	foreach ($purchases as $owner)
-    	{
-    		if (!in_array($owner['owner_id'], $results))
-    		{
-    			array_push($results, $owner['owner_id']);
-    		}
-    	}
-    	/*if (is_array($purchases)) 
-    	{
-        	if (isset($purchases[$key]) && $purchases[$key] == $value) 
-        	{
-            	$results[] = $purchases;
-        	}*/
-	        foreach ($results as $owner) 
-	        {
-            	$all = array();
-            	foreach($purchases as $purchase)
-            	{
-            		if ($purchase['owner_id'] === $owner)
-            		{
-            			array_push($all, $purchase);
-            		}
-            	}
-            	array_push($array_holder, array( $owner=> $all));
-         	}
-    	
-    	$stuff = array('results'=> $results, 'purchases'=>$purchases, 'extra'=>$array_holder);
-		return_view('admin/admin.subscription_manager.php', $stuff);
+		require_once(MODELS . '/User.php');
+		$owners_results = ORM::for_table('subscription_purchase')->find_many();
+		require_once(CLASSES . '/Owner.php');
+				$owners = array();
+				$objects = array();
+			foreach($owners_results as $owner)
+			{
+
+				if (!in_array($owner['owner_id'],$owners))
+				{
+					array_push($owners, $owner['owner_id']);
+				}
+			}
+			foreach($owners as $owner)
+			{
+				$user_model = Model::factory('User')->find_one($owner);
+				$new = new Owner;
+				$new->id = $owner;
+				$new->first_name = $user_model->first_name;
+				$new->last_name = $user_model->last_name;
+				foreach ($owners_results as $purchase)
+				{
+					if ($new->id === $purchase['owner_id'])
+					{
+						array_push($new->purchases, $purchase);
+					}
+				}
+				array_push($objects, $new);
+			}
+
+
+
+
+
+
+
+		/*$big = array();
+		$owner_holder = array();
+		// Make an Array of Owner_IDs
+		foreach ($owners as $owner)
+		{
+			$string = $owner['owner_id'];
+			if(!in_array($string, $owner_holder))
+			{
+				array_push($owner_holder, $string );
+			}
+		}
+		// Make an array where Owner_Ids are the key, and the value being another array, holding all the purchase objects
+		$second_array = array();
+
+
+		//
+		foreach ($owners as $purchase)
+		{
+
+		}*/
+
+		return_view('admin/admin.subscription_manager.php', $objects);
 	}
 	public function search_images()
 	{

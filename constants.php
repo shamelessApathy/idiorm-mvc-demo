@@ -1,6 +1,7 @@
 <?php
 define('ROOT','/var/www/idiorm/idiorm-mvc-demo');
 define('CONTROLLERS', ROOT . '/controllers');
+define('CLASSES', ROOT . '/classes');
 define('MODELS', ROOT . '/models');
 define('VIEWS', ROOT . '/views');
 define('HEADER', VIEWS . '/header.php');

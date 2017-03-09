@@ -847,6 +847,15 @@ could be simply that some of the other rules are being applied with a greater im
 	margin-top:50px;
 	margin-left:10px;
 }
+.sub-hidden
+{
+	display:none;
+}
+.sub-list
+{
+	list-style: none;
+	margin-top:20px;
+}
 @media only screen and (max-width:900px){
 #login_form
 {
