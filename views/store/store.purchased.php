@@ -11,8 +11,8 @@ require_once(HEADER);
 			  <div class='admin_image_row'>
 			  <ul>
 			  	<li>Name: $image->user_image_name</li>
-			  	<li>Size: $image->size_string</li>
-			  	<li><a href='/image/download/$image->id'>DOWNLOAD</a></li>
+			  	<li>Size: $image->width x $image->height</li>
+			  	<li><a href='/image/download/$image->id'><button style='margin-top:10px;'>DOWNLOAD</button></a></li>
 			  </ul>
 			  <a href='/image/info?id=$image->id'>
 			  <img class='admin_image' src='$image->thumbnail'/>

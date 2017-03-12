@@ -62,5 +62,8 @@ foreach ($images as $image)
 </div>
 </div>
 </div>
+<div class='row'>
+	<div style='width:100%; height:500px;'></div>
+</div>
 </div>
 <?php require_once(FOOTER); ?>
