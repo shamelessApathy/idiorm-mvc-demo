@@ -45,12 +45,10 @@ $cart2 = new Cart();
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Options <span class="caret"></span></a>
           <ul class="dropdown-menu">
             <li><a href="/profile/edit_profile">Edit Profile</a></li>
+            <li role="separator" class="divider"></li>
             <li><a href="/image/upload_image">Upload an Image</a></li>
             <li role="separator" class="divider"></li>
-            <li><a href="/store/admin">Your Store</a></li>
-            <li role="separator" class="divider"></li>
-            <li><a href="/user/get_images">Image Manager</a></li>
-            <li><a href='/user/purchased'>Purchased Images</a></li>
+            <li><a href="/user/image_manager">Image Manager</a></li>
             <li><a href='/cart/create_subscription'>Create Subscription</a></li>
           </ul>
         </li>

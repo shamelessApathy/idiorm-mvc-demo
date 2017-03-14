@@ -136,10 +136,24 @@ class Image extends Model
 	}
 	public function purchase($image_id, $user_id)
 	{
+		$time = time();
+		// Instantiate specific model based on image id to access attributes
+		$owner = Model::factory('Image')->find_one($image_id);
+		// Create a purchase record in purchase table
+		$purchase = ORM::for_table('purchase')->create();
+		$purchase->owner_id = $owner->user_id;
+		$purchase->image_id = $image_id;
+		$purchase->price = $owner->price;
+		$purchase->user_id = $_SESSION['user_info']['id'];
+		$purchase->created_at = $time;
+		$purchase->save();
+		// Create entry in images owned for_table
 		$table = ORM::for_table('images_owned')->create();
 		$table->user_id = $user_id;
+		$table->owner_id = $owner->user_id;
 		$table->image_id = $image_id;
 		$table->status = 2;
+		$table->created_at = $time;
 		if ($table->save())
 		{
 			return true;

@@ -6,6 +6,30 @@ require_once(BASE_CONTROLLER);
 */
 
 Class userController extends Controller {
+/*
+*
+* Returns image_manager front page selector area
+*/
+public function image_manager()
+{
+	return_view('store/store.image_manager.php');
+}
+
+/**
+*
+* @return view with all images sold my current user that's logged in
+* @param none
+*/
+public function sold()
+{
+	require_once(MODELS . '/User.php');
+	$user = new User();
+	$sold = $user->get_sold_images();
+	$sub = $user->get_sub_images(); 
+	$array = array('sold'=>$sold, 'sub'=> $sub);
+	return_view('store/store.sold.php', $array);
+}
+
 
 /*
 *

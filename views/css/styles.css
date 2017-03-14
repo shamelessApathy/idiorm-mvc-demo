@@ -562,7 +562,7 @@ body
 .hider_div
 {
 	width:30px;
-	background-color:#e0ffff;
+	background-color:#e0e0eb;
 	height:500px;
 	position:absolute;
 	right:0;
@@ -854,6 +854,15 @@ could be simply that some of the other rules are being applied with a greater im
 .sub-list
 {
 	list-style: none;
+	margin-top:20px;
+}
+.image-manager-button
+{
+	width:200px;
+	height:200px;
+	text-align:center;
+	display:block;
+	margin:0 auto;
 	margin-top:20px;
 }
 @media only screen and (max-width:900px){

@@ -246,4 +246,33 @@ class User extends Model {
 		return $table;
 
 	}
+	/**
+	*
+	* @param none
+	* @return All images that have been sold by non-sub method (actual cash)
+	*/
+	public function get_sold_images()
+	{
+		$user_id = $_SESSION['user_info']['id'];
+		$images = ORM::for_table('purchase')->where('owner_id', $user_id)->find_many();
+		require_once(MODELS.'/Image.php');
+		foreach ($images as $image)
+		{
+			$current = Model::factory('Image')->find_one($image->image_id);
+			$image->preview = $current->watermark;
+		}
+		return $images;
+	}
+
+	/**
+	*
+	* @param none
+	* @return All images bought through subscription points
+	*/
+	public function get_sub_images()
+	{
+		$user_id = $_SESSION['user_info']['id'];
+		$images = ORM::for_table('subscription_purchase')->where('owner_id', $user_id)->find_many();
+		return $images;
+	}
 }
