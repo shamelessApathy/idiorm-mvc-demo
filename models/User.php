@@ -273,6 +273,12 @@ class User extends Model {
 	{
 		$user_id = $_SESSION['user_info']['id'];
 		$images = ORM::for_table('subscription_purchase')->where('owner_id', $user_id)->find_many();
+		require_once(MODELS . "/Image.php");
+		foreach ($images as $image)
+		{
+			$current = Model::factory('Image')->find_one($image->image_id);
+			$image->preview = $current->watermark;
+		}
 		return $images;
 	}
 }
