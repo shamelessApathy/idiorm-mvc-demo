@@ -8,10 +8,13 @@ body
 	height:50px;
 	background-color:white;
 }
-
+.font-color
+{
+	color:#666699
+}
 .navbar, .navbar ul li a, .navbar-brand, .dropdown-menu, .btn, .btn-default, button 
 {
-	background-color:#6666ff !important;
+	background-color:#666699 !important;
 	color:#e7e7e7 !important;
 	font-weight:700;
 }
@@ -48,17 +51,17 @@ body
 }
 .navbar-default .collapsed, .form-control, .big_submit:hover, button:hover
 {
-	color:#6666ff !important;
+	color:#666699 !important;
 	background-color:#e7e7e7 !important;
 }
 .navbar-default .collapsed .icon-bar
 {
-	background-color:#6666ff;
+	background-color:#666699;
 }
 .dropdown-menu > li > a:hover , .btn-default:hover
 {
 	background-color:#e7e7e7 !important;
-	color:#6666ff !important;
+	color:#666699 !important;
 }
 
 
@@ -237,7 +240,7 @@ body
 	height:75px;
 	border-radius:5px;
 	font-size:2.0em;
-	background-color:#6666ff !important;
+	background-color:#666699 !important;
 	color:#e7e7e7 !important;
 	font-weight:700;
 }
@@ -695,13 +698,13 @@ could be simply that some of the other rules are being applied with a greater im
 	width:44px;
 	height:34px;
 	background-color:#e7e7e7;
-	color:#6666ff;
+	color:#666699;
 	font-size:30px;
 	padding-left:6px;
 }
 .cart-nav a
 {
-	color:#6666ff;
+	color:#666699;
 }
 .cart-circle
 {
@@ -717,7 +720,7 @@ could be simply that some of the other rules are being applied with a greater im
 }
 .cart-nav:hover 
 {
-	background-color:#6666ff;
+	background-color:#666699;
 	color:#e7e7e7;
 }
 .cart-nav:hover a

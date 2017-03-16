@@ -65,9 +65,9 @@ if (isset($info->dob))
 </div>
 </div>
 </div>
-</div>
 </form>
 <a href='/user/new_password'>Click here to change your password!</a>
+</div>
 
 
 

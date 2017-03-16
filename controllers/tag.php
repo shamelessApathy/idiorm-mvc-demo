@@ -75,10 +75,9 @@ class tagController extends Controller {
 			require_once(MODELS . '/Image.php');
 			$model = new Tag();
 			$results = $model->search_by_tag($query);
-			$id = $results[0];
 			
 			// if we find related tags to the query, search for images in image_to_tag table that are linked with each tag_id
-			if($results)
+			if(!empty($results))
 			{
 				$images = array();
 					$image_id = $model->get_images($id->id);
@@ -107,33 +106,17 @@ class tagController extends Controller {
 						uasort($images, 'cmp');
 						return_view('view.image_search_results.php', $images);
 					}
-				
-				/*if (empty($image_ids))
-				{
-					return_view('view.home.php');
-					user_msg('Sorry, no images matched your query!');
 				}
-				$image_array = array();
-				require_once(MODELS . '/Image.php');
-				foreach ($image_ids as $image_id)
-				{
-					$image_model = Model::factory('Image')->find_one($image_id);
-					if ($image_model->auth == '1')
-					{
-						array_push($image_array, $image_model);
-					}
-				}
-				return_view('view.image_search_results.php', $image_array);
-			}
 			else
 			{
-				echo 'something happened';
-			}*/
+				$_SESSION['query'] = $query;
+				return_view('view.image_search_results.php');
+			}
 		}
 		
 	
 	}
 }
-}
+
 
 ?>

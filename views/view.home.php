@@ -6,8 +6,8 @@ $featured = $info['featured'];
 <div class='row'>
 <div class='col-md-4'></div>
 <div class='col-md-4'>
-	<h1 style='text-align:center; color:#6666ff;'>sharefuly</h1>
-	<p style='text-align:center; color:#6666ff;'>monetize your photos</p>
+	<h1 class='font-color text-center'>sharefuly</h1>
+	<p class='font-color text-center'>monetize your photos</p>
 </div>
 <div class='col-md-4'></div>
 </div>
@@ -33,6 +33,7 @@ if (isset($_SESSION['user_info']))
 <div class='row'>
 <div class='col-md-6'>
 	<div class='left-container'>
+	<h3 class='text-center'>Featured Images</h3><br>
 	<div class='extra-inside'>
 		<?php 
 			if (isset($info))
@@ -47,6 +48,7 @@ if (isset($_SESSION['user_info']))
 	</div> 
 </div>
 <div class='col-md-6'>
+<h3 class='text-center'>Recently Uploaded</h3><br>
 <div class='front-container'>
 <div class='extra-inside'>
 <?php 
