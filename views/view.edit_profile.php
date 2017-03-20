@@ -20,7 +20,7 @@ if (isset($info->dob))
 <h1> Profile for <?php echo $_SESSION['user_info']->name;?></h1>
 <div class='row'>
 <div class='profile_edit_section'>
-<div class='col-md-12'>
+<div class='col-md-6'>
 <form id="user_avatar" type='file' runat="server" enctype='multipart/form-data' action="/profile/validate_file/set_avatar" method='POST' >
     <label>Choose an avatar:</label><input type='file' id="imgInp" name="user_avatar"/>
 	<div class='note'>Avatar must be 75px by 75px or it will be resized</div>
@@ -34,6 +34,15 @@ if (isset($info->dob))
     ?>"></div>
 </form>
 </div></div>
+<div class='col-md-6'>
+	<form action='/profile/edit_merchant' method='POST'>
+	<label>Merchant Account</label><br>
+		<input type='text' name='account-name' value="<?php echo (isset($info->merchant_account)) ? $info->merchant_account : null; ?>"><br>
+		<label>PayPal</label><input type='radio' name='merchant' <?php echo ($info->merchant == 'paypal') ? "checked='checked'" : null;?> value='paypal'><br>
+		<label>SquarePay</label><input type='radio' name='merchant' <?php echo ($info->merchant == 'squarepay') ? "checked='checked'" : null;?> value='squarepay'><br>
+		<button type='submit'>Submit</button>
+	</form>
+</div>
 </div>
 <form name="user_profile" action='/profile/update' method='POST'>
 <div class='row'>

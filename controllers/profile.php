@@ -35,6 +35,30 @@ class profileController extends Controller {
 		$model->update($info);
 		$this->edit_profile(true);
 	}
+	/**
+	*
+	* @param Paypal/Stripe/Squarepay
+	* @return bool true on success
+	*/
+	public function edit_merchant()
+	{
+		require_once(MODELS . '/Profile.php');
+		$user_id = $_SESSION['user_info']['id'];
+		$profile = Model::factory('Profile')->find_one($user_id);
+		$merchant = $_POST['merchant'];
+		if ($merchant == 'paypal')
+		{
+			$profile->merchant = 1;
+			$profile->merchant_account = $_POST['account-name'];
+		}
+		if ($merchant == 'squarepay')
+		{
+			$profile->merchant = 2;
+			$profile->merchant_account = $_POST['account-name'];
+		}
+		$profile->save();
+		$this->edit_profile(true);
+	}
 /*
 * calls set_avatar function
 */

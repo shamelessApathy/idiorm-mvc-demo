@@ -68,7 +68,7 @@ class tagController extends Controller {
 		{
 			$query = $_GET['query'];
 			//if (str_pos($query, " ") !== false)
-			//{
+			//{ 
 				//$query = explode(" " ,$query);
 			//}
 			require_once(MODELS . '/Tag.php');
@@ -80,7 +80,8 @@ class tagController extends Controller {
 			if(!empty($results))
 			{
 				$images = array();
-					$image_id = $model->get_images($id->id);
+					$image_id = $model->get_images($results[0]->id);
+					
 					if (isset($image_id))
 					{
 						foreach ($image_id as $image)
@@ -91,7 +92,7 @@ class tagController extends Controller {
 								$image_factory = Model::factory('Image')->find_one($image->image_id);
 								$image->thumbnail = $image_factory->thumbnail;
 							}
-							$get_votes = $vote_model->weighted_vote($image->image_id, $id->id);
+							$get_votes = $vote_model->weighted_vote($image->image_id, $results[0]->id);
 							$image->vote = (Int) $get_votes;
 							array_push($images, $image);
 						}
@@ -112,11 +113,13 @@ class tagController extends Controller {
 				$_SESSION['query'] = $query;
 				return_view('view.image_search_results.php');
 			}
+			
 		}
 		
 	
 	}
 }
+
 
 
 ?>

@@ -2,7 +2,7 @@
 class Profile extends Model {
 	public static $_table_use_short_name = true;
 	//public static $_table = 'profile';
-	//public static $_id_column = 'profile_id';
+	public static $_id_column = 'user_id';
 	public function user_id()
 	{
 		return $_SESSION['user_info']->id;
