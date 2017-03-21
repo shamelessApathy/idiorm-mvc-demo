@@ -45,4 +45,8 @@ $(function(){
 	{
 		var vote = new VotingBooth(voteArray[i]);
 	}
+
+	$('#report-button').on('click', function(){
+		$('.report-image').css({'display':'block'});
+	})
 })
