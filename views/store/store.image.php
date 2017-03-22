@@ -11,6 +11,8 @@ if (isset($_SESSION['user_info']))
 }
 ?>
 
+
+
 <div class='container'>
 <div class='user_info' data-user-id="<?php echo $user_info['id'];?>">
 	<div class='row'>

@@ -10,7 +10,15 @@ $cart2 = new Cart();
 <link href='/views/js/jquery-ui-1.12.1/jquery-ui.css' rel='stylesheet' type='text/css'/>
 <link href="<?php echo '/'. CSS . '/styles.css';?>" rel='stylesheet' type='text/css'/>
 <link href='/views/css/font-awesome-4.7.0/css/font-awesome.min.css' type='text/css' rel='stylesheet'/>
-
+<?php if (isset($info['image'])) : ?>
+  <?php $image = $info['image'];
+$image_url = "http://dev.sharefuly.com" . $image->watermark;
+   ?>
+<meta property="og:title" content="<?php echo $image->user_image_name;?>" />
+<meta property="og:url"                content="<?php echo $image->id;?>" />
+<meta property="og:image"              content="<?php echo $image_url;?>"/>
+<meta property="og:site_name"              content="Sharefuly"/>
+<?php endif; ?>
 </head>
 <?php if (isset($_SESSION['user_info'])) {$user = $_SESSION['user_info'];} ?>
 <div class='nav-mod'>
