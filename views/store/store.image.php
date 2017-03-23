@@ -29,6 +29,20 @@ if (isset($_SESSION['user_info']))
 			";
 			?>
 			</ul>
+<?php if(isset($_SESSION['user_info'])):?>
+<button id='report-button'>Report Image</button>
+<div class='report-image'>
+	<form action='/report/create_new' method='POST'>
+		<label>Why are you reporting this image?</label><br>
+		<label>Copyright Infringment</label><input style='float:right;' type='radio' name='type' value='copyright'><br>
+		<label>Graphic Violence</label><input style='float:right;' type='radio' name='type' value='violence'><br>
+		<label>Nudity</label><input style='float:right;' type='radio' name='type' value='nudity'><br>
+		<input type='number' name='image_id' value="<?php echo $image->id; ?>" HIDDEN>
+		<input style='width:100%;' type='text' name='description' placeholder='Optional Description'>
+		<button type='submit'>Submit Report</button>
+	</form>
+</div>
+<?php endif; ?>
 			</div>
 			</div>
 		<div class='col-md-8'>
@@ -58,7 +72,6 @@ if (isset($_SESSION['user_info']))
 			</div>
 	</div>
 </div>
-
 <button class='add_to_cart' data-id="<?php echo $image->id; ?>">Add to cart</button>
 
 <?php if(!$image->premium && isset($_SESSION['user_info'])) :?>

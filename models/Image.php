@@ -54,6 +54,7 @@ class Image extends Model
 		$new_image->path =	$new_path;
 		$new_image->user_id = $user_id;
 		$new_image->width = $width;
+		$new_image->auth = 1;
 		$new_image->height = $height;
 		$new_image->size_string = $size_string;
 		$new_image->mime_type = $mime_type;
