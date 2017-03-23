@@ -13,10 +13,12 @@ $cart2 = new Cart();
 <?php if (isset($info['image'])) : ?>
   <?php $image = $info['image'];
 $image_url = "http://dev.sharefuly.com" . $image->watermark;
+$path = "/image/info?id=";
    ?>
 <meta property="og:title" content="<?php echo $image->user_image_name;?>" />
-<meta property="og:url"                content="<?php echo $image->id;?>" />
+<meta property="og:type" content="image"/>	
 <meta property="og:image"              content="<?php echo $image_url;?>"/>
+<meta property="og:description"        content="This is the description for a stock photography excerpt"/>
 <meta property="og:site_name"              content="Sharefuly"/>
 <?php endif; ?>
 </head>
