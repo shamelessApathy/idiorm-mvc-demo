@@ -585,15 +585,26 @@ body
 /* New FRONTPAGE UI */
 .front-container
 {
-	width:450px;
+	width:100%;
+	max-width:925px;
 	height:700px;
 	overflow-x:hidden;
 	overflow-y:hidden;
 	margin:0 auto;
+	position:relative;
+}
+.scroll-hider
+{
+	position:absolute;
+	height:700px;
+	width:15px;
+	background-color:#e0e0eb;
+	right:0;
+	top:0;
 }
 .extra-inside
 {
-	width:470px;
+	max-width:930px;
 	height:700px;
 	overflow-x:hidden;
 }

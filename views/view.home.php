@@ -2,6 +2,7 @@
 $images = $info['images'];
 $featured = $info['featured'];
 ?>
+<link href='/views/css/featured.css' type='text/css' rel='stylesheet'/>
 <div class='container' >
 <div class='row'>
 <div class='col-md-4'></div>
@@ -22,7 +23,7 @@ $featured = $info['featured'];
 		<div class='col-md-2'></div>
 	</div>
 
-<?php 
+<?php  
 
 if (isset($_SESSION['user_info']))
 {
@@ -31,25 +32,15 @@ if (isset($_SESSION['user_info']))
 
 ?>
 <div class='row'>
-<div class='col-md-6'>
-	<div class='left-container'>
-	<h3 class='text-center'>Featured Images</h3><br>
-	<div class='extra-inside'>
-		<?php 
-			if (isset($info))
-			{
-				foreach ($featured as $image)
-				{
-					echo "<a href='/image/info?id=$image->id'><div class='left-glass'><img src='$image->thumbnail'/></div></a>";
-				}
-			}
-		?>
-		</div>
-	</div> 
+<div class='col-md-12'>
+
 </div>
-<div class='col-md-6'>
+</div>
+<div class='row'>
+<div class='col-md-12'>
 <h3 class='text-center'>Recently Uploaded</h3><br>
 <div class='front-container'>
+<div class='scroll-hider'></div>
 <div class='extra-inside'>
 <?php 
 if (isset($info))
@@ -69,3 +60,4 @@ foreach ($images as $image)
 </div>
 </div>
 <?php require_once(FOOTER); ?>
+<script src='/views/js/featured.js'></script>
