@@ -68,9 +68,13 @@ class imageController extends Controller {
 		$category = new categoryController();
 		$categories = $category->get_all();
 		return_view('view.upload_image.php', $categories);
-		if (!empty($_GET['success']))
+		if ($_GET['success'] == 'true')
 		{
 			user_msg('Image upload succesful!');
+		}
+		if ($_GET['success'] == 'false')
+		{
+			sys_msg('Something went wrong. You may have tried to upload a duplicate image, or there may have been another error');
 		}
 	}
 	// returns image_size, that's it
@@ -131,6 +135,7 @@ class imageController extends Controller {
 			$myname = strtolower($_FILES['image']['tmp_name']); //You are renaming the file here
 			$myname = explode('/',$myname);
 			$myname = $myname[2];
+			$myname = sha1_file($_FILES['image']['tmp_name']);
 			$newpath = '/users/images/raw_images/'.$myname.$ext;
 			$size = $this->image_size();
 			$width = $size[0];
@@ -154,7 +159,7 @@ class imageController extends Controller {
 				}
 				else
 				{
-					echo 'there was a problem';
+					header("Location:/image/upload_image?success=false");
 				}
 			}
 			else

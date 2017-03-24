@@ -10,6 +10,7 @@ ORM::configure('mysql:host=localhost;dbname=idiorm');
 ORM::configure('username', 'root');
 ORM::configure('password', 'Poke8112');
 ORM::configure('logging', true);
+ORM::configure('error_mode', PDO::ERRMODE_SILENT);
 ORM::configure('id_column_overrides', array(
     'album' => 'album_id',
     'user' => 'user_id'

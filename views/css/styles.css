@@ -904,6 +904,14 @@ could be simply that some of the other rules are being applied with a greater im
 {
 	font-size:10px;
 }
+/* Bug */
+.bug-button
+{
+	float:right;
+	margin-top:15px;
+	background-color:#e0e0eb !important;
+	color:black !important;
+}
 @media only screen and (max-width:900px){
 #login_form
 {

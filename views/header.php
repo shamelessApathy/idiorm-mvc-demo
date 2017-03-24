@@ -82,6 +82,7 @@ $path = "/image/info?id=";
         </div>
         <button type="submit" class="btn btn-default">Submit</button>
       </form>
+      <a href='/bug/report'><button class='bug-button'>Report a Bug</button></a>
       <ul  id='login-form' class="nav navbar-nav navbar-right">
      
 

@@ -4,7 +4,7 @@
 		use Imagine\Image\FontInterface;
 require(BASE_CONTROLLER);
 class testController extends Controller {
-	public function vote()
+	public function file()
 	{
 		return_view('view.test.php');
 	}
@@ -134,5 +134,12 @@ class testController extends Controller {
 		require_once(ROOT . '/app/libraries/cart.php');
 		$cart = new Cart();
 		$cart->remove_item($item);
+	}
+	public function upload()
+	{
+		$file = $_FILES['image']['tmp_name'];
+		$sha = sha1_file($file);
+		echo "$file <br>";
+		var_dump($sha);
 	}
 }

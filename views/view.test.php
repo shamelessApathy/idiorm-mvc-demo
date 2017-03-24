@@ -1,13 +1,9 @@
 <?php
 require(HEADER);
 ?>
-<form action='/vote/weighted_vote' method='POST'>
-<label>Tag ID</label><br>
-<input type='text' name='tag_id'><br>
-<label>Image ID</label><br>
-<input type='text' name='image_id'><br>
-<label>Tag ID</label><br>
-<button type='submit'>Vote</button>
+<form enctype='multipart/form-data' action='/test/upload' method='POST'>
+	<input type='file' name='image'/>
+	<button type='submit'>Submit</button>
 </form>
 
 
