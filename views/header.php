@@ -16,9 +16,18 @@ $image_url = "http://dev.sharefuly.com" . $image->watermark;
 $path = "/image/info?id=";
    ?>
 <meta property="og:title" content="<?php echo $image->user_image_name;?>" />
-<meta property="og:type" content="image"/>	
+<meta property="og:type" content="website"/>	
 <meta property="og:image"              content="<?php echo $image_url;?>"/>
 <meta property="og:description"        content="This is the description for a stock photography excerpt"/>
+<meta property="og:site_name"              content="Sharefuly"/>
+<?php else: ?>
+  <?php $server = $_SERVER['SERVER_NAME']; 
+  $main_image = "http://" . $server . '/sharefulynew.png';
+  ?>
+<meta property="og:title" content="Sharefuly Stock Photography" />
+<meta property="og:type" content="website"/>  
+<meta property="og:image"              content="<?php echo $main_image;?>"/>
+<meta property="og:description"        content="Stock photo website anyone can contribute to!"/>
 <meta property="og:site_name"              content="Sharefuly"/>
 <?php endif; ?>
 </head>
