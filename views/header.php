@@ -44,7 +44,7 @@ $path = "/image/info?id=";
         <span class="barz-span icon-bar"></span>
       </button>
       <div class='cart-nav'><a href='/cart'><i class='fa fa-shopping-cart'></i></a><?php if ($cart2->count_items() > 0) : ?><div class='cart-circle'><?php echo $cart2->count_items(); ?></div><?php endif; ?></div>
-      <a class="navbar-brand" href="/"><img style='max-width:200px;margin-top:-10px;' src='/sharefuly-lite.png'/></a>
+      <a class="navbar-brand" href="/">sharefuly</a>
     </div>
 
     <!-- Collect the nav links, forms, and other content for toggling -->
@@ -74,7 +74,7 @@ $path = "/image/info?id=";
       <?php endif;?>
       <?php if (!isset($user)):?>
         <li>
-          <a href='/user/register'>Register</a>
+          <a class='nav-link' href='/user/register'>Register</a>
         </li>
         <li>
           <form id='login_form' style='top:+15px; position:relative; display:block;' action='/user/verify' method='POST'>

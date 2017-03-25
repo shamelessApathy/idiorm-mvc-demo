@@ -17,7 +17,7 @@ $featured = $info['featured'];
 		<div class='col-md-8'>
 			<form action='/tag/search_by_tag' method='GET'>
 				<input id='big_search'  type='text' name='query'>
-				<button type='submit' class='big_submit'>Search</button>
+				<button type='submit' class='big-submit'>Search</button>
 			</form>
 		</div>
 		<div class='col-md-2'></div>
