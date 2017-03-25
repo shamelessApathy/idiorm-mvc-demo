@@ -105,13 +105,14 @@ class tagController extends Controller {
 							return ($a->vote > $b->vote) ? -1:1;
 						}
 						uasort($images, 'cmp');
-						return_view('view.image_search_results.php', $images);
+						$array = array('images'=>$images, 'query' => $query);
+						return_view('view.image_search_results.php', $array);
 					}
 				}
 			else
 			{
-				$_SESSION['query'] = $query;
-				return_view('view.image_search_results.php');
+				
+				return_view('view.image_search_results.php', $query);
 			}
 			
 		}

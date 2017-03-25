@@ -68,11 +68,11 @@ class imageController extends Controller {
 		$category = new categoryController();
 		$categories = $category->get_all();
 		return_view('view.upload_image.php', $categories);
-		if ($_GET['success'] == 'true')
+		if (isset($_GET['success']) && $_GET['success'] == 'true')
 		{
 			user_msg('Image upload succesful!');
 		}
-		if ($_GET['success'] == 'false')
+		if (isset($_GET['success']) && $_GET['success'] == 'false')
 		{
 			sys_msg('Something went wrong. You may have tried to upload a duplicate image, or there may have been another error');
 		}

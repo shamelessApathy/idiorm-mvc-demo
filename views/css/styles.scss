@@ -101,6 +101,26 @@ input
 {
 	color:$primary-hover-font-color;
 }
+.user-info-container
+{
+	background-color:$primary-bg;
+	color:$primary-font-color;
+	width:300px;
+	padding:10px;
+}
+.user-info-container ul 
+{
+	list-style-type:none;
+	text-indent:none;
+}
+.user-info-container ul li strong
+{
+	text-decoration:underline;
+}
+.user-info-container h3
+{
+	text-align:center;
+}
 /* END MAIN UI THEME */
 .container
 {
@@ -947,6 +967,32 @@ could be simply that some of the other rules are being applied with a greater im
 	margin-top:15px;
 	background-color:#e0e0eb !important;
 	color:black !important;
+}
+#image_file
+{
+	width: 0.1px;
+	height: 0.1px;
+	opacity: 0;
+	overflow: hidden;
+	position: absolute;
+	z-index: -1;
+}
+.image_file_label
+{
+	font-size:18px;
+	padding:5px;
+	background-color:$primary-bg;
+	color:$primary-font-color;
+	border:2px solid $primary-font-color;
+}
+.image_file_label:hover
+{
+	color:$primary-hover-font-color;
+}
+.mobile-upload
+{
+	margin:0 auto;
+	width:300px;
 }
 @media only screen and (max-width:900px){
 #login_form

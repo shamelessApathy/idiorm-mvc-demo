@@ -8,6 +8,7 @@
 				<li><?php echo $info['user']->username; ?></li>
 				<li><a href="<?php echo $info['store']->website ?>"><?php echo $info['store']->website ?></a></li>
 				<li><?php echo $info['user']->username; ?></li>
+				
 			</ul>
 		</div>
 	</div>

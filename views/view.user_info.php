@@ -12,18 +12,22 @@ $memberSince = date("F j, Y, g:i a");
 <div class='container'>
 <div class='row'>
 <div class='col-md-6'>
-<h1> USER INFO: </h1>	
-<ul class='user_info_list'>
-	<li>Username: <?php echo "$info->username" ;?></li>
-	<li>Member Since: <?php echo $memberSince; ?></li>
-	<li>Website: <?php echo (!empty($info->website)) ? $info->website : 'No Website Set' ?></li>
+<div class='user-info-container'>
+<h3> USER INFO </h3>	
+<ul>
+	<li><strong>User</strong><br> <?php echo "$info->username" ;?></li>
+	<li><strong>Since</strong><br> <?php echo $memberSince; ?></li>
+	<li><strong>Website</strong><br> <?php echo (!empty($info->website)) ? $info->website : 'No Website Set' ?></li>
+	<li><strong>Images</strong><br> <?php echo $info->image_count; ?></li>
 </ul>
 </div>
+</div>
 <div class='col-md-6'>
-	<img style='margin-top:40px;' src="<?php echo $info->avatar; ?>"/>
+	<img style='max-width:100%;' src="<?php echo $info->avatar; ?>"/>
 </div>
 </div>
 </div>
+
 
 
 </body>

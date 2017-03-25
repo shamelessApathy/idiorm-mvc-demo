@@ -10,13 +10,13 @@ $cart2 = new Cart();
 <link href='/views/js/jquery-ui-1.12.1/jquery-ui.css' rel='stylesheet' type='text/css'/>
 <link href="<?php echo '/'. CSS . '/styles.css';?>" rel='stylesheet' type='text/css'/>
 <link href='/views/css/font-awesome-4.7.0/css/font-awesome.min.css' type='text/css' rel='stylesheet'/>
-<?php if (isset($info['image'])) : ?>
+<?php if (is_array($info) && isset($info['image'])) : ?>
   <?php $image = $info['image'];
 $image_url = "http://dev.sharefuly.com" . $image->watermark;
 $path = "/image/info?id=";
    ?>
 <meta property="og:title" content="<?php echo $image->user_image_name;?>" />
-<meta property="og:type" content="website"/>	
+<meta property="og:type" content="website"/>  
 <meta property="og:image"              content="<?php echo $image_url;?>"/>
 <meta property="og:description"        content="This is the description for a stock photography excerpt"/>
 <meta property="og:site_name"              content="Sharefuly"/>
@@ -30,6 +30,7 @@ $path = "/image/info?id=";
 <meta property="og:description"        content="Stock photo website anyone can contribute to!"/>
 <meta property="og:site_name"              content="Sharefuly"/>
 <?php endif; ?>
+
 </head>
 <?php if (isset($_SESSION['user_info'])) {$user = $_SESSION['user_info'];} ?>
 <div class='nav-mod'>
@@ -91,7 +92,9 @@ $path = "/image/info?id=";
         </div>
         <button type="submit" class="btn btn-default">Submit</button>
       </form>
+      <?php if (isset($_SESSION['user_info']['level']) && $_SESSION['user_info']['level'] != '1' ) : ?>
       <a href='/bug/report'><button class='bug-button'>Report a Bug</button></a>
+    <?php endif; ?>
       <ul  id='login-form' class="nav navbar-nav navbar-right">
      
 

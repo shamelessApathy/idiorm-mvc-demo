@@ -1,7 +1,6 @@
 <?php
 
 class User extends Model {
-
 	//new
 	public function id()
 	{
@@ -233,7 +232,7 @@ class User extends Model {
 	}
 	public function images()
 	{
-		return $this->has_many('Image','user_id','id');
+		return $this->has_many('Image');
 	}
 	public function store()
 	{

@@ -135,10 +135,12 @@ public function verify()
 public function info($id)
 {
 	require_once(MODELS .'/User.php');
-	$model = new User();
-	$info = $model->info($id);
-	$info = $info;
-	return_view('view.user_info.php',$info);
+	require_once(MODELS . '/Image.php');
+	$user = Model::factory('User')->find_one($id);
+	$images = $user->images()->find_many();
+	$image_count = count($images);
+	$user->image_count = $image_count;
+	return_view('view.user_info.php',$user);
 }
 /*
 * Calls logout function from model

@@ -5,6 +5,7 @@ $categories = $info;
 <div class='container'>
 <div class='row'>
 <div class='col-md-6'>
+<div class='mobile-upload'>
 <h3> Upload an Image</h3>
 <form enctype='multipart/form-data' action='/image/new_image' method="POST">
 <label>Check here for Premium &nbsp</label><input id='premium' type='checkbox' name='premium'><br>
@@ -12,6 +13,7 @@ $categories = $info;
 <input type='text' id='input_price' value='3' name='price'>
 </div>
 <br>
+<label class='image_file_label' for='image_file'>Choose an Image</label>
 <input type='file' id='image_file' name='image'><br>
 <label>Image Name:</label><br>
 <input type='text' name='user_image_name'/><br>
@@ -24,6 +26,7 @@ $categories = $info;
 <br>
 <button style='margin-top:5px;' type='submit'>Submit</button>
 </form>
+</div>
 </div>
 
 <div class='col-md-6'>
