@@ -630,7 +630,11 @@ input
 	background:black;
 	color:white;
 }
-#upload_price, #upload_price_mobile
+#upload_price
+{
+	display:none;
+}
+#upload_price_mobile
 {
 	display:none;
 }
@@ -984,6 +988,15 @@ could be simply that some of the other rules are being applied with a greater im
 	position: absolute;
 	z-index: -1;
 }
+#mobile_image_file
+{
+	width: 0.1px;
+	height: 0.1px;
+	opacity: 0;
+	overflow: hidden;
+	position: absolute;
+	z-index: -1;
+}
 .image_file_label
 {
 	font-size:18px;
@@ -1055,6 +1068,7 @@ could be simply that some of the other rules are being applied with a greater im
 		height:100px;
 		display:block;
 		margin:0 auto;
+		font-size:60px;
 	}
 	#image_file_label
 	{
@@ -1064,7 +1078,7 @@ could be simply that some of the other rules are being applied with a greater im
 		margin:50px auto;
 		display:block;
 	}
-	#add_tag
+	#mobile_add_tag
 	{
 		width:90%;
 		font-size:60px;
@@ -1072,27 +1086,53 @@ could be simply that some of the other rules are being applied with a greater im
 		margin:50px auto;
 		display:block;
 	}
+	#mobile_input_price
+	{
+		width: 90%;
+		display:block;
+		height:100px;
+		margin:0 auto;
+		font-size:40px;
+	}
+	.mobile-submit
+	{
+		width:70%;
+		display:block;
+		margin:0 auto;
+		font-size:60px;
+	}
+	#mobile-spacer
+	{
+		display:none;
+		width:100%;
+		height:200px;
+	}
+	#mobile_tag_div .tag
+	{
+		font-size:40px;
+	}
 	#premium-label
 	{
 		font-size:40px;
-		display:inline;
+		display:block;
+		background-color:$primary-bg;
+		color:$primary-font-color;
+		padding:5px;
+		text-align:center;
+		margin:0 auto;
 	}
-	#premium-check
+	.mobile-warn
 	{
-		display:inline;
+		color:red;
+		text-align:center;
+		font-size:30px;
 	}
-	input[type='checkbox'] 
+	#premium-cancel
 	{
-	    -webkit-appearance:none;
-	    width:30px;
-	    height:30px;
-	    background:white;
-	    border-radius:5px;
-	    border:2px solid #555;
-	}
-	input[type='checkbox']:checked 
-	{
-    	background: #abd;
+		width:45%;
+		font-size:50px;
+		display:block;
+		margin:0 auto;
 	}
 	.desktop
 	{

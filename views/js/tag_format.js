@@ -1,9 +1,14 @@
 $(function(){
 	var button = $('#add_tag');
 	var field = document.getElementById('new_tag');
+	var mobile_field = document.getElementById('mobile_new_tag');
 	var tags = document.getElementById('tag_holder');
+	var mobile_tags = document.getElementById('mobile_tag_holder');
 	var tag_div = document.getElementById('tag_div');
+	var mobile_tag_div = document.getElementById('mobile_tag_div');
 	var premium = document.getElementById('premium');
+	var premium_mobile = $('#premium-mobile');
+	var premium_cancel = $('#premium-cancel');
 
 	var add_tags = function(){
 		myvalue =  function()
@@ -24,6 +29,31 @@ $(function(){
 		field.value = "";
 
 	}
+	var mobile_add_tags = function(){
+		$('#mobile-spacer').css({'display':'block'});
+		myvalue =  function()
+		{
+			value = mobile_tags.value;
+		}
+		console.log(mobile_field.value);
+		myvalue();
+		console.log(value);
+		if (value === undefined || value === null)
+		{
+			console.log('if running');
+			value = '';
+		}
+		mobile_tags.value = (value + mobile_field.value + "|");
+		var new_tag = "<span class='tag'>" + mobile_field.value + "</span>";
+		mobile_tag_div.innerHTML += new_tag;
+		mobile_field.value = "";
+
+	}
+	var cancel_premium = function()
+	{
+		$('#mobile_input_price').val('5');
+		$('#upload_price_mobile').css({'display':'none'});
+	}
 	var show_price = function()
 	{
 		console.log('click run');
@@ -40,16 +70,11 @@ $(function(){
 	}
 	var show_price_mobile = function()
 	{
-		console.log('running show mobile');
-		if (!premium.checked)
-		{
-			$('#input_price').val('');
-			$('#upload_price').css({'display':'none'});
-		}
-		else
-		{
-			$('#upload_price_mobile').css({'display':'block'});
-		}
+		console.log('showprice function');
+		premium_mobile.attr('checked', true);
+		$('#mobile_input_price').val('');
+		$('#upload_price_mobile').css({'display':'block'});
+
 	}
 	var runThat = function(e){
 		if (e.keyCode == 13)
@@ -83,6 +108,8 @@ $(function(){
 		console.log('running');
             $('#upload_preview').attr('src', e.target.result);
             $('#upload_preview').attr('style','display:block');
+            $('#mobile_upload_preview').attr('src', e.target.result);
+            $('#mobile_upload_preview').attr('style','display:block');
         }
 
         reader.readAsDataURL(input.files[0]);
@@ -92,9 +119,13 @@ $(function(){
 	$("#image_file").change(function(){
     	readURL(this);
 	});
+	$('#mobile_image_file').change(function(){
+		readURL(this);
+	})
 	$(field).on('keypress', runThat);
 	button.on('click', add_tags);
+	$('#mobile_add_tag').on('touchstart', mobile_add_tags);
 	$(premium).on('click', show_price);
-	$('#premium-check').on('touchstart', show_price_mobile);
-	
+	$('#premium-label').on('touchstart', show_price_mobile);
+	$(premium_cancel).on('touchstart', cancel_premium);
 })
