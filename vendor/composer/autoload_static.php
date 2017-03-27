@@ -6,6 +6,28 @@ namespace Composer\Autoload;
 
 class ComposerStaticInit29ed2090a64a518d498089eaa7ea3306
 {
+    public static $prefixLengthsPsr4 = array (
+        'S' => 
+        array (
+            'Stripe\\' => 7,
+        ),
+        'D' => 
+        array (
+            'Dotenv\\' => 7,
+        ),
+    );
+
+    public static $prefixDirsPsr4 = array (
+        'Stripe\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/stripe/stripe-php/lib',
+        ),
+        'Dotenv\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/vlucas/phpdotenv/src',
+        ),
+    );
+
     public static $prefixesPsr0 = array (
         'I' => 
         array (
@@ -29,6 +51,8 @@ class ComposerStaticInit29ed2090a64a518d498089eaa7ea3306
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
+            $loader->prefixLengthsPsr4 = ComposerStaticInit29ed2090a64a518d498089eaa7ea3306::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInit29ed2090a64a518d498089eaa7ea3306::$prefixDirsPsr4;
             $loader->prefixesPsr0 = ComposerStaticInit29ed2090a64a518d498089eaa7ea3306::$prefixesPsr0;
             $loader->classMap = ComposerStaticInit29ed2090a64a518d498089eaa7ea3306::$classMap;
 
