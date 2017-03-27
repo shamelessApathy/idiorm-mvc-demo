@@ -38,6 +38,19 @@ $(function(){
 			$('#upload_price').css({'display':'block'});
 		}
 	}
+	var show_price_mobile = function()
+	{
+		console.log('running show mobile');
+		if (!premium.checked)
+		{
+			$('#input_price').val('');
+			$('#upload_price').css({'display':'none'});
+		}
+		else
+		{
+			$('#upload_price_mobile').css({'display':'block'});
+		}
+	}
 	var runThat = function(e){
 		if (e.keyCode == 13)
 		{
@@ -82,5 +95,6 @@ $(function(){
 	$(field).on('keypress', runThat);
 	button.on('click', add_tags);
 	$(premium).on('click', show_price);
+	$('#premium-check').on('touchstart', show_price_mobile);
 	
 })

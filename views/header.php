@@ -88,7 +88,7 @@ $path = "/image/info?id=";
       </ul>
       <form class="navbar-form navbar-left" id='nav_search' action='/tag/search_by_tag' method="GET">
         <div class="form-group" >
-          <input type="text" class="form-control" style='width:100px;' name='query' placeholder="Search">
+          <input type="text" class="form-control" style='width:100px;' id='nav-search-box' name='query' placeholder="Search">
         </div>
         <button type="submit" class="btn btn-default">Submit</button>
       </form>
