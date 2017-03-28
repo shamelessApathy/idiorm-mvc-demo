@@ -1043,9 +1043,11 @@ could be simply that some of the other rules are being applied with a greater im
 		margin-left:15px;
 	}
 }
-@media	only screen and (-webkit-min-device-pixel-ratio: 1.3),
-	only screen and (-o-min-device-pixel-ratio: 13/10),
-	only screen and (min-resolution: 120dpi){
+@media only screen and (-webkit-min-device-pixel-ratio: 4),
+       only screen and (-webkit-device-pixel-ratio : 4),
+       only screen and (device-width: 360px),
+       only screen and (device-width: 640px),
+       only screen and (orientation: portrait) {
 
 	.test-media
 	{
