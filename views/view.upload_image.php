@@ -42,8 +42,8 @@ $categories = $info;
 <form enctype='multipart/form-data' action='/image/new_image' method="POST">
 <label id='image_file_label' class='image_file_label' for='mobile_image_file'>Choose an Image</label>
 <input type='file' id='mobile_image_file' name='image'><br>
-	<div class='mobile_upload_preview_holder' style='position:relative;height:200px;'>
-	<img width=300  id='mobile_upload_preview' class='preview-img' />
+	<div class='mobile_upload_preview_holder' style='position:relative;'>
+	<img id='mobile_upload_preview' class='preview-img' />
 	</div>
 <label>Image Name</label><br>
 <input type='text' class='mobile-field' name='user_image_name'/><br>

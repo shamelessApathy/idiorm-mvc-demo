@@ -711,6 +711,7 @@ input
 	-webkit-box-sizing:border-box;
 	overflow-x:hidden;
 	overflow-y:hidden;
+	margin:0 auto;
 }
 .looking-glass:hover
 {
@@ -721,6 +722,7 @@ input
 	width:300px;
 	left:-150px;
 	position:relative;
+
 }
 .left-container
 {
@@ -775,13 +777,13 @@ input
 }*/
 /* these two #barz don't work, don't know why, maybe bootstrap JS is manipulating something that affects these rules be applied... OR it
 could be simply that some of the other rules are being applied with a greater importance level */
-#barz:hover
+#barz
 {
-	background-color:#6666ff !important;
+	background-color:$body-bg !important;
 }
-#barz:hover .barz-span
+.icon-bar
 {
-	background-color:#e7e7e7 !important;
+	background-color:$secondary-font-color !important;
 }
 .add_to_cart
 {
@@ -794,13 +796,13 @@ could be simply that some of the other rules are being applied with a greater im
 .cart-nav
 {
 	border-radius:5px;
-	border:1px solid #e7e7e7;
+	border:1px solid $body-bg;
 	margin:8;
 	float:right;
 	width:44px;
 	height:34px;
-	background-color:#e7e7e7;
-	color:#666699;
+	background-color:$body-bg;
+	color:$secondary-font-color;
 	font-size:30px;
 	padding-left:6px;
 }
@@ -1144,4 +1146,44 @@ could be simply that some of the other rules are being applied with a greater im
 	{
 		display:block;
 	}
+	/* This will cause Bootstrap to show mobile nav menu */
+    .navbar-header {
+        float: none;
+    }
+    .navbar-left,.navbar-right {
+        float: none !important;
+    }
+    .navbar-toggle {
+        display: block;
+    }
+    .navbar-collapse {
+        border-top: 1px solid transparent;
+        box-shadow: inset 0 1px 0 rgba(255,255,255,0.1);
+    }
+    .navbar-fixed-top {
+        top: 0;
+        border-width: 0 0 1px;
+    }
+    .navbar-collapse.collapse {
+        display: none!important;
+    }
+    .navbar-nav {
+        float: none!important;
+        margin-top: 7.5px;
+    }
+    .navbar-nav>li {
+        float: none;
+    }
+    .navbar-nav>li>a {
+        padding-top: 10px;
+        padding-bottom: 10px;
+    }
+    .collapse.in{
+        display:block !important;
+    }
+    .extra-inside
+    {
+    	width:600px;
+    	margin:0 auto;
+    }
 }

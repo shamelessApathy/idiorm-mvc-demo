@@ -105,11 +105,13 @@ $(function(){
         var reader = new FileReader();
 
         reader.onload = function (e) {
-		console.log('running');
             $('#upload_preview').attr('src', e.target.result);
             $('#upload_preview').attr('style','display:block');
             $('#mobile_upload_preview').attr('src', e.target.result);
             $('#mobile_upload_preview').attr('style','display:block');
+            $('#mobile_upload_preview').css({'margin':"0 auto"});
+            var height = $('#mobile_upload_preview').height();
+            $('#mobile_upload_preview_holder').css({"height":height});
         }
 
         reader.readAsDataURL(input.files[0]);
