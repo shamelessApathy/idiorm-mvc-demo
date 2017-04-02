@@ -1027,6 +1027,14 @@ could be simply that some of the other rules are being applied with a greater im
 {
 	display:none;
 }
+#login-email
+{
+	width:90px;
+}
+#login-password
+{
+	width:90px;
+}
 @media only screen and (max-width:900px){
 #login_form
 {
@@ -1186,4 +1194,78 @@ could be simply that some of the other rules are being applied with a greater im
     	width:600px;
     	margin:0 auto;
     }
+	#login-email
+	{
+		width:200px;
+		height:90px;
+		font-size:50px;
+	}
+	#login-password
+	{
+		width:230px;
+		height:90px;
+		font-size:50px;
+		margin-left:10px;
+	}
+	#login-submit
+	{
+
+		font-size:50px;
+		margin-left:10px;
+	}
+	.navbar-nav
+	{
+		font-size:50px;
+	}
+	#user-avatar a
+	{
+		padding-top:30px;
+		padding-bottom:30px;
+	}
+	.dropdown-toggle
+	{
+		margin-top:20px;
+	}
+	.dropdown-menu
+	{
+		font-size:50px;
+	}
+	.caret
+	{
+		border-width:12px;
+	}
+	.navbar-brand
+	{
+		padding-top:20px;
+		font-size:50px;
+	}
+	.navbar-header
+	{
+		height:75px;
+	}
+	.navbar-toggle, .cart-nav
+	{
+		width:60px;
+		height:60px;
+		padding:0 !important;
+		font-size:50px;
+		color:$secondary-font-color !important;
+	}
+	.cart-nav a
+	{
+		padding-left:5px;
+	}
+	.navbar-default .collapsed
+	{
+		color:$secondary-font-color !important;
+	}
+	#barz
+	{
+		padding:0;
+	}
+	.navbar-toggle .icon-bar
+	{
+		width:50px;
+		height:4px;
+	}
 }

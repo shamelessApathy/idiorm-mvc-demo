@@ -40,9 +40,7 @@ $path = "/image/info?id=";
     <div class="navbar-header">
       <button type="button" class="navbar-toggle collapsed" id='barz' data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
         <span class="sr-only">Toggle navigation</span>
-        <span class="barz-span icon-bar"></span>
-        <span class="barz-span icon-bar"></span>
-        <span class="barz-span icon-bar"></span>
+        <i class='fa fa-navicon'></i>
       </button>
       <div class='cart-nav'><a href='/cart'><i class='fa fa-shopping-cart'></i></a><?php if ($cart2->count_items() > 0) : ?><div class='cart-circle'><?php echo $cart2->count_items(); ?></div><?php endif; ?></div>
       <a class="navbar-brand" href="/">sharefuly</a>
@@ -51,7 +49,7 @@ $path = "/image/info?id=";
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
-        <li class="active"><?php if(isset($user)):?>
+        <li id='user-avatar' class="active"><?php if(isset($user)):?>
         <a href="/user/info/<?php echo $user->id;?>"><?php echo $user->username . "  <img style='width:25px;height:25px;' src='$user->avatar'/>  ". $_SESSION['sub_count'];?></a>
       <?php else:?>
        <!-- <a href='/home'>Login</a>-->
@@ -62,14 +60,16 @@ $path = "/image/info?id=";
       <?php endif;?>
       <?php if (isset($user)):?>
         <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Options <span class="caret"></span></a>
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class='fa fa-cog'></i>  Options <span class="caret"></span></a>
           <ul class="dropdown-menu">
-            <li><a href="/profile/edit_profile">Edit Profile</a></li>
+            <li><a href="/profile/edit_profile"><i class='fa fa-pencil'></i>  Edit Profile</a></li>
             <li role="separator" class="divider"></li>
-            <li><a href="/image/upload_image">Upload an Image</a></li>
+            <li><a href="/image/upload_image"><i class='fa fa-upload'></i>  Upload an Image</a></li>
             <li role="separator" class="divider"></li>
-            <li><a href="/user/image_manager">Image Manager</a></li>
-            <li><a href='/cart/create_subscription'>Create Subscription</a></li>
+            <li><a href="/user/image_manager"><i class='fa fa-image'></i>  Image Manager</a></li>
+            <li role="separator" class="divider"></li>
+            <li><a href='/cart/create_subscription'><i class='fa fa-credit-card'></i>  Create Subscription</a></li>
+            <li role="separator" class="divider"></li>
           </ul>
         </li>
       <?php endif;?>
@@ -79,9 +79,9 @@ $path = "/image/info?id=";
         </li>
         <li>
           <form id='login_form' style='top:+15px; position:relative; display:block;' action='/user/verify' method='POST'>
-          <input type='text' name='email' placeholder='email' style='width:90px;'/>
-          <input type='password' name='password' placeholder='password' style='width:90px;' />
-          <button type='submit'>Login</button>
+          <input type='text' id='login-email' name='email' placeholder='email' />
+          <input type='password' id='login-password' name='password' placeholder='password'  />
+          <button id='login-submit' type='submit'>Login</button>
           </form>
         </li>
       <?php endif;?>
