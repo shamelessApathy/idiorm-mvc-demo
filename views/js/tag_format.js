@@ -70,11 +70,21 @@ $(function(){
 	}
 	var show_price_mobile = function()
 	{
+
 		console.log('showprice function');
 		premium_mobile.attr('checked', true);
 		$('#mobile_input_price').val('');
 		$('#upload_price_mobile').css({'display':'block'});
-
+	}
+	var rotation = 0;
+	var rotate_image = function(num)
+	{
+		console.log(rotation);
+		var rotate = num + rotation;
+		rotation += num;
+		console.log(num);
+		$('#rotate').val(rotate);
+		$('#upload_preview').rotate(rotate);
 	}
 	var runThat = function(e){
 		if (e.keyCode == 13)
@@ -112,6 +122,7 @@ $(function(){
             $('#mobile_upload_preview').css({'margin':"0 auto"});
             var height = $('#mobile_upload_preview').height();
             $('#mobile_upload_preview_holder').css({"height":height});
+            		$('.image-controls').css({'display':'block'});
         }
 
         reader.readAsDataURL(input.files[0]);
@@ -130,4 +141,10 @@ $(function(){
 	$(premium).on('click', show_price);
 	$('#premium-label').on('touchstart', show_price_mobile);
 	$(premium_cancel).on('touchstart', cancel_premium);
+	$('#clockwise').on('click', function(){
+		rotate_image(90);
+		});
+	$('#counterclockwise').on('click', function(){
+		rotate_image(-90);
+	})
 })

@@ -20,6 +20,7 @@ $categories = $info;
 <label>Tag Editor</label><br>
 <input id='new_tag'><button id='add_tag' type='button'>Add</button>
 <br>
+<input type='text' name='rotate' id='rotate'>
 <label>Check here for Premium &nbsp</label><input id='premium' type='checkbox' name='premium'><br>
 <div id='upload_price'><label>Price</label><span style='font-size:8px; color:red;'>  Format like 10.99 no "$"</span><br>
 <input type='text' id='input_price' value='5' name='price'>
@@ -31,9 +32,14 @@ $categories = $info;
 </div>
 
 <div class='col-md-6'>
+	<div class='image-controls'>
+	<i id='counterclockwise' class='fa fa-rotate-left' style='float:left;'></i>
+	<i id='clockwise' class='fa fa-rotate-right' style='float:right;'></i>
+	</div>
 	<div class='upload_preview_holder'>
 	<img width=300  id='upload_preview'/>
 	</div>
+
 </div>
 </div> 
 </div>
@@ -69,4 +75,5 @@ $categories = $info;
 
 
 <?php require(FOOTER); ?>
+<script src='/views/js/jqueryrotate.js' type='text/javascript' rel='javascript'></script>
 <script src='/views/js/tag_format.js' type='text/javascript' rel='javascript'></script>
