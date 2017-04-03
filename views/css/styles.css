@@ -1034,6 +1034,13 @@ could be simply that some of the other rules are being applied with a greater im
 
   .navbar-toggle .icon-bar {
     width: 50px;
-    height: 4px; } }
+    height: 4px; }
+
+  .mobile-hide {
+    display: none !important; }
+
+  #nav-register {
+    font-size: 18px;
+    padding-bottom: 15px; } }
 
 /*# sourceMappingURL=styles.css.map */

@@ -74,9 +74,7 @@ $path = "/image/info?id=";
         </li>
       <?php endif;?>
       <?php if (!isset($user)):?>
-        <li>
-          <a class='nav-link' href='/user/register'>Register</a>
-        </li>
+
         <li>
           <form id='login_form' style='top:+15px; position:relative; display:block;' action='/user/verify' method='POST'>
           <input type='text' id='login-email' name='email' placeholder='email' />
@@ -84,14 +82,19 @@ $path = "/image/info?id=";
           <button id='login-submit' type='submit'>Login</button>
           </form>
         </li>
+                <li>
+          <a class='nav-link' id='#nav-register' href='/user/register'>Register</a>
+        </li>
       <?php endif;?>
       </ul>
+      <div class='mobile-hide'>
       <form class="navbar-form navbar-left" id='nav_search' action='/tag/search_by_tag' method="GET">
         <div class="form-group" >
           <input type="text" class="form-control" style='width:100px;' id='nav-search-box' name='query' placeholder="Search">
         </div>
         <button type="submit" class="btn btn-default">Submit</button>
       </form>
+      </div>
       <?php if (isset($_SESSION['user_info']['level']) && $_SESSION['user_info']['level'] != '1' ) : ?>
       <a href='/bug/report'><button class='bug-button'>Report a Bug</button></a>
     <?php endif; ?>
