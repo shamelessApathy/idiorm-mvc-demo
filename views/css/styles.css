@@ -846,6 +846,9 @@ could be simply that some of the other rules are being applied with a greater im
 #login-password {
   width: 90px; }
 
+#mobile-login-button {
+  display: none; }
+
 @media only screen and (max-width: 900px) {
   #login_form {
     margin-left: 10px; }
@@ -1041,6 +1044,46 @@ could be simply that some of the other rules are being applied with a greater im
 
   #nav-register {
     font-size: 18px;
-    padding-bottom: 15px; } }
+    padding-bottom: 15px; }
+
+  #login-li {
+    display: none; }
+
+  #mobile-login-button {
+    background-color: #f2f2f2 !important;
+    color: #333 !important;
+    font-size: 35px;
+    margin: 7px auto;
+    display: inline; }
+
+  .style01-form-container {
+    color: #ccc;
+    background-color: #333;
+    width: 100%; }
+
+  .style01-form-container label {
+    font-size: 50px;
+    margin-left: 20px; }
+
+  .style01-form-container input {
+    width: 80%;
+    height: 100px;
+    margin: 0 20px;
+    display: block;
+    font-size: 50px; }
+
+  .style01-form-container button {
+    font-size: 35px;
+    margin-left: 20px;
+    background-color: #f2f2f2;
+    color: #333; }
+
+  .style01-form-container h1 {
+    text-align: center; }
+
+  #mobile-register {
+    font-size: 35px;
+    color: #f2f2f2;
+    margin-left: 20px; } }
 
 /*# sourceMappingURL=styles.css.map */

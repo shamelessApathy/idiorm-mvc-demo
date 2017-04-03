@@ -47,6 +47,7 @@ input
 	color:$primary-font-color;
 	font-weight:700;
 }
+
 .navbar-default .navbar-nav > .active > a
 {
 	color:$primary-font-color;
@@ -1035,6 +1036,10 @@ could be simply that some of the other rules are being applied with a greater im
 {
 	width:90px;
 }
+#mobile-login-button
+{
+	display:none;
+}
 @media only screen and (max-width:900px){
 #login_form
 {
@@ -1276,5 +1281,51 @@ could be simply that some of the other rules are being applied with a greater im
 	{
 		font-size:18px;
 		padding-bottom:15px;
+	}
+	#login-li
+	{
+		display:none;
+	}
+	#mobile-login-button
+	{
+		background-color:$body-bg !important;
+		color:$secondary-font-color !important;
+		font-size:35px;
+		margin:7px auto;
+		display:inline;
+	}
+	.style01-form-container
+	{
+		color:$primary-font-color;
+		background-color:$secondary-font-color;
+		width:100%;
+	}
+	.style01-form-container label{
+		font-size:50px;
+		margin-left:20px;
+	}
+	.style01-form-container input{
+		width:80%;
+		height:100px;
+		margin:0 20px;
+		display:block;
+		font-size:50px;
+	}
+	.style01-form-container button{
+		font-size:35px;
+		margin-left:20px;
+		background-color:$body-bg;
+		color:$secondary-font-color;
+	}
+	.style01-form-container h1
+	{
+		text-align:center;
+
+	}
+	#mobile-register
+	{
+		font-size:35px;
+		color:$body-bg;
+		margin-left:20px;
 	}
 }

@@ -43,8 +43,10 @@ $path = "/image/info?id=";
         <i class='fa fa-navicon'></i>
       </button>
       <div class='cart-nav'><a href='/cart'><i class='fa fa-shopping-cart'></i></a><?php if ($cart2->count_items() > 0) : ?><div class='cart-circle'><?php echo $cart2->count_items(); ?></div><?php endif; ?></div>
+         <?php echo (empty($_SESSION['user_info'])) ? "<a href='/user/login'><button id='mobile-login-button'>Login</button></a>" : null ; ?>
       <a class="navbar-brand" href="/">sharefuly</a>
     </div>
+
 
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -75,7 +77,7 @@ $path = "/image/info?id=";
       <?php endif;?>
       <?php if (!isset($user)):?>
 
-        <li>
+        <li id='login-li'>
           <form id='login_form' style='top:+15px; position:relative; display:block;' action='/user/verify' method='POST'>
           <input type='text' id='login-email' name='email' placeholder='email' />
           <input type='password' id='login-password' name='password' placeholder='password'  />
