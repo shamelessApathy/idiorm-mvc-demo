@@ -1,7 +1,10 @@
 <?php 
 require(HEADER);
+
+
 $categories = $info;
 ?>
+
 <div class='desktop'>
 <div class='container'>
 <div class='row'>
