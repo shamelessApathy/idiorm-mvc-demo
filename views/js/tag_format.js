@@ -83,8 +83,14 @@ $(function(){
 		var rotate = num + rotation;
 		rotation += num;
 		console.log(num);
-		$('#rotate').val(rotate);
 		$('#upload_preview').rotate(rotate);
+		$('#mobile_upload_preview').rotate(rotate);
+		if (rotation === 360 || rotation === -360)
+		{
+			rotation = 0;
+		}
+		$('#rotate').val(rotation);
+		$('#mobile-rotate').val(rotation);
 	}
 	var runThat = function(e){
 		if (e.keyCode == 13)
@@ -123,6 +129,7 @@ $(function(){
             var height = $('#mobile_upload_preview').height();
             $('#mobile_upload_preview_holder').css({"height":height});
             		$('.image-controls').css({'display':'block'});
+            		$('.mobile-image-controls').css({'display':'block'});
         }
 
         reader.readAsDataURL(input.files[0]);
@@ -146,5 +153,11 @@ $(function(){
 		});
 	$('#counterclockwise').on('click', function(){
 		rotate_image(-90);
+	})
+	$('#mobile-counterclockwise').on('touchstart', function(){
+		rotate_image(-90);
+	})
+	$('#mobile-clockwise').on('touchstart', function(){
+		rotate_image(90);
 	})
 })

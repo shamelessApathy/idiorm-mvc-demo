@@ -186,6 +186,7 @@ input
 	position:fixed;
 	top:100px;
 	left:10px;
+	z-index:10;
 }
 .top-bar
 {
@@ -1058,6 +1059,22 @@ could be simply that some of the other rules are being applied with a greater im
 	display:none;
 }
 .image-controls i
+{
+	background-color:$body-bg;
+	color:$secondary-font-color;
+	margin:5px;
+	padding:2px;
+}
+.mobile-image-controls
+{
+	width:90%;
+	height:100px;
+	background-color:$secondary-font-color;
+	font-size:90px;
+	margin:10px auto;
+	display:none;
+}
+.mobile-image-controls i
 {
 	background-color:$body-bg;
 	color:$secondary-font-color;

@@ -20,7 +20,7 @@ $categories = $info;
 <label>Tag Editor</label><br>
 <input id='new_tag'><button id='add_tag' type='button'>Add</button>
 <br>
-<input type='text' name='rotate' id='rotate'>
+<input type='text' name='rotate' id='rotate' HIDDEN>
 <label>Check here for Premium &nbsp</label><input id='premium' type='checkbox' name='premium'><br>
 <div id='upload_price'><label>Price</label><span style='font-size:8px; color:red;'>  Format like 10.99 no "$"</span><br>
 <input type='text' id='input_price' value='5' name='price'>
@@ -48,6 +48,10 @@ $categories = $info;
 <form enctype='multipart/form-data' action='/image/new_image' method="POST">
 <label id='image_file_label' class='image_file_label' for='mobile_image_file'>Choose an Image</label>
 <input type='file' id='mobile_image_file' name='image'><br>
+	<div class='mobile-image-controls'>
+	<i id='mobile-counterclockwise' class='fa fa-rotate-left' style='float:left;'></i>
+	<i id='mobile-clockwise' class='fa fa-rotate-right' style='float:right;'></i>
+	</div>
 	<div class='mobile_upload_preview_holder' style='position:relative;'>
 	<img id='mobile_upload_preview' class='preview-img' />
 	</div>
@@ -62,6 +66,7 @@ $categories = $info;
 <input id='mobile_new_tag' class='mobile-field'><button id='mobile_add_tag' type='button'>Add</button>
 <br>
 <input type='checkbox' name='premium' id='premium-mobile' HIDDEN>
+<input type='text' name='rotate' id='mobile-rotate' HIDDEN>
 <label id='premium-label'>Check here for Premium &nbsp</label><br>
 <div id='upload_price_mobile'><label>Price</label><br>
 <input type='text' id='mobile_input_price' value='5' name='price'>

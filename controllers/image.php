@@ -54,6 +54,14 @@ class imageController extends Controller {
 			return $image_to_tag;
 		}
 	}
+	public function rotate($deg)
+	{
+		$pixel = new ImagickPixel('none');
+		$file = $_FILES['image']['tmp_name'];
+		$image = new Imagick($file);
+		$rotated = $image->rotateImage($pixel, $deg);
+		$image->writeImage($file);
+	}
 	public function user_owned_images()
 	{
 		require(MODELS . '/User.php');
@@ -67,7 +75,6 @@ class imageController extends Controller {
 		require_once(CONTROLLERS . '/category.php');
 		$category = new categoryController();
 		$categories = $category->get_all();
-		return_view('view.upload_image.php', $categories);
 		if (isset($_GET['success']) && $_GET['success'] == 'true')
 		{
 			user_msg('Image upload succesful!');
@@ -76,6 +83,8 @@ class imageController extends Controller {
 		{
 			sys_msg('Something went wrong. You may have tried to upload a duplicate image, or there may have been another error');
 		}
+		return_view('view.upload_image.php', $categories);
+		
 	}
 	// returns image_size, that's it
 	public function image_size()
@@ -92,6 +101,7 @@ class imageController extends Controller {
 		$user_id = $_SESSION['user_info']->id;
 		$name = $_FILES['image']['name'];
 		$tags = $_POST['tags'];
+		$deg = $_POST['rotate'];
 		if ($_POST['price'] !== '3')
 			{
 				$price = $_POST['price'];
@@ -142,10 +152,13 @@ class imageController extends Controller {
 			$height = $size[1];
 			$size_string = $size[3];
 			$mime_type = $size['mime'];
-			$watermark = $this->watermark();
-			$thumbnail = $this->thumbnail();
+			$watermark = $this->watermark($deg);
+			$thumbnail = $this->thumbnail($deg);
+			$rotate = new Imagick($_FILES['image']['tmp_name']);
+			$rotate->rotateImage('none', $deg);
+			
 			// If the file is moved and stored successfully, call the model to make a DB entry for it
-  			if(move_uploaded_file($_FILES['image']['tmp_name'], $save_path.$myname.$ext))
+  			if($rotate->writeImage($save_path.$myname.$ext))
   			{
   				chmod($save_path.$myname.$ext, 0755);
   				require_once(MODELS . '/Image.php');
@@ -187,7 +200,7 @@ class imageController extends Controller {
 		$model->add_cat_to_image($cat_id, $image_id);
 	}
 	// creates watermarked image for preview
-	public function watermark()
+	public function watermark($deg = null)
  	{
  		$file = $_FILES['image']['tmp_name'];
  		$name = $_FILES['image']['name'];
@@ -208,6 +221,7 @@ class imageController extends Controller {
 		$ext = '.' . $ext;
 		$save_path = '/var/www/idiorm/idiorm-mvc-demo/users/images/preview/' . $nodir . $ext;
 		$image = new Imagick($file);
+		$image->rotateImage('none', $deg);
 		$watermark = new Imagick('watermark.png');
 		$width = $image->getImageWidth();
 		$height = $image->getImageHeight();
@@ -225,8 +239,9 @@ class imageController extends Controller {
 		}
 	}
 	// creates thumbnail version of the image
-	public function thumbnail()
+	public function thumbnail($deg = null)
 	{
+		// I am doing a rotation function twice, once for each thumbnail and watermark, not touching the original .... so far
 		$file = $_FILES['image']['tmp_name'];
  		$name = $_FILES['image']['name'];
  		$type = 'image';
@@ -247,6 +262,7 @@ class imageController extends Controller {
 		$save_path = '/var/www/idiorm/idiorm-mvc-demo/users/images/thumbnails/' . $nodir . $ext;
 		$new_path = '/users/images/thumbnails/' . $nodir . $ext;
 		$image = new Imagick($file);
+		$image->rotateImage('none', $deg);
 		$image->thumbnailImage(300,300, true);
 		if ($image->writeImage($save_path))
 		{
@@ -412,9 +428,9 @@ class imageController extends Controller {
 		if (!empty($_SESSION['user_info'])) 
 		{		
 			$user_id = $_SESSION['user_info']['id'];
-			$model = new Image();
+			$model = Model::factory('Image')->find_one($image_id);
 			$test = $model->ownership($image_id, $user_id);
-			if ($test)
+			if ($test || $model->user_id == $user_id)
 			{
 				require_once(MODELS . '/Image.php');
 				$image_model = Model::factory('Image')->find_one($image_id);
