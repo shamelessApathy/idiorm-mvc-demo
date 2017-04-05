@@ -841,6 +841,9 @@ could be simply that some of the other rules are being applied with a greater im
 .mobile {
   display: none; }
 
+.mobile input[type=text] {
+  font-size: 18px; }
+
 #login-email {
   width: 90px; }
 
