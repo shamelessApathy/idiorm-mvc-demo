@@ -5,6 +5,7 @@ require(HEADER);
 $categories = $info;
 ?>
 
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <div class='desktop'>
 <div class='container'>
 <div class='row'>
