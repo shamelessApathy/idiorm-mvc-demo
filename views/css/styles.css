@@ -913,5 +913,24 @@ could be simply that some of the other rules are being applied with a greater im
 
   #login-form {
     margin-left: 15px; } }
+@media only screen and (max-width: 600px) {
+  .looking-glass {
+    width: 75px;
+    height: 75px; }
+
+  .extra-inside {
+    width: 300px;
+    height: 400px;
+    margin: 0 auto; }
+
+  .front-container {
+    height: 400px; } }
+@media only screen and (min-width: 601px) and (max-width: 800px) {
+  .extra-inside {
+    width: 600px;
+    margin: 0 auto; }
+
+  .bug-button {
+    display: none; } }
 
 /*# sourceMappingURL=styles.css.map */
