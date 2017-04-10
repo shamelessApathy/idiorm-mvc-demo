@@ -9,6 +9,7 @@ if (isset($_SESSION['user_info']))
 {
 	$user_info = $_SESSION['user_info'];
 }
+$user_link = "/user/info/$user->id";
 ?>
 
 
@@ -21,7 +22,7 @@ if (isset($_SESSION['user_info']))
 			<ul>
 			<?php echo "
 				<li>Uploaded By: </li>
-				<li>$user->username <img class='user_avatar2' src='$user->avatar'/></li>
+				<li><a href=$user_link> $user->username <img class='user_avatar2' src='$user->avatar'/></a></li>
 				<li>Name: $image->user_image_name</li>
 				<li>Dimensions: $image->width x $image->height</li>
 				<li id='price'>Price: $image->price</li>

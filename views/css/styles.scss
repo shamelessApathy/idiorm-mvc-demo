@@ -9,6 +9,7 @@ $primary-hover-font-color:white;
 $primary-hover-bg: #ccc;
 $secondary-hover-font-color:#333;
 $tag-bg:#ffffe6;
+$sold-table-bg: #e6e6e6; 
 /* MAIN UI THEME */
 body
 {
@@ -170,7 +171,25 @@ input
 	color:$primary-hover-font-color !important;
 }
 
+ /* Table Stylings */
 
+#cash-table, #sub-table
+{
+	background-color:$sold-table-bg;
+}
+#cash-table tr, #sub-table tr
+{
+	border-top:2px solid #333;
+}
+#cash-table tr:hover, #sub-table tr:hover
+{
+	background-color:$body-bg;
+}
+
+
+
+
+ /* End Table Stylings */
 .sys_msg
 {
 	width:300px;

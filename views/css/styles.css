@@ -128,6 +128,17 @@ input {
   background-color: #ccc !important;
   color: white !important; }
 
+/* Table Stylings */
+#cash-table, #sub-table {
+  background-color: #e6e6e6; }
+
+#cash-table tr, #sub-table tr {
+  border-top: 2px solid #333; }
+
+#cash-table tr:hover, #sub-table tr:hover {
+  background-color: #f2f2f2; }
+
+/* End Table Stylings */
 .sys_msg {
   width: 300px;
   border: red 2px solid;

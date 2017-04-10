@@ -17,6 +17,7 @@ $(function(){
 		}
 		else
 		{
+			$(subTable).css({"display":"none"});
 			$(cashTable).css({"display":"block"});
 		}
 	})
@@ -28,6 +29,7 @@ $(function(){
 		}
 		else
 		{
+			$(cashTable).css({"display":"none"});
 			$(subTable).css({"display":"block"});
 		}
 	})
