@@ -30,7 +30,7 @@ $path = "/image/info?id=";
 <meta property="og:description"        content="Stock photo website anyone can contribute to!"/>
 <meta property="og:site_name"              content="Sharefuly"/>
 <?php endif; ?>
-<meta http-equiv="X-UA-Compatible" content="IE=edge"> <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 </head>
 <?php if (isset($_SESSION['user_info'])) {$user = $_SESSION['user_info'];} ?>

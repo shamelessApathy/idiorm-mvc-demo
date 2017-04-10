@@ -70,7 +70,6 @@ class profileController extends Controller {
 			$file = $_FILES['user_avatar']['tmp_name'];
 			$nodir = explode('/', $file);
 			$nodir = $nodir[2];
-			var_dump($file);
 			$orig = explode('.',$orig);
 			$ext = '.' . $orig[1];
 			$save_path = ROOT . "/users/avatars/";

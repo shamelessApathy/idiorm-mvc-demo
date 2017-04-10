@@ -24,7 +24,7 @@ $featured = $info['featured'];
 	</div>
 
 <?php  
-
+ 
 if (isset($_SESSION['user_info']))
 {
 	$user = $_SESSION['user_info'];

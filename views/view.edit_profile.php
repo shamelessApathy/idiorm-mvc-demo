@@ -17,10 +17,10 @@ if (isset($info->dob))
 <!-- This is going to need some javascript, want to preview the avatar, probably a bunch of other cool features to add -->
 <html>
 <div class='container'>
-<h1> Profile for <?php echo $_SESSION['user_info']->name;?></h1>
+<h1> Profile for <?php echo $_SESSION['user_info']['username'];?></h1>
 <div class='row'>
-<div class='profile_edit_section'>
 <div class='col-md-6'>
+<div class='profile_edit_section'>
 <form id="user_avatar" type='file' runat="server" enctype='multipart/form-data' action="/profile/validate_file/set_avatar" method='POST' >
     <label>Choose an avatar:</label><input type='file' id="imgInp" name="user_avatar"/>
 	<div class='note'>Avatar must be 75px by 75px or it will be resized</div>
@@ -44,10 +44,10 @@ if (isset($info->dob))
 	</form>
 </div>
 </div>
-<form name="user_profile" action='/profile/update' method='POST'>
 <div class='row'>
-<div class='profile_edit_section'>
 <div class='col-md-6'>
+<form name="user_profile" action='/profile/update' method='POST'>
+<div class='profile_edit_section'>
 <div class='form-group'>
 	<label>First Name:</label><br>
 	<input type='text' name='first_name' value="<?php echo isset($info->first_name) ?  $info->first_name : '';?>"/><br>
