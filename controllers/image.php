@@ -102,7 +102,7 @@ class imageController extends Controller {
 		$name = $_FILES['image']['name'];
 		$tags = $_POST['tags'];
 		$deg = $_POST['rotate'];
-		if ($_POST['price'] !== '3')
+		if ($_POST['price'] !== GLOBAL_PRICE)
 			{
 				$price = $_POST['price'];
 				$premium = 1;
@@ -207,15 +207,16 @@ class imageController extends Controller {
  		$type = 'image';
 		$nodir = explode('/', $file);
 		$nodir = $nodir[2];
-		$name = $_FILES['image']['name'];
-		$ext = explode('.', $name);
-		if ($ext[1] === 'jpg')
+		$extFind = strrpos($name, '.');
+		$extFind = $extFind + 1;
+		$ext = substr($name, $extFind);
+		if ($ext === 'jpg')
 		{
 			$ext = 'jpeg';
 		}
 		else
 		{
-			$ext = $ext[1];
+			$ext = $ext;
 		}
 		$ext2 = $ext;
 		$ext = '.' . $ext;

@@ -11,5 +11,6 @@ define('BOOTSTRAP', 'views/bootstrap-3.3.7-dist');
 define('BASE_CONTROLLER', ROOT . '/controllers/controller.php');
 define('SIDEBAR', ROOT . '/views/view.sidebar.php');
 define('HTML_FOOTER', ROOT . '/views/html_footer.php');
+define('GLOBAL_PRICE', 5);
 
 ?>

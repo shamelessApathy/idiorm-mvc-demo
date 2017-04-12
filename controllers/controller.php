@@ -21,9 +21,12 @@ class Controller {
 						$fileinfo = finfo_open();
 						$fileinfo = finfo_file($fileinfo, $check);
 						$fileinfo = explode(" ",$fileinfo);
-						$name = explode('.',$name);
-						$ext = $name[1];
+						$extFind = strrpos($name, '.');
+						$extFind = $extFind + 1;
+						// I rewrote this, anything with more than one "." was having an error because it couldn't find the actual extension of the file
+						$ext = substr($name, $extFind);
 						$ext = strtoupper($ext);
+						$name = explode('.',$name);
 						if ($ext === 'JPG')
 						{
 							$ext = 'JPEG';
