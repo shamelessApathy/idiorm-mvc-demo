@@ -52,6 +52,8 @@ public function register(){
 * Call model's create_new function
 */
 public function create_new(){
+	if (isset($_POST['agree']) && $_POST['agree'] == 'on')
+	{
 	if ($this->validate($_POST['email'], 'email'))
 	{	
 		//define post data
@@ -75,6 +77,12 @@ public function create_new(){
 	{
 		return_view('view.register.php');
 		sys_msg('email is invalid');
+	}
+}
+	else
+	{
+		return_view('view.register.php');
+		sys_msg('You need to agree to our Terms of Service in order to register!');
 	}
 }
 /*

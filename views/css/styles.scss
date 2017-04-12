@@ -100,6 +100,40 @@ input
 	text-align:center;
 	font-size:8px;
 }
+.user-agreement-container
+{
+	width:100%;
+	height:300px;
+	border:2px solid $primary-bg;
+	overflow-y:hidden;
+}
+.user-agreement-inside
+{
+	width:100%;
+	overflow-x:hidden;
+	word-wrap:break-word;
+	padding:5px;
+	height:300px;
+	overflow-y:scroll;
+}
+.user-agreement-slider-hider
+{
+	width:12px;
+	position:absolute;
+	right:18;
+	top:35px;
+	background-color:$body-bg;
+	height:260px;
+	z-index:1;
+}
+.user-agreement-label
+{
+	position:relative;
+	width:100%;
+	top:0;
+	text-align:center;
+	border-bottom:2px solid $primary-bg;
+}
 .cart-nav:hover 
 {
 	background-color:$primary-hover-bg;
