@@ -6,6 +6,18 @@ require_once(BASE_CONTROLLER);
 */
 
 Class userController extends Controller {
+
+
+/**
+*
+*
+*
+*/
+public function terms()
+{
+	return_view('view.terms_and_conditions.php');
+}
+
 /*
 *
 * Returns image_manager front page selector area
@@ -54,6 +66,12 @@ public function register(){
 public function create_new(){
 	if (isset($_POST['agree']) && $_POST['agree'] == 'on')
 	{
+	if (empty($_POST['username']))
+	{
+		return_view('view.register.php');
+		sys_msg('You need to select a username!');
+		return;
+	}
 	if ($this->validate($_POST['email'], 'email'))
 	{	
 		//define post data
