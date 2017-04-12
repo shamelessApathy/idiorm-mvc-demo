@@ -59,6 +59,7 @@ if (isset($info->dob))
 	<input class='dob' value="<?php echo isset($info->dob) ? $mm : '';?>" name='month'/><input class='dob' value="<?php echo isset($info->dob) ? $dd : '';?>" name='day'/><input class='dob_year' name='year' value="<?php echo isset($info->dob) ? $yy : '';?>"/>
 </div>
 </div>
+</div>
 <div class='col-md-6'>
 <div class='form-group'>
 	<label>Street Address</label><br>
@@ -73,10 +74,11 @@ if (isset($info->dob))
 <button type='submit'>Submit</button>
 </div>
 </div>
-</div>
 </form>
 <a href='/user/new_password'>Click here to change your password!</a>
 </div>
+</div>
+
 
 
 

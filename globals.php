@@ -16,6 +16,6 @@ function sys_msg($msg)
 function user_msg($msg)
 {
 	$inline = "this.parentElement.setAttribute('style','display:none')";
-	echo "<div class='user_msg'><i onclick=$inline class='fa fa-window-close'></i></div> User Message: $msg ";
+	echo "<div class='user_msg'><i onclick=$inline class='fa fa-window-close'></i> User Message: $msg</div> ";
 }
 ?>

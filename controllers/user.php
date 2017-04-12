@@ -252,7 +252,7 @@ public function get_images($user_id = null)
 
 	$images = array('user_images' => $images);
 
-	return_view('store/store.album_manager.php', $images);
+	return_view('store/store.collection_manager.php', $images);
 }
 public function purchased()
 {

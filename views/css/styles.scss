@@ -220,7 +220,15 @@ input
 	background-color:$body-bg;
 }
 
-
+.collection-manager-table tr
+{
+	border-top:2px solid $primary-bg;
+	padding-bottom:10px;
+}
+.collection-manager-table tr:hover
+{
+	background-color:$sold-table-bg;
+}
 
 
  /* End Table Stylings */
@@ -444,12 +452,15 @@ input
 .image_thumb
 {
 	width:100px;
-	height:120px;
 	position:relative;
-	margin-top:10px;
-	margin-left:10px;
 	float:left;
 	text-align:center;
+
+}
+.image_holder
+{
+		vertical-align:middle;
+	display:table-cell;
 }
 ._thumb
 {

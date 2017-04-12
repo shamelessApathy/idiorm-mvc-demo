@@ -168,6 +168,13 @@ input {
 #cash-table tr:hover, #sub-table tr:hover {
   background-color: #f2f2f2; }
 
+.collection-manager-table tr {
+  border-top: 2px solid #333;
+  padding-bottom: 10px; }
+
+.collection-manager-table tr:hover {
+  background-color: #e6e6e6; }
+
 /* End Table Stylings */
 .sys_msg {
   width: 300px;
@@ -350,12 +357,13 @@ input {
 
 .image_thumb {
   width: 100px;
-  height: 120px;
   position: relative;
-  margin-top: 10px;
-  margin-left: 10px;
   float: left;
   text-align: center; }
+
+.image_holder {
+  vertical-align: middle;
+  display: table-cell; }
 
 ._thumb {
   width: 100px;
