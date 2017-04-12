@@ -9,13 +9,13 @@ $info = $info;
 function sys_msg($msg)
 {
 	$inline = "this.parentElement.setAttribute('style','display:none')";
-	echo "<div  class='sys_msg'>System Message: $msg <i onclick=$inline class='fa fa-window-close'></i></div>";
+	echo "<div  class='sys_msg'><i onclick=$inline class='fa fa-window-close'></i> System Message: $msg </div>";
 }
 
 
 function user_msg($msg)
 {
 	$inline = "this.parentElement.setAttribute('style','display:none')";
-	echo "<div class='user_msg'>User Message: $msg <i onclick=$inline class='fa fa-window-close'></i></div>";
+	echo "<div class='user_msg'><i onclick=$inline class='fa fa-window-close'></i> User Message: $msg</div> ";
 }
 ?>
