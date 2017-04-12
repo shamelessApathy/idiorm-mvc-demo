@@ -1,3 +1,18 @@
+/* HTML_FOOTER STYLINGS */
+.footer-container {
+  padding-top: 5px;
+  padding-bottom: 5px;
+  width: 100%;
+  background-color: #333; }
+
+.footer-container a {
+  text-decoration: none; }
+
+.footer-container h3 {
+  color: #ccc;
+  text-align: center; }
+
+/* END HTML FOOTER_STYLING */
 /* MAIN UI THEME */
 body {
   background: #f2f2f2; }

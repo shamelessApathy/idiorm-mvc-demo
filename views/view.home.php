@@ -56,8 +56,9 @@ foreach ($images as $image)
 </div>
 </div>
 <div class='row'>
-	<div style='width:100%; height:500px;'></div>
+	<div style='width:100%; height:150px;'></div>
 </div>
 </div>
+<?php require_once(HTML_FOOTER); ?>
 <?php require_once(FOOTER); ?>
 <script src='/views/js/featured.js'></script>

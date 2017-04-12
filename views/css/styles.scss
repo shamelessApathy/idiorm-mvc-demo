@@ -10,6 +10,33 @@ $primary-hover-bg: #ccc;
 $secondary-hover-font-color:#333;
 $tag-bg:#ffffe6;
 $sold-table-bg: #e6e6e6; 
+
+
+/* HTML_FOOTER STYLINGS */
+
+.footer-container
+{
+	padding-top:5px;
+	padding-bottom:5px;
+	width:100%;
+	background-color:$primary-bg;
+}
+.footer-container a
+{
+	text-decoration:none;
+
+}
+.footer-container h3
+{
+	color:$primary-font-color;
+	text-align:center;
+}
+
+
+
+/* END HTML FOOTER_STYLING */
+
+
 /* MAIN UI THEME */
 body
 {
