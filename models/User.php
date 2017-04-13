@@ -1,11 +1,12 @@
 <?php
 
 class User extends Model {
-	//new
-	public function id()
+	// Im not sure what this is being used for but I commented it out, maybe before I implemented Paris? You can instantiate using a user ID now
+	// and generally I just reach for the $_SESSION['user_info']['id'] variable manually in all my functions
+	/*public function id()
 	{
-		return $_SESSION['user_info']->id;
-	}
+		return $_SESSION['user_info']['id'];
+	}*/
 	/*
 	*
 	* Creates new user

@@ -83,7 +83,8 @@ $user_link = "/user/info/$user->id";
 <?php endif; ?>
 </div>
 </div>
+</div>
 
-
+<?php require_once(HTML_FOOTER);?>
 <?php require(FOOTER);?>
 <script src='/views/js/single.js' rel='javascript' type='text/javascript'></script>

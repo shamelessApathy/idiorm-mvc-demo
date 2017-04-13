@@ -3,7 +3,7 @@ class Image extends Model
 {
 	public function user()
 	{
-		$this->belongs_to('User');
+		return $this->belongs_to('User');
 	}
 	public function get_featured()
 	{
@@ -185,6 +185,17 @@ class Image extends Model
 		$image = ORM::for_table('image')->where('id', $id)->find_one();
 		return $image;
 
+	}
+	/**
+	*
+	* @param $image_id
+	* @return Tags relating to image
+	* NOTE :: currently doesn't work, something needs to be done to define a relationship with a "through" table but I'm not wasting
+	* Time on that right now, I've got another join query that should do the trick for what I  need
+	*/ 
+	public function tags()
+	{
+		return $this->has_many('image_to_tag');
 	}
 
 

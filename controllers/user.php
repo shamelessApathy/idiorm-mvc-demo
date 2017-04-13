@@ -7,11 +7,47 @@ require_once(BASE_CONTROLLER);
 
 Class userController extends Controller {
 
+/**
+*
+* @param Takes a User ID
+* @return Returns a  the view showcasing all the images from a certain user
+*/
+public function get_all_images($id)
+{
+	require_once(MODELS . '/User.php');
+	require_once(MODELS . '/Image.php');
+	$model = Model::factory('User')->find_one($id);
+	$images = $model->images()->find_many();
+	foreach( $images as $image)
+	{
+		$tags = $image->get_tags();
+		$tag_array = array();
+		if (count($tags) >= 3)
+		{
+			for ($i = 0; $i < 3; $i++)
+			{
+				array_push($tag_array, $tags[$i]);
+			}
+		}
+		else
+		{
+			$count = count($tags);
+			for ($i = 0; $i < $count; $i++ )
+			{
+				array_push($tag_array, $tags[$i]);
+			}
+		}
+		$image->tags = $tag_array;
+
+	}
+
+	return_view('store/store.user_images.php', ['images' => $images, 'username'=>$model->username]);
+}
 
 /**
 *
 *
-*
+* @return The view for Terms and Conditions
 */
 public function terms()
 {

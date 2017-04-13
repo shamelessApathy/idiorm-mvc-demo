@@ -16,22 +16,27 @@ $sold-table-bg: #e6e6e6;
 
 .footer-container
 {
-	padding-top:5px;
-	padding-bottom:5px;
 	width:100%;
 	background-color:$primary-bg;
+	position:fixed;
+	bottom:0;
 }
 .footer-container a
 {
 	text-decoration:none;
 
 }
-.footer-container h3
+.footer-container p
 {
+	font-size:12px;
 	color:$primary-font-color;
-	text-align:center;
+	text-align:left;
+	padding-left:10px;
 }
-
+.footer-container p i 
+{
+	padding-right:5px;
+}
 
 
 /* END HTML FOOTER_STYLING */
@@ -41,6 +46,7 @@ $sold-table-bg: #e6e6e6;
 body
 {
 	background:$body-bg;
+	padding-bottom:200px;
 }
 .center
 {
@@ -234,17 +240,26 @@ input
 
  /* Table Stylings */
 
-#cash-table, #sub-table
+#cash-table, #sub-table, .user-images-table
 {
 	background-color:$sold-table-bg;
 }
-#cash-table tr, #sub-table tr
+#cash-table tr, #sub-table tr, .user-images-table tr
 {
-	border-top:2px solid #333;
+	border-top:1px solid #333 !important;
 }
 #cash-table tr:hover, #sub-table tr:hover
 {
 	background-color:$body-bg;
+}
+.user-images-table tr:hover
+{
+	background-color:$body-bg;
+	cursor:pointer;
+}
+table.user-image-table tr 
+{
+	border-top:2px solid #333;
 }
 
 .collection-manager-table tr
@@ -256,6 +271,23 @@ input
 {
 	background-color:$sold-table-bg;
 }
+
+.user-images-table
+{
+	width:100%;
+	table-layout:fixed;
+}
+.user-images-table {
+	font-size:12px;
+}
+.user-images-table .tag{
+	font-size:8px;
+	padding:2px;
+}
+
+ 
+
+
 
 
  /* End Table Stylings */
