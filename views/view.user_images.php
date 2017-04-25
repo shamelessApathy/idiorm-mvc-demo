@@ -17,5 +17,5 @@ foreach ($info as $image)
 ?>
 <h1> This is the user image page!</h1>
 
-
+<?php require_once(HTML_FOOTER); ?>
 <?php require(FOOTER); ?>

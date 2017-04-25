@@ -51,7 +51,7 @@ $categories = $info;
 
 
 
-
+<?php require_once(HTML_FOOTER); ?>
 <?php require(FOOTER); ?>
 <script src='/views/js/jqueryrotate.js' type='text/javascript' rel='javascript'></script>
 <script src='/views/js/tag_format.js' type='text/javascript' rel='javascript'></script>

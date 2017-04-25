@@ -31,5 +31,5 @@ $memberSince = date("F j, Y, g:i a");
 
 
 </body>
-
+<?php require_once(HTML_FOOTER); ?>
 <?php require_once(FOOTER); ?>

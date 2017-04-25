@@ -10,6 +10,8 @@ require(HEADER);
 <?php echo "<a href='$info'>here</a>"; ?>
 </p>
 </div>
+<?php require_once(HTML_FOOTER); ?>
 <?php 
+
  require_once(FOOTER);
 ?>

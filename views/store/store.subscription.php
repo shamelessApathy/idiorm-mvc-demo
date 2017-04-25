@@ -17,6 +17,6 @@ require_once(HEADER);
 		<div class='col-md-4'></div>		
 	</div>
 </div>
-
+<?php require_once(HTML_FOOTER); ?>
 <?php require_once(FOOTER); ?>
 <script src='/views/js/subscribe_script.js'></script>

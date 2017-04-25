@@ -18,5 +18,5 @@
 <div class='col-md-2'></div>
 </div>
 </div>
-
+<?php require_once(HTML_FOOTER);?>
 <?php require(FOOTER);?>

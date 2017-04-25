@@ -2,8 +2,8 @@
 require_once(HEADER);
 ?>
 
-
 <div class='container'>
+<h4>Suggestion Page</h4>
 	<form name='suggestion' action='/suggestion/create_suggestion' method='POST'>
 		<label>Email</label><br>
 		<input type='text' name='email'><br>

@@ -85,8 +85,9 @@ if (isset($info['user_images']))
 </div>
 <?php endif; ?>
 
-
+<?php require_once(HTML_FOOTER); ?>
 <?php
+
 require_once(FOOTER);
 ?>
 <script src='/views/js/album_manager.js' type='text/javascript' rel='javascript'></script>

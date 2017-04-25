@@ -140,5 +140,6 @@ for ($i = 0; $i < $num; $i++)
 </div>
 </div>
 </div>
+<?php require_once(HTML_FOOTER); ?>
 <?php require(FOOTER);?>
 <script src='/views/js/album_manager.js' type='text/javascript' rel='javascript'></script>

@@ -83,5 +83,6 @@ if (isset($info->dob))
 
 
 
+<?php require_once(HTML_FOOTER);?>
 <?php require(FOOTER);?>
 <script src='/views/js/edit_profile.js'></script>
