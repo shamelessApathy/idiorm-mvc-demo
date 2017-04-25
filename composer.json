@@ -4,6 +4,7 @@
         "j4mie/paris": "^1.5",
         "imagine/imagine": "~0.5.0",
         "stripe/stripe-php": "4.*",
-        "vlucas/phpdotenv": "^2.4"
+        "vlucas/phpdotenv": "^2.4",
+        "swiftmailer/swiftmailer":"^5.4.5"
     }
 }
