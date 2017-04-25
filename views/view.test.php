@@ -1,13 +1,16 @@
 <?php
 require(HEADER);
 ?>
-<form enctype='multipart/form-data' action='/test/upload' method='POST'>
-	<input type='file' name='image'/>
-	<button type='submit'>Submit</button>
+<form action='/test/send_mail' method='POST'>
+<label>Email</label><input type='text' name='email'><br>
+<label>Body</label><br>
+<input type='text' name='text'><br>
+<button type='submit'>Send</button>
 </form>
 
 
 
 <?php 
+require_once(HTML_FOOTER);
 require(FOOTER);
 ?>

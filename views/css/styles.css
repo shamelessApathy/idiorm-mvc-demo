@@ -180,6 +180,12 @@ input {
   color: white !important; }
 
 /* Table Stylings */
+.bug-table {
+  border-collapse: collapse; }
+
+.bug-table td {
+  padding-top: 15px; }
+
 #cash-table, #sub-table, .user-images-table {
   background-color: #e6e6e6; }
 

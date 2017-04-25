@@ -98,6 +98,44 @@ class testController extends Controller {
 			return false;
 		}
 	}
+	public function start_mail()
+	{
+		return_view('view.test.php');
+	}
+	public function send_mail()
+	{
+		$email = $_POST['email'];
+		$text = $_POST['text'];
+		require_once(SWIFT_MAILER);
+
+		$subject = 'Hello from Sharefuly!';
+		$from = array('support@dev.sharefuly.com' =>'Support');
+		$to = array(
+		 $email => 'Customer'
+		);
+
+		$text = "Some demo text lorem ipsum etcetera";
+		$html = "<em>Stock Photography <strong>Sharefuly</strong></em>";
+
+		$transport = Swift_SmtpTransport::newInstance('smtp.mailtrap.io', 465);
+		$transport->setUsername('496800b5ca10efac0');
+		$transport->setPassword('fbcf6bacada144');
+		$swift = Swift_Mailer::newInstance($transport);
+
+		$message = new Swift_Message($subject);
+		$message->setFrom($from);
+		$message->setBody($html, 'text/html');
+		$message->setTo($to);
+		$message->addPart($text, 'text/plain');
+
+		if ($recipients = $swift->send($message, $failures))
+		{
+		 echo 'Message successfully sent!';
+		} else {
+		 echo "There was an error:\n";
+		 print_r($failures);
+		}
+}
 	public function thumb()
 	{
 		require_once(MODELS . '/Image.php');

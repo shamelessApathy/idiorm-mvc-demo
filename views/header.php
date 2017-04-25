@@ -109,10 +109,10 @@ $path = "/image/info?id=";
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Admin Options <span class="caret"></span></a>
           <ul class="dropdown-menu">
-            <li><a href="/admin/post_manager">Post Manager</a></li>
             <li><a href="/admin/user_manager">User Manager</a></li>
             <li><a href="/admin/image_manager">Image Manager</a></li>
             <li><a href="/admin/subscription_manager">Subscription Manager</a></li>
+            <li><a href="/admin/bug_manager">Bug Reports</a></li>
             <li role="separator" class="divider"></li>
             <li><a href="#">Separated link</a></li>
           </ul>

@@ -17,6 +17,21 @@ class adminController extends Controller {
 	{
 		return_view('admin/admin.subscription_manager.php');
 	}
+	public function bug_manager()
+	{
+		$bugs = $this->get_bugs();
+		return_view('admin/admin.bug_manager.php', $bugs);
+	}
+	/**
+	*
+	* @param none
+	* @return list of unresolved/ unanswered bugs
+	*/
+	public function get_bugs()
+	{
+		$bugs = ORM::for_table('bug')->find_many();
+		return $bugs;
+	}
 	public function get_subscription_purchases()
 	{
 		require_once(MODELS . '/User.php');
