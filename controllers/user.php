@@ -6,11 +6,7 @@ require_once(BASE_CONTROLLER);
 */
 
 Class userController extends Controller {
-	public function __construct()
-	{
-		// No one is accessing UserController functions without being logged in 
-		$this->lockdown();
-	}
+
 /**
 *
 * @param Takes a User ID
@@ -178,7 +174,7 @@ public function verify()
 	}
 	else
 	{
-		$reroute = NULL;
+		$reroute = null;
 	}
 	// Instantiate User class
 	require_once(MODELS . '/User.php');
@@ -195,9 +191,10 @@ public function verify()
 			$_SESSION['sub_count'] = $this->subscription_count($user->id);   //$_SESSION['sub_count'] is a point system for subscriptions
 			$_SESSION['user_info'] = $user;     // Should I have this set as only USER_ID and not all the fucking info?
 			$_SESSION['logged_in'] = 1;  // Easy way to see if someone is logged in, although I never use it
+			$_SESSION['reroute'] = $reroute;
 			// ** NEW TODAY **
 			// If $reroute is active, send the user to that page
-			if ($reroute !== NULL)
+			if ($reroute !== null)
 			{
 				header("Location: $reroute");
 				user_msg('login successful');
@@ -212,14 +209,14 @@ public function verify()
 		// no match? send back to login page, also include $reroute var, if it's null it won't matter right?
 		else
 		{
-			return_view('view.login.php', $reroute);
+			return_view('view.login.php');
 			sys_msg('Incorrect Credentials');
 		}
 	}
 	// Fields are empty send em back, include $reroute again
 	else
 	{
-		return_view('view.login.php', $reroute);
+		return_view('view.login.php');
 		sys_msg('One of the login fields is empty!');
 	}
 }

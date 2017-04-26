@@ -21,8 +21,8 @@ class Mailer {
 		$to = array(
 		 $email => "$user->first_name $user->last_name"
 		);
-
-		$html = "<em>Stock Photography <strong>Sharefuly</strong></em><br><p>You can view all of your purchased images <a href='http://idiorm.dev/user/purchased_images'>here</a> by logging in!</p>";
+		$string = print_r($items);
+		$html = "<em>Stock Photography <strong>Sharefuly</strong></em><br><p>You can view all of your purchased images <a href='http://idiorm.dev/user/purchased'>here</a> by logging in!</p> <p>List: $string ";
  
 		$transport = Swift_SmtpTransport::newInstance('smtp.mailtrap.io', 465);
 		$transport->setUsername('496800b5ca10efac0');
