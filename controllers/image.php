@@ -462,5 +462,41 @@ class imageController extends Controller {
 			sys_msg('You must be logged in first!');
 		}
 	}
+	/**
+	*
+	* @param User ID
+	* @return All Images for Sale from User ** AVAILABLE FOR PUBLIC TO SEE **
+	*/	
+	public function user($user_id)
+	{
+		require_once(MODELS . '/User.php');
+		require_once(MODELS . '/Image.php');
+		$model = Model::factory('User')->find_one($id);
+		$images = $model->images()->find_many();
+		foreach( $images as $image)
+		{
+			$tags = $image->get_tags();
+			$tag_array = array();
+			if (count($tags) >= 3)
+			{
+				for ($i = 0; $i < 3; $i++)
+				{
+					array_push($tag_array, $tags[$i]);
+				}
+			}
+			else
+			{
+				$count = count($tags);
+				for ($i = 0; $i < $count; $i++ )
+				{
+					array_push($tag_array, $tags[$i]);
+				}
+			}
+			$image->tags = $tag_array;
+			$username = $model->username;
+
+		}
+		return_view('store/store.images_by_user.php', ['images'=>$images, 'username'=>$username]);
+	}
 }
 ?>

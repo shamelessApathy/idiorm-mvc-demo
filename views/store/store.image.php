@@ -9,7 +9,7 @@ if (isset($_SESSION['user_info']))
 {
 	$user_info = $_SESSION['user_info'];
 }
-$user_link = "/user/info/$user->id";
+$user_link = "/image/user/$user->id";
 ?>
 
 

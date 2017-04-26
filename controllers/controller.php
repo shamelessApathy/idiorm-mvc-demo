@@ -7,6 +7,12 @@ class Controller {
 	*/
 	public function validate($check, $type, $name = null)
 	{
+		/**
+		*
+		* @param  $data (whatever is needing to be tested)
+		* @return boolen TRUE/FALSE
+		*/
+
 		function test_input($data) 
 		{
   			$data = trim($data);
@@ -53,7 +59,27 @@ class Controller {
 						break;
 		default : return 'default';
 
+		}
 	}
-}
+	/**
+		*
+		* @param none
+		* @return tells whether or not User is logged in
+		*/
+		function lockdown()
+		{
+			if (isset($_SESSION['user_info']) && !empty($_SESSION['user_info']))
+			{
+				return TRUE;
+			}
+			else
+			{
+				$reroute = $_SERVER['REQUEST_URI'];
+				return_view('view.login.php', $reroute);
+				sys_msg('Your must be logged in to view this page!');
+				exit();
+			}
+		}
+
 }
 

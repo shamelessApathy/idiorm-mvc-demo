@@ -18,4 +18,23 @@ function user_msg($msg)
 	$inline = "this.parentElement.setAttribute('style','display:none')";
 	echo "<div class='user_msg'><i onclick=$inline class='fa fa-window-close'></i> <strong>           User Message</strong><br>$msg</div> ";
 }
+
+
+/**
+*
+* @param none
+* @return Returns TRUE is user logged in FALSE if now, checks $_SESSION var
+*/
+
+function is_logged_in()
+{
+	if (!empty($_SESSION['user_info']))
+	{
+		return TRUE;
+	}
+	else
+	{
+		return FALSE;
+	}
+}
 ?>

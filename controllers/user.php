@@ -6,7 +6,11 @@ require_once(BASE_CONTROLLER);
 */
 
 Class userController extends Controller {
-
+	public function __construct()
+	{
+		// No one is accessing UserController functions without being logged in 
+		$this->lockdown();
+	}
 /**
 *
 * @param Takes a User ID
@@ -164,31 +168,59 @@ public function login()
 */
 public function verify()
 {
+	// Define User Email and Password
 	$email = $_POST['email'];
 	$password = $_POST['password'];
-	require_once(MODELS . '/User.php');
-	$model = new User();
-	if (!empty($email) && !empty($password))
+	// Check to see if there is a reroute form element set from login form
+	if (!empty($_POST['reroute']))
 	{
-		$user = $model->verify($email,$password);	
-		if ($user)
-		{
-			$_SESSION['sub_count'] = $this->subscription_count($user->id);
-			$_SESSION['user_info'] = $user;
-			$_SESSION['logged_in'] = 1;
-			header('Location: /home');
-			user_msg('login successfull');
-		}
-		else
-		{
-			return_view('view.login.php');
-			sys_msg('Incorrect Credentials');
-		}
+		$reroute = $_POST['reroute'];
 	}
 	else
 	{
-		return_view('view.login.php');
-		sys_msg('Incorrect credentials');
+		$reroute = NULL;
+	}
+	// Instantiate User class
+	require_once(MODELS . '/User.php');
+	$model = new User();
+	// Test to make sure Email and Password are actually filled in??? -- don't know why I didn't test up there where they're defined
+	if (!empty($email) && !empty($password))
+	{
+		// User Model verifies email/password combo
+		$user = $model->verify($email,$password);
+		// If there's a match continue	
+		if ($user)
+		{
+			// Sets session variables for the user   
+			$_SESSION['sub_count'] = $this->subscription_count($user->id);   //$_SESSION['sub_count'] is a point system for subscriptions
+			$_SESSION['user_info'] = $user;     // Should I have this set as only USER_ID and not all the fucking info?
+			$_SESSION['logged_in'] = 1;  // Easy way to see if someone is logged in, although I never use it
+			// ** NEW TODAY **
+			// If $reroute is active, send the user to that page
+			if ($reroute !== NULL)
+			{
+				header("Location: $reroute");
+				user_msg('login successful');
+			}
+			// no $reroute? send use to home page
+			else
+			{
+				header('Location: /home');
+				user_msg('login successful');
+			}
+		}
+		// no match? send back to login page, also include $reroute var, if it's null it won't matter right?
+		else
+		{
+			return_view('view.login.php', $reroute);
+			sys_msg('Incorrect Credentials');
+		}
+	}
+	// Fields are empty send em back, include $reroute again
+	else
+	{
+		return_view('view.login.php', $reroute);
+		sys_msg('One of the login fields is empty!');
 	}
 }
 /*
@@ -307,28 +339,28 @@ public function get_images($user_id = null)
 	$images = array('user_images' => $images);
 
 	return_view('store/store.collection_manager.php', $images);
+
 }
+/**
+* 
+* @param none
+* @return View of current User's purchased images
+*/
 public function purchased()
 {
-	if (empty($_SESSION))
-	{
-		return_view('view.home.php');
-		sys_msg('You must be logged in!');
-		return;
-	}
-	$user_id = $_SESSION['user_info']['id'];
-	require_once(MODELS . '/User.php');
-	$user = Model::factory('User')->find_one($user_id);
-	$results = $user->purchased();
-	require_once(MODELS . '/Image.php');
-	$image_model = new Image();
-	$images = array();
-	foreach ($results as $result)
-	{
-		$stuff = Model::factory('Image')->find_one($result->image_id);
-		array_push($images, $stuff);
-	}
-	return_view('store/store.purchased.php', $images);
+		$user_id = $_SESSION['user_info']['id'];
+		require_once(MODELS . '/User.php');
+		$user = Model::factory('User')->find_one($user_id);
+		$results = $user->purchased();
+		require_once(MODELS . '/Image.php');
+		$image_model = new Image();
+		$images = array();
+		foreach ($results as $result)
+		{
+			$stuff = Model::factory('Image')->find_one($result->image_id);
+			array_push($images, $stuff);
+		}
+		return_view('store/store.purchased.php', $images);
 }
 /*
 *
