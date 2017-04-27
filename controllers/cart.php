@@ -184,7 +184,7 @@ class cartController extends Controller {
 			require_once(MAILER);
 			$mailer = new Mailer();
 			$user_id = $_SESSION['user_info']['id'];
-			$mailer->purchase_confirmation($user_id, $items);
+			$mailer->purchase_confirmation($user_id, $items, $price);
 			$_SESSION['cart'] = null;
 			return_view('store/store.image_success.php');
 		}

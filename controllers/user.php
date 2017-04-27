@@ -60,6 +60,7 @@ public function terms()
 */
 public function image_manager()
 {
+	$this->lockdown();
 	return_view('store/store.image_manager.php');
 }
 
@@ -70,6 +71,7 @@ public function image_manager()
 */
 public function sold()
 {
+	$this->lockdown();
 	require_once(MODELS . '/User.php');
 	$user = new User();
 	$sold = $user->get_sold_images();
@@ -251,6 +253,7 @@ public function logout()
 */ 
 public function edit_profile()
 {
+	$this->lockdown();
 	$id = $_SESSION['user_info']->id;
 	require_once(MODELS . '/User.php');
 	$model = new User();
@@ -285,6 +288,7 @@ public function validate_file($function)
 }
 public function get_all()
 {
+	$this->lockdown();
 	require_once(MODELS . '/User.php');
 	$model = new User();
 	$users = $model->get_all();
@@ -323,6 +327,7 @@ public function change_password()
 }
 public function get_images($user_id = null)
 {
+	$this->lockdown();
 	if (empty($user_id))
 	{
 		$user_id = $_SESSION['user_info']['id'];
@@ -345,6 +350,7 @@ public function get_images($user_id = null)
 */
 public function purchased()
 {
+	$this->lockdown();
 		$user_id = $_SESSION['user_info']['id'];
 		require_once(MODELS . '/User.php');
 		$user = Model::factory('User')->find_one($user_id);

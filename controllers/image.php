@@ -62,6 +62,10 @@ class imageController extends Controller {
 		$rotated = $image->rotateImage($pixel, $deg);
 		$image->writeImage($file);
 	}
+	public function payout()
+	{
+		return_view('view.payout.php');
+	}
 	public function user_owned_images()
 	{
 		require(MODELS . '/User.php');
@@ -72,6 +76,7 @@ class imageController extends Controller {
 	}
 	public function upload_image($success = null)
 	{
+		$this->lockdown();
 		require_once(CONTROLLERS . '/category.php');
 		$category = new categoryController();
 		$categories = $category->get_all();

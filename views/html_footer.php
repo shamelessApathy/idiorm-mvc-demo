@@ -8,7 +8,7 @@
 		</div>
 		<div class='row'>
 		<div class='col-xs-6'><a href='/bug/report'><p><i class='fa fa-globe'></i> Company Overview</p></a></div>
-		<div class='col-xs-6'><a href='/bug/report'><p><i class='fa fa-money'></i> Contributor Payout</p></a></div>
+		<div class='col-xs-6'><a href='/image/payout'><p><i class='fa fa-money'></i> Contributor Payout</p></a></div>
 		</div>
 	</div>
 </div>

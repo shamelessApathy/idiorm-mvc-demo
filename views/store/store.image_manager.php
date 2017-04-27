@@ -17,5 +17,6 @@
 	<a href='/user/sold'><button class='image-manager-button' type='button'>Sold Images</button></a><br>
 	</div>
 </div>
+</div>
 <?php require_once(HTML_FOOTER); ?>
 <?php require(FOOTER);?>
