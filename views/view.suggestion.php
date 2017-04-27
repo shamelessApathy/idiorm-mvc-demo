@@ -8,7 +8,7 @@ require_once(HEADER);
 		<label>Email</label><br>
 		<input type='text' name='email'><br>
 		<label>Suggestion</label><br>
-	<input style='width:300px; height:100px;' type='text' name='description'><br>
+	<textarea style='width:300px; height:100px;' type='text' name='description'></textarea><br>
 	<button type='submit'>Submit</button>
 	</form>
 </div>

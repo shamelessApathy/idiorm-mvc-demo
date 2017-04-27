@@ -11,7 +11,12 @@ $secondary-hover-font-color:#333;
 $tag-bg:#ffffe6;
 $sold-table-bg: #e6e6e6; 
 
-
+input 
+{
+	padding-top:0;
+	padding-left:0;
+	line-height:1em;
+}
 /* HTML_FOOTER STYLINGS */
 
 .footer-container
@@ -911,6 +916,38 @@ table.user-image-table tr
 	width:100px;
 	height:100px;
 }*/
+
+/* SUBSCRIPTION STYLINGS */
+.sub-container
+{
+	width:200px;
+	height:200px;
+	box-sizing:border-box;
+	-o-box-sizing:border-box;
+	-moz-box-sizing:border-box;
+	-webkit-box-sizing:border-box;
+	text-align:center;
+	padding-top:20px;
+}
+#bronze-sub
+{
+	background-color:#cd7f32;
+	color:#333;
+	border:2px solid #333;
+}
+#silver-sub
+{
+	background-color:black;
+	color:#c0c0c0;
+	border:2px solid #c0c0c0;
+}
+#gold-sub
+{
+	background-color:#333;
+	color:#D4AF37;
+	border:2px solid #D4AF37;
+}
+
 /* these two #barz don't work, don't know why, maybe bootstrap JS is manipulating something that affects these rules be applied... OR it
 could be simply that some of the other rules are being applied with a greater importance level */
 #barz
@@ -955,7 +992,7 @@ could be simply that some of the other rules are being applied with a greater im
 {
 	width:102%;
 	height:420px;
-	background-color:#b3b3ff;
+	background-color:#d9d9d9;
 	overflow-x:hidden;
 }
 .cart-item

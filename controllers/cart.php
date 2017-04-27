@@ -72,6 +72,11 @@ class cartController extends Controller {
 		}
 		$user = Model::factory('User')->find_one($_SESSION['user_info']['id']);
 		$this->create_stripe_subscription($stripe_token, $user->stripe_id, $plan);
+		// Mail confirmation
+		require_once(MAILER);
+		$mailer = new Mailer();
+		$plan_id = $_SESSION['plan_id'];
+		$mailer->subscription_confirmation($user, $plan_id);
 		$count = $user->subscription_count();
 		$_SESSION['sub_count'] = $count;
 		return_view('view.home.php');

@@ -32,6 +32,9 @@ class suggestionController extends Controller {
 			}
 			$email = $_POST['email'];
 			$description = $_POST['description'];
+			require_once(MAILER);
+			$mailer = new Mailer();
+			$mailer->suggestion_confirmation($email, $user_id);
 			require_once(MODELS . '/Suggestion.php');
 			$model = new Suggestion();
 			if($model->create_new($user_id, $email, $description))

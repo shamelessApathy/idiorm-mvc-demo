@@ -20,10 +20,24 @@ class bugController extends Controller {
 		}
 
 		$description = $_POST['description'];
-		$email = $_POST['email'];
+		if (isset($_POST['email']))
+		{
+			$email = $_POST['email'];
+		}
+		else
+		{
+			$email = null;
+		} 
 
 		require_once(MODELS . '/Bug.php');
 		$model = new Bug();
+		require_once(MAILER);
+		$mailer = new Mailer();
+		$bool = $this->validate($email, 'email');
+		if (!empty($email) && $bool)
+		{
+			$mailer->bug_submission_confirmation($email);
+		}
 		if ($model->create_report($type, $email, $description))
 		{
 			header("Location:/bug/report?success=true");

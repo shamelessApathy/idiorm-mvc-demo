@@ -18,7 +18,7 @@ require_once(HEADER);
 	<label>Email</label><br>
 	<input type='text' name='email'/><br>
 	<label>Description</label><br>
-	<input style='width:300px; height:150px;' type='text' name='description'><br>
+	<textarea style='width:300px; height:150px;' type='text' name='description'></textarea><br>
 	<button type='submit'>Submit Bug</button>
 </form>
 </div>

@@ -87,8 +87,7 @@ public function sold()
 */
 public function subscription_pay()
 {
-	var_dump($_POST);
-	$plan = $_POST['plan'];
+	$plan = $_GET['plan'];
 	$sub = ORM::for_table('subscription_details')->where('subscription_id', $plan)->find_one();
 	return_view('store/store.subscription_pay.php', $sub);
 }
