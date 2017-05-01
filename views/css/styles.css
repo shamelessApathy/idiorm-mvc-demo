@@ -739,7 +739,11 @@ table.user-image-table tr {
   -moz-box-sizing: border-box;
   -webkit-box-sizing: border-box;
   text-align: center;
-  padding-top: 20px; }
+  padding-top: 20px;
+  margin: 0 auto; }
+
+.sub-link, .sub-link p, .sub-link:hover {
+  text-decoration: none; }
 
 #bronze-sub {
   background-color: #cd7f32;

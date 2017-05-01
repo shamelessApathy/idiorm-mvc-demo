@@ -43,6 +43,11 @@ if ($controller === 'cart' && !isset($method))
 	$cart = new cartController();
 	$cart->display_cart();
 }
+require_once('routes.php');
+if (array_key_exists($full_uri, $routes))
+{
+	return_view($routes[$full_uri]);
+}
 else
 {
 
