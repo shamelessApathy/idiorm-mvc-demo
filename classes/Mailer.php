@@ -4,6 +4,46 @@ class Mailer {
 	{
 		require_once(SWIFT_MAILER);
 	}
+	/**
+	* Sends email to image owner telling them their image was reported and has been deactivated
+	* @param = $user, $image, $report
+	* @return True if email sent
+	*/
+	public function report($user, $image, $report)
+	{
+
+		$email = $user->email;
+		$text = "One of your images has been found to be in violation of our Terms of Service";
+
+		$subject = 'Image TOS Violation';
+		$from = array('support@dev.sharefuly.com' =>'Support');
+		$to = array(
+				$email => "$user->first_name $user->last_name"
+				);
+		$html = "<h4>Image TOS Violation</h4><p>This is an auto-generated email, your image $image->user_image_name has been reported, after a review it has been deemed in violation of Sharefuly.com's Terms of Service agreement. Please be more mindful of what images you upload! Thank you!<p>Sharefuly Support Team</p><a href='http://sharefuly.com'>Sharefuly Stock Photography</a>";
+
+ 
+		$transport = Swift_SmtpTransport::newInstance('smtp.mailtrap.io', 465);
+		$transport->setUsername('496800b5ca10efac0');
+		$transport->setPassword('fbcf6bacada144');
+		$swift = Swift_Mailer::newInstance($transport);
+
+		$message = new Swift_Message($subject);
+		$message->setFrom($from);
+		$message->setBody($html, 'text/html');
+		$message->setTo($to);
+		$message->addPart($text, 'text/plain');
+
+		if ($recipients = $swift->send($message, $failures))
+		{
+			return true;
+		} 
+		else 
+		{
+			echo "There was an error:\n";
+			print_r($failures);
+		}	
+	}
 	function purchase_confirmation($user_id, $items, $price)
 	{
 		require_once(MODELS . '/User.php');

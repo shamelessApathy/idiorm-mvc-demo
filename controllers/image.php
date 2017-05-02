@@ -2,6 +2,38 @@
 require(BASE_CONTROLLER);
 require(MODELS . '/Image.php');
 class imageController extends Controller {
+	/**
+	* Unauthorizes an Image, done from the admin area
+	* @param Image ID
+	* @return BOOL, true on success, false on failure
+	*/
+	public function unauthorize($report_id)
+	{
+		 $this->lockdown(TRUE);
+		 require_once(MODELS . '/Image.php');
+		 require_once(MODELS . '/Report.php');
+		 require_once(MODELS . '/User.php');
+		 require_once(MAILER);
+		 $report_id = (int) $report_id;
+		 $report_model = ORM::for_table('report')->where('id', $report_id)->find_one();
+		 $image_id = $report_model['image_id'];
+		 $image_model = Model::factory('Image')->find_one($image_id);
+		 $owner = Model::factory('User')->find_one($model->user_id);
+		 $image_model->auth = 0;
+		 $image_model->save();
+		 $report_model->resolved = 1;
+		 $report_model->save();
+
+		 $mailer = new Mailer(); 
+		 if ($mailer->report($owner, $image_model, $report_model))
+		 {
+		 	header("Location:/report/get_reports/unresolved");
+		 }
+		 else
+		 {
+		 	echo 'returned false';
+		 }
+	}
 	public function search_images($param, $query)
 	{
 		require (MODELS . '/Image.php');

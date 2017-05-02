@@ -66,9 +66,16 @@ class Controller {
 		* @param none
 		* @return tells whether or not User is logged in
 		*/
-		function lockdown()
+		function lockdown($admin = null)
 		{
-			if (isset($_SESSION['user_info']) && !empty($_SESSION['user_info']))
+			if (!empty($admin))
+			{
+				if (isset($_SESSION['user_info']) && !empty($_SESSION['user_info'] && $_SESSION['user_info']['level'] == 1 ))
+				{
+					return TRUE;
+				}
+			}
+			if (isset($_SESSION['user_info']) && !empty($_SESSION['user_info']) && empty($admin))
 			{
 				return TRUE;
 			}

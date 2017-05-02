@@ -29,4 +29,19 @@ class reportController extends Controller {
 			return_view('store/store.report.php', $array);
 		}
 	}
+	public function get_reports($param)
+	{
+		require_once(MODELS . '/Report.php');
+		require_once(MODELS . '/Image.php');
+		$model = new Report();
+		$reports = $model->get_reports($param);
+		foreach ($reports as $report)
+		{
+			$image_model = Model::factory('Image')->find_one($report->image_id);
+			$report->image_url = $image_model->thumbnail;
+		}
+
+		return_view('admin/admin.image_manager.php', ['reports' =>$reports]);
+
+	}
 }

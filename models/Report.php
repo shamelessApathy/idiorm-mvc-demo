@@ -14,9 +14,20 @@ class Report {
 			return true;
 		}
 	}
-	public function get_reports()
+	public function get_reports($param)
 	{
-		$reports = ORM::for_table('report')->find_many();
-		return $reports;
+		if ($param == 'unresolved')
+		{
+			$reports = ORM::for_table('report')->where('resolved',0)->find_many();
+			return $reports;
+		}
+		if ($param = 'resolved')
+		{
+			$reports = ORM::for_table('report')->where('resolved', 1)->find_many();
+		}
+		else
+		{
+			return false;
+		}
 	}
 }
