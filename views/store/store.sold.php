@@ -57,6 +57,7 @@
 
 </div>
 </div>
+</div>
 
 <?php require_once(HTML_FOOTER); ?>
 <?php require(FOOTER);?>

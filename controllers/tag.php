@@ -20,28 +20,42 @@ class tagController extends Controller {
 	{
 		if (empty($image_id))
 		{
-			$image_id = $_POST['id'];
+			$image_id = $_POST['id'];		
+			require_once(MODELS . '/Image.php');
+			$model = Model::factory('Image')->find_one($image_id);
+			$tags = $model->get_tags($image_id);
+			if ($tags)
+			{	
+			$tags_array = array();
+				foreach($tags as $tag)
+				{
+					$id = $tag->tag_id;
+					$table = ORM::for_table('tag')->where('id', $id)->find_one();
+					array_push($tags_array, array('text' =>$table->text, 'id'=>$table->id));
+				}
+			$tags = json_encode($tags_array);
+			echo $tags;
+			}
 		}
-		require_once(MODELS . '/Image.php');
-		$model = Model::factory('Image')->find_one($image_id);
-		$tags = $model->get_tags($image_id);
-		if ($tags)
-		{	
-		$tags_array = array();
-		foreach($tags as $tag)
-		{
-			$id = $tag->tag_id;
-			$table = ORM::for_table('tag')->where('id', $id)->find_one();
-			array_push($tags_array, array('text' =>$table->text, 'id'=>$table->id));
-		}
-
-		$tags = json_encode($tags_array);
-		echo $tags;
-	}
 		else
 		{
-			echo "{}";
+			require_once(MODELS . '/Image.php');
+			$model = Model::factory('Image')->find_one($image_id);
+			$tags = $model->get_tags($image_id);
+			if ($tags)
+			{	
+			$tags_array = array();
+				foreach($tags as $tag)
+				{
+					$id = $tag->tag_id;
+					$table = ORM::for_table('tag')->where('id', $id)->find_one();
+					array_push($tags_array, array('text' =>$table->text, 'id'=>$table->id));
+				}
+			$tags = $tags_array;
+			return $tags;
+			}
 		}
+
 	}
 	public function remove_tag($tag_id = null, $image_id = null)
 	{
@@ -94,6 +108,9 @@ class tagController extends Controller {
 							}
 							$get_votes = $vote_model->weighted_vote($image->image_id, $results[0]->id);
 							$image->vote = (Int) $get_votes;
+							$image->tags =  $this->get_tags($image['image_id']);
+							$image_model = Model::factory('Image')->find_one($image['image_id']);
+							$image->price = $image_model->price;
 							array_push($images, $image);
 						}
 						function cmp($a, $b)
