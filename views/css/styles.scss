@@ -643,6 +643,12 @@ table.user-image-table tr
 	margin-bottom:20px;
 	margin-top:20px;
 }
+#focus_tags
+{
+	height:50px;
+	overflow-x:hidden;
+	overflow-y:scroll;
+}
 .focus_details
 {
 	display:none;
@@ -873,7 +879,7 @@ table.user-image-table tr
 .left-sidebar
 {
 	width:150px;
-	height:800px;
+	height:800px; 
 	border-right:2px solid black;
 }
 .admin_image_row ul li
@@ -906,14 +912,20 @@ table.user-image-table tr
 /* SEARCH RESULTS*/
 .search-item
 {
-	width:100%;
-	min-height:127px;
+	width:200px;
+	height:350px;
 	background-color:$sold-table-bg;
-	border-bottom:2px solid $primary-bg;
+	border:2px solid $primary-bg;
+	overflow-y:hidden;
+	float:left;
+}
+.search-item .tag{
+	font-size:10px;
 }
 .search-item a
 {
 	text-decoration:none;
+	color:inherit;
 }
 .search-tags
 {
@@ -921,20 +933,20 @@ table.user-image-table tr
 	overflow-x:hidden;
 	overflow-y:hidden;
 	padding:5px;
+	height:80px;
 }
 .preview-thumb
 {
-	height:110px;
+	height:150px;
 	max-width:100%;
- 	float:left;
  	margin-top:5px;
 	/*display:flex;
 	align-items:center;
 	justify-content: center;*/
 }
-.search-price
+.search-results-info
 {
-	text-align:center;
+	list-style-type:none;
 }
 .preview-thumb img
 {

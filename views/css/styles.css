@@ -504,6 +504,11 @@ table.user-image-table tr {
   margin-bottom: 20px;
   margin-top: 20px; }
 
+#focus_tags {
+  height: 50px;
+  overflow-x: hidden;
+  overflow-y: scroll; }
+
 .focus_details {
   display: none;
   transition: .5s;
@@ -720,31 +725,37 @@ table.user-image-table tr {
 }*/
 /* SEARCH RESULTS*/
 .search-item {
-  width: 100%;
-  min-height: 127px;
+  width: 200px;
+  height: 350px;
   background-color: #e6e6e6;
-  border-bottom: 2px solid #333; }
+  border: 2px solid #333;
+  overflow-y: hidden;
+  float: left; }
+
+.search-item .tag {
+  font-size: 10px; }
 
 .search-item a {
-  text-decoration: none; }
+  text-decoration: none;
+  color: inherit; }
 
 .search-tags {
   width: 100%;
   overflow-x: hidden;
   overflow-y: hidden;
-  padding: 5px; }
+  padding: 5px;
+  height: 80px; }
 
 .preview-thumb {
-  height: 110px;
+  height: 150px;
   max-width: 100%;
-  float: left;
   margin-top: 5px;
   /*display:flex;
   align-items:center;
   justify-content: center;*/ }
 
-.search-price {
-  text-align: center; }
+.search-results-info {
+  list-style-type: none; }
 
 .preview-thumb img {
   max-width: 100%;

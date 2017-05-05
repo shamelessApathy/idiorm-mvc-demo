@@ -5,22 +5,29 @@ class tagController extends Controller {
 	{
 		if (empty($tags))
 		{
-			$tags = array($_POST['tag']);
+			$tag = $_POST['tag'];
 			$image_id = $_POST['image_id'];
-		}
-		require_once(MODELS . '/Tag.php');
-		$model = new Tag();
-		foreach ($tags as $tag)
-		{
+			require_once(MODELS . '/Tag.php');
+			$model = new Tag();
 			$model->add_tag($tag, $image_id);
+			$other = true;
+			$this->get_tags($image_id,$other);
 		}
-			$this->get_tags($image_id);
-	}
-	public function get_tags($image_id = null)
-	{
-		if (empty($image_id))
+		else
 		{
-			$image_id = $_POST['id'];		
+			require_once(MODELS . '/Tag.php');
+			$model = new Tag();
+			foreach ($tags as $tag)
+			{
+				$model->add_tag($tag, $image_id);
+			}
+				$this->get_tags($image_id);
+		}
+	}
+	public function get_tags($image_id = null, $other = null)
+	{
+		if (!empty($other) && $other === true) 
+		{		
 			require_once(MODELS . '/Image.php');
 			$model = Model::factory('Image')->find_one($image_id);
 			$tags = $model->get_tags($image_id);
@@ -60,16 +67,17 @@ class tagController extends Controller {
 	public function remove_tag($tag_id = null, $image_id = null)
 	{
 		if (empty($tag_id))
-		{
-		$image_id = $_POST['image_id'];
-		$tag_id = $_POST['tag_id'];
-		require_once(MODELS . '/Tag.php');
-		$model = new Tag();
-		$result = $model->remove_tag($image_id, $tag_id);
-		if ($result)
-		{
-			$this->get_tags($image_id);
-		}
+		{ 
+			$image_id = $_POST['image_id'];
+			$tag_id = $_POST['tag_id'];
+			require_once(MODELS . '/Tag.php');
+			$model = new Tag();
+			$result = $model->remove_tag($image_id, $tag_id);
+			if ($result)
+			{
+				$other = true;
+				$this->get_tags($image_id, $other);
+			}
 		}
 	}
 
@@ -110,7 +118,7 @@ class tagController extends Controller {
 							$image->vote = (Int) $get_votes;
 							$image->tags =  $this->get_tags($image['image_id']);
 							$image_model = Model::factory('Image')->find_one($image['image_id']);
-							$image->price = $image_model->price;
+							$image->info = $image_model;
 							array_push($images, $image);
 						}
 						function cmp($a, $b)

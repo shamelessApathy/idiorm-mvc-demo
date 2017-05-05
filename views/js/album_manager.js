@@ -11,6 +11,7 @@ $(function(){
 			this.setTags = function(results)
 			{
 				tags = results;
+				console.log(tags);
 				tags = JSON.parse(tags);
 				length = tags.length;
 				$('#focus_tags').html('');
@@ -81,6 +82,7 @@ $(function(){
 					data: data,
 					success: function(results)
 					{
+						console.log(results);
 						this.setTags(results);
 					}.bind(this)
 				})
@@ -238,7 +240,8 @@ $(function(){
 		this.remove_tag = function(e){
 						target = e.target;
 						var tag = $(target).attr('data-id');
-						var data = {'tag_id' : tag, 'image_id' : this.id}
+						var image_id = $('#the_image').attr('data-id');
+						var data = {'tag_id' : tag, 'image_id' : image_id};
 						$.ajax({
 							url: "/tag/remove_tag",
 							type: "POST",

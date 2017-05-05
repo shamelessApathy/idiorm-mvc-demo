@@ -19,7 +19,7 @@ if (isset($info['user_images']))
 					<li id='focus_height'></li>
 					<li><strong>Tags:</strong></li>
 					<li id='focus_tags'></li><br>
-				</ul><br>
+				</ul>
 				<input type='text' id='add_tag'>
 				<button type='button' id='add_tag_button'>Add Tag</button>
 			</div>
