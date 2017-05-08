@@ -1,18 +1,46 @@
 <?php require(HEADER);
 ?>
 <div class='container'>
-<h3>Search Results for "<?php echo $info['query'];?>"</h3>
-<h4><?php echo $info['count'] . ' results';?></h4>
-<?php
-$images = $info['images'];
-?>
 
-<?php if (is_array($info)):?>
+<h3>Search Results for "<?php echo $info['query'];?>"</h3>
+<?php if (!empty($info['images'])):?>
+	<h4><?php echo $info['count'] . ' results';?></h4>
+<?php endif;?>
+<?php
+if (!empty($info['images']))
+{
+	$images = $info['images'];
+}
+?>
+<div class='image-details'>
+<div class='image-details-hider'>
+<div class='close-image-details'>X</div>
+<div class='row'>
+<div class='col-md-3'>
+<div class='clear'></div>
+
+<ul class='image-details-ul'>
+		<li class='image-details-price'></li>
+		<li class='image-details-filtype'></li>
+		<li class='image-details-width'></li>
+		<li class='image-details-height'></li>
+		<li class='image-details-tags'></li>
+</ul>
+</div>
+<div class='col-md-9'>
+
+
+	<div class='image-details-holder'></div>
+</div>
+</div>
+</div>
+</div>
+<br>
+<?php if (is_array($info) && !empty($info['images'])):?>
 <?php foreach($images as $image):?>
-<div class='search-item'>	
-<a href="/image/info?id=<?php echo $image->image_id;?>">
+<div class='search-item'>
 		<div class='preview-thumb'>
-			<img 
+			<img class='image-result' 
 				data-price="<?php echo $image->info->price;?>" 
 				data-filetype="<?php echo $image->info->mime_type;?>" 
 				data-width="<?php echo $image->info->width;?>" 
@@ -21,10 +49,13 @@ $images = $info['images'];
 				data-tags="<?php $json = json_encode($image['tags']); echo $json;?>"
 				src="<?php echo $image->thumbnail;?>"/>
 		</div>
-</a>
+
 </div>
 <?php endforeach;?>
+<?php else:?>
+	<h4>No images matching your criteria</h4>
 <?php endif;?>
+<?php if (!empty($images)):?>
  <div class='page-count'>Pages  
  <?php 
 $count = $info['count'];
@@ -38,6 +69,8 @@ for ($i = 1; $i <= $num_pages; $i++)
 }
  ?> 
  </div>
+<?php endif;?>
  </div>
  <?php require_once(HTML_FOOTER); ?>
 <?php require(FOOTER); ?>
+<script src='/views/js/search_results.js'></script>

@@ -149,7 +149,7 @@ class tagController extends Controller {
 			else
 			{
 				
-				return_view('view.image_search_results.php', $query);
+				return_view('view.image_search_results.php', array('query'=>$query));
 			}
 			
 		}
