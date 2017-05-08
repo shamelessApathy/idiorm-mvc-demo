@@ -2,36 +2,42 @@
 ?>
 <div class='container'>
 <h3>Search Results for "<?php echo $info['query'];?>"</h3>
+<h4><?php echo $info['count'] . ' results';?></h4>
 <?php
 $images = $info['images'];
-
 ?>
+
 <?php if (is_array($info)):?>
-<?php foreach ($images as $image): ?>
+<?php foreach($images as $image):?>
 <div class='search-item'>	
 <a href="/image/info?id=<?php echo $image->image_id;?>">
 		<div class='preview-thumb'>
-			<img src="<?php echo $image->thumbnail;?>"/>
+			<img 
+				data-price="<?php echo $image->info->price;?>" 
+				data-filetype="<?php echo $image->info->mime_type;?>" 
+				data-width="<?php echo $image->info->width;?>" 
+				data-height="<?php echo $image->info->height;?>" 
+				data-id="<?php echo $image->info->id;?>"
+				data-tags="<?php $json = json_encode($image['tags']); echo $json;?>"
+				src="<?php echo $image->thumbnail;?>"/>
 		</div>
-		<ul class='search-results-info'>
-		<li>Price <?php echo $image->info->price . '.00';?></li>
-		<li>FileType <?php echo $image->info->mime_type;?></li>
-		<li>Width <?php echo $image->info->width;?></li>
-		<li>Height <?php echo $image->info->height;?></li>
-		</ul>
-		<h4 style=text-align:center;'>TAGS</h4>
-		<div class='search-tags'>
-		<?php foreach ($image['tags'] as $tag):?>
-			<div class='tag' id="<?php echo $tag['id'];?>">
-				<?php echo $tag['text'];?>
-			</div>
-		<?php endforeach;?>
-		</div> 
 </a>
 </div>
-<?php endforeach ;?>
+<?php endforeach;?>
 <?php endif;?>
- 
+ <div class='page-count'>Pages  
+ <?php 
+$count = $info['count'];
+$limit = $info['limit'];
+$offset = $info['page'];
+$query = $info['query'];
+$num_pages = ceil($count/$limit);
+for ($i = 1; $i <= $num_pages; $i++)
+{
+	echo "<a href='/tag/search_by_tag?query=".$query."&page=".$i."'>$i  </a>";
+}
+ ?> 
+ </div>
  </div>
  <?php require_once(HTML_FOOTER); ?>
 <?php require(FOOTER); ?>

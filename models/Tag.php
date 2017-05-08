@@ -47,9 +47,24 @@ class Tag {
 		}
 	}
 	}
-	public function get_images($tag_id)
+	/**
+	*
+	* @param $tag_id ID of tag to link images to
+	* @return An integer, count of how many images have that tag id attached
+	*/
+	public function get_count($tag_id)
 	{
-		$images = ORM::for_table('image_to_tag')->where('tag_id', $tag_id)->find_many();
+		$table = ORM::for_table('image_to_tag')->where('tag_id', $tag_id)->find_many();
+		$count = count($table);
+		return $count;
+	}
+	public function get_images($tag_id, $limit, $offset)
+	{
+		$images = ORM::for_table('image_to_tag')
+					->where('tag_id', $tag_id)
+					->limit($limit)
+					->offset($offset)
+					->find_many();
 		return $images;
 	}
 	public function remove_tag($image_id, $tag_id)

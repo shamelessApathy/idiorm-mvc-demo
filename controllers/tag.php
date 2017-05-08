@@ -83,6 +83,17 @@ class tagController extends Controller {
 
 	public function search_by_tag()
 	{
+		if (!empty($_GET['page']))
+		{
+			$page = $_GET['page'];
+		}
+		else
+		{
+			$page = 1;
+		}
+		$page2 = $page -1;
+		$limit = 5;
+		$offset = $page2*$limit;
 		require_once(MODELS . '/Vote.php');
 		$vote_model = new Vote();
 		
@@ -102,7 +113,8 @@ class tagController extends Controller {
 			if(!empty($results))
 			{
 				$images = array();
-					$image_id = $model->get_images($results[0]->id);
+				$count = $model->get_count($results[0]->id);
+					$image_id = $model->get_images($results[0]->id, $limit, $offset);
 					
 					if (isset($image_id))
 					{
@@ -130,7 +142,7 @@ class tagController extends Controller {
 							return ($a->vote > $b->vote) ? -1:1;
 						}
 						uasort($images, 'cmp');
-						$array = array('images'=>$images, 'query' => $query);
+						$array = array('images'=>$images, 'query' => $query, 'count'=>$count, 'page'=>$page, 'limit'=>$limit);
 						return_view('view.image_search_results.php', $array);
 					}
 				}
