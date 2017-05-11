@@ -910,23 +910,32 @@ table.user-image-table tr
 	height:100px;
 }*/
 /* SEARCH RESULTS*/
+.image-button-holder
+{
+	float:left;
+	margin-left:20px;
+}
 .image-details
 {
 	height:0;
 	width:100%;
 	border:2px solid #333;
+	transition:height .5s;
+	-o-transition:height .5s;
+	-moz-transition:height .5s;
+	-webkit-transition:height .5s;
 }
 .close-image-details
 {
-	position:relative;
-	width:100%;
 	text-align:right;
 	font-size:20px;
+	float:right;
 }
 .image-details-ul
 {
 	float:left;
 	list-style-type:none;
+	margin-top:10px;
 }
 .image-details-holder
 {
