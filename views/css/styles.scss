@@ -926,10 +926,12 @@ table.user-image-table tr
 .image-details-ul
 {
 	float:left;
+	list-style-type:none;
 }
 .image-details-holder
 {
 	float:right;
+	margin-right:10px;
 }
 .image-details-hider
 {
@@ -955,6 +957,7 @@ table.user-image-table tr
 	overflow-x:hidden;
 	overflow-y:hidden;
 	z-index:0;
+	margin-left:10px;
 }
 .search-item
 {

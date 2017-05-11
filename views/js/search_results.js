@@ -4,6 +4,17 @@ $(function(){
 		this.initialize = function(){
 			this.area = $('.image-details');
 			this.price = $(this.element).attr('data-price');
+			this.filetype = $(this.element).attr('data-filetype');
+			this.add_to_cart = $('.add_to_cart');
+			this.tags = $(this.element).attr('data-tags');
+			this.json = $.parseJSON(this.tags);
+			this.tag_holder = $('.item-details-tags');
+			this.width = $(this.element).attr('data-width');
+			this.image_id = $(this.element).attr('data-id');
+			this.height = $(this.element).attr('data-height');
+			this.filetype_holder = $('.image-details-filetype');
+			this.width_holder = $('.image-details-width');
+			this.height_holder = $('.image-details-height');
 			this.price_holder = $('.image-details-price');
 			this.url = $(this.element).attr('src');
 			this.image_holder = $('.image-details-holder');
@@ -29,8 +40,16 @@ $(function(){
 		this.addDetails = function()
 		{
 			$(this.image_holder).html("<img style='max-width:100%;' src='"+this.url+"'/>");
-			$(this.price_holder).html(this.price);
-
+			var price = "Price " + this.price + ".00";
+			var filetype = "Filetype " + this.filetype;
+			var width = "Width " + this.width + "px";
+			var height = "Height " + this.height + "px";
+			$(this.add_to_cart).attr('data-id',this.image_id);
+			$(this.price_holder).html(price);
+			$(this.filetype_holder).html(filetype);
+			$(this.width_holder).html(width);
+			$(this.height_holder).html(height);
+			console.log(this.tags);
 //			$('.item-details-price').html(this.price);
 		}
 		this.initialize();

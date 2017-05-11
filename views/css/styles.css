@@ -736,10 +736,12 @@ table.user-image-table tr {
   font-size: 20px; }
 
 .image-details-ul {
-  float: left; }
+  float: left;
+  list-style-type: none; }
 
 .image-details-holder {
-  float: right; }
+  float: right;
+  margin-right: 10px; }
 
 .image-details-hider {
   display: none; }
@@ -760,7 +762,8 @@ table.user-image-table tr {
   height: 150px;
   overflow-x: hidden;
   overflow-y: hidden;
-  z-index: 0; }
+  z-index: 0;
+  margin-left: 10px; }
 
 .search-item {
   display: block; }

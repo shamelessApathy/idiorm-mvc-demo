@@ -31,6 +31,7 @@ if (!empty($info['images']))
 
 
 	<div class='image-details-holder'></div>
+	<button style='display:inline; position:relative;' class="add_to_cart" >Add to Cart</button>
 </div>
 </div>
 </div>
@@ -46,7 +47,7 @@ if (!empty($info['images']))
 				data-width="<?php echo $image->info->width;?>" 
 				data-height="<?php echo $image->info->height;?>" 
 				data-id="<?php echo $image->info->id;?>"
-				data-tags="<?php $json = json_encode($image['tags']); echo $json;?>"
+				data-tags="<?php $json = json_encode($image['tags']);echo htmlentities($json, ENT_QUOTES, 'UTF-8');?>"
 				src="<?php echo $image->thumbnail;?>"/>
 		</div>
 
