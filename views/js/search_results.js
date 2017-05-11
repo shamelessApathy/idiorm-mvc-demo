@@ -26,9 +26,11 @@ $(function(){
 			this.image_holder = $('.image-details-holder');
 			this.button = $('.add_to_cart');
 			this.hider = $('.image-details-hider');
+			this.opacity = $('.image-details-opacity');
 		}
 		this.open = function()
 		{
+			$(this.opacity).hide();
 			console.log('running');
 			$(this.area).css({"height":"350px"});
 			$(this.hider).css({"display":"block"});
@@ -59,6 +61,8 @@ $(function(){
 			$(this.button).attr('data-id', this.image_id);
 			console.log(this.tag_string);
 			$(this.tag_holder).html(this.tag_string);
+			$(this.opacity).fadeIn(function(){console.log('runniing!!!')});
+
 //			$('.item-details-price').html(this.price);
 		}.bind(this)
 		this.initialize();

@@ -14,6 +14,7 @@ if (!empty($info['images']))
 ?>
 <div class='image-details'>
 <div class='image-details-hider'>
+<div class='image-details-opacity'>
 <div class='image-button-holder'><button type='button' class='add_to_cart'>Add To Cart</button></div>
 <div class='close-image-details'>X</div>
 <div class='clear'></div>
@@ -37,11 +38,13 @@ if (!empty($info['images']))
 </div>
 </div>
 </div>
+</div>
 <br>
 <?php if (is_array($info) && !empty($info['images'])):?>
 <?php foreach($images as $image):?>
 <div class='search-item'>
 		<div class='preview-thumb'>
+			<a href="/image/info?id=<?php echo $image->info->id;?>" class='search-item-link'></a>
 			<img class='image-result' 
 				data-price="<?php echo $image->info->price;?>" 
 				data-filetype="<?php echo $image->info->mime_type;?>" 

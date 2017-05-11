@@ -724,6 +724,12 @@ table.user-image-table tr {
 	height:100px;
 }*/
 /* SEARCH RESULTS*/
+.search-item-link {
+  width: 100%;
+  height: 100%;
+  display: none;
+  position: absolute; }
+
 .image-button-holder {
   float: left;
   margin-left: 20px; }
@@ -731,11 +737,13 @@ table.user-image-table tr {
 .image-details {
   height: 0;
   width: 100%;
-  border: 2px solid #333;
-  transition: height .5s;
-  -o-transition: height .5s;
-  -moz-transition: height .5s;
-  -webkit-transition: height .5s; }
+  border: 2px solid #333; }
+
+.image_details {
+  transition: .5s;
+  -o-transition: .5s;
+  -moz-transition: .5s;
+  -webkit-transition: .5s; }
 
 .close-image-details {
   text-align: right;
@@ -753,6 +761,14 @@ table.user-image-table tr {
 
 .image-details-hider {
   display: none; }
+
+.image-details-opacity {
+  /*
+  opacity:0;
+  transition:opacity 2s;
+  -o-transition:opacity 2s;
+  -moz-transition:opacity 2s;
+  -webkit-transition:opacity 2s;*/ }
 
 .page-count {
   width: 100%;
@@ -1101,6 +1117,15 @@ could be simply that some of the other rules are being applied with a greater im
   #login-form {
     margin-left: 15px; } }
 @media only screen and (max-width: 600px) {
+  .search-item-link {
+    height: 100%;
+    width: 100%;
+    display: block; }
+
+  .search-item {
+    float: none;
+    margin: 15px auto; }
+
   .looking-glass {
     width: 75px;
     height: 75px; }
