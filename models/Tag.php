@@ -69,7 +69,6 @@ class Tag {
 		{
 			array_push($tag_array,array("tag_id" =>$tag));
 		}
-		var_dump($tag_array);
 		
 		$images_array = array();
 			$images = ORM::for_table('image_to_tag')
