@@ -92,7 +92,7 @@ class tagController extends Controller {
 			$page = 1;
 		}
 		$page2 = $page -1;
-		$limit = 20;
+		$limit = 10;
 		$offset = $page2*$limit;
 		require_once(MODELS . '/Vote.php');
 		$vote_model = new Vote();
@@ -108,14 +108,18 @@ class tagController extends Controller {
 			require_once(MODELS . '/Image.php');
 			$model = new Tag();
 			$results = $model->search_by_tag($query);
+			$tag_ids = array();
+			foreach ($results as $tag_id)
+			{
+				array_push($tag_ids, $tag_id['id']);
+			}
 			
 			// if we find related tags to the query, search for images in image_to_tag table that are linked with each tag_id
 			if(!empty($results))
 			{
 				$images = array();
-				$count = $model->get_count($results[0]->id);
-					$image_id = $model->get_images($results[0]->id, $limit, $offset);
-					
+				$count = $model->get_count($tag_ids);
+					$image_id = $model->get_images($tag_ids, $limit, $offset);
 					if (isset($image_id))
 					{
 						foreach ($image_id as $image)

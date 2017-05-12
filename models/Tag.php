@@ -54,18 +54,37 @@ class Tag {
 	*/
 	public function get_count($tag_id)
 	{
-		$table = ORM::for_table('image_to_tag')->where('tag_id', $tag_id)->find_many();
-		$count = count($table);
+		$count = 0;
+		foreach ($tag_id as $tag)
+		{
+			$table = ORM::for_table('image_to_tag')->where('tag_id', $tag)->find_many();
+			$count = $count + count($table);
+		}
 		return $count;
 	}
 	public function get_images($tag_id, $limit, $offset)
 	{
-		$images = ORM::for_table('image_to_tag')
-					->where('tag_id', $tag_id)
-					->limit($limit)
-					->offset($offset)
-					->find_many();
-		return $images;
+		$tag_array = array();
+		foreach ($tag_id as $tag)
+		{
+			array_push($tag_array,array("tag_id" =>$tag));
+		}
+		var_dump($tag_array);
+		
+		$images_array = array();
+			$images = ORM::for_table('image_to_tag')
+						->where_in('tag_id', $tag_id)
+						->limit($limit)
+						->offset($offset)
+						->find_many();
+						var_dump(ORM::get_last_query());
+						
+			foreach($images as $image)
+			{
+				array_push($images_array, $image);
+			}
+
+		return $images_array;
 	}
 	public function remove_tag($image_id, $tag_id)
 	{
