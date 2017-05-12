@@ -92,7 +92,7 @@ class tagController extends Controller {
 			$page = 1;
 		}
 		$page2 = $page -1;
-		$limit = 5;
+		$limit = 20;
 		$offset = $page2*$limit;
 		require_once(MODELS . '/Vote.php');
 		$vote_model = new Vote();

@@ -787,7 +787,8 @@ table.user-image-table tr {
   overflow-x: hidden;
   overflow-y: hidden;
   z-index: 0;
-  margin-left: 10px; }
+  margin-left: 10px;
+  margin-top: 10px; }
 
 .search-item {
   display: block; }
