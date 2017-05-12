@@ -533,6 +533,32 @@ table.user-image-table tr
 		vertical-align:middle;
 	display:table-cell;
 }
+.nav-arrows
+{
+	width:100%;
+	height:100%;
+	z-index:2;
+}
+.nav-arrow-left:hover,.nav-arrow-right:hover
+{
+	color:black;
+}
+.nav-arrow-left
+{
+	color:white;
+	position:absolute;
+	left:5%;
+	top:35%;
+	font-size:60px;
+}
+.nav-arrow-right
+{
+	color:white;
+	position:absolute;
+	right:5%;
+	top:35%;
+	font-size:60px;
+}
 ._thumb
 {
 	width:100px;
@@ -605,6 +631,7 @@ table.user-image-table tr
 .watermark
 {
 	max-width:100%;
+	margin-top:-85%;
 }
 .image_info
 {

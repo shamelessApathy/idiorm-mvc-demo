@@ -345,20 +345,69 @@ class imageController extends Controller {
 
 
 	}
-	// get info to be able to display on the single store.image.php view
-	public function info()
+	public function before($id=null)
 	{
+		if (empty($id))
+		{
+			$id = $_GET['id'];
+		}
+		require_once(MODELS . '/Image.php');
+		$next = $id-1;
+		$model = Model::factory('Image')->find_one($next);
+		var_dump($model);
+		if ($model === FALSE)
+		{
+			$id = $next-1;
+			$this->before($id);
+		}
+		else
+		{
+			$this->info($next);
+		}
+	}
+	public function after($id=null)
+	{
+		if (empty($id))
+		{
+			$id = $_GET['id'];
+		}
+		require_once(MODELS . '/Image.php');
+		$next = $id+1;
+		$model = Model::factory('Image')->find_one($next);
+		while (empty($model))
+		{
+			$id = $id+1;
+			$this->after($id);
+		}
+		$this->info($id);
+	}
+	// get info to be able to display on the single store.image.php view
+	public function info($id = null)
+	{
+
 		require_once(MODELS . '/User.php');
 		require_once(MODELS . '/Profile.php');
 		$user_model = new User();
-		$id = $_GET['id'];
+		if (isset($_GET['id']))
+		{
+			$id = $_GET['id'];
+		}
 		$image = $this->get_image($id);
-		$user_info = Model::factory('User')->find_one($image->user_id);
-		$tags = $image->get_tags();
-		$categories = $image->get_categories();
-		$user_profile = $user_info->profile();
-		$image = array('image'=>$image, 'tags'=>$tags, 'categories'=> $categories, 'user'=>$user_info, 'profile' => $user_profile);
-		return_view('store/store.image.php', $image);
+		if (!empty($image))
+		{
+			$user_info = Model::factory('User')->find_one($image->user_id);
+			$tags = $image->get_tags();
+			$categories = $image->get_categories();
+			$user_profile = $user_info->profile();
+			$image = array('image'=>$image, 'tags'=>$tags, 'categories'=> $categories, 'user'=>$user_info, 'profile' => $user_profile);
+			return_view('store/store.image.php', $image);
+		}
+		else
+		{
+			var_dump($id);
+			var_dump(ORM::get_last_query());
+			echo "Image not found";
+		}
 	}
 	// instantiates an image class based on image_id using ORM Model::factory
 	public function get_image($id)
