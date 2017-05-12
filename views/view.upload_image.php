@@ -17,7 +17,13 @@ $categories = $info;
 <input type='file' id='image_file' name='image'><br>
 <label>Image Name:</label><br>
 <input type='text' name='user_image_name'/><br>
-
+<label>Category</label><br>
+<select id='upload-category'>
+	<option>Default 1</option>
+	<option>Default 2</option>
+	<option>Default 3</option>
+	<option name='add-a-category' id='add-a-category'>Add a Category</option>
+</select><br>
 <label>Tags</label><br>
 <div id='tag_div'></div><br>
 <input id='tag_holder' type='text' style='display:none;' name='tags' placeholder='Use tag editor to add tags' readonly/><br>
@@ -46,6 +52,12 @@ $categories = $info;
 
 </div>
 </div> 
+<div class='add-cat-div'>
+	<div class='close'>X</div>
+	<p>Submit a New Category</p>
+	<input name='cat-title' id='cat-title' type='text'/>
+	<button type='button' id='add-cat-button'>Submit</button>
+</div>
 </div>
 </div>
 
@@ -55,3 +67,4 @@ $categories = $info;
 <?php require(FOOTER); ?>
 <script src='/views/js/jqueryrotate.js' type='text/javascript' rel='javascript'></script>
 <script src='/views/js/tag_format.js' type='text/javascript' rel='javascript'></script>
+<script src='/views/js/category.js' type='text/javascript' rel='javascript'></script>

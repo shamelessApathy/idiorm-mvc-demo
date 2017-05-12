@@ -764,6 +764,24 @@ table.user-image-table tr
 	background:black;
 	color:white;
 }
+/* UPLOAD IMAGE STUFF */
+#add-cat-button
+{
+	margin-top:10px;
+}
+.add-cat-div
+{
+	padding:10px;
+	width:200px;
+	height:150px;
+	border:1px solid black;
+	background:#ccc;
+	position:absolute;
+	top:200px;
+	left:35%;
+	z-index:-1;
+	opacity:0;
+}
 #upload_price
 {
 	display:none;

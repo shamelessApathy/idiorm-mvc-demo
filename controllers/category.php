@@ -50,24 +50,41 @@ class categoryController extends Controller{
 		$categories = $model->get_categories($image_id);
 		if($categories)
 		{
-		var_dump($image_id);
-		$cat_array = array();
-		foreach ($categories as $category)
-		{
-			$title = $model->get_title($category->category_id);
-			$assoc = array('category_title'=>$title->title,'cat_id'=>$category->category_id);
-			array_push($cat_array, $assoc);
-		}
-		var_dump($cat_array);
-		if (!empty($cat_array))
-		{
-		$result = json_encode($cat_array);
-		echo $result;
+			var_dump($image_id);
+			$cat_array = array();
+			foreach ($categories as $category)
+			{
+				$title = $model->get_title($category->category_id);
+				$assoc = array('category_title'=>$title->title,'cat_id'=>$category->category_id);
+				array_push($cat_array, $assoc);
+			}
+			var_dump($cat_array);
+			if (!empty($cat_array))
+			{
+			$result = json_encode($cat_array);
+			echo $result;
+			}
+			else
+			{
+				return false;
+			}
 		}
 	}
-	else
+	/**
+	*
+	* @param $cat_name
+	* @return BOOL for success or failure
+	*/
+	public function create_category($cat_name = null)
 	{
-		return false;
+		if (empty($cat_name))
+		{
+			$cat_name = $_POST['cat_name'];
+		}
+		
+		require_once(MODELS . '/Category.php');
+		$model = new Category();
+		$model->add_category($cat_name);
 	}
-	}
+
 }
