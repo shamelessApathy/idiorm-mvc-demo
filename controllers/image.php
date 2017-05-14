@@ -345,53 +345,54 @@ class imageController extends Controller {
 
 
 	}
-	public function before($id=null)
+	public function before($id_not_used=null)
 	{
-		if (empty($id))
-		{
-			$id = $_GET['id'];
-		}
+		$id = $_GET['id'];
 		require_once(MODELS . '/Image.php');
-		$next = $id-1;
-		$model = Model::factory('Image')->find_one($next);
-		var_dump($model);
-		if ($model === FALSE)
+		$previousModel = Model::factory('Image')->where_lt('id', $id)->find_many();
+		//$send_to = $previousModel[$offset];
+		if (empty($previousModel))
 		{
-			$id = $next-1;
-			$this->before($id);
+				echo "No more images in this direction";
+				return;
 		}
 		else
 		{
-			$this->info($next);
+			$send_to = end($previousModel);
 		}
-	}
-	public function after($id=null)
+		$this->info($send_to->id, '1');
+	}	
+	public function after($id_not_used=null)
 	{
-		if (empty($id))
-		{
-			$id = $_GET['id'];
-		}
+		$id = $_GET['id'];
 		require_once(MODELS . '/Image.php');
-		$next = $id+1;
-		$model = Model::factory('Image')->find_one($next);
-		while (empty($model))
+		$nextModel = Model::factory('Image')->where_gt('id', $id)->find_many();
+		if (empty($nextModel))
 		{
-			$id = $id+1;
-			$this->after($id);
+				echo "No more images in this direction <a href='/image/info?id=$id'>Go Back</a>";
+				return;
 		}
-		$this->info($id);
+		else
+		{
+			$send_to = reset($nextModel);
+		}
+		$this->info($send_to->id, '1');
 	}
 	// get info to be able to display on the single store.image.php view
-	public function info($id = null)
+	public function info($id_func = null, $recursive =  null)
 	{
-
 		require_once(MODELS . '/User.php');
 		require_once(MODELS . '/Profile.php');
 		$user_model = new User();
-		if (isset($_GET['id']))
+		if (isset($id_func) && !is_null($id_func) && !is_null($recursive))
+		{
+			$id = $id_func;
+		}
+		else
 		{
 			$id = $_GET['id'];
 		}
+			var_dump($id);
 		$image = $this->get_image($id);
 		if (!empty($image))
 		{
@@ -404,7 +405,6 @@ class imageController extends Controller {
 		}
 		else
 		{
-			var_dump($id);
 			var_dump(ORM::get_last_query());
 			echo "Image not found";
 		}
@@ -434,16 +434,6 @@ class imageController extends Controller {
 		$tags = $image->tags;
 		$tags = str_ireplace($tag, '', $tags);
 		$tags = explode(' ', $tags);
-		var_dump($tags);
-		/*if ($this->edit_tags($tags, $id))
-		{
-			echo 'it worked';
-		}
-		else
-		{
-			echo 'didnt work';
-		}*/
-
 	}
 	/*
 	*
