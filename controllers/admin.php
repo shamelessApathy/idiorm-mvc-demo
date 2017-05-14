@@ -1,6 +1,10 @@
 <?php
 require_once(BASE_CONTROLLER);
 class adminController extends Controller {
+	public function category_manager()
+	{
+		return_view('admin/admin.category_manager.php');
+	}
 	public function post_manager()
 	{
 		return_view('admin/admin.post_manager.php');

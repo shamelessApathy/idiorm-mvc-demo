@@ -113,6 +113,7 @@ $path = "/image/info?id=";
             <li><a href="/admin/image_manager">Image Manager</a></li>
             <li><a href="/admin/subscription_manager">Subscription Manager</a></li>
             <li><a href="/admin/bug_manager">Bug Reports</a></li>
+            <li><a href="/admin/category_manager">Category Manager</a></li>
             <li role="separator" class="divider"></li>
             <li><a href="#">Separated link</a></li>
           </ul>
