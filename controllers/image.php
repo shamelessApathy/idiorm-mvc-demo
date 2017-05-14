@@ -392,7 +392,6 @@ class imageController extends Controller {
 		{
 			$id = $_GET['id'];
 		}
-			var_dump($id);
 		$image = $this->get_image($id);
 		if (!empty($image))
 		{
@@ -405,7 +404,6 @@ class imageController extends Controller {
 		}
 		else
 		{
-			var_dump(ORM::get_last_query());
 			echo "Image not found";
 		}
 	}
