@@ -28,27 +28,45 @@ $(function(){
 			this.hider = $('.image-details-hider');
 			this.opacity = $('.image-details-opacity');
 		}
+		this.getImageHeight = function()
+		{
+			/*var poll = setInterval(function () 
+			{
+	    		if (img.naturalWidth) 
+	    		{
+	        		clearInterval(poll);
+	        		console.log(img.naturalWidth, img.naturalHeight);
+	        	}
+        	}, 10);*/
+		}
 		this.open = function()
 		{
+			var width = .9*screen.width;
+			$(this.area).width(width);
 			$(this.opacity).hide();
 			console.log('running');
-			$(this.area).css({"height":"600px"});
-			$(this.hider).css({"display":"block"});
 			this.addDetails();
+			$(this.area).css({"margin-top":"0"});
 		}.bind(this);
 		this.close = function()
 		{
-			$(this.hider).css({"display":"none"});
-			$(this.area).css({"height":"0"});
+			$(this.img).remove();
+			$(this.area).css({"margin-top":"-1000"});
 		}.bind(this)
 		this.setListener = function(el)
 		{
 			$(el).on('click', this.open);
 			$('.close-image-details').on('click', this.close);
 		}.bind(this)
+		this.img;
 		this.addDetails = function()
 		{
-			$(this.image_holder).html("<a href='/image/info?id="+this.image_id+"'><img style='max-width:100%;' src='"+this.url+"'/></a>");
+			var sizing = .5*screen.width + "px";
+			this.img = document.createElement('img');
+			this.img.src = this.url;
+			$(this.img).css({"max-width":sizing});
+			$(this.image_holder).append(this.img);
+			//$(this.image_holder).html("<a href='/image/info?id="+this.image_id+"'><img style='max-width:100%;' src='"+this.url+"'/></a>");
 			var price = "Price " + this.price + ".00";
 			var filetype = "Filetype " + this.filetype;
 			var width = "Width " + this.width + "px";

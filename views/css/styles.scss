@@ -1006,12 +1006,21 @@ table.user-image-table tr
 }
 .image-details
 {
-	height:0;
-	width:100%;
+	padding-top:10px;
+	padding-bottom:10px;
+	margin-top:-1000px;
+	position:absolute;
 	background-color:rgba(0, 0, 0, 0.85);
+	display:block;
+	margin-left:-10%;
+	color:$body-bg;
 	/*border:2px solid #333;*/
 }
-.image_details
+.image-details .tag
+{
+	color:$secondary-font-color;
+}
+.image-details
 {
 	transition:.5s;
 	-o-transition:.5s;
@@ -1022,7 +1031,12 @@ table.user-image-table tr
 {
 	text-align:right;
 	font-size:20px;
+	padding-right:5px;
 	float:right;
+}
+.close-image-details:hover
+{
+	color:#ccc;
 }
 .image-details-ul
 {
@@ -1038,7 +1052,8 @@ table.user-image-table tr
 }
 .image-details-hider
 {
-	display:none;
+
+	background-color:rgba(0,0,0,.1);
 }
 .image-details-opacity
 {

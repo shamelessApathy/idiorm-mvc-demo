@@ -76,7 +76,6 @@ class Tag {
 						->limit($limit)
 						->offset($offset)
 						->find_many();
-						var_dump(ORM::get_last_query());
 						
 			foreach($images as $image)
 			{

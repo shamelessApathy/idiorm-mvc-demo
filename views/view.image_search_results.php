@@ -16,7 +16,7 @@ if (!empty($info['images']))
 <div class='image-details-hider'>
 <div class='image-details-opacity'>
 <div class='image-button-holder'><button type='button' class='add_to_cart'>Add To Cart</button></div>
-<div class='close-image-details'>X</div>
+<div class='close-image-details'><i class='fa fa-close'></i></div>
 <div class='clear'></div>
 <div class='row'>
 <div class='col-md-3'>
