@@ -415,28 +415,51 @@ table.user-image-table tr {
   vertical-align: middle;
   display: table-cell; }
 
-.nav-arrows {
+.mobile-nav-arrows {
   width: 100%;
-  height: 100%;
-  position: absolute;
+  height: 57px;
   z-index: 2; }
 
 .nav-arrow-left:hover, .nav-arrow-right:hover {
   color: black; }
 
 .nav-arrow-left {
-  color: white;
-  position: absolute;
-  left: 5%;
-  top: 35%;
-  font-size: 60px; }
+  color: #333;
+  left: 0;
+  top: 300px;
+  height: 100%;
+  font-size: 60px;
+  width: 52px;
+  float: left;
+  margin-right: 5px; }
 
 .nav-arrow-right {
-  color: white;
-  position: absolute;
-  right: 10%;
-  top: 35%;
-  font-size: 60px; }
+  color: #333;
+  right: 0;
+  float: left;
+  top: 300px;
+  height: 100%;
+  font-size: 60px;
+  width: 52px;
+  margin-left: 5px; }
+
+.mobile-nav-arrow-left {
+  color: #333;
+  left: 0;
+  font-size: 60px;
+  width: 52px;
+  float: left;
+  margin-right: 5px;
+  display: none; }
+
+.mobile-nav-arrow-right {
+  color: #333;
+  float: right;
+  height: 100%;
+  font-size: 60px;
+  width: 52px;
+  margin-left: 5px;
+  display: none; }
 
 ._thumb {
   width: 100px;
@@ -498,7 +521,14 @@ table.user-image-table tr {
   left: 15px; }
 
 .watermark {
-  max-width: 100%; }
+  max-width: 80%;
+  display: block;
+  float: left; }
+
+.watermark {
+  cursor: -moz-zoom-in;
+  cursor: -webkit-zoom-in;
+  cursor: zoom-in; }
 
 .image_info {
   text-align: left; }
@@ -776,7 +806,8 @@ table.user-image-table tr {
 .image-details {
   height: 0;
   width: 100%;
-  border: 2px solid #333; }
+  background-color: rgba(0, 0, 0, 0.85);
+  /*border:2px solid #333;*/ }
 
 .image_details {
   transition: .5s;
@@ -796,7 +827,8 @@ table.user-image-table tr {
 
 .image-details-holder {
   float: right;
-  margin-right: 10px; }
+  margin-right: 10px;
+  width: 100%; }
 
 .image-details-hider {
   display: none; }
@@ -1145,6 +1177,16 @@ could be simply that some of the other rules are being applied with a greater im
   padding: 2px; }
 
 @media only screen and (max-width: 900px) {
+  .mobile-nav-arrow-left, .mobile-nav-arrow-right {
+    display: block; }
+
+  .nav-arrow-left, .nav-arrow-right {
+    display: none; }
+
+  .watermark {
+    float: none;
+    max-width: 100%; }
+
   #login_form {
     margin-left: 10px; }
 

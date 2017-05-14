@@ -129,6 +129,7 @@ class tagController extends Controller {
 								$image->vote = 0;
 								$image_factory = Model::factory('Image')->find_one($image->image_id);
 								$image->thumbnail = $image_factory->thumbnail;
+								$image->watermark = $image_factory->watermark;
 							}
 							$get_votes = $vote_model->weighted_vote($image->image_id, $results[0]->id);
 							$image->vote = (Int) $get_votes;

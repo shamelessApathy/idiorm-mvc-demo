@@ -32,7 +32,7 @@ $(function(){
 		{
 			$(this.opacity).hide();
 			console.log('running');
-			$(this.area).css({"height":"350px"});
+			$(this.area).css({"height":"600px"});
 			$(this.hider).css({"display":"block"});
 			this.addDetails();
 		}.bind(this);

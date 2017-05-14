@@ -48,19 +48,29 @@ $user_link = "/image/user/$user->id";
 			</div>
 		<div class='col-md-8'>
 			<div class='watermark-container'>
-				<div class='nav-arrows'>
+			<div class='mobile-nav-arrows'>
+				<a href="/image/before?id=<?php echo $image->id;?>">
+					<div class='mobile-nav-arrow-left'>
+						<i class='fa fa-arrow-circle-left'></i>
+					</div>
+				</a>
+				<a href="/image/after?id=<?php echo $image->id;?>">
+					<div class='mobile-nav-arrow-right'>
+						<i class='fa fa-arrow-circle-right'></i>
+					</div>
+				</a>
+			</div>
 					<a href="/image/before?id=<?php echo $image->id;?>">
 						<div class='nav-arrow-left'>
 							<i class='fa fa-arrow-circle-left'></i>
 						</div>
 					</a>
+				<img class='watermark' onclick="window.open(this.src)" data-id="<?php echo $image->id;?>" src="<?php echo $image->watermark;?>"/>
 					<a href="/image/after?id=<?php echo $image->id;?>">
 						<div class='nav-arrow-right'>
 							<i class='fa fa-arrow-circle-right'></i>
 						</div>
 					</a>
-				 </div>
-				<img class='watermark' data-id="<?php echo $image->id;?>" src="<?php echo $image->watermark;?>"/>
 			</div>
 		</div>
 				<div class='col-md-2'>

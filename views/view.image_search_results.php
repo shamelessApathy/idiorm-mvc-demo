@@ -52,7 +52,7 @@ if (!empty($info['images']))
 				data-height="<?php echo $image->info->height;?>" 
 				data-id="<?php echo $image->info->id;?>"
 				data-tags="<?php $json = json_encode($image['tags']);echo htmlentities($json, ENT_QUOTES, 'UTF-8');?>"
-				src="<?php echo $image->thumbnail;?>"/>
+				src="<?php echo $image->watermark;?>"/>
 		</div> 
 
 </div>
