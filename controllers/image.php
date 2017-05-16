@@ -109,9 +109,10 @@ class imageController extends Controller {
 	public function upload_image($success = null)
 	{
 		$this->lockdown();
-		require_once(CONTROLLERS . '/category.php');
-		$category = new categoryController();
-		$categories = $category->get_all();
+		require_once(MODELS . '/Category.php');
+		$category = new Category();
+		//$categories = $category->get_all();
+		$categories = $category->approved_only();
 		if (isset($_GET['success']) && $_GET['success'] == 'true')
 		{
 			user_msg('Image upload succesful!');

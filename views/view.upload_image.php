@@ -4,12 +4,11 @@ require(HEADER);
 
 $categories = $info;
 ?>
-
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <div class='desktop'>
 <div class='container'>
 <div class='row'>
-<div class='col-md-6'>
+<div class='col-md-6'> 
 <div class='mobile-upload'>
 <h3 class='upload-title'> Upload an Image</h3>
 <form enctype='multipart/form-data' action='/image/new_image' method="POST">
@@ -19,9 +18,9 @@ $categories = $info;
 <input type='text' name='user_image_name'/><br>
 <label>Category</label><br>
 <select id='upload-category'>
-	<option>Default 1</option>
-	<option>Default 2</option>
-	<option>Default 3</option>
+<?php foreach($categories as $cat): ?>
+	<option name='category' value="<?php echo $cat->id;?>"><?php echo $cat->title;?></option>
+<?php endforeach;?>
 	<option name='add-a-category' id='add-a-category'>Add a Category</option>
 </select><br>
 <label>Tags</label><br>
