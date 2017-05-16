@@ -1,6 +1,17 @@
 <?php
 
 class Category{
+	public function get_unapproved()
+	{
+		$categories = ORM::for_table('category')->where('approved', 0)->find_many();
+		return $categories;
+	}
+	public function approve($id)
+	{
+		$category = ORM::for_table('category')->where('id', $id)->find_one();
+		$category->approved = 1;
+		$category->save();
+	}
 	public function add_category($name)
 	{
 		$name = ucfirst($name);
