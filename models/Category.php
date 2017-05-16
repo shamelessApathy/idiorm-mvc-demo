@@ -3,6 +3,7 @@
 class Category{
 	public function add_category($name)
 	{
+		$name = ucfirst($name);
 		$category = ORM::for_table('category')->create();
 		$category->title = $name;
 		$category->save();
@@ -26,6 +27,13 @@ class Category{
 		{
 			return true;
 		}
+	}
+	public function approved_only()
+	{
+		// When using the ORM::for_table function do NOT capitalize the table name, confused this the Model::factory where you capitalize the MODEL's name
+		$categories = ORM::for_table('category')->where('approved','1')->find_many();
+		var_dump(ORM::get_last_query());
+		return $categories;
 	}
 	public function get_categories($image_id)
 	{
