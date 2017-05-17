@@ -35,8 +35,9 @@ input
 {
 	width:100%;
 	background-color:$primary-bg;
-	position:fixed;
+	position:absolute;
 	bottom:0;
+	z-index:10;
 }
 .footer-container a
 {
@@ -1018,13 +1019,16 @@ table.user-image-table tr
 }
 .image-details
 {
+	left: 50%;
+	-webkit-transform: translateX(-50%);
+	transform: translateX(-50%);
 	padding-top:10px;
 	padding-bottom:10px;
 	margin-top:-1000px;
 	position:absolute;
 	background-color:rgba(0, 0, 0, 0.85);
 	display:block;
-	margin-left:-10%;
+	left:-100px;
 	color:$body-bg;
 	/*border:2px solid #333;*/
 }

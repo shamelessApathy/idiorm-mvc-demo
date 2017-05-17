@@ -25,7 +25,6 @@ $(function(){
 			// puts image info and preview image in focus_modal
 			this.populate_details = function(el)
 			{
-				console.log('runniung');
 				orig = el;
 				$('.focus_modal').css({'display':'block'});
 				$('.focus_details').attr('style','display:block');
@@ -158,7 +157,7 @@ $(function(){
 				button.on('click', this.addTags);
 			}
 			this.keyListeners = function()
-			{
+			{ 
 				$("#add_tag").on('keyup', function (e) {
     				if (e.keyCode == 13) 
     				{
@@ -179,7 +178,7 @@ $(function(){
 			this.thumbListeners = function(el)
 			{
 				var element = el;
-				$(el).on('click', function()
+				$(el.parentElement).on('click', function()
 				{
 					this.populate_details(element);
 				}.bind(this))
