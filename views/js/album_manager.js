@@ -40,6 +40,7 @@ $(function(){
 					$('#focus_type').html('Regular Image');
 				}
 				var image = el.getElementsByTagName('IMG')[0];
+				console.log(image);
 				this.id = $(image).attr('data-id');
 				var download = $('#download_image');
 				var watermark = $(image).attr('data-watermark');
@@ -178,7 +179,7 @@ $(function(){
 			this.thumbListeners = function(el)
 			{
 				var element = el;
-				$(el.parentElement).on('click', function()
+				$(el).on('click', function()
 				{
 					this.populate_details(element);
 				}.bind(this))
