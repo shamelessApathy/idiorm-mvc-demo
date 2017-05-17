@@ -35,9 +35,8 @@ input
 {
 	width:100%;
 	background-color:$primary-bg;
-	position:absolute;
-	bottom:0;
-	z-index:10;
+	position:fixed;
+	bottom:0; 
 }
 .footer-container a
 {
@@ -1019,16 +1018,23 @@ table.user-image-table tr
 }
 .image-details
 {
-	left: 50%;
+	/* Set your own height: percents, ems, whatever! */
+ /* Set your own width: percents, ems, whatever! */
+  	/*overflow: auto; /* Recommended in case content is larger than the container */
+  	margin: auto; /* Center the item vertically & horizontally */
+  	position: absolute; /* Break it out of the regular flow */
+  	top: 0; left: 0; right:0; /* Set the bounds in which to center it, relative to its parent/container */
+	/*left:50%;
 	-webkit-transform: translateX(-50%);
 	transform: translateX(-50%);
+	-moz-transform: translateX(-50%);
+	-o-transform: translateX(-50%);*/
 	padding-top:10px;
 	padding-bottom:10px;
 	margin-top:-1000px;
 	position:absolute;
 	background-color:rgba(0, 0, 0, 0.85);
 	display:block;
-	left:-100px;
 	color:$body-bg;
 	/*border:2px solid #333;*/
 }

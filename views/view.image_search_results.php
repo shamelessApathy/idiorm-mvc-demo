@@ -1,17 +1,5 @@
 <?php require(HEADER);
 ?>
-<div class='container'>
-
-<h3>Search Results for "<?php echo $info['query'];?>"</h3>
-<?php if (!empty($info['images'])):?>
-	<h4><?php echo $info['count'] . ' results';?></h4>
-<?php endif;?>
-<?php
-if (!empty($info['images']))
-{
-	$images = $info['images'];
-}
-?>
 <div class='image-details'>
 <div class='image-details-hider'>
 <div class='image-details-opacity'>
@@ -39,6 +27,19 @@ if (!empty($info['images']))
 </div>
 </div>
 </div>
+<div class='container'>
+
+<h3>Search Results for "<?php echo $info['query'];?>"</h3>
+<?php if (!empty($info['images'])):?>
+	<h4><?php echo $info['count'] . ' results';?></h4>
+<?php endif;?>
+<?php
+if (!empty($info['images']))
+{
+	$images = $info['images'];
+}
+?>
+
 <br>
 <?php if (is_array($info) && !empty($info['images'])):?>
 <?php foreach($images as $image):?>

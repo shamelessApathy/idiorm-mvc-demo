@@ -42,12 +42,13 @@ $(function(){
 		this.open = function()
 		{
 			var width = .9*window.innerWidth;
+			$('body').width(window.innerWidth);
 			var tenpercent = -(.2 * width);
 			var left_string = tenpercent+'px';
 			$(this.area).width(width);
 			$(this.opacity).hide();
 			console.log('running');
-			$(this.area).css({"margin-top":"0"});
+			$(this.area).css({"margin-top":"150px"});
 			this.addDetails();
 		}.bind(this);
 		this.close = function()
@@ -63,13 +64,14 @@ $(function(){
 		this.img;
 		this.addDetails = function()
 		{
-			console.log(this.area.width());
 			var sizing = .7*this.area.width() + "px";
 			var size_string = "max-width:"+sizing;
 			this.img = document.createElement('img');
 			$(this.img).attr("style",size_string);
 			this.img.src = this.url;
 			$(this.image_holder).append(this.img);
+			console.log(this.img.height);
+
 			//$(this.image_holder).html("<a href='/image/info?id="+this.image_id+"'><img style='max-width:100%;' src='"+this.url+"'/></a>");
 			var price = "Price " + this.price + ".00";
 			var filetype = "Filetype " + this.filetype;
