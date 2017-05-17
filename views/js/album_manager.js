@@ -254,7 +254,7 @@ $(function(){
 
 	var album = new AlbumManager();
 	
-	var image_thumb_array = document.getElementsByClassName('image_thumb');
+	var image_thumb_array = document.getElementsByClassName('search-item');
 	for ( var i =0; i < image_thumb_array.length; i++)
 	{
 		album.thumbListeners(image_thumb_array[i]);

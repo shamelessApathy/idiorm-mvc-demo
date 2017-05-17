@@ -659,6 +659,12 @@ table.user-image-table tr
 	display:none;
 	z-index:-1;
 }
+.collection-wrapper
+{
+	height:600px;
+	width:100%;
+	overflow-y:scroll;
+}
 .image_thumb:hover .image_details_button 
 {
 	display:block;
@@ -1345,6 +1351,7 @@ could be simply that some of the other rules are being applied with a greater im
 	list-style: none;
 	margin-top:20px;
 }
+
 .image-manager-button
 {
 	width:200px;
