@@ -26,6 +26,10 @@ class Category{
 		{
 			return true;
 		}
+		else
+		{
+			return false;
+		}
 	}
 	public function get_categories($image_id)
 	{

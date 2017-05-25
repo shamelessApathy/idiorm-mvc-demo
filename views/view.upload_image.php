@@ -3,6 +3,7 @@ require(HEADER);
 
 
 $categories = $info;
+
 ?>
 
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -18,12 +19,12 @@ $categories = $info;
 <label>Image Name:</label><br>
 <input type='text' name='user_image_name'/><br>
 <label>Category</label><br>
-<select id='upload-category'>
-	<option>Default 1</option>
-	<option>Default 2</option>
-	<option>Default 3</option>
-	<option name='add-a-category' id='add-a-category'>Add a Category</option>
-</select><br>
+<select id='upload-category' name='category-id'>
+		<option>Choose a Category</option>
+	<?php foreach ($categories as $cat):?>
+		<option value="<?php echo $cat->id;?>"><?php echo ucwords($cat->title);?></option>
+	<?php endforeach;?>
+</select><button name='add-a-category' value='add-a-category' type='button' id='add-a-category'>New Category</button><br>
 <label>Tags</label><br>
 <div id='tag_div'></div><br>
 <input id='tag_holder' type='text' style='display:none;' name='tags' placeholder='Use tag editor to add tags' readonly/><br>

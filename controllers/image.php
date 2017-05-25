@@ -130,12 +130,30 @@ class imageController extends Controller {
 		$size = getimagesize($file);
 		return $size;
 	}
+	/**
+	*
+	* @param $image_id and $cat_id, sent from new_image function
+	* @return bool if unsuccessfull
+	*/
+	public function add_category_to_image($image_id, $cat_id)
+	{
+		require_once(MODELS .'/Category.php');
+		$model = new Category(); 
+		if ($model->add_cat_to_image($cat_id, $image_id))
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+	}
 	// runs through list of everything that needs to be done and recorded to create an instance of an image
 	public function new_image()
 	{
-		
 		$check = $_FILES['image']['tmp_name'];
 		$user_id = $_SESSION['user_info']->id;
+		$cat_id = $_POST['category-id'];
 		$name = $_FILES['image']['name'];
 		$tags = $_POST['tags'];
 		$deg = $_POST['rotate'];
@@ -155,8 +173,8 @@ class imageController extends Controller {
 			}
 		else
 		{
-			$price = 3;
-			$premium = 0;
+			$price = GLOBAL_PRICE;
+			$premium = 0; 
 		}
 
 		$tags = explode('|', $tags);
@@ -205,6 +223,14 @@ class imageController extends Controller {
 				{
 					//$this->upload_image(true); //sends you to function that renders view that shows all images from user (that are authorized!!!)
 					$this->add_tag($tags, $return);
+					if($this->add_category_to_image($return, $cat_id))
+					{
+
+					}
+					else
+					{
+						echo 'npot working';
+					}
 					header("Location:/image/upload_image?success=true");
 				}
 				else

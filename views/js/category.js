@@ -9,13 +9,12 @@ $(function(){
 		}
 		this.close = function()
 		{
-			console.log('close running');
+
 			$(this.add_cat_div).css({'opacity':'0'});
 			$(this.add_cat_div).css({'z-index':'-1'});
 		}.bind(this)
 		this.show_add = function()
 		{
-			console.log('show_add running!');
 			$(this.add_cat_div).css({'z-index':"2"});
 			$(this.add_cat_div).css({'opacity':'1'});
 			$('.close').on('click', this.close);
@@ -23,7 +22,6 @@ $(function(){
 		this.submit_category = function()
 		{
 			var title = $('#cat-title').val();
-			console.log(title);
 			var data = {"cat_name": title};
 			$.ajax({
 				type: "POST",
@@ -37,14 +35,7 @@ $(function(){
 		this.initializeListeners = function(show)
 		{
 			var func1 = show;
-			$(this.cat_choice).change(function(){
-				var selection = $(this).find("option:selected").attr('name');
-				console.log(selection);
-				if (selection === "add-a-category")
-				{
-					func1();
-				}
-			})
+			$('#add-a-category').on('click', func1);
 			$(this.submit).on('click', this.submit_category);
 
 		}.bind(this)
