@@ -21,6 +21,13 @@ class categoryController extends Controller{
 		$model = new Category();
 		$images = $model->get_images($cat_id);
 	}
+	public function approved_only()
+	{
+		require_once(MODELS . '/Category.php');
+		$model = new Category();
+		$approved = $model->approved_only();
+		return $approved;
+	}
 	public function get_all()
 	{
 		require_once(MODELS. '/Category.php');

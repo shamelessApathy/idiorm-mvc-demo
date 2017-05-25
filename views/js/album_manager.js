@@ -25,7 +25,6 @@ $(function(){
 			// puts image info and preview image in focus_modal
 			this.populate_details = function(el)
 			{
-				console.log('runniung');
 				orig = el;
 				$('.focus_modal').css({'display':'block'});
 				$('.focus_details').attr('style','display:block');
@@ -41,6 +40,7 @@ $(function(){
 					$('#focus_type').html('Regular Image');
 				}
 				var image = el.getElementsByTagName('IMG')[0];
+				console.log(image);
 				this.id = $(image).attr('data-id');
 				var download = $('#download_image');
 				var watermark = $(image).attr('data-watermark');
@@ -158,7 +158,7 @@ $(function(){
 				button.on('click', this.addTags);
 			}
 			this.keyListeners = function()
-			{
+			{ 
 				$("#add_tag").on('keyup', function (e) {
     				if (e.keyCode == 13) 
     				{
@@ -255,7 +255,7 @@ $(function(){
 
 	var album = new AlbumManager();
 	
-	var image_thumb_array = document.getElementsByClassName('image_thumb');
+	var image_thumb_array = document.getElementsByClassName('search-item');
 	for ( var i =0; i < image_thumb_array.length; i++)
 	{
 		album.thumbListeners(image_thumb_array[i]);

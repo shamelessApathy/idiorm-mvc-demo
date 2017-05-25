@@ -142,5 +142,14 @@ foreach ($info['tags'] as $tag)
   </div><!-- /.container-fluid -->
 </nav>
 </div>
+<?php 
+$request = $_SERVER['REQUEST_URI'];
+$request = explode('/', $request);
+
+if ($request[1] === 'admin')
+{
+  echo "<div class='admin-warning'>You are in the admin area! </div>";
+}
+?>
 <div class='spacer'></div>
 </html>

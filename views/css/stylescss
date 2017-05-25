@@ -525,11 +525,6 @@ table.user-image-table tr {
   display: none;
   z-index: -1; }
 
-.collection-wrapper {
-  height: 600px;
-  width: 100%;
-  overflow-y: scroll; }
-
 .image_thumb:hover .image_details_button {
   display: block;
   position: absolute;
@@ -820,28 +815,13 @@ table.user-image-table tr {
   margin-left: 20px; }
 
 .image-details {
-  /* Set your own height: percents, ems, whatever! */
-  /* Set your own width: percents, ems, whatever! */
-  /*overflow: auto; /* Recommended in case content is larger than the container */
-  margin: auto;
-  /* Center the item vertically & horizontally */
-  position: absolute;
-  /* Break it out of the regular flow */
-  top: 0;
-  left: 0;
-  right: 0;
-  /* Set the bounds in which to center it, relative to its parent/container */
-  /*left:50%;
-  -webkit-transform: translateX(-50%);
-  transform: translateX(-50%);
-  -moz-transform: translateX(-50%);
-  -o-transform: translateX(-50%);*/
   padding-top: 10px;
   padding-bottom: 10px;
   margin-top: -1000px;
   position: absolute;
   background-color: rgba(0, 0, 0, 0.85);
   display: block;
+  margin-left: -10%;
   color: #f2f2f2;
   /*border:2px solid #333;*/ }
 
@@ -1270,4 +1250,4 @@ could be simply that some of the other rules are being applied with a greater im
   .bug-button {
     display: none; } }
 
-/*# sourceMappingURL=styles.css.map */
+/*# sourceMappingURL=stylescss.map */

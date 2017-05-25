@@ -3,7 +3,27 @@ require_once(BASE_CONTROLLER);
 class adminController extends Controller {
 	public function category_manager()
 	{
-		return_view('admin/admin.category_manager.php');
+		require_once(MODELS . "/Category.php");
+		$model = new Category();
+		$categories = $model->approved_only();
+
+		return_view('admin/admin.category_manager.php', ['approved' =>$categories]);
+	}
+	public function approve_category()
+	{
+		var_dump($_POST);
+		require_once(MODELS . '/Category.php');
+		$id = $_POST['id'];
+		$model = new Category();
+		$model->approve($id);
+	}
+	public function show_unapproved()
+	{
+		require_once(MODELS . '/Category.php');
+		$model = new Category();
+		$categories = $model->get_unapproved();
+
+		return_view('admin/admin.category_manager.php', ['unapproved' => $categories]);
 	}
 	public function post_manager()
 	{

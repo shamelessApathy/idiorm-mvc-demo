@@ -11,6 +11,18 @@ $secondary-hover-font-color:#333;
 $tag-bg:#ffffe6;
 $sold-table-bg: #e6e6e6; 
 
+.admin-warning
+{
+	background-color:#0099ff;
+	width:100%;
+	height:50px;
+	padding-top:5px;
+	display:block;
+	margin-top:60px;
+	color:#ccc;
+	font-size:20px;
+	text-align:center;
+}
 input 
 {
 	padding-top:0;
@@ -24,7 +36,7 @@ input
 	width:100%;
 	background-color:$primary-bg;
 	position:fixed;
-	bottom:0;
+	bottom:0; 
 }
 .footer-container a
 {
@@ -647,6 +659,12 @@ table.user-image-table tr
 	display:none;
 	z-index:-1;
 }
+.collection-wrapper
+{
+	height:600px;
+	width:100%;
+	overflow-y:scroll;
+}
 .image_thumb:hover .image_details_button 
 {
 	display:block;
@@ -1006,13 +1024,23 @@ table.user-image-table tr
 }
 .image-details
 {
+	/* Set your own height: percents, ems, whatever! */
+ /* Set your own width: percents, ems, whatever! */
+  	/*overflow: auto; /* Recommended in case content is larger than the container */
+  	margin: auto; /* Center the item vertically & horizontally */
+  	position: absolute; /* Break it out of the regular flow */
+  	top: 0; left: 0; right:0; /* Set the bounds in which to center it, relative to its parent/container */
+	/*left:50%;
+	-webkit-transform: translateX(-50%);
+	transform: translateX(-50%);
+	-moz-transform: translateX(-50%);
+	-o-transform: translateX(-50%);*/
 	padding-top:10px;
 	padding-bottom:10px;
 	margin-top:-1000px;
 	position:absolute;
 	background-color:rgba(0, 0, 0, 0.85);
 	display:block;
-	margin-left:-10%;
 	color:$body-bg;
 	/*border:2px solid #333;*/
 }
@@ -1323,6 +1351,7 @@ could be simply that some of the other rules are being applied with a greater im
 	list-style: none;
 	margin-top:20px;
 }
+
 .image-manager-button
 {
 	width:200px;
