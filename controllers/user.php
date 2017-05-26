@@ -342,8 +342,9 @@ public function get_images($user_id = null)
 		$category = $cat_model->get_category($image->id);
 		$image->category = $category;
 	}
-
-	$images = array('user_images' => $images);
+	$another_cat = new Category();
+	$categories = $another_cat->approved_only();
+	$images = array('user_images' => $images, 'categories'=>$categories);
 
 	return_view('store/store.collection_manager.php', $images);
 

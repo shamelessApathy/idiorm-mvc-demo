@@ -13,7 +13,15 @@ if (isset($info['user_images']))
 			<p id='focus_type'></p>
 				<ul>
 					<li id='focus_name'></li>
-					<li id='focus_category'></li>
+					<li id='focus-category'>
+						<select id='category-change'>
+								<option id='none-selected'>No Category Assigned</option>
+							<?php foreach($info['categories'] as $cat):?>
+								<option value="<?php echo $cat->id;?>"><?php echo ucwords($cat->title);?></option>
+							<?php endforeach;?>
+						</select>
+						<button type='button'>Change</button>
+					</li>
 					<li id='focus_edit_name'><input id='edit_name'><button id='save_name'>save</button></li>
 					<li id='focus_price'></li>
 					<li id='focus_width'></li>
@@ -41,7 +49,7 @@ if (isset($info['user_images']))
 <h1 style='text-align:center;'>All User Images</h1>
 <p style='text-align:center;'> click on an image to edit </p>
 <?php
-echo "<div class='collection-wrapper'>";
+echo "<div class='collection-wrapper'><div class='focus-scroll-hider'></div>";
 		foreach ($user_images as $image)
 		{
 			$uploaded = $image->created_at;
