@@ -17,10 +17,10 @@ if (isset($info['user_images']))
 						<select id='category-change'>
 								<option id='none-selected'>No Category Assigned</option>
 							<?php foreach($info['categories'] as $cat):?>
-								<option value="<?php echo $cat->id;?>"><?php echo ucwords($cat->title);?></option>
+								<option class='category-option' value="<?php echo $cat->id;?>"><?php echo ucwords($cat->title);?></option>
 							<?php endforeach;?>
 						</select>
-						<button type='button'>Change</button>
+						<button type='button' id='change-category'>Change</button>
 					</li>
 					<li id='focus_edit_name'><input id='edit_name'><button id='save_name'>save</button></li>
 					<li id='focus_price'></li>
@@ -61,7 +61,7 @@ echo "<div class='collection-wrapper'><div class='focus-scroll-hider'></div>";
 			}
 			if (isset($image->category->title))
 			{
-				$cat = $image->category->title;
+				$cat = $image->category->id;
 			}
 			else
 			{

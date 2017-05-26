@@ -43,6 +43,27 @@ class Category{
 			return false;
 		}
 	}
+	public function change_category($image_id, $cat_id)
+	{
+		$current = ORM::for_table('category_to_image')->where('image_id', $image_id)->find_one();
+		if ( !empty($current))
+		{
+			if ($current->delete())
+			{
+				if ($this->add_cat_to_image($cat_id, $image_id))
+				{
+					return true;
+				}
+			}
+		}
+		else
+		{
+			if($this->add_cat_to_image($cat_id, $image_id))
+			{
+				return true;
+			}
+		}
+	}
 	public function approved_only()
 	{
 		// When using the ORM::for_table function do NOT capitalize the table name, confused this the Model::factory where you capitalize the MODEL's name

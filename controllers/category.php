@@ -11,6 +11,17 @@ class categoryController extends Controller{
 			return_view('admin/admin.image_manager.php');
 		}
 	}
+	public function change_category()
+	{
+		$image_id = $_POST['image_id'];
+		$cat_id = $_POST['cat_id'];
+		require_once(MODELS . '/Category.php');
+		$cat_model = new Category();
+		if($cat_model->change_category($image_id, $cat_id))
+		{
+			echo "it happened!!!!";
+		}
+	}
 	public function get_images($cat_id = null)
 	{
 		if (!isset($cat_id))

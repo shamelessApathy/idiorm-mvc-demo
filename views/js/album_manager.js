@@ -5,6 +5,7 @@ $(function(){
 	{
 		this.init = function(){
 			this.id;
+			this.thumb_el;
 			this.close = $('.close');
 			this.element = $('.album_modal');
 			this.user_id = $('#user_id').attr('data-attribute');
@@ -41,7 +42,6 @@ $(function(){
 					$('#focus_type').html('Regular Image');
 				}
 				var image = el.getElementsByTagName('IMG')[0];
-				console.log(image);
 				this.id = $(image).attr('data-id');
 				var download = $('#download_image');
 				var watermark = $(image).attr('data-watermark');
@@ -50,7 +50,6 @@ $(function(){
 				var height = $(image).attr('data-height');
 				var price = $(image).attr('data-price');
 				var category = $(image).attr('data-category');
-				console.log(category);
 				var price_string = ('<strong>Price:</strong>' + '   ' + price);
 				var download_string = "<a href='/image/download/"+ this.id + "'><button id='download_image'>DOWNLOAD</button></a>";
 				$('#focus_price').html(price_string);
@@ -60,11 +59,26 @@ $(function(){
 				this.addEditNameListener();
 				$('#focus_width').html('<strong>Width:</strong>' + width );
 				$('#focus_height').html('<strong>Height:</strong>' + height );
+				$('#category_change:first-child').attr('selected','selected');
 				if (category != '')
 				{
-					var string = '<strong>Category:</strong>' + category;
-					$('#focus_category').html(string);
+					var categoryElements = document.getElementsByClassName('category-option');
+					for (var i =0; i < categoryElements.length; i++)
+					{
+						if (categoryElements[i].value === category)
+						{
+							console.log('match found');
+							console.log(categoryElements[i]);
+							$(categoryElements[i]).attr('selected','selected');
+						}
+						
+					}
+
 				}
+				else
+						{
+							$('#none-selected').attr('selected','selected');
+						}
 				var data = {'image_id': this.id};
 				$.ajax({
 					url: '/image/get_tags',
@@ -143,11 +157,6 @@ $(function(){
 				var button = $('.tiny_link');
 				button.on('click', this.editName);
 			}.bind(this)
-			this.addCategoryListener = function()
-			{
-				var button = ('#add_category_button');
-				$(button).on('click', this.add_category);
-			}.bind(this)
 			this.addCloseListener = function()
 			{
 				this.close.on('click', function(){
@@ -187,11 +196,36 @@ $(function(){
 			this.thumbListeners = function(el)
 			{
 				var element = el;
+				this.thumb_el = $(element).find('.collection-thumb');
 				$(el).on('click', function()
 				{
 					this.populate_details(element);
 				}.bind(this))
 			}.bind(this);
+			this.updateThumb = function(id)
+			{
+				console.log('running functioion!');
+				console.log(this.thumb_el);
+				$(this.thumb_el).attr('data-category',id);
+			}.bind(this)
+			this.changeCategory = function()
+			{
+				var id = $('#category-change').find(':selected').val();
+				var image_id = this.id;
+				$.ajax({
+					method:'POST',
+					url: '/category/change_category',
+					data: {'cat_id':id, 'image_id':image_id},
+					success: function(results)
+					{
+						this.updateThumb(id);
+					}.bind(this)
+				})
+			}.bind(this)
+			this.changeCategoryListener = function()
+			{
+				$('#change-category').on('click', this.changeCategory);
+			}
 		}
 		this.albums = function()
 		{
@@ -200,50 +234,12 @@ $(function(){
 		this.show_details = function(e){
 			var element = e;
 		}
-		this.set_category = function (results)
-		{
-			if(results != null)
-			{	
-				$('#categories').html('');
-				var categories = $('#categories');
-				for (var i = 0; i < results.length; i++)
-				{
-					categories.append("<span class='category'>"+results[i]['title']+"</span>");
-				}
-			}
-		}
-		this.add_category = function()
-		{
-			var input = $('#add_category').val();
-			var data = {'image_id':this.id, 'category_id': input};
-			$.ajax({
-				type:'POST',
-				data: data,
-				dataType: 'json',
-				url: '/category/add_cat_to_image',
-				success: function(results){
-					this.set_category(results);
-				}.bind(this)
-			});
-		}.bind(this)
-		this.get_categories = function(image_id){
-				var data = {'image_id': image_id};
-			$.ajax({
-				type:'POST',
-				data: data,
-				dataType: 'json',
-				url:'/image/get_categories',
-				success: function(results){
-					this.set_category(results);
-				}.bind(this)
-			});
-		}.bind(this)
 		this.init();
 		this.addCloseListener();
 		this.addTagListener();
 		this.addDeleteListener();
 		this.keyListeners();
-		this.addCategoryListener();
+		this.changeCategoryListener();
 
 		this.remove_tag = function(e){
 						target = e.target;
