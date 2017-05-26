@@ -26,6 +26,7 @@ $(function(){
 			// puts image info and preview image in focus_modal
 			this.populate_details = function(el)
 			{
+				this.thumb_el = el.getElementsByClassName('collection-thumb')[0];
 				orig = el;
 				$('.focus_modal').css({'display':'block'});
 				$('.focus_details').attr('style','display:block');
@@ -59,7 +60,7 @@ $(function(){
 				this.addEditNameListener();
 				$('#focus_width').html('<strong>Width:</strong>' + width );
 				$('#focus_height').html('<strong>Height:</strong>' + height );
-				$('#category_change:first-child').attr('selected','selected');
+				
 				if (category != '')
 				{
 					var categoryElements = document.getElementsByClassName('category-option');
@@ -77,7 +78,7 @@ $(function(){
 				}
 				else
 						{
-							$('#none-selected').attr('selected','selected');
+							$('#category_change:first-child').attr('selected','selected');
 						}
 				var data = {'image_id': this.id};
 				$.ajax({
@@ -196,7 +197,6 @@ $(function(){
 			this.thumbListeners = function(el)
 			{
 				var element = el;
-				this.thumb_el = $(element).find('.collection-thumb');
 				$(el).on('click', function()
 				{
 					this.populate_details(element);
