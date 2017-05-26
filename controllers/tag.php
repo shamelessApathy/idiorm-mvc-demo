@@ -100,6 +100,12 @@ class tagController extends Controller {
 		if (!empty($_GET['query']))
 		{
 			$query = $_GET['query'];
+			$time = time();
+			$history = ORM::for_table('search_history')->create();
+			$history->query = $query;
+			$history->created_at = $time;
+			$history->save();
+
 			//if (str_pos($query, " ") !== false)
 			//{ 
 				//$query = explode(" " ,$query);
