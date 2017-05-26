@@ -109,6 +109,8 @@ class imageController extends Controller {
 	public function upload_image($success = null)
 	{
 		$this->lockdown();
+		require_once(MODELS . '/Profile.php');
+		$user = ORM::for_table('profile')->where('user_id', $_SESSION['user_info']['id'])->find_one();
 		require_once(MODELS . '/Category.php');
 		$category = new Category();
 		//$categories = $category->get_all();
@@ -120,6 +122,10 @@ class imageController extends Controller {
 		if (isset($_GET['success']) && $_GET['success'] == 'false')
 		{
 			sys_msg('Something went wrong. You may have tried to upload a duplicate image, or there may have been another error');
+		}
+		if (empty($user->merchant_account))
+		{
+			sys_msg('You can upload an image and sell them but you need to add a merchant account in the profile area to receive payment!');
 		}
 		return_view('view.upload_image.php', $categories);
 		
@@ -158,6 +164,15 @@ class imageController extends Controller {
 		$name = $_FILES['image']['name'];
 		$tags = $_POST['tags'];
 		$deg = $_POST['rotate'];
+		if (empty($tags) || empty($cat_id))
+		{
+			require_once(CONTROLLERS . '/category.php');
+			$category = new categoryController();
+			$categories = $category->get_all();
+			return_view('view.upload_image.php', $categories);
+			sys_msg('You need a category and tags to submit the image!');
+			return;
+		}
 		if ($_POST['price'] !== GLOBAL_PRICE)
 			{
 				$price = $_POST['price'];
