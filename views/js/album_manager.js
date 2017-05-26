@@ -12,7 +12,6 @@ $(function(){
 			this.setTags = function(results)
 			{
 				tags = results;
-				console.log(tags);
 				tags = JSON.parse(tags);
 				length = tags.length;
 				$('#focus_tags').html('');
@@ -68,8 +67,6 @@ $(function(){
 					{
 						if (categoryElements[i].value === category)
 						{
-							console.log('match found');
-							console.log(categoryElements[i]);
 							$(categoryElements[i]).attr('selected','selected');
 						}
 						
@@ -105,7 +102,6 @@ $(function(){
 					data: data,
 					success: function(results)
 					{
-						console.log(results);
 						this.setTags(results);
 					}.bind(this)
 				})
@@ -141,7 +137,6 @@ $(function(){
 			}
 			this.editName = function()
 			{
-				console.log('edit name running');
 				$('#focus_edit_name').css({"display":"block"});
 				$('#save_name').on('click', function(){
 					var new_name = $('#edit_name').val();
@@ -154,7 +149,6 @@ $(function(){
 			}.bind(this)
 			this.addEditNameListener = function()
 			{
-				console.log('add listener running');
 				var button = $('.tiny_link');
 				button.on('click', this.editName);
 			}.bind(this)
@@ -204,8 +198,6 @@ $(function(){
 			}.bind(this);
 			this.updateThumb = function(id)
 			{
-				console.log('running functioion!');
-				console.log(this.thumb_el);
 				$(this.thumb_el).attr('data-category',id);
 			}.bind(this)
 			this.changeCategory = function()
