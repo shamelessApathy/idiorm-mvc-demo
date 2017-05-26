@@ -50,13 +50,14 @@ class Category{
 		var_dump(ORM::get_last_query());
 		return $categories;
 	}
-	public function get_categories($image_id)
+	public function get_category($image_id)
 	{
-		$categories = ORM::for_table('category_to_image')->where('image_id', $image_id)->find_many();
-		if ($categories)
+		$category_relation = ORM::for_table('category_to_image')->where('image_id', $image_id)->find_one();
+		if (!empty($category_relation))
 		{
-		return $categories;
-	}
+			$category = ORM::for_table('category')->where('id', $category_relation->category_id)->find_one();
+			return $category;
+		}
 	else
 	{
 		return false;

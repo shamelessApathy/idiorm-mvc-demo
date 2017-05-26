@@ -30,6 +30,7 @@ $(function(){
 				$('.focus_details').attr('style','display:block');
 				$('#focus_type').html('');
 				$('#focus_price').html('');
+				$('#focus_category').html('');
 				var premium = $(el).attr('data-premium');
 				if (premium === '1')
 				{
@@ -48,6 +49,8 @@ $(function(){
 				var width = $(image).attr('data-width');
 				var height = $(image).attr('data-height');
 				var price = $(image).attr('data-price');
+				var category = $(image).attr('data-category');
+				console.log(category);
 				var price_string = ('<strong>Price:</strong>' + '   ' + price);
 				var download_string = "<a href='/image/download/"+ this.id + "'><button id='download_image'>DOWNLOAD</button></a>";
 				$('#focus_price').html(price_string);
@@ -57,6 +60,11 @@ $(function(){
 				this.addEditNameListener();
 				$('#focus_width').html('<strong>Width:</strong>' + width );
 				$('#focus_height').html('<strong>Height:</strong>' + height );
+				if (category != '')
+				{
+					var string = '<strong>Category:</strong>' + category;
+					$('#focus_category').html(string);
+				}
 				var data = {'image_id': this.id};
 				$.ajax({
 					url: '/image/get_tags',

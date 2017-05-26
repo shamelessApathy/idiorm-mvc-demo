@@ -13,6 +13,7 @@ if (isset($info['user_images']))
 			<p id='focus_type'></p>
 				<ul>
 					<li id='focus_name'></li>
+					<li id='focus_category'></li>
 					<li id='focus_edit_name'><input id='edit_name'><button id='save_name'>save</button></li>
 					<li id='focus_price'></li>
 					<li id='focus_width'></li>
@@ -37,7 +38,7 @@ if (isset($info['user_images']))
 <div class='col-md-2'></div>
 <div class='col-md-8'>
 
-<h1>All User Images</h1>
+<h1 style='text-align:center;'>All User Images</h1>
 <p style='text-align:center;'> click on an image to edit </p>
 <?php
 echo "<div class='collection-wrapper'>";
@@ -50,11 +51,20 @@ echo "<div class='collection-wrapper'>";
 				$image->thumbnail = '/views/img/unauth.png';
 				$image->watermark = '/views/img/unauth.png';
 			}
+			if (isset($image->category->title))
+			{
+				$cat = $image->category->title;
+			}
+			else
+			{
+				$cat = null;
+			}
 			echo "
 					<div class='search-item'>
-						<img style='max-height:110px;' data-name='$image->user_image_name'  data-width='$image->width' data-height='$image->height' data-watermark='$image->watermark' data-price='$image->price' data-premium='$image->premium' data-id='$image->id' src='$image->thumbnail'/>
+						<img class='collection-thumb' style='max-height:110px;' data-name='$image->user_image_name'  data-width='$image->width' data-height='$image->height' data-watermark='$image->watermark' data-price='$image->price' data-premium='$image->premium' data-id='$image->id' data-category='$cat'  src='$image->thumbnail'/>
 						</div>
 				";
+				
 		}
 	echo "</div>";
 	?>

@@ -74,7 +74,11 @@ $user_link = "/image/user/$user->id";
 			</div>
 		</div>
 				<div class='col-md-2'>
-
+				<?php if (!empty($categories)):?>
+					<h3>CATEGORY</h3>
+					<div class='category'><?php echo ucwords($categories[0]->title);?></div>
+					<div class='clear'></div>
+				<?php endif;?>
 				<?php if (isset($_SESSION['user_info'])):?>
 			<div style='margin-top:10px;'><h3>TAGS</h3><div class='store_tags'> <?php 
 			foreach ($tags as $tag)

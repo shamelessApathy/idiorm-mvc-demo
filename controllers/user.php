@@ -336,6 +336,12 @@ public function get_images($user_id = null)
 	require_once(MODELS . '/Category.php');
 	$model = Model::factory('User')->find_one($user_id);
 	$images = $model->images()->find_many();
+	foreach ($images as $image)
+	{
+		$cat_model = new Category();
+		$category = $cat_model->get_category($image->id);
+		$image->category = $category;
+	}
 
 	$images = array('user_images' => $images);
 
