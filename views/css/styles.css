@@ -252,7 +252,8 @@ table.user-image-table tr {
   color: red;
   position: fixed;
   top: 100px;
-  left: 10px; }
+  left: 10px;
+  z-index: 10; }
 
 .user_msg {
   width: 300px;

@@ -38,8 +38,20 @@ if (isset($info->dob))
 	<form action='/profile/edit_merchant' method='POST'>
 	<label>Merchant Account</label><br>
 		<input type='text' name='account-name' value="<?php echo (isset($info->merchant_account)) ? $info->merchant_account : null; ?>"><br>
-		<label>PayPal</label><input type='radio' name='merchant' <?php echo ($info->merchant == 'paypal') ? "checked='checked'" : null;?> value='paypal'><br>
-		<label>SquarePay</label><input type='radio' name='merchant' <?php echo ($info->merchant == 'squarepay') ? "checked='checked'" : null;?> value='squarepay'><br>
+		<label>PayPal</label><input type='radio' name='merchant' 
+		<?php 
+		if (isset($info->merchant))
+		{
+			echo ($info->merchant == 'paypal') ? "checked='checked'" : null;
+		}
+		?> value='paypal'><br>
+		<label>SquarePay</label><input type='radio' name='merchant' 
+		<?php 
+		if (isset($info->merchant))
+		{
+			echo ($info->merchant == 'squarepay') ? "checked='checked'" : null;
+		}
+		?> value='squarepay'><br>
 		<button type='submit'>Submit</button>
 	</form>
 </div>

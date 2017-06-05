@@ -9,6 +9,48 @@ Class userController extends Controller {
 
 /**
 *
+* @param User ID
+* @return bool
+* Starts the process of creating a tokenized password reset link that's sent to the user's email
+*/
+public function reset_password()
+{
+	return_view('view.reset_password.php');
+	/*require_once(MODELS . "/User.php");
+	$model = new User();
+	$token = $model->create_token(5);
+	echo $token;*/
+}
+/**
+*
+* @param Email
+* @return bool @true if it sewnds email successfully
+*
+*/
+public function reset_email()
+{
+	$email = $_POST['email'] ?? null;
+	if (empty($email))
+	{
+		return_view('view.reset_password.php');
+		sys_msg('You must include your email');
+	}
+	else
+	{
+		require_once(MODELS . "/User.php");
+		$model = Model::factory('User')->where('email', $email)->find_one();
+		$hash = $model->create_token();
+		require_once(MAILER);
+		$mailer = new Mailer(); 
+		$mailer->reset_password($model->email, $hash);
+	}
+}
+public function token_reset()
+{
+	var_dump($_GET);
+}
+/**
+*
 * @param Takes a User ID
 * @return Returns a  the view showcasing all the images from a certain user
 */

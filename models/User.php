@@ -41,6 +41,24 @@ class User extends Model {
 		}
 
 	}
+	/**
+	*
+	* @param User ID
+	* @return Token for Link
+	*
+	*/
+	public function create_token()
+	{
+		$user_id = $this->id;
+		$time = time();
+		$string = $time . $user_id;
+		$hash = hash("sha256", $string);
+		$entry = ORM::for_table('password_reset_token')->create();
+		$entry->user_id = $user_id;
+		$entry->token = $hash;
+		$entry->save();
+		return $hash;
+	}
 	public function subscription_count( $user_id = null)
 	{
 		if (empty($user_id))
