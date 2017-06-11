@@ -163,7 +163,8 @@ input {
 
 #nav-search-box {
   background-color: white !important;
-  color: #333 !important; }
+  color: #333 !important;
+  width: 100px; }
 
 .user-info-container ul {
   list-style-type: none;
@@ -1263,6 +1264,9 @@ could be simply that some of the other rules are being applied with a greater im
   #login-form {
     margin-left: 15px; } }
 @media only screen and (max-width: 600px) {
+  #nav-search-box {
+    width: 100%; }
+
   .collection-thumb {
     display: block;
     margin: 0 auto; }

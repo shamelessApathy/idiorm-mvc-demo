@@ -106,7 +106,7 @@ foreach ($info['tags'] as $tag)
       <div class='mobile-hide'>
       <form class="navbar-form navbar-left" id='nav_search' action='/tag/search_by_tag' method="GET">
         <div class="form-group" >
-          <input type="text" class="form-control" style='width:100px;' id='nav-search-box' name='query' placeholder="Search">
+          <input type="text" class="form-control" id='nav-search-box' name='query' placeholder="Search">
         </div>
         <button type="submit" class="btn btn-default">Submit</button>
       </form>

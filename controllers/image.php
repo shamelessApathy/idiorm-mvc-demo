@@ -159,11 +159,14 @@ class imageController extends Controller {
 	public function new_image()
 	{
 		$check = $_FILES['image']['tmp_name'];
+		// This can get used ONLY on JPEGs and TIFFs
+		//$exif = exif_read_data($check);
 		$user_id = $_SESSION['user_info']->id;
 		$cat_id = $_POST['category-id'];
 		$name = $_FILES['image']['name'];
 		$tags = $_POST['tags'];
 		$deg = $_POST['rotate'];
+		// Make sure a tag and category are attached to image
 		if (empty($tags) || empty($cat_id))
 		{
 			require_once(CONTROLLERS . '/category.php');
@@ -173,6 +176,7 @@ class imageController extends Controller {
 			sys_msg('You need a category and tags to submit the image!');
 			return;
 		}
+		// If price is set, it will be a premium image, handle accordingly
 		if ($_POST['price'] !== GLOBAL_PRICE)
 			{
 				$price = $_POST['price'];
@@ -187,6 +191,7 @@ class imageController extends Controller {
 					return;
 				}
 			}
+			// if not premium, set it to global price
 		else
 		{
 			$price = GLOBAL_PRICE;
@@ -411,7 +416,10 @@ class imageController extends Controller {
 		$nextModel = Model::factory('Image')->where_gt('id', $id)->find_many();
 		if (empty($nextModel))
 		{
-				echo "No more images in this direction <a href='/image/info?id=$id'>Go Back</a>";
+				$nextModel = Model::factory('Image')->where_gt('id', 1)->find_many();
+				$send_to = reset($nextModel);
+				$this->info($send_to->id, '1');
+				/*echo "No more images in this direction <a href='/image/info?id=$id'>Go Back</a>";*/
 				return;
 		}
 		else
