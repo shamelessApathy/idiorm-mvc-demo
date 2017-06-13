@@ -1,6 +1,11 @@
 <?php require_once(HEADER); 
 $images = $info['images'];
 $featured = $info['featured'];
+$categories = $info['categories'];
+foreach($categories as $category)
+{
+	echo $category->title . "<br>";
+}
 ?>
 <link href='/views/css/featured.css' type='text/css' rel='stylesheet'/>
 <div class='container' >

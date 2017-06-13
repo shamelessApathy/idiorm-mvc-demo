@@ -764,9 +764,15 @@ table.user-image-table tr
 	-webkit-transition:.5s;
 	margin:0 auto;
 }
+#delete_image
+{
+	background-color:red;
+	
+}
 .focus_details ul
 {
 	list-style-type:none;
+	padding:0;
 }
 .focus_details li
 {
