@@ -235,7 +235,7 @@ class Mailer {
 		$to = array(
 		 $email => "Reset Password"
 		);
-		$html = "<a href='http://dev.sharefuly.com/user/token_reset?token=$token'>Click here to reset your password!</a>";
+		$html = "<a href='". STORE_URI ."/user/token_reset?token=$token'>Click here to reset your password!</a>";
 
  
 		$transport = Swift_SmtpTransport::newInstance('smtp.mailtrap.io', 465);
