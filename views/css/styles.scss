@@ -10,7 +10,22 @@ $primary-hover-bg: #ccc;
 $secondary-hover-font-color:#333;
 $tag-bg:#ffffe6;
 $sold-table-bg: #e6e6e6; 
+/* FRONT PAGE CATEGORY STYLINGS */
 
+.front-category-container
+{
+	display:flex;
+	justify-content:space-between;
+}
+.front-category
+{
+	display:block;
+	float:left;
+	margin-left:10px;
+}
+
+
+/* END CATEGORY STYLINGS */
 .admin-warning
 {
 	background-color:#0099ff;
