@@ -24,13 +24,36 @@ class categoryController extends Controller{
 	}
 	public function get_images($cat_id = null)
 	{
+
 		if (!isset($cat_id))
 		{
-			$cat_id = $_GET['cat_id'];
+			$cat_id = !empty($_GET['cat_id']) ? $_GET['cat_id'] : $_POST['cat_id'];
 		}
+		$cat_id = explode('=',$cat_id);
+		$cat_id = $cat_id[1];
 		require_once(MODELS . '/Category.php');
 		$model = new Category();
 		$images = $model->get_images($cat_id);
+		$title = $model->get_title($cat_id);
+		require_once(MODELS . '/Image.php');
+		$images_in_cat = array();
+		foreach($images as $image)
+		{
+			$image_instance = Model::factory('Image')->find_one($image->image_id);
+			array_push($images_in_cat, $image_instance);
+		}
+		// Need to attach tags
+		require_once(MODELS . '/Tag.php');
+		$tag_model = new Tag();
+		foreach($images_in_cat as $image)
+		{
+			if (!empty($image))
+			{
+				$tags = $tag_model->get_tags_for_image($image->id);
+				$image->tags = $tags;
+			}
+		}
+		return_view('view.category.php', array('images'=>$images_in_cat, 'category'=>$title->title));
 	}
 	public function approved_only()
 	{
