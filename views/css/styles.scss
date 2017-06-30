@@ -11,7 +11,10 @@ $secondary-hover-font-color:#333;
 $tag-bg:#ffffe6;
 $sold-table-bg: #e6e6e6; 
 /* FRONT PAGE CATEGORY STYLINGS */
-
+.mobile-front-category-container
+{
+	display:none;
+}
 .front-category-container
 {
 	display:flex;
@@ -1609,6 +1612,14 @@ could be simply that some of the other rules are being applied with a greater im
 	.front-container
 	{
 		height:400px;
+	}
+	.front-category-container
+	{
+		display:none;
+	}
+	.mobile-front-category-container
+	{
+		display:block;
 	}
 }
 @media only screen and (min-width:601px) and (max-width:800px){

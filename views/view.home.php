@@ -31,6 +31,17 @@ $categories = $info['categories'];
 				<div class='front-category'><a href="/category/get_images?cat_id=<?php echo $category->id;?>"><?php echo strtoupper($category->title);?></a></div>
 			<?php endforeach;?>
 		</div>
+		<div class='mobile-front-category-container'>
+		<sub>Browse by Category</sub>
+		<form style='margin-top:10px;' action='/category/get_images' method='GET'>
+			<select name="cat_id">
+			<?php foreach ($categories as $category):?>
+				<option  value="<?php echo $category->id;?>"><?php echo strtoupper($category->title);?></option></a>
+			<?php endforeach;?>
+			</select>
+			<button type='submit'>Go</button>
+			</form>
+			</div>
 		</div>
 		<div class='col-md-2'></div>
 	</div>
