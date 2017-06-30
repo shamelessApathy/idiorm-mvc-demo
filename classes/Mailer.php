@@ -225,4 +225,36 @@ class Mailer {
 		 print_r($failures);
 		}
 	}
+	public function reset_password($email, $token)
+	{
+		$email = $email;
+		$text = "You have recently requested to reset your password";
+
+		$subject = 'Sharefuly Password Reset';
+		$from = array('support@dev.sharefuly.com' =>'Support');
+		$to = array(
+		 $email => "Reset Password"
+		);
+		$html = "<a href='". STORE_URI ."/user/token_reset?token=$token'>Click here to reset your password!</a>";
+
+ 
+		$transport = Swift_SmtpTransport::newInstance('smtp.mailtrap.io', 465);
+		$transport->setUsername('496800b5ca10efac0');
+		$transport->setPassword('fbcf6bacada144');
+		$swift = Swift_Mailer::newInstance($transport);
+
+		$message = new Swift_Message($subject);
+		$message->setFrom($from);
+		$message->setBody($html, 'text/html');
+		$message->setTo($to);
+		$message->addPart($text, 'text/plain');
+
+		if ($recipients = $swift->send($message, $failures))
+		{
+		 echo 'Message successfully sent!';
+		} else {
+		 echo "There was an error:\n";
+		 print_r($failures);
+		}
+	}
 }

@@ -10,7 +10,22 @@ $primary-hover-bg: #ccc;
 $secondary-hover-font-color:#333;
 $tag-bg:#ffffe6;
 $sold-table-bg: #e6e6e6; 
+/* FRONT PAGE CATEGORY STYLINGS */
 
+.front-category-container
+{
+	display:flex;
+	justify-content:space-between;
+}
+.front-category
+{
+	display:block;
+	float:left;
+	margin-left:10px;
+}
+
+
+/* END CATEGORY STYLINGS */
 .admin-warning
 {
 	background-color:#0099ff;
@@ -214,6 +229,7 @@ input
 {
 	background-color:$text-box-color !important;
 	color: $secondary-font-color !important;
+	width:100px;
 }
 .user-info-container ul 
 {
@@ -334,6 +350,7 @@ table.user-image-table tr
 	position:fixed;
 	top:100px;
 	left:10px;
+	z-index:10;
 }
 .user_msg
 {
@@ -762,9 +779,15 @@ table.user-image-table tr
 	-webkit-transition:.5s;
 	margin:0 auto;
 }
+#delete_image
+{
+	background-color:red;
+	
+}
 .focus_details ul
 {
 	list-style-type:none;
+	padding:0;
 }
 .focus_details li
 {
@@ -1552,6 +1575,10 @@ could be simply that some of the other rules are being applied with a greater im
 }
 
 @media only screen and (max-width:600px){
+	#nav-search-box
+	{
+		width:100%;
+	}
 	.collection-thumb
 	{
 		display:block;

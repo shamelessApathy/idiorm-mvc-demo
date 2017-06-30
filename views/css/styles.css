@@ -1,3 +1,14 @@
+/* FRONT PAGE CATEGORY STYLINGS */
+.front-category-container {
+  display: flex;
+  justify-content: space-between; }
+
+.front-category {
+  display: block;
+  float: left;
+  margin-left: 10px; }
+
+/* END CATEGORY STYLINGS */
 .admin-warning {
   background-color: #0099ff;
   width: 100%;
@@ -163,7 +174,8 @@ input {
 
 #nav-search-box {
   background-color: white !important;
-  color: #333 !important; }
+  color: #333 !important;
+  width: 100px; }
 
 .user-info-container ul {
   list-style-type: none;
@@ -252,7 +264,8 @@ table.user-image-table tr {
   color: red;
   position: fixed;
   top: 100px;
-  left: 10px; }
+  left: 10px;
+  z-index: 10; }
 
 .user_msg {
   width: 300px;
@@ -604,8 +617,12 @@ table.user-image-table tr {
   -webkit-transition: .5s;
   margin: 0 auto; }
 
+#delete_image {
+  background-color: red; }
+
 .focus_details ul {
-  list-style-type: none; }
+  list-style-type: none;
+  padding: 0; }
 
 .focus_details li {
   margin-top: 5px; }
@@ -1262,6 +1279,9 @@ could be simply that some of the other rules are being applied with a greater im
   #login-form {
     margin-left: 15px; } }
 @media only screen and (max-width: 600px) {
+  #nav-search-box {
+    width: 100%; }
+
   .collection-thumb {
     display: block;
     margin: 0 auto; }

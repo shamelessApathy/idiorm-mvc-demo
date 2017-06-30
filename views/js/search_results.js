@@ -22,7 +22,8 @@ $(function(){
 			this.width_holder = $('.image-details-width');
 			this.height_holder = $('.image-details-height');
 			this.price_holder = $('.image-details-price');
-			this.url = $(this.element).attr('src');
+			this.url = $(this.element).attr('data-watermark');
+			console.log(this.url);
 			this.image_holder = $('.image-details-holder');
 			this.button = $('.add_to_cart');
 			this.hider = $('.image-details-hider');

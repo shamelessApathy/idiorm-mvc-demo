@@ -9,6 +9,106 @@ Class userController extends Controller {
 
 /**
 *
+* @param User ID
+* @return bool
+* Starts the process of creating a tokenized password reset link that's sent to the user's email
+*/
+public function reset_password()
+{
+	return_view('view.reset_password.php');
+	/*require_once(MODELS . "/User.php");
+	$model = new User();
+	$token = $model->create_token(5);
+	echo $token;*/
+}
+/**
+*
+* @param Email, sends a tokenized link to user's email if it exists in the DB, to reset password
+* @return bool @true if it sends email successfully
+*
+*/
+public function reset_email()
+{
+	$email = $_POST['email'] ?? null;
+	if (empty($email))
+	{
+		return_view('view.reset_password.php');
+		sys_msg('You must include your email');
+	}
+	else
+	{
+		require_once(MODELS . "/User.php");
+		$model = Model::factory('User')->where('email', $email)->find_one();
+		$hash = $model->create_token();
+		require_once(MAILER);
+		$mailer = new Mailer(); 
+		$mailer->reset_password($model->email, $hash);
+	}
+}
+
+/**
+*
+* @param $_GET['token']
+* @return BOOLEAN true/false for if it reset the password
+*/
+public function token_reset()
+{
+	require_once(MODELS . '/User.php');
+	$user_model = new User();
+	// Test to make sure token is actually in the DB and matches the username
+	$token = $_GET['token'];
+	$result = $user_model->validate_token($token);
+	if (!empty($result))
+	{
+		$user_id = $result->user_id;
+		$user_instance = Model::factory('User')->find_one($user_id);
+		return_view('view.validated_reset.php', array( 'user'=> $user_instance, 'token'=>$token));
+	}
+	else
+	{
+		echo "Your token seems to not match anything in the database, try resending the email <a href='/user/reset_password'>Reset Password</a>";
+	}
+}
+/**
+* final reset function in the password reset cycle, will delete the token once password has been changed
+* @param $_POST['password'] & $_POST['confirm-password']
+* @return On success, home page and success message, on failure, redirection to same page
+*/
+public function final_reset()
+{
+	require_once(MODELS . '/User.php');
+	$token = $_POST['token'];
+	$user_id = $_POST['user_id'];
+	$user = Model::factory('User')->find_one($user_id);
+	$password = $_POST['password'];
+	$confirm_password = $_POST['confirm-password'];
+	if ($password === $confirm_password)
+	{
+		$validation = $user->validate_token($token);
+		// make sure no one is trying any funny business with the submission form
+		// re-validates token, then checks to make sure that token matches the user_id its meant for
+		if ($validation && $validation->user_id === $user_id)
+		{
+			if ($user->change_password_outside($password))
+			{
+				$user->delete_token($token);
+				return_view('view.login.php');
+				user_msg('Password changed successfully!');
+			}
+			else
+			{
+				var_dump(ORM::get_last_query());
+			}
+		}
+	}
+	else
+	{
+		return_view('view.validated_reset.php', array('user'=> $user, 'token' => $token));
+		sys_msg('Your passwords do not match!!');
+	}
+}
+/**
+*
 * @param Takes a User ID
 * @return Returns a  the view showcasing all the images from a certain user
 */

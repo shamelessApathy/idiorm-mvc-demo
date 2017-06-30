@@ -96,17 +96,20 @@ foreach ($info['tags'] as $tag)
           <input type='text' id='login-email' name='email' placeholder='email' />
           <input type='password' id='login-password' name='password' placeholder='password'  />
           <button id='login-submit' type='submit'>Login</button>
+        </li>
           </form>
         </li>
-                <li>
-          <a class='nav-link' id='#nav-register' href='/user/register'>Register</a>
+          <li>
+          <a style='display:inline; top:+15px; position:relative;' class='nav-link' id='nav-forgot' href='/user/reset_password'>Reset Password</a>
+          <a style='display:inline; top:+15px; position:relative;' class='nav-link' id='#nav-register' href='/user/register'>Register</a>
         </li>
+
       <?php endif;?>
       </ul>
       <div class='mobile-hide'>
       <form class="navbar-form navbar-left" id='nav_search' action='/tag/search_by_tag' method="GET">
         <div class="form-group" >
-          <input type="text" class="form-control" style='width:100px;' id='nav-search-box' name='query' placeholder="Search">
+          <input type="text" class="form-control" id='nav-search-box' name='query' placeholder="Search">
         </div>
         <button type="submit" class="btn btn-default">Submit</button>
       </form>

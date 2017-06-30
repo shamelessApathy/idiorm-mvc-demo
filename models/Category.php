@@ -1,5 +1,5 @@
 <?php
-
+ 
 class Category{
 	public function get_unapproved()
 	{
@@ -23,6 +23,7 @@ class Category{
 	public function get_images($cat_id)
 	{
 		$images = ORM::for_table('category_to_image')->where('category_id', $cat_id)->find_many();
+		return $images;
 	}
 	public function get_all()
 	{

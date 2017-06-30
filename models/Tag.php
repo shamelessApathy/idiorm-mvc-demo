@@ -106,6 +106,17 @@ class Tag {
             $last = ORM::get_last_query();
             return $images;
 	}
+	public function get_tags_for_image($image_id)
+	{
+		$tags = ORM::for_table('image_to_tag')->where('image_id',$image_id)->find_many();
+		$tags_array = array();
+		foreach($tags as $tag)
+		{
+			$tag_entry = ORM::for_table('tag')->where('id', $tag->tag_id)->find_one();
+			array_push($tags_array, array('tag_id'=>$tag->tag_id,'text'=>$tag_entry->text));
+		}
+		return $tags_array;
+	}
 
 }
 

@@ -7,6 +7,7 @@ class User extends Model {
 	{
 		return $_SESSION['user_info']['id'];
 	}*/
+	public static $_id_column = 'id';
 	/*
 	*
 	* Creates new user
@@ -40,6 +41,41 @@ class User extends Model {
 			return false;
 		}
 
+	}
+	/**
+	*
+	* @param User ID
+	* @return Token for Link
+	*
+	*/
+	public function create_token()
+	{
+		$user_id = $this->id;
+		$time = time();
+		$string = $time . $user_id;
+		$hash = hash("sha256", $string);
+		$entry = ORM::for_table('password_reset_token')->create();
+		$entry->user_id = $user_id;
+		$entry->token = $hash;
+		$entry->save();
+		return $hash;
+	}
+	/**
+	*
+	* @param $token to check against DB
+	* @return BOOL for whether or not it passes test
+	*/
+	public function validate_token($token)
+	{
+		$table_test = ORM::for_table('password_reset_token')->where('token', $token)->find_one();
+		if (!empty($table_test))
+		{
+			return $table_test; // It matched, send back the info with user_id
+		}
+		else
+		{
+			return false; // No match
+		}
 	}
 	public function subscription_count( $user_id = null)
 	{
@@ -185,9 +221,14 @@ class User extends Model {
 		}
 		return $users;
 	}
+	public function delete_token($token)
+	{
+		$entry = ORM::for_table('password_reset_token')->where('token', $token)->find_one();
+		$entry->delete();
+	}
 	public function change_password($user_id, $new_password)
 	{
-		$user = ORM::for_table('user')->find_one($user_id);
+		$user = ORM::for_table('user')->where('id', $user_id)->find_one();
 		$password = hash('sha256', $new_password);
 		$salt = random_bytes(8);
 		$password = $password . $salt;
@@ -195,7 +236,19 @@ class User extends Model {
 		$user->salt = $salt;
 		if($user->save())
 		{
-			return true;
+			return true; 
+		}
+	}
+	public function change_password_outside($new_password)
+	{
+		$password = hash('sha256', $new_password);
+		$salt = random_bytes(8);
+		$password = $password . $salt;
+		$this->password = $password;
+		$this->salt = $salt;
+		if($this->save())
+		{
+			return true; 
 		}
 	}
 	/*

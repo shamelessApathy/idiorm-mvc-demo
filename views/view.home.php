@@ -1,6 +1,7 @@
 <?php require_once(HEADER); 
 $images = $info['images'];
 $featured = $info['featured'];
+$categories = $info['categories'];
 ?>
 <link href='/views/css/featured.css' type='text/css' rel='stylesheet'/>
 <div class='container' >
@@ -22,7 +23,17 @@ $featured = $info['featured'];
 		</div>
 		<div class='col-md-2'></div>
 	</div>
-
+	<div class='row'>
+		<div class='col-md-2'></div>
+		<div class='col-md-8'>
+		<div class='front-category-container'>
+			<?php foreach ($categories as $category):?>
+				<div class='front-category'><a href="/category/get_images?cat_id=<?php echo $category->id;?>"><?php echo strtoupper($category->title);?></a></div>
+			<?php endforeach;?>
+		</div>
+		</div>
+		<div class='col-md-2'></div>
+	</div>
 <?php  
  
 if (isset($_SESSION['user_info']))
