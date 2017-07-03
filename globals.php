@@ -2,7 +2,9 @@
 
 function return_view($view, $info =null) 
 {
-
+require_once(MODELS . '/Category.php');
+$model =new Category();
+$categories = $model->get_all();
 require(VIEWS . '/' . $view);
 $info = $info;
 }

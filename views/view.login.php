@@ -4,7 +4,7 @@
 <div class='container'>
 <div class='style01-form-container'>
 <h1> Login</h1>
-<form action='verify' method='POST'>
+<form action='/user/verify' method='POST'>
 <label>Email</label><br>
 <input type='text' name='email'/><br>
 <label>Password</label><br>
