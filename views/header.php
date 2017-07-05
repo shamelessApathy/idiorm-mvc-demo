@@ -86,13 +86,13 @@ foreach ($info['tags'] as $tag)
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class='fa fa-cog'></i>  Options <span class="caret"></span></a>
           <ul class="dropdown-menu">
-            <li><a href="/profile/edit_profile"><i class='fa fa-pencil'></i>  Edit Profile</a></li>
+            <li><a id='drop-color' href="/profile/edit_profile"><i class='fa fa-pencil'></i>  Edit Profile</a></li>
             <li role="separator" class="divider"></li>
-            <li><a href="/image/upload_image"><i class='fa fa-upload'></i>  Upload an Image</a></li>
+            <li><a id='drop-color' href="/image/upload_image"><i class='fa fa-upload'></i>  Upload an Image</a></li>
             <li role="separator" class="divider"></li>
-            <li><a href="/user/image_manager"><i class='fa fa-image'></i>  Image Manager</a></li>
+            <li><a id='drop-color' href="/user/image_manager"><i class='fa fa-image'></i>  Image Manager</a></li>
             <li role="separator" class="divider"></li>
-            <li><a href='/cart/create_subscription'><i class='fa fa-credit-card'></i>  Create Subscription</a></li>
+            <li><a id='drop-color' href='/cart/create_subscription'><i class='fa fa-credit-card'></i>  Create Subscription</a></li>
             <li role="separator" class="divider"></li>
           </ul>
         </li>
@@ -114,11 +114,11 @@ foreach ($info['tags'] as $tag)
         <li class="dropdown admin-warning" style='list-style-type:none; padding-left:0;''>
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"  aria-expanded="false">Admin Options <span class="caret"></span></a>
           <ul class="dropdown-menu">
-            <li><a href="/admin/user_manager">User Manager</a></li>
-            <li><a href="/admin/image_manager">Image Manager</a></li>
-            <li><a href="/admin/subscription_manager">Subscription Manager</a></li>
-            <li><a href="/admin/bug_manager">Bug Reports</a></li>
-            <li><a href="/admin/category_manager">Category Manager</a></li>
+            <li><a id='drop-color' href="/admin/user_manager">User Manager</a></li>
+            <li><a id='drop-color' href="/admin/image_manager">Image Manager</a></li>
+            <li><a id='drop-color' href="/admin/subscription_manager">Subscription Manager</a></li>
+            <li><a id='drop-color' href="/admin/bug_manager">Bug Reports</a></li>
+            <li><a id='drop-color' href="/admin/category_manager">Category Manager</a></li>
             <li role="separator" class="divider"></li>
             <li><a href="#">Separated link</a></li>
           </ul>
@@ -127,7 +127,7 @@ foreach ($info['tags'] as $tag)
       <?php endif; ?>
       </ul>
       <?php if (isset($user)):?>
-      <a class='navbar-brand logout' href='/user/logout'>Logout</a>
+      <a class='logout' id='logout-navbar' href='/user/logout'>Logout</a>
     <?php endif; ?>
 
     </div><!-- /.navbar-collapse -->

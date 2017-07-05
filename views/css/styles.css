@@ -74,7 +74,16 @@ body {
   position: relative;
   display: block;
   float: right;
-  font-size: 30px; }
+  font-size: 18px;
+  text-decoration: none;
+  line-height: 50px;
+  /*padding:15px 15px;*/ }
+
+#logout-navbar {
+  color: #ccc; }
+
+#drop-color {
+  color: #ccc; }
 
 .navbar-default .navbar-nav > li > a, .navbar-default .navbar-brand {
   color: #ccc !important; }
