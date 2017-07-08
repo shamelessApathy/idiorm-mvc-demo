@@ -94,6 +94,9 @@ foreach ($info['tags'] as $tag)
             <li role="separator" class="divider"></li>
             <li><a id='drop-color' href='/cart/create_subscription'><i class='fa fa-credit-card'></i>  Create Subscription</a></li>
             <li role="separator" class="divider"></li>
+            <?php if ($user->level === '1'):?>
+              <li><a href='/admin/dashboard'>Admin Dashboard</a></li>
+            <?php endif;?>
           </ul>
         </li>
         </ul>
