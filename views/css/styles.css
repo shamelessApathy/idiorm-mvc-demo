@@ -62,8 +62,31 @@ body {
   height: 50px;
   background-color: white; }
 
-.navbar-default .navbar-nav > li > a, .navbar-default .navbar-brand {
+#nav-search-holder {
+  float: left;
+  display: block;
+  position: relative;
+  width: 30%;
+  margin-left: 40%; }
+
+#login-navbar {
+  color: #ccc !important;
+  position: relative;
+  display: block;
+  float: right;
+  font-size: 18px;
+  text-decoration: none;
+  line-height: 50px;
+  /*padding:15px 15px;*/ }
+
+#logout-navbar {
   color: #ccc; }
+
+#drop-color {
+  color: #ccc; }
+
+.navbar-default .navbar-nav > li > a, .navbar-default .navbar-brand {
+  color: #ccc !important; }
 
 .font-color {
   color: #333; }
@@ -178,7 +201,7 @@ input {
 #nav-search-box {
   background-color: white !important;
   color: #333 !important;
-  width: 100px; }
+  width: 200px; }
 
 .user-info-container ul {
   list-style-type: none;
@@ -206,6 +229,9 @@ input {
 
 #nav_search {
   margin-top: 10px; }
+
+#nav_search button {
+  margin-left: 15px; }
 
 .form-control, .big_submit:hover {
   color: white !important;
@@ -1018,14 +1044,15 @@ could be simply that some of the other rules are being applied with a greater im
 .cart-nav {
   border-radius: 5px;
   border: 1px solid #f2f2f2;
-  margin: 8;
   float: right;
   width: 44px;
   height: 34px;
   background-color: #f2f2f2;
   color: #333;
   font-size: 30px;
-  padding-left: 6px; }
+  padding-left: 6px;
+  margin-top: 8px;
+  margin-right: 5px; }
 
 .cart-outside {
   overflow-y: hidden;
@@ -1282,6 +1309,33 @@ could be simply that some of the other rules are being applied with a greater im
   #login-form {
     margin-left: 15px; } }
 @media only screen and (max-width: 600px) {
+  .user-info-container {
+    margin: 0 auto; }
+
+  .navbar-form {
+    margin: 0 auto;
+    display: block; }
+
+  #nav_search {
+    width: 100%; }
+
+  #nav_search button {
+    display: block;
+    margin: 0 auto; }
+
+  #nav-search-holder {
+    width: 100%;
+    float: none;
+    margin: 0 auto; }
+
+  #login-navbar {
+    float: none; }
+
+  /*#nav-search-holder button
+  {
+  	margin:0 auto;
+  	display:block;
+  }*/
   #nav-search-box {
     width: 100%; }
 

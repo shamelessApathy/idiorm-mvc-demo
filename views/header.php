@@ -57,79 +57,68 @@ foreach ($info['tags'] as $tag)
         <i class='fa fa-navicon'></i>
       </button>
       <div class='cart-nav'><a href='/cart'><i class='fa fa-shopping-cart'></i></a><?php if ($cart2->count_items() > 0) : ?><div class='cart-circle'><?php echo $cart2->count_items(); ?></div><?php endif; ?></div>
-         <?php echo (empty($_SESSION['user_info'])) ? "<a href='/user/login'><button id='mobile-login-button'>Login</button></a>" : null ; ?>
       <a class="navbar-brand" href="/">sharefuly</a>
     </div>
 
 
+
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-      <ul class="nav navbar-nav">
+         <ul class='nav navbar-nav'>
         <li id='user-avatar' class="active"><?php if(isset($user)):?>
         <a href="/user/info/<?php echo $user->id;?>"><?php echo $user->username . "  <img style='width:25px;height:25px;' src='$user->avatar'/>  ". $_SESSION['sub_count'];?></a>
-      <?php else:?>
-       <!-- <a href='/home'>Login</a>-->
-      <?php endif;?>
-
-            <span class="sr-only">(current)</span></li>
-        <?php if(isset($user)):?>
-      <?php endif;?>
-      <?php if (isset($user)):?>
-        <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class='fa fa-cog'></i>  Options <span class="caret"></span></a>
-          <ul class="dropdown-menu">
-            <li><a href="/profile/edit_profile"><i class='fa fa-pencil'></i>  Edit Profile</a></li>
-            <li role="separator" class="divider"></li>
-            <li><a href="/image/upload_image"><i class='fa fa-upload'></i>  Upload an Image</a></li>
-            <li role="separator" class="divider"></li>
-            <li><a href="/user/image_manager"><i class='fa fa-image'></i>  Image Manager</a></li>
-            <li role="separator" class="divider"></li>
-            <li><a href='/cart/create_subscription'><i class='fa fa-credit-card'></i>  Create Subscription</a></li>
-            <li role="separator" class="divider"></li>
-          </ul>
         </li>
-      <?php endif;?>
-      <?php if (!isset($user)):?>
-
-        <li id='login-li'>
-          <form id='login_form' style='top:+15px; position:relative; display:block;' action='/user/verify' method='POST'>
-          <input type='text' id='login-email' name='email' placeholder='email' />
-          <input type='password' id='login-password' name='password' placeholder='password'  />
-          <button id='login-submit' type='submit'>Login</button>
-        </li>
-          </form>
-        </li>
-          <li>
-          <a style='display:inline; top:+15px; position:relative;' class='nav-link' id='nav-forgot' href='/user/reset_password'>Reset Password</a>
-          <a style='display:inline; top:+15px; position:relative;' class='nav-link' id='#nav-register' href='/user/register'>Register</a>
-        </li>
+        </ul>
+      <ul id='nav-search-holder' class="nav navbar-nav">
 
       <?php endif;?>
-      </ul>
-      <div class='mobile-hide'>
-      <form class="navbar-form navbar-left" id='nav_search' action='/tag/search_by_tag' method="GET">
+      <form class="navbar-form" id='nav_search' action='/tag/search_by_tag' method="GET">
         <div class="form-group" >
           <input type="text" class="form-control" id='nav-search-box' name='query' placeholder="Search">
         </div>
-        <button type="submit" class="btn btn-default">Submit</button>
+        <button type="submit">Submit</button>
       </form>
+        </ul>
+
+            <span class="sr-only">(current)</span></li>
+      <?php if (isset($user)):?>
+        <ul class='nav navbar-nav'>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class='fa fa-cog'></i>  Options <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a id='drop-color' href="/profile/edit_profile"><i class='fa fa-pencil'></i>  Edit Profile</a></li>
+            <li role="separator" class="divider"></li>
+            <li><a id='drop-color' href="/image/upload_image"><i class='fa fa-upload'></i>  Upload an Image</a></li>
+            <li role="separator" class="divider"></li>
+            <li><a id='drop-color' href="/user/image_manager"><i class='fa fa-image'></i>  Image Manager</a></li>
+            <li role="separator" class="divider"></li>
+            <li><a id='drop-color' href='/cart/create_subscription'><i class='fa fa-credit-card'></i>  Create Subscription</a></li>
+            <li role="separator" class="divider"></li>
+          </ul>
+        </li>
+        </ul>
+      <?php endif;?>
+      <div class='mobile-hide'>
+      
       </div>
-      <?php if (isset($_SESSION['user_info']['level']) && $_SESSION['user_info']['level'] != '1' ) : ?>
-      <a href='/bug/report'><button class='bug-button'>Report a Bug</button></a>
-    <?php endif; ?>
-      <ul  id='login-form' class="nav navbar-nav navbar-right">
+      <?php if (!isset($user)):?>
+      <a id='login-navbar' href='/login'>Login</a>
+
+      <div class='divider'></div>
+            <?php endif; ?>
+      <ul class="nav navbar-nav">
      
 
 
         <?php if (isset($user) && $user->level === '1'): ?> <!-- just found out this right here, the user->level returns a string, why? -->
-        <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Admin Options <span class="caret"></span></a>
+        <li class="dropdown admin-warning" style='list-style-type:none; padding-left:0;''>
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"  aria-expanded="false">Admin Options <span class="caret"></span></a>
           <ul class="dropdown-menu">
-            <li><a href="/admin/user_manager">User Manager</a></li>
-            <li><a href="/admin/image_manager">Image Manager</a></li>
-            <li><a href="/admin/subscription_manager">Subscription Manager</a></li>
-            <li><a href="/admin/bug_manager">Bug Reports</a></li>
-            <li><a href="/admin/category_manager">Category Manager</a></li>
+            <li><a id='drop-color' href="/admin/user_manager">User Manager</a></li>
+            <li><a id='drop-color' href="/admin/image_manager">Image Manager</a></li>
+            <li><a id='drop-color' href="/admin/subscription_manager">Subscription Manager</a></li>
+            <li><a id='drop-color' href="/admin/bug_manager">Bug Reports</a></li>
+            <li><a id='drop-color' href="/admin/category_manager">Category Manager</a></li>
             <li role="separator" class="divider"></li>
             <li><a href="#">Separated link</a></li>
           </ul>
@@ -138,7 +127,7 @@ foreach ($info['tags'] as $tag)
       <?php endif; ?>
       </ul>
       <?php if (isset($user)):?>
-      <a class='navbar-brand logout' href='/user/logout'>Logout</a>
+      <a class='logout' id='logout-navbar' href='/user/logout'>Logout</a>
     <?php endif; ?>
 
     </div><!-- /.navbar-collapse -->

@@ -343,8 +343,9 @@ public function logout()
 	$model = new User();
 	if ($model->logout())
 	{
-		return_view('view.home.php');
-		user_msg('Successfully Logged Out!');
+		require_once(CONTROLLERS . '/home.php');
+		$home = new homeController();
+		$home->load(true);
 	}
 }
 /*

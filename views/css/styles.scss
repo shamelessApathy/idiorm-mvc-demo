@@ -94,9 +94,36 @@ body
 	height:50px;
 	background-color:$header-bg;
 }
-.navbar-default .navbar-nav > li > a,.navbar-default .navbar-brand 
+#nav-search-holder
+{
+	float:left;
+	display:block;
+	position:relative;
+	width:30%;
+	margin-left:40%;
+}
+#login-navbar
+{
+	color:$primary-font-color !important;
+	position:relative;
+	display:block;
+	float:right;
+	font-size:18px;
+	text-decoration:none;
+	line-height:50px;
+	/*padding:15px 15px;*/
+}
+#logout-navbar
 {
 	color:$primary-font-color;
+}
+#drop-color
+{
+	color:$primary-font-color;
+}
+.navbar-default .navbar-nav > li > a,.navbar-default .navbar-brand
+{
+	color:$primary-font-color !important;
 }
 .font-color
 {
@@ -232,7 +259,7 @@ input
 {
 	background-color:$text-box-color !important;
 	color: $secondary-font-color !important;
-	width:100px;
+	width:200px;
 }
 .user-info-container ul 
 {
@@ -269,6 +296,11 @@ input
 {
 	margin-top:10px;
 }
+#nav_search button
+{
+	margin-left:15px;
+}
+
 .form-control, .big_submit:hover
 {
 	color:$primary-hover-font-color !important;
@@ -1260,7 +1292,6 @@ could be simply that some of the other rules are being applied with a greater im
 {
 	border-radius:5px;
 	border:1px solid $body-bg;
-	margin:8;
 	float:right;
 	width:44px;
 	height:34px;
@@ -1268,6 +1299,8 @@ could be simply that some of the other rules are being applied with a greater im
 	color:$secondary-font-color;
 	font-size:30px;
 	padding-left:6px;
+	margin-top:8px;
+	margin-right:5px;
 }
 
 .cart-outside
@@ -1578,6 +1611,39 @@ could be simply that some of the other rules are being applied with a greater im
 }
 
 @media only screen and (max-width:600px){
+	.user-info-container
+	{
+		margin:0 auto;
+	}
+	.navbar-form
+	{
+		margin:0 auto;
+		display:block;
+	}
+	#nav_search
+	{
+		width:100%;
+	}
+	#nav_search button
+	{
+		display:block;
+		margin:0 auto;
+	}
+	#nav-search-holder
+	{
+		width:100%;
+		float:none;
+		margin:0 auto;
+	}
+	#login-navbar
+	{
+		float:none;
+	}
+	/*#nav-search-holder button
+	{
+		margin:0 auto;
+		display:block;
+	}*/
 	#nav-search-box
 	{
 		width:100%;

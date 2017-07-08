@@ -4,7 +4,8 @@
 
 $routes = array(
 '/company_overview' => 'view.company_overview.php',
-'/payout' => 'view.payout.php'
+'/payout' => 'view.payout.php',
+'/login' => 'view.login.php'
 	);
 
 ?>
