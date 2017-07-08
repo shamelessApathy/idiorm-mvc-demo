@@ -29,6 +29,10 @@ $sold-table-bg: #e6e6e6;
 
 
 /* END CATEGORY STYLINGS */
+#hide-for-regular
+{
+	display:none;
+}
 .admin-warning
 {
 	background-color:#0099ff;
@@ -111,11 +115,12 @@ body
 	font-size:18px;
 	text-decoration:none;
 	line-height:50px;
-	/*padding:15px 15px;*/
 }
 #logout-navbar
 {
 	color:$primary-font-color;
+	font-size:18px;
+	line-height:50px;
 }
 #drop-color
 {
@@ -1611,6 +1616,10 @@ could be simply that some of the other rules are being applied with a greater im
 }
 
 @media only screen and (max-width:600px){
+	#hide-for-regular
+	{
+		display:block;
+	}
 	.user-info-container
 	{
 		margin:0 auto;

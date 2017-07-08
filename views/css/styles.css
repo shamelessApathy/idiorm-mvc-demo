@@ -12,6 +12,9 @@
   margin-left: 10px; }
 
 /* END CATEGORY STYLINGS */
+#hide-for-regular {
+  display: none; }
+
 .admin-warning {
   background-color: #0099ff;
   width: 100%;
@@ -76,11 +79,12 @@ body {
   float: right;
   font-size: 18px;
   text-decoration: none;
-  line-height: 50px;
-  /*padding:15px 15px;*/ }
+  line-height: 50px; }
 
 #logout-navbar {
-  color: #ccc; }
+  color: #ccc;
+  font-size: 18px;
+  line-height: 50px; }
 
 #drop-color {
   color: #ccc; }
@@ -1309,6 +1313,9 @@ could be simply that some of the other rules are being applied with a greater im
   #login-form {
     margin-left: 15px; } }
 @media only screen and (max-width: 600px) {
+  #hide-for-regular {
+    display: block; }
+
   .user-info-container {
     margin: 0 auto; }
 

@@ -111,7 +111,7 @@ foreach ($info['tags'] as $tag)
 
 
         <?php if (isset($user) && $user->level === '1'): ?> <!-- just found out this right here, the user->level returns a string, why? -->
-        <li class="dropdown admin-warning" style='list-style-type:none; padding-left:0;''>
+        <li class="dropdown admin-warning" id='hide-for-regular' style='list-style-type:none; padding-left:0;''>
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"  aria-expanded="false">Admin Options <span class="caret"></span></a>
           <ul class="dropdown-menu">
             <li><a id='drop-color' href="/admin/user_manager">User Manager</a></li>
