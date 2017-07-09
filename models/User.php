@@ -215,9 +215,9 @@ class User extends Model {
 		foreach ($users as $user)
 		{
 			$id = $user->id;
-			$posts = ORM::for_table('post')->where('author_id', $id)->find_many();
-			$number = count($posts);
-			$user->number_posts = $number;
+			$images = ORM::for_table('image')->where('user_id', $id)->find_many();
+			$number = count($images);
+			$user->number_images = $number;
 		}
 		return $users;
 	}

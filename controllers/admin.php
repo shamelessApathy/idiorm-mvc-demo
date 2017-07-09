@@ -1,6 +1,64 @@
 <?php
 require_once(BASE_CONTROLLER);
 class adminController extends Controller {
+	public function images_by_user($user_id)
+	{
+		$images = ORM::for_table('image')->where('user_id', $user_id)->find_many();
+		return_view("admin/admin.user_images.php", $images);
+	}
+	public function admin_delete_image($image_id = null)
+	{
+
+		if (empty($image_id))
+		{
+			$image_id = $_POST['image_id'];
+		}
+		require_once(MODELS . '/Image.php');
+		require_once(MODELS . '/Tag.php');
+		require_once(MODELS . '/Vote.php');
+		require_once(MODELS . '/Category.php');
+		$category_model = new Category();
+		$category_model->delete_image_relation($image_id);
+		$image_model = Model::factory('Image')->find_one($image_id);
+		$path = $image_model->path;
+		$tags = $image_model->get_tags();
+		$tag_model = new Tag();
+		if (unlink(ROOT . $image_model->path))
+		{
+			echo ' it deleted';
+			$image_model->delete();
+		}
+		
+		foreach ($tags as $tag)
+		{
+			$tag_model->remove_tag($image_id, $tag->tag_id);
+		}
+		$vote_model = new Vote();
+		$votes = $vote_model->get_all_for_image($image_id);
+		foreach ($votes as $vote)
+		{
+			$vote_model->delete_vote($vote->id);
+		}
+
+
+	}
+	/**
+	* 
+	* @param $image_id , $user_id (needed to return to the view of images_by_user)
+	* @return if true, deletes image, sends you back to admin area of user_id you were just at
+	*/
+	public function delete_user_image()
+	{
+		$image_id = $_GET['image_id'] ?? null;
+		$user_id = $_GET['user_id'] ?? null;
+		$this->admin_delete_image($image_id);
+		$this->images_by_user($user_id);
+		sys_msg("Image deleted successfully!");
+	}
+	public function dashboard()
+	{
+		return_view("admin/admin.dashboard.php");
+	}
 	public function category_manager()
 	{
 		require_once(MODELS . "/Category.php");

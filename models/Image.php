@@ -96,6 +96,7 @@ class Image extends Model
 		{
 			return true;
 		}
+		
 	}
 	public function authorize_image($id)
 	{

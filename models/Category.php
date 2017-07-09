@@ -12,6 +12,11 @@ class Category{
 		$category->approved = 1;
 		$category->save();
 	}
+	public function delete_image_relation($image_id)
+	{
+		$cat_rel = ORM::for_table('category_to_image')->where('image_id', $image_id)->find_one();
+		$cat_rel->delete();
+	}
 	public function add_category($name)
 	{
 		$name = ucfirst($name);

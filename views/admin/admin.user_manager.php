@@ -26,9 +26,9 @@
 			<p>Username : $user->username</p>
 			<p>Email :  $user->email</p>
 			<p>User ID : $user->id</p>
-			<p>Number of posts: $user->number_posts</p>
+			<p>Number of Images: $user->number_images</p>
 			<div class='user_actions'>
-			<a href='/post/search_posts/$user->id'>Get Posts</a>
+			<a href='/admin/images_by_user/$user->id'>User Images</a>
 			<p>User Level: $user->level</p>
 			<form action='/user/set_level'>
 			<select name='level'>

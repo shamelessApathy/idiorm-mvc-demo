@@ -369,6 +369,9 @@ class imageController extends Controller {
 		require_once(MODELS . '/Image.php');
 		require_once(MODELS . '/Tag.php');
 		require_once(MODELS . '/Vote.php');
+		require_once(MODELS . '/Category.php');
+		$category_model = new Category();
+		$category_model->delete_image_relation($image_id);
 		$image_model = Model::factory('Image')->find_one($image_id);
 		$path = $image_model->path;
 		$tags = $image_model->get_tags();
