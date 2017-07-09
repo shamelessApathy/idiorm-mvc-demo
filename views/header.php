@@ -64,14 +64,9 @@ foreach ($info['tags'] as $tag)
 
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-         <ul class='nav navbar-nav'>
-        <li id='user-avatar' class="active"><?php if(isset($user)):?>
-        <a href="/user/info/<?php echo $user->id;?>"><?php echo $user->username . "  <img style='width:25px;height:25px;' src='$user->avatar'/>  ". $_SESSION['sub_count'];?></a>
-        </li>
-        </ul>
+
       <ul id='nav-search-holder' class="nav navbar-nav">
 
-      <?php endif;?>
       <form class="navbar-form" id='nav_search' action='/tag/search_by_tag' method="GET">
         <div class="form-group" >
           <input type="text" class="form-control" id='nav-search-box' name='query' placeholder="Search">
@@ -79,10 +74,15 @@ foreach ($info['tags'] as $tag)
         <button type="submit">Submit</button>
       </form>
         </ul>
-
+         <ul class='nav navbar-nav' id='navbar-avatar'>
+        <li id='user-avatar' class="active"><?php if(isset($user)):?>
+        <a href="/user/info/<?php echo $user->id;?>"><?php echo $user->username . "  <img style='width:25px;height:25px;' src='$user->avatar'/>  ". $_SESSION['sub_count'];?></a>
+      <?php endif;?>
+        </li>
+        </ul>
             <span class="sr-only">(current)</span></li>
       <?php if (isset($user)):?>
-        <ul class='nav navbar-nav'>
+        <ul class='nav navbar-nav' id='navbar-options'>
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class='fa fa-cog'></i>  Options <span class="caret"></span></a>
           <ul class="dropdown-menu">
@@ -96,7 +96,11 @@ foreach ($info['tags'] as $tag)
             <li role="separator" class="divider"></li>
             <?php if ($user->level === '1'):?>
               <li><a href='/admin/dashboard'>Admin Dashboard</a></li>
+              <li role='separator' class='divider'></li>
             <?php endif;?>
+            <?php if (isset($user)):?>
+              <li><a id='drop-color' href='/user/logout'>Logout</a></li>
+            <?php endif; ?>
           </ul>
         </li>
         </ul>
@@ -113,25 +117,8 @@ foreach ($info['tags'] as $tag)
      
 
 
-        <?php if (isset($user) && $user->level === '1'): ?> <!-- just found out this right here, the user->level returns a string, why? -->
-        <li class="dropdown admin-warning" id='hide-for-regular' style='list-style-type:none; padding-left:0;''>
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"  aria-expanded="false">Admin Options <span class="caret"></span></a>
-          <ul class="dropdown-menu">
-            <li><a id='drop-color' href="/admin/user_manager">User Manager</a></li>
-            <li><a id='drop-color' href="/admin/image_manager">Image Manager</a></li>
-            <li><a id='drop-color' href="/admin/subscription_manager">Subscription Manager</a></li>
-            <li><a id='drop-color' href="/admin/bug_manager">Bug Reports</a></li>
-            <li><a id='drop-color' href="/admin/category_manager">Category Manager</a></li>
-            <li role="separator" class="divider"></li>
-            <li><a href="#">Separated link</a></li>
-          </ul>
-        </li>
-      
-      <?php endif; ?>
       </ul>
-      <?php if (isset($user)):?>
-      <a class='logout' id='logout-navbar' href='/user/logout'>Logout</a>
-    <?php endif; ?>
+
 
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->

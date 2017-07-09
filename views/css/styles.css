@@ -69,8 +69,13 @@ body {
   float: left;
   display: block;
   position: relative;
-  width: 30%;
-  margin-left: 40%; }
+  width: 30%; }
+
+#navbar-avatar {
+  float: right; }
+
+#navbar-options {
+  float: right; }
 
 #login-navbar {
   color: #ccc !important;
@@ -232,7 +237,9 @@ input {
   float: right !important; }
 
 #nav_search {
-  margin-top: 10px; }
+  margin-top: 10px;
+  float: left;
+  display: block; }
 
 #nav_search button {
   margin-left: 15px; }
@@ -1323,20 +1330,14 @@ could be simply that some of the other rules are being applied with a greater im
     margin: 0 auto;
     display: block; }
 
-  #nav_search {
-    width: 100%; }
-
   #nav_search button {
     display: block;
     margin: 0 auto; }
 
-  #nav-search-holder {
-    width: 100%;
-    float: none;
-    margin: 0 auto; }
-
   #login-navbar {
-    float: none; }
+    float: none;
+    text-align: center;
+    width: 100%; }
 
   /*#nav-search-holder button
   {
@@ -1345,6 +1346,28 @@ could be simply that some of the other rules are being applied with a greater im
   }*/
   #nav-search-box {
     width: 100%; }
+
+  #navbar-options {
+    float: none;
+    clear: both;
+    margin: 0 auto;
+    display: block; }
+
+  #navbar-avatar {
+    display: none; }
+
+  #nav_search {
+    margin: 0 auto;
+    display: block;
+    padding: 5px;
+    width: 80%;
+    float: none;
+    clear: both; }
+
+  #nav-search-holder {
+    width: 100%;
+    float: none;
+    margin: 0 auto; }
 
   .collection-thumb {
     display: block;
