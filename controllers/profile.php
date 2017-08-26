@@ -8,7 +8,7 @@ class profileController extends Controller {
 		$user_id = $_SESSION['user_info']->id;
 		$user = Model::factory('User')->find_one($user_id);
 		$profile =$user->profile()->find_one();
-		if($bool)
+		if(!empty($bool))
 		{
 		return_view('view.edit_profile.php', $profile);
 		user_msg('profile edited successfully!');
@@ -16,6 +16,7 @@ class profileController extends Controller {
 		else
 		{
 		return_view('view.edit_profile.php', $profile);
+		sys_msg('Something went wrong', $profile);
 		}
 	}
 	public function update()
@@ -29,11 +30,28 @@ class profileController extends Controller {
 		$city = $_POST['city'];
 		$state = $_POST['state'];
 		$zipcode = $_POST['zip_code'];
-		$info = array('user_id' =>$id, 'first_name' => $firstname, 'middle_name' => $middlename, 'last_name' => $lastname, 'dob' => $dob, 'street_address' => $streetaddress, 'city' => $city, 'state' => $state, 'zip_code' => $zipcode);
+		$country = $_POST['country'];
+		$info = array(
+			'user_id' =>$id, 
+			'first_name' => $firstname, 
+			'middle_name' => $middlename, 
+			'last_name' => $lastname, 
+			'dob' => $dob, 
+			'street_address' => $streetaddress, 
+			'city' => $city, 
+			'state' => $state, 
+			'zip_code' => $zipcode, 
+			'country'=>$country);
 		require_once(MODELS . '/Profile.php');
 		$model = new Profile();
-		$model->update($info);
-		$this->edit_profile(true);
+		if($model->update($info))
+		{
+			$this->edit_profile(true);
+		}
+		else
+		{
+			$this->edit_profile(false);
+		}
 	}
 	/**
 	*

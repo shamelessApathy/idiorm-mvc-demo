@@ -12,7 +12,7 @@
 <input type='text' name='reroute' value= "<?php echo isset($info) ? $info : null;?>" HIDDEN><br>
 <button type='submit'>Submit</button>
 </form>
-<a id='mobile-register' href='register'>Register</a>
+<a id='mobile-register' href='/user/register'>Register</a>
 </div>
 </div>
 

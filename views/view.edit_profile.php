@@ -25,7 +25,7 @@ if (isset($info->dob))
     <label>Choose an avatar:</label><input type='file' id="imgInp" name="user_avatar"/>
 	<div class='note'>Avatar must be 75px by 75px or it will be resized</div>
     <img id="blah"  src="#" alt="your image" />
-    <button type='submit'>Submit</button>
+    <button type='submit'>Change Avatar</button>
     <div>Current image: <img class='user_avatar' src="<?php 
     if (isset($_SESSION['user_info']->avatar)) 
     {
@@ -35,32 +35,14 @@ if (isset($info->dob))
 </form>
 </div></div>
 <div class='col-md-6'>
-	<form action='/profile/edit_merchant' method='POST'>
-	<label>Merchant Account</label><br>
-		<input type='text' name='account-name' value="<?php echo (isset($info->merchant_account)) ? $info->merchant_account : null; ?>"><br>
-		<label>PayPal</label><input type='radio' name='merchant' 
-		<?php 
-		if (isset($info->merchant))
-		{
-			echo ($info->merchant == 'paypal') ? "checked='checked'" : null;
-		}
-		?> value='paypal'><br>
-		<label>SquarePay</label><input type='radio' name='merchant' 
-		<?php 
-		if (isset($info->merchant))
-		{
-			echo ($info->merchant == 'squarepay') ? "checked='checked'" : null;
-		}
-		?> value='squarepay'><br>
-		<button type='submit'>Submit</button>
-	</form>
+
 </div>
 </div>
+<form name="user_profile" action='/profile/update' method='POST'>
 <div class='row'>
 <div class='col-md-6'>
-<form name="user_profile" action='/profile/update' method='POST'>
 <div class='profile_edit_section'>
-<div class='form-group'>
+
 	<label>First Name:</label><br>
 	<input type='text' name='first_name' value="<?php echo isset($info->first_name) ?  $info->first_name : '';?>"/><br>
 	<label>Middle:</label><br>
@@ -69,24 +51,26 @@ if (isset($info->dob))
 	<input type='text' name='last_name' value="<?php echo isset($info->last_name) ? $info->last_name : '';?>"/><br>
 	<label>Birthdate:</label><br>
 	<input class='dob' value="<?php echo isset($info->dob) ? $mm : '';?>" name='month'/><input class='dob' value="<?php echo isset($info->dob) ? $dd : '';?>" name='day'/><input class='dob_year' name='year' value="<?php echo isset($info->dob) ? $yy : '';?>"/>
-</div>
+
 </div>
 </div>
 <div class='col-md-6'>
-<div class='form-group'>
+
 	<label>Street Address</label><br>
 	<input name='street_address' value="<?php echo isset($info->street_address) ? $info->street_address : ''; ?>"/><br>
 	<label>City</label><br>
 	<input name='city' value="<?php echo isset($info->city) ? $info->city : ''; ?>"><br>
-	<label>State</label><br>
+	<label>State/Region</label><br>
 	<input name='state' value="<?php echo isset($info->state) ? $info->state : ''; ?>"><br>
-	<label>Zip Code</label><br>
-	<input name='zip_code' value="<?php echo isset($info->zip_code) ? $info->zip_code : ''; ?>">
+	<label>Postal Code</label><br>
+	<input name='zip_code' value="<?php echo isset($info->zip_code) ? $info->zip_code : ''; ?>"><br>
+	<label>Country</label><br>
+	<input name='country' value="<?php echo isset($info->country) ?  $info->country : ''; ?>"><br>
 </div>
 <button type='submit'>Submit</button>
 </div>
 </div>
-</form>
+
 <a href='/user/new_password'>Click here to change your password!</a>
 </div>
 </div>
