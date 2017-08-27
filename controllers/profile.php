@@ -1,6 +1,34 @@
 <?php
 require_once(BASE_CONTROLLER);
 class profileController extends Controller {
+	public function user_id()
+	{
+		return $_SESSION['user_info']->id;
+	}
+	public function create()
+	{
+		
+		$profile_info = $_POST;
+		require_once(MODELS . '/Profile.php');
+		$model = new Profile();
+		$result = $model->create($profile_info);
+		var_dump($result);
+	}
+	public function profile_create()
+	{
+		return_view('view.profile_create.php');
+	}
+	public function profile_avatar()
+	{
+		return_view('view.profile_avatar.php');
+	}
+	public function options()
+	{
+		$user_id = $_SESSION['user_info']['id'];
+		$model = require_once(MODELS . '/Profile.php');
+		$exists = Model::factory('Profile')->where('user_id',$user_id)->find_one();
+		return_view('view.profile_options.php', $exists);
+	}
 	public function edit_profile($bool = null)
 	{
 		require_once(MODELS . "/User.php");

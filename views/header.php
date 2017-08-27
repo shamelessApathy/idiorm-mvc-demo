@@ -86,7 +86,7 @@ foreach ($info['tags'] as $tag)
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class='fa fa-cog'></i>  Options <span class="caret"></span></a>
           <ul class="dropdown-menu">
-            <li><a id='drop-color' href="/profile/edit_profile"><i class='fa fa-pencil'></i>  Edit Profile</a></li>
+            <li><a id='drop-color' href="/profile/options"><i class='fa fa-pencil'></i>  Profile</a></li>
             <li role="separator" class="divider"></li>
             <li><a id='drop-color' href="/image/upload_image"><i class='fa fa-upload'></i>  Upload an Image</a></li>
             <li role="separator" class="divider"></li>
