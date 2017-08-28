@@ -36,15 +36,10 @@ class profileController extends Controller {
 		$user_id = $_SESSION['user_info']->id;
 		$user = Model::factory('User')->find_one($user_id);
 		$profile =$user->profile()->find_one();
-		if(!empty($bool))
-		{
 		return_view('view.edit_profile.php', $profile);
-		user_msg('profile edited successfully!');
-		}
-		else
+		if ($bool === true)
 		{
-		return_view('view.edit_profile.php', $profile);
-		sys_msg('Something went wrong', $profile);
+			user_msg('Profile Update Successfully!');
 		}
 	}
 	public function update()
@@ -54,22 +49,24 @@ class profileController extends Controller {
 		$middlename = $_POST['middle_name'];
 		$lastname = $_POST['last_name'];
 		$dob = $_POST['month'] . '/' . $_POST['day'] . '/' . $_POST['year'];
-		$streetaddress = $_POST['street_address'];
+		#$streetaddress = $_POST['street_address'];
 		$city = $_POST['city'];
 		$state = $_POST['state'];
-		$zipcode = $_POST['zip_code'];
+		#$zipcode = $_POST['zip_code'];
 		$country = $_POST['country'];
+		$website = $_POST['website'];
 		$info = array(
 			'user_id' =>$id, 
 			'first_name' => $firstname, 
 			'middle_name' => $middlename, 
 			'last_name' => $lastname, 
 			'dob' => $dob, 
-			'street_address' => $streetaddress, 
+			#'street_address' => $streetaddress, 
 			'city' => $city, 
 			'state' => $state, 
-			'zip_code' => $zipcode, 
-			'country'=>$country);
+			#'zip_code' => $zipcode, 
+			'country'=>$country,
+			'website'=>$website);
 		require_once(MODELS . '/Profile.php');
 		$model = new Profile();
 		if($model->update($info))

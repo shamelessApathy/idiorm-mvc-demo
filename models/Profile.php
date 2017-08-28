@@ -29,16 +29,19 @@ class Profile extends Model {
 	public function update($info)
 	{
 		$profile = ORM::for_table('profile')->where('user_id' , $_SESSION['user_info']->id)->find_one();
-		if (!$profile){
-
-	$profile = ORM::for_table('profile')->create();
-	}
 
 		foreach ($info as $key => $value)
 		{
 			$profile->set($key, $value); 
 		}
-		$profile->save();
+		if($profile->save())
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
 	}
 	public function user()
 	{
