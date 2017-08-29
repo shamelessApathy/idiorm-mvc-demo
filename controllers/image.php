@@ -553,9 +553,10 @@ class imageController extends Controller {
 		{		
 			$user_id = $_SESSION['user_info']['id'];
 			$model = Model::factory('Image')->find_one($image_id);
-			$test = $model->ownership($image_id, $user_id);
-			if ($test || $model->user_id == $user_id)
-			{
+			# Took out ownership test
+			#$test = $model->ownership($image_id, $user_id);
+			#if ($test || $model->user_id == $user_id)
+			#{
 				require_once(MODELS . '/Image.php');
 				$image_model = Model::factory('Image')->find_one($image_id);
 				$image_path = $image_model->path;
@@ -571,13 +572,13 @@ class imageController extends Controller {
 		    		readfile(ROOT . $image_path);
 		    		exit;
 				}
-			}
-		else
+			#}
+		/*else
 		{
 			return_view('view.home.php');
 			sys_msg("You are not the user who purchased this image!");
 			return;
-		}
+		}*/ // This else belongs to the ownership test function
 		}
 		else
 		{
