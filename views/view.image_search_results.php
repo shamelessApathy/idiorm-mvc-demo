@@ -3,8 +3,8 @@
 <div class='image-details'>
 <div class='image-details-hider'>
 <div class='image-details-opacity'>
-<?php if(isset($_SESSION['user-info']['id'])):?>
-<div class='image-button-holder'><button type='button' class='download-button'>Download</button></div>
+<?php if(isset($_SESSION['user_info']['id'])):?>
+<div class='image-button-holder'><a id='image-download-link'><button type='button' class='download-button'>Download</button></div></a>
 <?php else:?>
 <div class='image-button-holder'><a href='/login'><button type='button' class='login-button'>Login to Download</button></div></a>
 <?php endif;?>

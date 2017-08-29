@@ -31,6 +31,7 @@ $user_link = "/image/user/$user->id";
 			?>
 			</ul>
 <?php if(isset($_SESSION['user_info'])):?>
+<a href="/image/download/<?php echo $image->id;?>"><button class='image-download' type='button'>Download</button></a>
 <button id='report-button'>Report Image</button>
 <div class='report-image'>
 	<form action='/report/create_new' method='POST'>
@@ -43,6 +44,8 @@ $user_link = "/image/user/$user->id";
 		<button type='submit'>Submit Report</button>
 	</form>
 </div>
+<?php else:?>
+<a href='/login'><button type='button' class='login-button'>Login to Download</button></a>
 <?php endif; ?>
 			</div>
 			</div>

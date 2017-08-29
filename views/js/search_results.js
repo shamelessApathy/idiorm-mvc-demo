@@ -10,6 +10,7 @@ $(function(){
 			this.json = $.parseJSON(this.tags);
 			this.tag_holder = $('.image-details-tags');
 			this.tag_string = "<h4>TAGS</h4>";
+			this.download_link = $('#image-download-link');
 			for (var i = 0; i < this.json.length; i++)
 			{
 				var wrapper = "<div class='tag'>" + this.json[i]['text'] + "</div>";
@@ -89,6 +90,9 @@ $(function(){
 			$(this.opacity).fadeIn(function(){console.log('runniing!!!')});
 
 //			$('.item-details-price').html(this.price);
+// Adding image source download link here
+			var url_download_string = "/image/download/" + this.image_id;
+			$(this.download_link).attr('href', url_download_string);
 		}.bind(this)
 		this.initialize();
 	}
