@@ -344,7 +344,7 @@ class imageController extends Controller {
 		$new_path = '/users/images/thumbnails/' . $nodir . $ext;
 		$image = new Imagick($file);
 		$image->rotateImage('none', $deg);
-		$image->thumbnailImage(300,300, true);
+		$image->thumbnailImage(600,600, true);
 		if ($image->writeImage($save_path))
 		{
 			return $new_path;
