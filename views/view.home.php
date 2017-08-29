@@ -9,7 +9,6 @@ $categories = $info['categories'];
 <div class='col-md-4'></div>
 <div class='col-md-4'>
 	<h1 class='font-color text-center'>sharefuly</h1>
-	<p class='font-color text-center'>monetize your photos</p>
 </div>
 <div class='col-md-4'></div>
 </div>

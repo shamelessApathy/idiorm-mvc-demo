@@ -101,14 +101,6 @@ $user_link = "/image/user/$user->id";
 			</div>
 	</div>
 </div>
-<button class='add_to_cart' data-id="<?php echo $image->id; ?>">Add to cart</button>
-
-<?php if(!$image->premium && isset($_SESSION['user_info'])) :?>
-<form action='/image/subscription' method='POST'>
-	<input name='image_id' hidden value="<?php echo $image->id;?>">
-	<button type='submit'>USE SUBSCRIPTION</button>
-</form>
-<?php endif; ?>
 </div>
 </div>
 </div>

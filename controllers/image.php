@@ -123,10 +123,6 @@ class imageController extends Controller {
 		{
 			sys_msg('Something went wrong. You may have tried to upload a duplicate image, or there may have been another error');
 		}
-		if (empty($user->merchant_account))
-		{
-			sys_msg('You can upload an image and sell them but you need to add a merchant account in the profile area to receive payment!');
-		}
 		return_view('view.upload_image.php', $categories);
 		
 	}

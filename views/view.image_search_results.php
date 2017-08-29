@@ -3,7 +3,11 @@
 <div class='image-details'>
 <div class='image-details-hider'>
 <div class='image-details-opacity'>
-<div class='image-button-holder'><button type='button' class='add_to_cart'>Add To Cart</button></div>
+<?php if(isset($_SESSION['user-info']['id'])):?>
+<div class='image-button-holder'><button type='button' class='download-button'>Download</button></div>
+<?php else:?>
+<div class='image-button-holder'><a href='/login'><button type='button' class='login-button'>Login to Download</button></div></a>
+<?php endif;?>
 <div class='close-image-details'><i class='fa fa-close'></i></div>
 <div class='clear'></div>
 <div class='row'>

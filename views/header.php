@@ -56,7 +56,7 @@ foreach ($info['tags'] as $tag)
         <span class="sr-only">Toggle navigation</span>
         <i class='fa fa-navicon'></i>
       </button>
-      <div class='cart-nav'><a href='/cart'><i class='fa fa-shopping-cart'></i></a><?php if ($cart2->count_items() > 0) : ?><div class='cart-circle'><?php echo $cart2->count_items(); ?></div><?php endif; ?></div>
+     
       <a class="navbar-brand" href="/">sharefuly</a>
     </div>
 
@@ -91,8 +91,6 @@ foreach ($info['tags'] as $tag)
             <li><a id='drop-color' href="/image/upload_image"><i class='fa fa-upload'></i>  Upload an Image</a></li>
             <li role="separator" class="divider"></li>
             <li><a id='drop-color' href="/user/image_manager"><i class='fa fa-image'></i>  Image Manager</a></li>
-            <li role="separator" class="divider"></li>
-            <li><a id='drop-color' href='/cart/create_subscription'><i class='fa fa-credit-card'></i>  Create Subscription</a></li>
             <li role="separator" class="divider"></li>
             <?php if ($user->level === '1'):?>
               <li><a href='/admin/dashboard'>Admin Dashboard</a></li>
