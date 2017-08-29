@@ -546,6 +546,15 @@ class imageController extends Controller {
 			return_view("store/store.image_success.php", $link);
 		}
 	}
+	// Simply records the download so it can be accessed later as a record of how many times image has been downloaded
+	public function record_download($image_model)
+	{
+		$download = ORM::for_table('download')->create();
+		$download->image_id = $image_model->id;
+		$download->owner_id = $image_model->user_id;
+		$download->user_id = $_SESSION['user_info']['id'];
+		$download->save();
+	}
 	public function download($image_id = null)
 	{
 		require_once(MODELS . '/Image.php');
@@ -559,6 +568,7 @@ class imageController extends Controller {
 			#{
 				require_once(MODELS . '/Image.php');
 				$image_model = Model::factory('Image')->find_one($image_id);
+				$this->record_download($image_model);
 				$image_path = $image_model->path;
 				if (file_exists(ROOT . $image_path)) 
 				{
