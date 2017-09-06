@@ -154,6 +154,8 @@ class imageController extends Controller {
 	// runs through list of everything that needs to be done and recorded to create an instance of an image
 	public function new_image()
 	{
+
+		
 		$check = $_FILES['image']['tmp_name'];
 		// This can get used ONLY on JPEGs and TIFFs
 		//$exif = exif_read_data($check);

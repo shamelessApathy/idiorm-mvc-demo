@@ -8,7 +8,7 @@ $cart2 = new Cart();
 
 <?php if (is_array($info) && isset($info['image'])) : ?>
   <?php $image = $info['image'];
-$image_url = "http://dev.sharefuly.com" . $image->watermark;
+$image_url = "http://dev.sharefuly.com" . $image->thumbnail;
 $path = "/image/info?id=";
 $request =$_SERVER['REQUEST_URI'];
 $exploded = explode('/',$request);
