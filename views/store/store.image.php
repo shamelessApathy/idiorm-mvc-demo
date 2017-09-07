@@ -25,7 +25,6 @@ $user_link = "/image/user/$user->id";
 				<li><a href=$user_link> $user->username <img class='user_avatar2' src='$user->avatar'/></a></li>
 				<li>Name: $image->user_image_name</li>
 				<li>Dimensions: $image->width x $image->height</li>
-				<li id='price'>Price: $image->price</li>
 				
 			";
 			?>
