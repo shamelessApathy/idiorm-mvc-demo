@@ -5,6 +5,10 @@ class profileController extends Controller {
 	{
 		return $_SESSION['user_info']->id;
 	}
+	public function edit_logo()
+	{
+		return_view('view.edit_logo.php');
+	}
 	public function create()
 	{
 		
@@ -135,6 +139,29 @@ class profileController extends Controller {
 			$_SESSION['user_info']['avatar'] = $newpath;
 			header('Location: /profile/edit_profile');
 		}
+	}
+	public function set_logo()
+	{
+		require_once(MODELS . '/Profile.php');
+		$profile = Model::factory('Profile')->where('user_id',$this->user_id())->find_one();
+		$orig = $_FILES['artist-logo']['name'];
+			$file = $_FILES['artist-logo']['tmp_name'];
+			$nodir = explode('/', $file);
+			$nodir = $nodir[2];
+			$orig = explode('.',$orig);
+			$ext = '.' . $orig[1];
+			$save_path = ROOT . "/users/logos/";
+			
+			$myname = $nodir; //You are renaming the file here
+			$newpath = '/users/logos/'.$myname.$ext;
+			if(move_uploaded_file($_FILES['artist-logo']['tmp_name'], $save_path.$myname.$ext))
+	  		{
+				$profile->logo = $newpath;
+				$profile->save();
+				$_SESSION['user_info']['logo'] = $newpath;
+				$this->edit_logo();
+				user_msg('Artist Logo successfully changed!');
+			}
 	}
 	public function validate_file($function)
 	{

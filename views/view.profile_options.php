@@ -10,6 +10,13 @@
 <div class='col-md-6'>
 <a href="/profile/profile_avatar"><button class='image-manager-button'> Set Avatar </button></a>
 </div>
+<div class='row'>
+	<div class='col-md-3'></div>
+	<div class='col-md-6'>
+		<a href='/profile/edit_logo'><button class='image-manager-button'>Set Artist Logo</button></a>
+	</div>
+	<div class='col-md-3'></div>
+</div>
 </div>
 
 
