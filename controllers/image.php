@@ -607,9 +607,9 @@ class imageController extends Controller {
 	{
 		require_once(MODELS . '/User.php');
 		require_once(MODELS . '/Image.php');
-		$model = Model::factory('User')->find_one($id);
+		$model = Model::factory('User')->find_one($user_id);
 		$images = $model->images()->find_many();
-		foreach( $images as $image)
+		foreach( $images as $image) 
 		{
 			$tags = $image->get_tags();
 			$tag_array = array();

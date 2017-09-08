@@ -286,7 +286,7 @@ class User extends Model {
 	}
 	public function images()
 	{
-		return $this->has_many('Image');
+		return $this->has_many('Image','user_id');
 	}
 	public function store()
 	{
