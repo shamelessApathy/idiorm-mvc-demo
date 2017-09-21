@@ -117,6 +117,7 @@ $(function(){
 					type: "POST",
 					data: data,
 					success: function(results){
+						console.log(results);
 					}
 				})
 				$('.focus_modal').attr('style','');
