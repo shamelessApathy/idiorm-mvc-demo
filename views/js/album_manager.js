@@ -108,7 +108,7 @@ $(function(){
 				$(tag).val("");
 			}.bind(this);
 			this.delete = function()
-			{
+			{ 
 				var image_id = document.getElementById('the_image');
 				image_id = image_id.getAttribute('data-id');
 				var data = {'image_id': image_id};

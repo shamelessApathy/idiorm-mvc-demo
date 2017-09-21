@@ -289,9 +289,12 @@ class imageController extends Controller {
  		$type = 'image';
 		$nodir = explode('/', $file);
 		$nodir = $nodir[2];
+		// New ext setting
+		$ext = 'jpeg';
+		/*    Commented out for new imageformat change
 		$extFind = strrpos($name, '.');
 		$extFind = $extFind + 1;
-		$ext = substr($name, $extFind);
+		$ext = substr($name, $extFind);		
 		if ($ext === 'jpg')
 		{
 			$ext = 'jpeg';
@@ -300,6 +303,7 @@ class imageController extends Controller {
 		{
 			$ext = $ext;
 		}
+		*/
 		$ext2 = $ext;
 		$ext = '.' . $ext;
 		$save_path = '/var/www/idiorm/idiorm-mvc-demo/users/images/preview/' . $nodir . $ext;
@@ -310,6 +314,7 @@ class imageController extends Controller {
 		$height = $image->getImageHeight();
 		$watermark->scaleImage($width, $height, 0,0);
 		$image->compositeImage($watermark, imagick::COMPOSITE_OVER, 0,0);
+		$image->setImageFormat('jpeg');
 		$new_path = '/users/images/preview/' . $nodir . $ext;
 
 		if($image->writeImage($save_path))
@@ -376,8 +381,11 @@ class imageController extends Controller {
 		$tag_model = new Tag();
 		if (unlink(ROOT . $image_model->path))
 		{
-			echo ' it deleted';
 			$image_model->delete();
+		}
+		else
+		{
+			echo "there was a problem deleting";
 		}
 		
 		foreach ($tags as $tag)
