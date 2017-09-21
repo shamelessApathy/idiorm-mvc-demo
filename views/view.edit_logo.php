@@ -7,7 +7,7 @@ require_once(HEADER);
 	<div class='profile_edit_section'>
 <form id="user_avatar" type='file' runat="server" enctype='multipart/form-data' action="/profile/set_logo" method='POST' >
     <label>Choose an artist logo:</label><input type='file' id="imgInp" name="artist-logo"/>
-	<div class='note'>Logo must be 50px by 50px or it will be resized</div>
+	<div class='note'>Logo must be 100px by 100px or it will be resized. Rectangles are OK but will be resized for best fit</div>
     <img id="blah"  src="#" alt="your image" />
     <div>Current image: <img class='current-artist-logo' src="<?php 
     if (isset($_SESSION['user_info']->logo)) 
@@ -15,7 +15,15 @@ require_once(HEADER);
     	echo $_SESSION['user_info']->logo;
     }
     ?>"></div>
-    <button type='submit'>Change Artist Logo</button>
+    <label>Position</label><br>
+    <select name='position'>
+    	<option value='top_left'>Top Left</option>
+    	<option value='top_right'>Top Right</option>
+    	<option value='center'>Center</option>
+    	<option value='bottom_left'>Bottom Left</option>
+    	<option value='bottom_right'>Bottom Right</option>
+    </select><br>
+    <button type='submit' style='margin-top:10px;'>Change Artist Logo</button>
 </form>
 </div>
 </div>

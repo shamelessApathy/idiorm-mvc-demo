@@ -145,18 +145,32 @@ class profileController extends Controller {
 		require_once(MODELS . '/Profile.php');
 		$profile = Model::factory('Profile')->where('user_id',$this->user_id())->find_one();
 		$orig = $_FILES['artist-logo']['name'];
+		$position = $_POST['position'];
 			$file = $_FILES['artist-logo']['tmp_name'];
 			$nodir = explode('/', $file);
 			$nodir = $nodir[2];
 			$orig = explode('.',$orig);
+			$check_ext = $orig[1];
+			if ($check_ext != 'png')
+			{
+				return_view('view.edit_logo.php');
+				sys_msg('File needs to be in .png format for transparency reasons!');
+			}
+			var_dump($check_ext);
+			echo "<br>" .$position;
+			$imagick = new Imagick($file);
+			$width = $imagick->getImageWidth();
+			$height = $imagick->getImageHeight();
+			$imagick->scaleImage(100,100,true);
 			$ext = '.' . $orig[1];
 			$save_path = ROOT . "/users/logos/";
 			
 			$myname = $nodir; //You are renaming the file here
 			$newpath = '/users/logos/'.$myname.$ext;
-			if(move_uploaded_file($_FILES['artist-logo']['tmp_name'], $save_path.$myname.$ext))
+			if($imagick->writeImage($save_path.$myname.$ext))
 	  		{
 				$profile->logo = $newpath;
+				$profile->logo_position = $position;
 				$profile->save();
 				$_SESSION['user_info']['logo'] = $newpath;
 				$this->edit_logo();
