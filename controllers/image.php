@@ -310,6 +310,7 @@ class imageController extends Controller {
 		$height = $image->getImageHeight();
 		$watermark->scaleImage($width, $height, 0,0);
 		$image->compositeImage($watermark, imagick::COMPOSITE_OVER, 0,0);
+		$image->setImageCompressionQuality(0);	
 		$new_path = '/users/images/preview/' . $nodir . $ext;
 
 		if($image->writeImage($save_path))
