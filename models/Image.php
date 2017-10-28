@@ -35,7 +35,10 @@ class Image extends Model
 		{
 			for ($i = 0; $i < 60; $i++)
 			{
-				array_push($image_array, $images[$i]);
+				if (isset($images[$i]))
+				{
+					array_push($image_array, $images[$i]);
+				}
 			}
 		}
 		return $image_array;
