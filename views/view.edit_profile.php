@@ -45,6 +45,8 @@ if (isset($info->dob))
 	<input name='country' value="<?php echo isset($info->country) ?  $info->country : ''; ?>"><br>
 	<label>Website</label><br>
 	<input name='website' value="<?php echo isset($info->website) ? $info->website : '';?>"><br>
+	<label>Bio Paragraph</label><br>
+	<textarea style='width:500px; height:200px;' name='bio' value=""><?php echo isset($info->bio) ? $info->bio : '';?></textarea><br>
 </div>
 <br>
 <button type='submit'>Submit</button>

@@ -59,6 +59,7 @@ class profileController extends Controller {
 		#$zipcode = $_POST['zip_code'];
 		$country = $_POST['country'];
 		$website = $_POST['website'];
+		$bio = $_POST['bio'];
 		$info = array(
 			'user_id' =>$id, 
 			'first_name' => $firstname, 
@@ -70,6 +71,7 @@ class profileController extends Controller {
 			'state' => $state, 
 			#'zip_code' => $zipcode, 
 			'country'=>$country,
+			'bio'=>$bio,
 			'website'=>$website);
 		require_once(MODELS . '/Profile.php');
 		$model = new Profile();

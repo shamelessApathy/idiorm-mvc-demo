@@ -328,11 +328,14 @@ public function info($id)
 {
 	require_once(MODELS .'/User.php');
 	require_once(MODELS . '/Image.php');
+	require_once(MODELS . '/Profile.php');
 	$user = Model::factory('User')->find_one($id);
 	$images = $user->images()->find_many();
 	$image_count = count($images);
 	$user->image_count = $image_count;
-	return_view('view.user_info.php',$user);
+	$profile = Model::factory('Profile')->find_one($id);
+	$data = array('user'=>$user, 'profile'=>$profile);
+	return_view('view.user_info.php',$data);
 }
 /*
 * Calls logout function from model

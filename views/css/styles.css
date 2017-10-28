@@ -378,6 +378,14 @@ table.user-image-table tr {
   width: 100%;
   border-top: 2px solid black; }
 
+.user-info-paragraph {
+  background-color: #333;
+  color: #ccc;
+  width: 80%;
+  margin: 0 auto;
+  margin-top: 20px;
+  padding: 5px; }
+
 .dob {
   width: 30px; }
 
@@ -861,6 +869,9 @@ table.user-image-table tr {
 
 .admin_image_row ul li {
   list-style-type: none; }
+
+.admin-image-holder {
+  width: 100%; }
 
 /* CART STYLES */
 /*.cart-container
