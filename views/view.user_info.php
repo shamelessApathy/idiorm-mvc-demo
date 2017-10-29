@@ -1,6 +1,6 @@
 
 <?php require_once(HEADER);
-$date = $info->created_at;
+$date = $info['user']->created_at;
 $memberSince = date("F j, Y, g:i a");  
 $user = $info['user'];
 $profile = $info['profile'];
