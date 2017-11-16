@@ -26,7 +26,7 @@ $user_link = "/image/user/$user->id";
 </div>
 </div>
 <div class='col-md-6'>
-	<img style='max-width:300px;' src="<?php echo $user->avatar; ?>"/>
+	<div style='width:300px; margin:0 auto'><img style='max-width:300px;' src="<?php echo $user->avatar; ?>"/></div>
 </div>
 </div>
 <div class='row'>
