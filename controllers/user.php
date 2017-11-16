@@ -219,7 +219,7 @@ public function create_new(){
 		$model = new User();
 		if($model->create_new($username,$email,$password))
 		{
-			return_view('view.home.php');
+			header("Location: /home");
 			user_msg('New User created successfully!');
 		}
 		else  

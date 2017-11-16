@@ -2,6 +2,8 @@
 
 //require('vendor/j4mie/idiorm/idiorm.php');
 //require('vendor/j4mie/paris/paris.php');
+error_reporting(0);
+ini_set('display_errors', 0);
 require('vendor/autoload.php');
 require('constants.php');
 require('globals.php');

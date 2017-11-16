@@ -30,7 +30,7 @@ $categories = $info['categories'];
 				<div class='front-category'><a href="/category/get_images?cat_id=<?php echo $category->id;?>"><?php echo strtoupper($category->title);?></a></div>
 			<?php endforeach;?>
 		</div>
-		<div class='mobile-front-category-container'>
+		<div style='display:none;' class='mobile-front-category-container'>
 		<sub>Browse by Category</sub>
 		<form style='margin-top:10px;' action='/category/get_images' method='GET'>
 			<select name="cat_id">
