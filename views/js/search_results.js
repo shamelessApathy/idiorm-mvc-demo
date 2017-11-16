@@ -4,8 +4,10 @@ $(function(){
 		this.initialize = function(){
 			this.area = $('.image-details');
 			this.price = $(this.element).attr('data-price');
+			this.username = $(this.element).attr('data-username');
 			this.filetype = $(this.element).attr('data-filetype');
 			this.add_to_cart = $('.add_to_cart');
+			this.user_id = $(this.element).attr('data-user');
 			this.tags = $(this.element).attr('data-tags');
 			this.json = $.parseJSON(this.tags);
 			this.tag_holder = $('.image-details-tags');
@@ -22,7 +24,14 @@ $(function(){
 			this.filetype_holder = $('.image-details-filetype');
 			this.width_holder = $('.image-details-width');
 			this.height_holder = $('.image-details-height');
-			this.price_holder = $('.image-details-price');
+			this.user_avatar = $(this.element).attr('data-avatar');
+			if (this.user_avatar === "NULL")
+			{
+				this.user_avatar = false;
+			}
+			// no more price
+			//this.price_holder = $('.image-details-price');
+			this.username_holder = $('.image-details-username');
 			this.url = $(this.element).attr('data-watermark');
 			console.log(this.url);
 			this.image_holder = $('.image-details-holder');
@@ -80,7 +89,18 @@ $(function(){
 			var width = "Width " + this.width + "px";
 			var height = "Height " + this.height + "px";
 			$(this.add_to_cart).attr('data-id',this.image_id);
-			$(this.price_holder).html(price);
+			// Checking to see if User Avatar is set yet, if not, don't bother adding it in
+			if (this.user_avatar)
+			{
+				var user_avatar_string = "<img class='user_avatar2' src='"+this.user_avatar+"'/>";	
+			}
+			else
+			{
+				user_avatar_string = "";
+			}
+			var user_link = "<a href='/user/info/"+this.user_id+"'>"+this.username+"</a>&nbsp"+user_avatar_string;
+
+			$(this.username_holder).html(user_link);
 			$(this.filetype_holder).html(filetype);
 			$(this.width_holder).html(width);
 			$(this.height_holder).html(height);

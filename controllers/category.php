@@ -36,10 +36,14 @@ class categoryController extends Controller{
 		$images = $model->get_images($cat_id);
 		$title = $model->get_title($cat_id);
 		require_once(MODELS . '/Image.php');
+		require_once(MODELS . '/User.php');
 		$images_in_cat = array();
 		foreach($images as $image)
 		{
 			$image_instance = Model::factory('Image')->find_one($image->image_id);
+			$user_for_image = Model::factory('User')->find_one($image_instance->user_id);
+			$image_instance->username = $user_for_image->username;
+			$image_instance->user_avatar = $user_for_image->avatar;
 			array_push($images_in_cat, $image_instance);
 		}
 		// Need to attach tags
@@ -91,7 +95,6 @@ class categoryController extends Controller{
 		$categories = $model->get_categories($image_id);
 		if($categories)
 		{
-			var_dump($image_id);
 			$cat_array = array();
 			foreach ($categories as $category)
 			{
@@ -99,7 +102,6 @@ class categoryController extends Controller{
 				$assoc = array('category_title'=>$title->title,'cat_id'=>$category->category_id);
 				array_push($cat_array, $assoc);
 			}
-			var_dump($cat_array);
 			if (!empty($cat_array))
 			{
 			$result = json_encode($cat_array);

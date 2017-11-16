@@ -21,9 +21,19 @@ $user_link = "/user/info/$user->id";
 	<div class='col-md-2'>
 				<div class='image_info' data-id="<?php echo $image->id; ?>">
 			<ul>
-			<?php echo "
+			<?php
+			// This checks to see if the user has an avatar image set, if they don't, it won't load a broken image link 
+			if (isset($user->avatar) && $user->avatar != null)
+			{
+				$user_avatar_string = "<img class='user_avatar2' src='$user->avatar'/>";
+			}
+			else 
+			{
+				$user_avatar_string = "";
+			}
+			echo "
 				<li>Uploaded By: </li>
-				<li><a href=$user_link> $user->username <img class='user_avatar2' src='$user->avatar'/></a></li>
+				<li><a href=$user_link> $user->username $user_avatar_string</a></li>
 				<li>Name: $image->user_image_name</li>
 				<li>Dimensions: $image->width x $image->height</li>
 				

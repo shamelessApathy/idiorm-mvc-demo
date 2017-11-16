@@ -1,16 +1,22 @@
 <?php require_once(HEADER);?>
 <?php $images = $info['images'];?>
+<?php
+/*echo "<pre>";
+print_r($images);
+echo "</pre>";*/
+
+?>
 <div class='image-details'>
 <div class='image-details-hider'>
 <div class='image-details-opacity'>
-<div class='image-button-holder'><button type='button' class='add_to_cart'>Add To Cart</button></div>
+<div class='image-button-holder'><a href='/login'><button type='button'>Login to Download</button></a></div>
 <div class='close-image-details'><i class='fa fa-close'></i></div>
 <div class='clear'></div>
 <div class='row'>
 <div class='col-md-3'>
 
 <ul class='image-details-ul'>
-		<li class='image-details-price'></li>
+		<li class='image-details-username'></li>
 		<li class='image-details-filtype'></li>
 		<li class='image-details-width'></li>
 		<li class='image-details-height'></li>
@@ -36,7 +42,10 @@
 			<div class='preview-thumb'> 
 				<a href="/image/info?id=<?php echo $image->id;?>" class='search-item-link'></a>
 			<img class='image-result' 
-				data-price="<?php echo $image->price;?>" 
+				data-user="<?php echo $image->user_id;?>"
+				data-avatar="<?php echo $image->user_avatar;?>"
+				data-price="<?php echo $image->price;?>"
+				data-username="<?php echo $image->username;?>" 
 				data-filetype="<?php echo $image->mime_type;?>" 
 				data-width="<?php echo $image->width;?>" 
 				data-height="<?php echo $image->height;?>" 
