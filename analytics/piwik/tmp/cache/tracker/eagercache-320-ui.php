@@ -1,5 +1,5 @@
 <?php return array (
-  'lifetime' => 1510841295,
+  'lifetime' => 1511157420,
   'data' => 
   array (
     'PluginCorePluginsAdminMetadata' => 
@@ -1947,6 +1947,187 @@
       '/var/www/idiorm/idiorm-mvc-demo/analytics/piwik/plugins/MultiSites/Columns/Metrics/EcommerceOnlyEvolutionMetric.php' => 1490773448,
       '/var/www/idiorm/idiorm-mvc-demo/analytics/piwik/plugins/VisitFrequency/Columns/Metrics/ReturningMetric.php' => 1490773448,
     ),
+    'PluginCorePluginsAdminReleaseChannelPiwik\\UpdateCheck\\ReleaseChannel' => 
+    array (
+    ),
+    'PluginCoreAdminHomeReleaseChannelPiwik\\UpdateCheck\\ReleaseChannel' => 
+    array (
+    ),
+    'PluginCoreHomeReleaseChannelPiwik\\UpdateCheck\\ReleaseChannel' => 
+    array (
+    ),
+    'PluginWebsiteMeasurableReleaseChannelPiwik\\UpdateCheck\\ReleaseChannel' => 
+    array (
+    ),
+    'PluginDiagnosticsReleaseChannelPiwik\\UpdateCheck\\ReleaseChannel' => 
+    array (
+    ),
+    'PluginCoreVisualizationsReleaseChannelPiwik\\UpdateCheck\\ReleaseChannel' => 
+    array (
+    ),
+    'PluginProxyReleaseChannelPiwik\\UpdateCheck\\ReleaseChannel' => 
+    array (
+    ),
+    'PluginAPIReleaseChannelPiwik\\UpdateCheck\\ReleaseChannel' => 
+    array (
+    ),
+    'PluginExamplePluginReleaseChannelPiwik\\UpdateCheck\\ReleaseChannel' => 
+    array (
+    ),
+    'PluginWidgetizeReleaseChannelPiwik\\UpdateCheck\\ReleaseChannel' => 
+    array (
+    ),
+    'PluginTransitionsReleaseChannelPiwik\\UpdateCheck\\ReleaseChannel' => 
+    array (
+    ),
+    'PluginLanguagesManagerReleaseChannelPiwik\\UpdateCheck\\ReleaseChannel' => 
+    array (
+    ),
+    'PluginActionsReleaseChannelPiwik\\UpdateCheck\\ReleaseChannel' => 
+    array (
+    ),
+    'PluginDashboardReleaseChannelPiwik\\UpdateCheck\\ReleaseChannel' => 
+    array (
+    ),
+    'PluginMultiSitesReleaseChannelPiwik\\UpdateCheck\\ReleaseChannel' => 
+    array (
+    ),
+    'PluginReferrersReleaseChannelPiwik\\UpdateCheck\\ReleaseChannel' => 
+    array (
+    ),
+    'PluginUserLanguageReleaseChannelPiwik\\UpdateCheck\\ReleaseChannel' => 
+    array (
+    ),
+    'PluginDevicesDetectionReleaseChannelPiwik\\UpdateCheck\\ReleaseChannel' => 
+    array (
+    ),
+    'PluginGoalsReleaseChannelPiwik\\UpdateCheck\\ReleaseChannel' => 
+    array (
+    ),
+    'PluginEcommerceReleaseChannelPiwik\\UpdateCheck\\ReleaseChannel' => 
+    array (
+    ),
+    'PluginSEOReleaseChannelPiwik\\UpdateCheck\\ReleaseChannel' => 
+    array (
+    ),
+    'PluginEventsReleaseChannelPiwik\\UpdateCheck\\ReleaseChannel' => 
+    array (
+    ),
+    'PluginUserCountryReleaseChannelPiwik\\UpdateCheck\\ReleaseChannel' => 
+    array (
+    ),
+    'PluginVisitsSummaryReleaseChannelPiwik\\UpdateCheck\\ReleaseChannel' => 
+    array (
+    ),
+    'PluginVisitFrequencyReleaseChannelPiwik\\UpdateCheck\\ReleaseChannel' => 
+    array (
+    ),
+    'PluginVisitTimeReleaseChannelPiwik\\UpdateCheck\\ReleaseChannel' => 
+    array (
+    ),
+    'PluginVisitorInterestReleaseChannelPiwik\\UpdateCheck\\ReleaseChannel' => 
+    array (
+    ),
+    'PluginExampleAPIReleaseChannelPiwik\\UpdateCheck\\ReleaseChannel' => 
+    array (
+    ),
+    'PluginRssWidgetReleaseChannelPiwik\\UpdateCheck\\ReleaseChannel' => 
+    array (
+    ),
+    'PluginFeedbackReleaseChannelPiwik\\UpdateCheck\\ReleaseChannel' => 
+    array (
+    ),
+    'PluginMonologReleaseChannelPiwik\\UpdateCheck\\ReleaseChannel' => 
+    array (
+    ),
+    'PluginLoginReleaseChannelPiwik\\UpdateCheck\\ReleaseChannel' => 
+    array (
+    ),
+    'PluginUsersManagerReleaseChannelPiwik\\UpdateCheck\\ReleaseChannel' => 
+    array (
+    ),
+    'PluginSitesManagerReleaseChannelPiwik\\UpdateCheck\\ReleaseChannel' => 
+    array (
+    ),
+    'PluginInstallationReleaseChannelPiwik\\UpdateCheck\\ReleaseChannel' => 
+    array (
+    ),
+    'PluginCoreUpdaterReleaseChannelPiwik\\UpdateCheck\\ReleaseChannel' => 
+    array (
+      '/var/www/idiorm/idiorm-mvc-demo/analytics/piwik/plugins/CoreUpdater/ReleaseChannel/Latest2XBeta.php' => 'Piwik\\Plugins\\CoreUpdater\\ReleaseChannel\\Latest2XBeta',
+      '/var/www/idiorm/idiorm-mvc-demo/analytics/piwik/plugins/CoreUpdater/ReleaseChannel/Latest2XStable.php' => 'Piwik\\Plugins\\CoreUpdater\\ReleaseChannel\\Latest2XStable',
+      '/var/www/idiorm/idiorm-mvc-demo/analytics/piwik/plugins/CoreUpdater/ReleaseChannel/LatestBeta.php' => 'Piwik\\Plugins\\CoreUpdater\\ReleaseChannel\\LatestBeta',
+      '/var/www/idiorm/idiorm-mvc-demo/analytics/piwik/plugins/CoreUpdater/ReleaseChannel/LatestStable.php' => 'Piwik\\Plugins\\CoreUpdater\\ReleaseChannel\\LatestStable',
+    ),
+    'PluginCoreConsoleReleaseChannelPiwik\\UpdateCheck\\ReleaseChannel' => 
+    array (
+    ),
+    'PluginScheduledReportsReleaseChannelPiwik\\UpdateCheck\\ReleaseChannel' => 
+    array (
+    ),
+    'PluginUserCountryMapReleaseChannelPiwik\\UpdateCheck\\ReleaseChannel' => 
+    array (
+    ),
+    'PluginLiveReleaseChannelPiwik\\UpdateCheck\\ReleaseChannel' => 
+    array (
+    ),
+    'PluginCustomVariablesReleaseChannelPiwik\\UpdateCheck\\ReleaseChannel' => 
+    array (
+    ),
+    'PluginPrivacyManagerReleaseChannelPiwik\\UpdateCheck\\ReleaseChannel' => 
+    array (
+    ),
+    'PluginImageGraphReleaseChannelPiwik\\UpdateCheck\\ReleaseChannel' => 
+    array (
+    ),
+    'PluginAnnotationsReleaseChannelPiwik\\UpdateCheck\\ReleaseChannel' => 
+    array (
+    ),
+    'PluginMobileMessagingReleaseChannelPiwik\\UpdateCheck\\ReleaseChannel' => 
+    array (
+    ),
+    'PluginOverlayReleaseChannelPiwik\\UpdateCheck\\ReleaseChannel' => 
+    array (
+    ),
+    'PluginSegmentEditorReleaseChannelPiwik\\UpdateCheck\\ReleaseChannel' => 
+    array (
+    ),
+    'PluginInsightsReleaseChannelPiwik\\UpdateCheck\\ReleaseChannel' => 
+    array (
+    ),
+    'PluginMorpheusReleaseChannelPiwik\\UpdateCheck\\ReleaseChannel' => 
+    array (
+    ),
+    'PluginContentsReleaseChannelPiwik\\UpdateCheck\\ReleaseChannel' => 
+    array (
+    ),
+    'PluginBulkTrackingReleaseChannelPiwik\\UpdateCheck\\ReleaseChannel' => 
+    array (
+    ),
+    'PluginResolutionReleaseChannelPiwik\\UpdateCheck\\ReleaseChannel' => 
+    array (
+    ),
+    'PluginDevicePluginsReleaseChannelPiwik\\UpdateCheck\\ReleaseChannel' => 
+    array (
+    ),
+    'PluginHeartbeatReleaseChannelPiwik\\UpdateCheck\\ReleaseChannel' => 
+    array (
+    ),
+    'PluginIntlReleaseChannelPiwik\\UpdateCheck\\ReleaseChannel' => 
+    array (
+    ),
+    'PluginMarketplaceReleaseChannelPiwik\\UpdateCheck\\ReleaseChannel' => 
+    array (
+    ),
+    'PluginProfessionalServicesReleaseChannelPiwik\\UpdateCheck\\ReleaseChannel' => 
+    array (
+    ),
+    'PluginUserIdReleaseChannelPiwik\\UpdateCheck\\ReleaseChannel' => 
+    array (
+    ),
+    'PluginCustomPiwikJsReleaseChannelPiwik\\UpdateCheck\\ReleaseChannel' => 
+    array (
+    ),
     'PluginCorePluginsAdminRendererPiwik\\API\\ApiRenderer' => 
     array (
     ),
@@ -2193,186 +2374,237 @@
     'PluginProfessionalServicesTasksPiwik\\Plugin\\Tasks' => false,
     'PluginUserIdTasksPiwik\\Plugin\\Tasks' => false,
     'PluginCustomPiwikJsTasksPiwik\\Plugin\\Tasks' => 'Piwik\\Plugins\\CustomPiwikJs\\Tasks',
-    'PluginCorePluginsAdminReleaseChannelPiwik\\UpdateCheck\\ReleaseChannel' => 
+    'PluginDBStatsMetadata' => 
     array (
+      'description' => 'DBStats_PluginDescription',
+      'homepage' => 'http://piwik.org/',
+      'authors' => 
+      array (
+        0 => 
+        array (
+          'name' => 'Piwik',
+          'homepage' => 'http://piwik.org/',
+        ),
+      ),
+      'license' => 'GPL v3+',
+      'version' => '3.2.0',
+      'theme' => false,
+      'require' => 
+      array (
+      ),
     ),
-    'PluginCoreAdminHomeReleaseChannelPiwik\\UpdateCheck\\ReleaseChannel' => 
+    'PluginExampleCommandMetadata' => 
     array (
+      'description' => 'Piwik Platform showcase: how to create a console command.',
+      'homepage' => 'http://piwik.org/',
+      'authors' => 
+      array (
+        0 => 
+        array (
+          'name' => 'Piwik',
+          'homepage' => 'http://piwik.org/',
+        ),
+      ),
+      'license' => 'GPL v3+',
+      'version' => '0.1.0',
+      'theme' => false,
+      'require' => 
+      array (
+      ),
+      'name' => 'ExampleCommand',
     ),
-    'PluginCoreHomeReleaseChannelPiwik\\UpdateCheck\\ReleaseChannel' => 
+    'PluginExampleReportMetadata' => 
     array (
+      'description' => 'Piwik Platform showcase: how to define and display a data report.',
+      'homepage' => 'http://piwik.org/',
+      'authors' => 
+      array (
+        0 => 
+        array (
+          'name' => 'Piwik',
+          'email' => '',
+          'homepage' => '',
+        ),
+      ),
+      'license' => 'GPL v3+',
+      'version' => '0.1.0',
+      'theme' => false,
+      'require' => 
+      array (
+      ),
+      'name' => 'ExampleReport',
     ),
-    'PluginWebsiteMeasurableReleaseChannelPiwik\\UpdateCheck\\ReleaseChannel' => 
+    'PluginExampleSettingsPluginMetadata' => 
     array (
+      'description' => 'Piwik Platform showcase: how to define and how to access plugin settings.',
+      'homepage' => 'http://piwik.org/',
+      'authors' => 
+      array (
+        0 => 
+        array (
+          'name' => 'Piwik',
+          'homepage' => 'http://piwik.org/',
+        ),
+      ),
+      'license' => 'GPL v3+',
+      'version' => '0.1.0',
+      'theme' => false,
+      'require' => 
+      array (
+      ),
+      'name' => 'ExampleSettingsPlugin',
     ),
-    'PluginDiagnosticsReleaseChannelPiwik\\UpdateCheck\\ReleaseChannel' => 
+    'PluginExampleThemeMetadata' => 
     array (
+      'description' => 'Piwik Platform showcase: example of how to create a simple Theme.',
+      'homepage' => '',
+      'authors' => 
+      array (
+        0 => 
+        array (
+          'name' => '',
+          'email' => '',
+          'homepage' => '',
+        ),
+      ),
+      'license' => 'GPL v3+',
+      'version' => '0.1.0',
+      'theme' => true,
+      'require' => 
+      array (
+        'piwik' => '>=3.0.0-b1,<4.0.0-b1',
+      ),
+      'name' => 'ExampleTheme',
+      'stylesheet' => 'stylesheets/theme.less',
+      'keywords' => 
+      array (
+      ),
+      'support' => 
+      array (
+        'email' => '',
+        'issues' => '',
+        'forum' => '',
+        'irc' => '',
+        'source' => '',
+        'docs' => '',
+        'wiki' => '',
+        'rss' => '',
+      ),
     ),
-    'PluginCoreVisualizationsReleaseChannelPiwik\\UpdateCheck\\ReleaseChannel' => 
+    'PluginExampleTrackerMetadata' => 
     array (
+      'description' => 'Piwik Platform showcase: how to track additional custom data creating new database table columns.',
+      'homepage' => 'http://piwik.org/',
+      'authors' => 
+      array (
+        0 => 
+        array (
+          'name' => 'Piwik',
+          'email' => '',
+          'homepage' => '',
+        ),
+      ),
+      'license' => 'GPL v3+',
+      'version' => '0.1.0',
+      'theme' => false,
+      'require' => 
+      array (
+      ),
+      'name' => 'ExampleTracker',
     ),
-    'PluginProxyReleaseChannelPiwik\\UpdateCheck\\ReleaseChannel' => 
+    'PluginExampleUIMetadata' => 
     array (
+      'description' => 'Piwik Platform showcase: how to display data tables, graphs, and the UI framework.',
+      'homepage' => 'http://piwik.org',
+      'authors' => 
+      array (
+        0 => 
+        array (
+          'name' => 'Piwik',
+          'email' => 'hello@piwik.org',
+          'homepage' => 'http://piwik.org',
+        ),
+      ),
+      'license' => 'GPL v3+',
+      'version' => '1.0.1',
+      'theme' => false,
+      'require' => 
+      array (
+        'piwik' => '>=2.13.1',
+      ),
+      'name' => 'ExampleUI',
+      'keywords' => 
+      array (
+        0 => 'example',
+        1 => 'framework',
+        2 => 'platform',
+        3 => 'ui',
+        4 => 'visualization',
+      ),
     ),
-    'PluginAPIReleaseChannelPiwik\\UpdateCheck\\ReleaseChannel' => 
+    'PluginExampleVisualizationMetadata' => 
     array (
+      'description' => 'Piwik Platform showcase: how to create a new custom data visualization.',
+      'homepage' => 'http://piwik.org',
+      'authors' => 
+      array (
+        0 => 
+        array (
+          'name' => 'The Piwik Team',
+          'email' => 'hello@piwik.org',
+          'homepage' => 'http://piwik.org',
+        ),
+      ),
+      'license' => 'GPL v3+',
+      'version' => '0.1.0',
+      'theme' => false,
+      'require' => 
+      array (
+      ),
+      'name' => 'ExampleVisualization',
+      'keywords' => 
+      array (
+        0 => 'SimpleTable',
+      ),
     ),
-    'PluginExamplePluginReleaseChannelPiwik\\UpdateCheck\\ReleaseChannel' => 
+    'PluginMobileAppMeasurableMetadata' => 
     array (
+      'description' => 'Analytics for Mobile: lets you measure and analyze Mobile Apps with an optimized perspective of your mobile data.',
+      'homepage' => 'http://piwik.org/',
+      'authors' => 
+      array (
+        0 => 
+        array (
+          'name' => 'Piwik',
+          'homepage' => 'http://piwik.org/',
+        ),
+      ),
+      'license' => 'GPL v3+',
+      'version' => '3.2.0',
+      'theme' => false,
+      'require' => 
+      array (
+      ),
+      'name' => 'MobileAppMeasurable',
     ),
-    'PluginWidgetizeReleaseChannelPiwik\\UpdateCheck\\ReleaseChannel' => 
+    'PluginProviderMetadata' => 
     array (
-    ),
-    'PluginTransitionsReleaseChannelPiwik\\UpdateCheck\\ReleaseChannel' => 
-    array (
-    ),
-    'PluginLanguagesManagerReleaseChannelPiwik\\UpdateCheck\\ReleaseChannel' => 
-    array (
-    ),
-    'PluginActionsReleaseChannelPiwik\\UpdateCheck\\ReleaseChannel' => 
-    array (
-    ),
-    'PluginDashboardReleaseChannelPiwik\\UpdateCheck\\ReleaseChannel' => 
-    array (
-    ),
-    'PluginMultiSitesReleaseChannelPiwik\\UpdateCheck\\ReleaseChannel' => 
-    array (
-    ),
-    'PluginReferrersReleaseChannelPiwik\\UpdateCheck\\ReleaseChannel' => 
-    array (
-    ),
-    'PluginUserLanguageReleaseChannelPiwik\\UpdateCheck\\ReleaseChannel' => 
-    array (
-    ),
-    'PluginDevicesDetectionReleaseChannelPiwik\\UpdateCheck\\ReleaseChannel' => 
-    array (
-    ),
-    'PluginGoalsReleaseChannelPiwik\\UpdateCheck\\ReleaseChannel' => 
-    array (
-    ),
-    'PluginEcommerceReleaseChannelPiwik\\UpdateCheck\\ReleaseChannel' => 
-    array (
-    ),
-    'PluginSEOReleaseChannelPiwik\\UpdateCheck\\ReleaseChannel' => 
-    array (
-    ),
-    'PluginEventsReleaseChannelPiwik\\UpdateCheck\\ReleaseChannel' => 
-    array (
-    ),
-    'PluginUserCountryReleaseChannelPiwik\\UpdateCheck\\ReleaseChannel' => 
-    array (
-    ),
-    'PluginVisitsSummaryReleaseChannelPiwik\\UpdateCheck\\ReleaseChannel' => 
-    array (
-    ),
-    'PluginVisitFrequencyReleaseChannelPiwik\\UpdateCheck\\ReleaseChannel' => 
-    array (
-    ),
-    'PluginVisitTimeReleaseChannelPiwik\\UpdateCheck\\ReleaseChannel' => 
-    array (
-    ),
-    'PluginVisitorInterestReleaseChannelPiwik\\UpdateCheck\\ReleaseChannel' => 
-    array (
-    ),
-    'PluginExampleAPIReleaseChannelPiwik\\UpdateCheck\\ReleaseChannel' => 
-    array (
-    ),
-    'PluginRssWidgetReleaseChannelPiwik\\UpdateCheck\\ReleaseChannel' => 
-    array (
-    ),
-    'PluginFeedbackReleaseChannelPiwik\\UpdateCheck\\ReleaseChannel' => 
-    array (
-    ),
-    'PluginMonologReleaseChannelPiwik\\UpdateCheck\\ReleaseChannel' => 
-    array (
-    ),
-    'PluginLoginReleaseChannelPiwik\\UpdateCheck\\ReleaseChannel' => 
-    array (
-    ),
-    'PluginUsersManagerReleaseChannelPiwik\\UpdateCheck\\ReleaseChannel' => 
-    array (
-    ),
-    'PluginSitesManagerReleaseChannelPiwik\\UpdateCheck\\ReleaseChannel' => 
-    array (
-    ),
-    'PluginInstallationReleaseChannelPiwik\\UpdateCheck\\ReleaseChannel' => 
-    array (
-    ),
-    'PluginCoreUpdaterReleaseChannelPiwik\\UpdateCheck\\ReleaseChannel' => 
-    array (
-      '/var/www/idiorm/idiorm-mvc-demo/analytics/piwik/plugins/CoreUpdater/ReleaseChannel/Latest2XBeta.php' => 'Piwik\\Plugins\\CoreUpdater\\ReleaseChannel\\Latest2XBeta',
-      '/var/www/idiorm/idiorm-mvc-demo/analytics/piwik/plugins/CoreUpdater/ReleaseChannel/Latest2XStable.php' => 'Piwik\\Plugins\\CoreUpdater\\ReleaseChannel\\Latest2XStable',
-      '/var/www/idiorm/idiorm-mvc-demo/analytics/piwik/plugins/CoreUpdater/ReleaseChannel/LatestBeta.php' => 'Piwik\\Plugins\\CoreUpdater\\ReleaseChannel\\LatestBeta',
-      '/var/www/idiorm/idiorm-mvc-demo/analytics/piwik/plugins/CoreUpdater/ReleaseChannel/LatestStable.php' => 'Piwik\\Plugins\\CoreUpdater\\ReleaseChannel\\LatestStable',
-    ),
-    'PluginCoreConsoleReleaseChannelPiwik\\UpdateCheck\\ReleaseChannel' => 
-    array (
-    ),
-    'PluginScheduledReportsReleaseChannelPiwik\\UpdateCheck\\ReleaseChannel' => 
-    array (
-    ),
-    'PluginUserCountryMapReleaseChannelPiwik\\UpdateCheck\\ReleaseChannel' => 
-    array (
-    ),
-    'PluginLiveReleaseChannelPiwik\\UpdateCheck\\ReleaseChannel' => 
-    array (
-    ),
-    'PluginCustomVariablesReleaseChannelPiwik\\UpdateCheck\\ReleaseChannel' => 
-    array (
-    ),
-    'PluginPrivacyManagerReleaseChannelPiwik\\UpdateCheck\\ReleaseChannel' => 
-    array (
-    ),
-    'PluginImageGraphReleaseChannelPiwik\\UpdateCheck\\ReleaseChannel' => 
-    array (
-    ),
-    'PluginAnnotationsReleaseChannelPiwik\\UpdateCheck\\ReleaseChannel' => 
-    array (
-    ),
-    'PluginMobileMessagingReleaseChannelPiwik\\UpdateCheck\\ReleaseChannel' => 
-    array (
-    ),
-    'PluginOverlayReleaseChannelPiwik\\UpdateCheck\\ReleaseChannel' => 
-    array (
-    ),
-    'PluginSegmentEditorReleaseChannelPiwik\\UpdateCheck\\ReleaseChannel' => 
-    array (
-    ),
-    'PluginInsightsReleaseChannelPiwik\\UpdateCheck\\ReleaseChannel' => 
-    array (
-    ),
-    'PluginMorpheusReleaseChannelPiwik\\UpdateCheck\\ReleaseChannel' => 
-    array (
-    ),
-    'PluginContentsReleaseChannelPiwik\\UpdateCheck\\ReleaseChannel' => 
-    array (
-    ),
-    'PluginBulkTrackingReleaseChannelPiwik\\UpdateCheck\\ReleaseChannel' => 
-    array (
-    ),
-    'PluginResolutionReleaseChannelPiwik\\UpdateCheck\\ReleaseChannel' => 
-    array (
-    ),
-    'PluginDevicePluginsReleaseChannelPiwik\\UpdateCheck\\ReleaseChannel' => 
-    array (
-    ),
-    'PluginHeartbeatReleaseChannelPiwik\\UpdateCheck\\ReleaseChannel' => 
-    array (
-    ),
-    'PluginIntlReleaseChannelPiwik\\UpdateCheck\\ReleaseChannel' => 
-    array (
-    ),
-    'PluginMarketplaceReleaseChannelPiwik\\UpdateCheck\\ReleaseChannel' => 
-    array (
-    ),
-    'PluginProfessionalServicesReleaseChannelPiwik\\UpdateCheck\\ReleaseChannel' => 
-    array (
-    ),
-    'PluginUserIdReleaseChannelPiwik\\UpdateCheck\\ReleaseChannel' => 
-    array (
-    ),
-    'PluginCustomPiwikJsReleaseChannelPiwik\\UpdateCheck\\ReleaseChannel' => 
-    array (
+      'description' => 'Provider_PluginDescription',
+      'homepage' => 'http://piwik.org/',
+      'authors' => 
+      array (
+        0 => 
+        array (
+          'name' => 'Piwik',
+          'homepage' => 'http://piwik.org/',
+        ),
+      ),
+      'license' => 'GPL v3+',
+      'version' => '3.2.0',
+      'theme' => false,
+      'require' => 
+      array (
+      ),
     ),
   ),
 );
