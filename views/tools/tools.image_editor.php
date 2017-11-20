@@ -2,6 +2,7 @@
 <link href='/views/css/image_editor.css' rel='stylesheet' type='text/css'/>
 
 <div class='container'>
+	<h4>HTML5 Canvas Image Editor</h4>
 	<div id='ie-file-input'>
 		<h4>Choose your image to edit</h4>
 		<input type='file' id='ie-image' name='ie-image'/>
@@ -15,6 +16,9 @@
 		<div id='ie-toolbar-right'>
 			<div class='ie-icon' id='ie-upload'>
 				<i class='fa fa-upload'></i>
+			</div>
+			<div class='ie-icon' id='ie-brighter'>
+				<i class='fa fa-lightbulb-o'></i>
 			</div>
 		</div>
 	</div>
