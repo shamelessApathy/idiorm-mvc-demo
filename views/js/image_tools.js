@@ -124,7 +124,7 @@ $(function(){
 
 		}
 		// adjusts for height and width of toolbars to help provide visibility
-		this.adjustToolbars = function(height)
+		this.adjustToolbars = function(width,height)
 		{
 			
 			
@@ -165,7 +165,6 @@ $(function(){
     		// the object that has been modified is in:
     		console.log('working now');
 			}.bind(this))
-			this.adjustToolbars();
 		}
 		// This function mounts image onto HMTL5 Canvas
 		this.handleImage = function(e)
@@ -191,7 +190,10 @@ $(function(){
 		    	canvas.height = i.height;
 
     			context.drawImage(i, 0, 0);
-    			this.adjustToolbars(i.width,i.height)
+    			// have to multiple by 1.63 it is scaling the height 63%?37%?
+    			width = i.width;
+    			height = i.height - (i.height * 0.2);
+    			this.adjustToolbars(width, height);
 			}.bind(this);
 
 	        	//img.src = event.target.result;

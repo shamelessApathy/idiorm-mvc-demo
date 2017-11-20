@@ -1,3 +1,4 @@
+<link href='/views/css/reset.css' rel='stylesheet' type='text/css'/>
 <?php require_once(HEADER);?>
 <link href='/views/css/image_editor.css' rel='stylesheet' type='text/css'/>
 
