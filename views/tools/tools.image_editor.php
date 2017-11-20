@@ -4,19 +4,21 @@
 <div class='container'>
 	<div id='ie-file-input'>
 		<h4>Choose your image to edit</h4>
-		<input type='file' name='ie-image'/>
+		<input type='file' id='ie-image' name='ie-image'/>
 		<br>
 		<button type='button' id='ie-image-mount'>Load Image</button>
 	</div>
 	<div id='ie-container'>
 		<div id='ie-toolbar-left'></div>
-		<canvas id='ie-canvas'></canvas>
+		<canvas id='ie-canvas'>
+		</canvas>
 		<div id='ie-toolbar-right'>
 			<div class='ie-icon' id='ie-upload'>
 				<i class='fa fa-upload'></i>
 			</div>
 		</div>
 	</div>
+			<img width=300 id='ie-canvas-image'/>
 </div>
 
 <?php require_once(FOOTER);?>
