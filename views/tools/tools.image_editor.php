@@ -11,10 +11,9 @@
 		<button type='button' id='ie-image-mount'>Load Image</button>
 	</div>
 	<div id='ie-container'>
-		<div id='ie-toolbar-left'></div>
 		<canvas id='ie-canvas'>
 		</canvas>
-		<div id='ie-toolbar-right'>
+		<div id='ie-toolbar-bottom'>
 			<div class='ie-icon' id='ie-upload'>
 				<i class='fa fa-upload'></i>
 			</div>
