@@ -23,11 +23,27 @@
 			<div class='ie-icon' id='ie-darker'>
 				<i class='fa fa-lightbulb-o'></i>
 			</div>
+			<div class='ie-icon' id='ie-download'>
+				<i class='fa fa-download'></i>
+			</div>
 		</div>
 	</div>
+<a id="downloadLnk" download="YourFileName.jpg">Download as image</a>
+
 </div>
 
 <?php require_once(FOOTER);?>
 <?php require_once(HTML_FOOTER);?>
-<script src='/views/js/image_tools.js'></script>  
+
+<script src='/views/js/image_tools.js'></script>
+<script>
+function download() {
+	canvas = document.getElementById('ie-canvas');
+    var dt = canvas.toDataURL('image/jpeg');
+    this.href = dt;
+};
+downloadLnk.addEventListener('click', download, false);
+</script>
+</script>
+	
 <!--<script src='/views/js/filter.js'></script>  -->

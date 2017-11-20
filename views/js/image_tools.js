@@ -8,7 +8,11 @@ $(function(){
 			this.button_upload = document.getElementById('ie-upload');
 			this.button_image_mount = document.getElementById('ie-image-mount');
 			this.button_brightness_up = document.getElementById('ie-brighter');
+			this.button_brightness_down = document.getElementById('ie-darker');
+			this.button_download = document.getElementById('ie-download');
 			this.hidden_input = document.getElementById('ie-file-input');
+			this.toolbar_left = document.getElementById('ie-toolbar-left');
+			this.toolbar_right = document.getElementById('ie-toolbar-right');
 
 			// Filters
 			// This function is the beginning of figuring out filters
@@ -72,6 +76,17 @@ $(function(){
 			  	}
 			  return pixels;
 			};
+			this.darkness = function(pixels, adjustment) 
+			{
+				var d = pixels.data;
+				for (var i=0; i<d.length; i+=4) 
+				{
+			    	d[i] -= adjustment;
+			    	d[i+1] -= adjustment;
+			    	d[i+2] -= adjustment;
+			  	}
+			  return pixels;
+			};
 			this.convertImageToCanvas = function(image) 
 			{
 				var canvas = document.createElement("canvas");
@@ -89,6 +104,15 @@ $(function(){
 				var sCtx = sCanvas.getContext('2d');
 				sCtx.putImageData(demo,0,0);
 			}
+			this.makeDarker = function()
+			{
+				console.log('inside makedarker function!!');
+				var preCan = this.convertCanvasToImage(interiorCanvas);
+				var demo = this.filterImage(this.darkness, preCan, 10);
+				var sCanvas = document.getElementById('ie-canvas');
+				var sCtx = sCanvas.getContext('2d');
+				sCtx.putImageData(demo,0,0);
+			}
 			switch(action)
 			{
 				case "makeBrighter": this.makeBrighter();
@@ -99,6 +123,16 @@ $(function(){
 		}
 
 		}
+		// adjusts for height and width of toolbars to help provide visibility
+		this.adjustToolbars = function(height)
+		{
+			
+			
+			console.log(height);
+			$(this.toolbar_left).css({"height":height});
+			$(this.toolbar_right).css({"height":height});
+		}
+		// All event listeners that need to be instantly instantiated are in this function
 		this.listeners = function()
 		{
 			$(this.button_upload).on('click', function(){
@@ -110,13 +144,28 @@ $(function(){
 			})
 			// Listen for file change here
 			$("#ie-image").change(function(e){
-				console.log('change function firing');
-				this.handleImage(e);	
+				//this.canvas.height = document.getElementById('ie-canvas').height;
+				this.handleImage(e);
 			}.bind(this))
 			$(this.button_brightness_up).on('click', function(){
 				console.log('brightness UP running');
 				this.Filters('makeBrighter');
 			}.bind(this))
+			$(this.button_brightness_down).on('click', function(){
+				console.log('click recognized for darker!');
+				this.Filters('makeDarker');
+			}.bind(this))
+			$(this.button_download).on('click', function(){
+				console.log('made it to the download function listener');
+				canvas = document.getElementById('ie-canvas');
+				var dataURL = canvas.toDataURL('image/jpeg');
+    			$(this.button_download).href = dataURL;
+			}.bind(this))			
+			$(this.canvas).on('object:modified', function(event) {
+    		// the object that has been modified is in:
+    		console.log('working now');
+			}.bind(this))
+			this.adjustToolbars();
 		}
 		// This function mounts image onto HMTL5 Canvas
 		this.handleImage = function(e)
@@ -124,17 +173,33 @@ $(function(){
     		var reader = new FileReader();
     		reader.onload = function(event)
     		{
-        		var img = new Image();
-        		img.onload = function()
-	        	{
-	        		var canvas = document.getElementById('ie-canvas');
-	        		var ctx = canvas.getContext('2d');
-	            	canvas.width = img.width;
-	            	canvas.height = img.height;
-	            	ctx.drawImage(img,0,0);
-	        	}
-	        	img.src = event.target.result;
-	    	}
+        		//var img = new Image();
+        		//var current_img_height =  0;
+        		function objectifyImage(i) 
+				{
+				    var img_obj = new Image();
+				    img_obj.src = i;
+				    return img_obj;
+				}
+
+			var canvas = document.getElementById('ie-canvas');
+			var context = canvas.getContext('2d');
+			i = objectifyImage(event.target.result);
+			i.onload = function() 
+			{
+    			canvas.width = i.width;
+		    	canvas.height = i.height;
+
+    			context.drawImage(i, 0, 0);
+    			this.adjustToolbars(i.width,i.height)
+			}.bind(this);
+
+	        	//img.src = event.target.result;
+	        	// Coudn't get the right reading here because of the canvas not being made larger yet, image hadn't loaded...
+	        	
+	        	
+	    	}.bind(this)
+	    	
     		reader.readAsDataURL(e.target.files[0]);     
 		}
 
@@ -148,7 +213,7 @@ $(function(){
 
 	
 		this.init();
-		this.listeners();
+		setInterval( this.listeners(), 500);
 	}
 	var newTools = new ImageTools();
 })
