@@ -20,6 +20,9 @@
 			<div class='ie-icon' id='ie-brighter'>
 				<i class='fa fa-lightbulb-o'></i>
 			</div>
+			<div class='ie-icon' id='ie-darker'>
+				<i class='fa fa-lightbulb-o'></i>
+			</div>
 		</div>
 	</div>
 </div>
