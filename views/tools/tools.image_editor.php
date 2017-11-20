@@ -22,9 +22,9 @@
 			</div>
 		</div>
 	</div>
-			<img width=300 id='ie-canvas-image'/>
 </div>
 
 <?php require_once(FOOTER);?>
 <?php require_once(HTML_FOOTER);?>
-<script src='/views/js/image_tools.js'></script> 
+<script src='/views/js/image_tools.js'></script>  
+<!--<script src='/views/js/filter.js'></script>  -->
