@@ -1,7 +1,6 @@
 var keys = [];
 var windowAnimFrame = window.requestAnimationFrame || window.webkitRequestAnimationFrame || window.mozRequestAnimationFrame || window.onRequestAnimationFrame || window.msRequestAnimationFrame || null;
 var ctx = document.getElementById('ie-canvas').getContext('2d');
-var layer_counter = 0 ;
 $(function(){
 
 	console.log('loading image_tools.js');
@@ -209,42 +208,6 @@ $(function(){
     		// the object that has been modified is in:
     		console.log('canvas object modified running');
 			}.bind(this))
-			// Listens for click/touch on "NEw LAyer" button
-			$('#ie-layer').on('mousedown touchstart', function(){
-				this.createNewLayer();
-			}.bind(this))
-		}
-		// Creates a new canvas layer
-		this.createNewLayer = function()
-		{
-			var test_img = "https://i.pinimg.com/236x/a0/b9/41/a0b941ca87bc71d0fe6a2a5f456cb41e--salomon-snowboard-snowboards.jpg";
-			console.log('made it to the createNewLayer() function');
-			function objectifyImage(i) 
-			{
-			    var img_obj = new Image();
-			    img_obj.src = i;
-			    return img_obj;
-			}
-			layer_counter++;
-			var new_canvas = [];
-			new_canvas[layer_counter] = document.createElement('canvas');
-			$(new_canvas[layer_counter]).css({"top":0,"left":0,"z-index":"1",'position':'absolute'});
-			var layer_string = "ie-layer-"+layer_counter;
-			$(new_canvas[layer_counter]).attr('id', layer_string);
-			$(new_canvas[layer_counter]).attr('class', 'ie-new-layer');
-			document.getElementById('ie-container').appendChild(new_canvas[layer_counter]); // adds the canvas to #someBox
-			var context = new_canvas[layer_counter].getContext('2d');
-			i = objectifyImage(test_img);
-			var newC = new_canvas[layer_counter];
-			i.onload = function(newC) 
-			{
-    			newC.width = i.width;
-		    	newC.height = i.height;
-
-    			context.drawImage(i, 0, 0);
-			}
-			console.log(newC);
-
 		}
 		this.clearOpacity = function()
 		{

@@ -25,6 +25,9 @@
 				<?php $time = time();?>
 				<a id="downloadLnk" download="<?php echo $time . '.jpg';?>"><i class='fa fa-download'></i></a>
 			</div>
+			<div class='ie-icon' id='ie-layer'>
+				<i class='fa fa-plus'></i>
+			</div>
 		</div>
 	</div>
 

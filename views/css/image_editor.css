@@ -2,19 +2,11 @@
 {
 	width:90%;
 }
-#ie-canvas
+canvas
 {
 	width:90%;
-}
-#ie-toolbar-right
-{
-	position:relative;
-	top:0;
-	height:500px;
-	width:50px;
-	z-index:2;
-	float:right;
-	background-color:#333;
+	position:absolute;
+	z-index:0;
 }
 #ie-toolbar-bottom 
 {
