@@ -10,8 +10,6 @@
 		<div id='ie-file-input'>
 			<h4>Choose your image to edit</h4>
 			<input type='file' id='ie-image' name='ie-image'/>
-			<br>
-			<button type='button' id='ie-image-mount'>Load Image</button>
 		</div>
 		<div id='ie-toolbar-bottom'>
 			<div class='ie-icon' id='ie-upload'>

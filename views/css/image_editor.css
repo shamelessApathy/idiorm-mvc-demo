@@ -35,11 +35,13 @@
 	padding:15px;
 	margin:15px;
 	width:300px;
-	height:200px;
+	height:100px;
 	border:2px solid #333;
+	background-color:#333;
+	color:#ccc;
 	position:fixed;
 	bottom:80px;
-	left:80px;
+	left:10px;
 }
 #ie-darker
 {

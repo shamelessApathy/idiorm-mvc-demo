@@ -1,4 +1,6 @@
 var keys = [];
+var windowAnimFrame = window.requestAnimationFrame || window.webkitRequestAnimationFrame || window.mozRequestAnimationFrame || window.onRequestAnimationFrame || window.msRequestAnimationFrame || null;
+var ctx = document.getElementById('ie-canvas').getContext('2d');
 $(function(){
 
 	console.log('loading image_tools.js');
@@ -6,8 +8,6 @@ $(function(){
 	{
 		this.init = function()
 		{
-			this.windowAnimFrame = window.requestAnimationFrame || window.webkitRequestAnimationFrame || window.mozRequestAnimationFrame || window.onRequestAnimationFrame || window.msRequestAnimationFrame || null;
-			this.ctx = document.getElementById('ie-canvas').getContext('2d');
 			this.canvas = document.getElementById('ie-canvas');
 			this.button_upload = document.getElementById('ie-upload');
 			this.button_image_mount = document.getElementById('ie-image-mount');
@@ -142,22 +142,24 @@ $(function(){
 			}
 			switch(action)
 			{
-				case "makeBrighter": this.makeBrighter();
+				case "brighter": this.makeBrighter();
 				break;
-				case "makeDarker" : this.makeDarker();
+				case "darker" : this.makeDarker();
 				break;
 			}
 		}
 
 		}
-		// adjusts for height and width of toolbars to help provide visibility
-		this.adjustToolbars = function(width,height)
+		this.checkButtonArray = function()
 		{
-			
-			
-			console.log(height);
-			$(this.toolbar_left).css({"height":height});
-			$(this.toolbar_right).css({"height":height});
+		  if (keys.indexOf('brighter') >= 0)
+		  {
+		    return 'brighter';
+		  }
+		  if (keys.indexOf('darker') >= 0)
+		  {
+		    return 'darker';
+		  }
 		}
 		// All event listeners that need to be instantly instantiated are in this function
 		this.listeners = function()
@@ -176,14 +178,24 @@ $(function(){
 				this.handleImage(e);
 			}.bind(this))
 			// Listening for button_brightness button click
-			$(this.button_brightness_up).on('click', function(){
+			$(this.button_brightness_up).on('mousedown touchstart', function(){
+				this.startHandler('brighter', this.button_brightness_up);
 				console.log('brightness UP running');
-				this.Filters('makeBrighter');
+				//this.Filters('makeBrighter');
 			}.bind(this))
 			// Listening for button_darkness click
-			$(this.button_brightness_down).on('click', function(){
+			$(this.button_brightness_down).on('mousedown touchstart', function(){
+				this.startHandler('darker', this.button_brightness_down);
 				console.log('click recognized for darker!');
-				this.Filters('makeDarker');
+				//this.Filters('makeDarker');
+			}.bind(this))
+			$(this.button_brightness_up).on('mouseup touchend', function(){
+				console.log('brightness up mouseup function running');
+		       	this.endHandler('brighter',this.button_brightness_up);
+			}.bind(this))
+			$(this.button_brightness_down).on('mouseup touchend', function(){
+				console.log('darkness down mouseup function running');
+		        this.endHandler('brighter',this.button_brightness_up);
 			}.bind(this))
 			// Listening for button download click ## REALLY NEEDS HREF LINK INSTEAD ##
 			$(this.button_download).on('click', function(){
@@ -197,6 +209,24 @@ $(function(){
     		console.log('canvas object modified running');
 			}.bind(this))
 		}
+		this.clearOpacity = function()
+		{
+		    $(this.button_brightness_up).css({'opacity':'1'});
+		    $(this.button_brightness_down).css({'opacity':'1'});
+  		}
+		// this function adds to array Keys
+		   this.startHandler = function(button, buttonVar)
+		   {  
+		      $(buttonVar).css({'opacity':'0.8'});  
+		      keys.push(button);
+		   };
+		   // this function handles when buttons are released
+		   this.endHandler = function(button, buttonVar)
+		   {
+		          this.clearOpacity();
+		          var index = keys.indexOf(button);
+		          keys.splice(index, 1);
+		   };
 		// This function mounts image onto HMTL5 Canvas
 		this.handleImage = function(e)
 		{
@@ -221,10 +251,6 @@ $(function(){
 		    	canvas.height = i.height;
 
     			context.drawImage(i, 0, 0);
-    			// have to multiple by 1.63 it is scaling the height 63%?37%?
-    			width = i.width;
-    			height = i.height - (i.height * 0.2);
-    			this.adjustToolbars(width, height);
 			}.bind(this);
 
 	        	//img.src = event.target.result;
@@ -245,11 +271,45 @@ $(function(){
 			$(this.hidden_input).css({"visibility":"visible"});
 			$(this.hidden_input).css({"z-index":"10"});
 		}
-
+		// This funciton checks if buttons are in the keys array and then acts accordingly
+		this.checkButtons = function()
+		{
+			if (keys[0] != null)
+			{
+				var command = this.checkButtonArray();
+				switch (command)
+				{
+					case "brighter": this.Filters('brighter');
+					break;
+					case "darker": this.Filters('darker');
+					break;
+				}
+			}
+		}
+		// This is the main animation loop
+		this.animLoop = function()
+		{
+			this.checkButtons();
+		}
+		// Run loop fires the Anim loop and sets the FPS
+		this.runLoop = function()
+		{
+		    if (windowAnimFrame)
+		    {
+		    	this.animLoop();
+		    	windowAnimFrame(this.runLoop.bind(this));
+		    } 
+		    else 
+		    {
+		    	var fps = 1000 / 60; // 60 fps
+		    	setInterval(this.animLoop, fps).bind(this);
+		    }
+	    }
 
 	
 		this.init();
-		setInterval( this.listeners(), 500);
+		this.listeners();
+		this.runLoop();
 	}
 	var newTools = new ImageTools();
 })
