@@ -1,9 +1,13 @@
+var keys = [];
 $(function(){
+
 	console.log('loading image_tools.js');
 	var ImageTools = function()
 	{
 		this.init = function()
 		{
+			this.windowAnimFrame = window.requestAnimationFrame || window.webkitRequestAnimationFrame || window.mozRequestAnimationFrame || window.onRequestAnimationFrame || window.msRequestAnimationFrame || null;
+			this.ctx = document.getElementById('ie-canvas').getContext('2d');
 			this.canvas = document.getElementById('ie-canvas');
 			this.button_upload = document.getElementById('ie-upload');
 			this.button_image_mount = document.getElementById('ie-image-mount');
@@ -16,6 +20,29 @@ $(function(){
 
 			// Filters
 			// This function is the beginning of figuring out filters
+			this.checkAnimation = function()
+			{
+			  if (keys.indexOf('left') >= 0)
+			  {
+			    return 'left';
+			  }
+			  if (keys.indexOf('right') >= 0)
+			  {
+			    return 'right';
+			  }
+			  if (keys.indexOf('up') >= 0)
+			  {
+			    return 'up';
+			  }
+			  if (keys.indexOf('down') >= 0)
+			  {
+			    return 'down';
+			  }
+			  if (keys.indexOf('space') >= 0)
+			  {
+			    return 'space';
+			  }
+			}
 		this.Filters = function(action)
 		{
 			console.log('startFilters() started!');
@@ -135,26 +162,30 @@ $(function(){
 		// All event listeners that need to be instantly instantiated are in this function
 		this.listeners = function()
 		{
+			// Click listener for Upload Button
 			$(this.button_upload).on('click', function(){
 				console.log('running click loop');
 				this.show_file_input();
 			}.bind(this))
+			//Click listener for Image Mount button
 			$(this.button_image_mount).on('click', function(){
 				console.log('mount button listener running!');
 			})
 			// Listen for file change here
 			$("#ie-image").change(function(e){
-				//this.canvas.height = document.getElementById('ie-canvas').height;
 				this.handleImage(e);
 			}.bind(this))
+			// Listening for button_brightness button click
 			$(this.button_brightness_up).on('click', function(){
 				console.log('brightness UP running');
 				this.Filters('makeBrighter');
 			}.bind(this))
+			// Listening for button_darkness click
 			$(this.button_brightness_down).on('click', function(){
 				console.log('click recognized for darker!');
 				this.Filters('makeDarker');
 			}.bind(this))
+			// Listening for button download click ## REALLY NEEDS HREF LINK INSTEAD ##
 			$(this.button_download).on('click', function(){
 				console.log('made it to the download function listener');
 				canvas = document.getElementById('ie-canvas');
@@ -163,7 +194,7 @@ $(function(){
 			}.bind(this))			
 			$(this.canvas).on('object:modified', function(event) {
     		// the object that has been modified is in:
-    		console.log('working now');
+    		console.log('canvas object modified running');
 			}.bind(this))
 		}
 		// This function mounts image onto HMTL5 Canvas
@@ -202,7 +233,9 @@ $(function(){
 	        	
 	    	}.bind(this)
 	    	
-    		reader.readAsDataURL(e.target.files[0]);     
+    		reader.readAsDataURL(e.target.files[0]);
+    		$(this.hidden_input).css({"visibility":"hidden"});
+    		$(this.hidden_input).css({"z-index":"-1"});
 		}
 
 		
@@ -210,6 +243,7 @@ $(function(){
 		this.show_file_input = function()
 		{
 			$(this.hidden_input).css({"visibility":"visible"});
+			$(this.hidden_input).css({"z-index":"10"});
 		}
 
 

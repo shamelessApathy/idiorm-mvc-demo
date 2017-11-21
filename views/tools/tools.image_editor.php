@@ -2,17 +2,17 @@
 <?php require_once(HEADER);?>
 <link href='/views/css/image_editor.css' rel='stylesheet' type='text/css'/>
 
-<div class='container'>
-	<h4>HTML5 Canvas Image Editor</h4>
-	<div id='ie-file-input'>
-		<h4>Choose your image to edit</h4>
-		<input type='file' id='ie-image' name='ie-image'/>
-		<br>
-		<button type='button' id='ie-image-mount'>Load Image</button>
-	</div>
+	<h4 style='text-align:center;'>HTML5 Canvas Image Editor</h4>
+
 	<div id='ie-container'>
 		<canvas id='ie-canvas'>
 		</canvas>
+		<div id='ie-file-input'>
+			<h4>Choose your image to edit</h4>
+			<input type='file' id='ie-image' name='ie-image'/>
+			<br>
+			<button type='button' id='ie-image-mount'>Load Image</button>
+		</div>
 		<div id='ie-toolbar-bottom'>
 			<div class='ie-icon' id='ie-upload'>
 				<i class='fa fa-upload'></i>
@@ -24,16 +24,15 @@
 				<i class='fa fa-lightbulb-o'></i>
 			</div>
 			<div class='ie-icon' id='ie-download'>
-				<i class='fa fa-download'></i>
+				<?php $time = time();?>
+				<a id="downloadLnk" download="<?php echo $time . '.jpg';?>"><i class='fa fa-download'></i></a>
 			</div>
 		</div>
 	</div>
-<a id="downloadLnk" download="YourFileName.jpg">Download as image</a>
 
-</div>
 
 <?php require_once(FOOTER);?>
-<?php require_once(HTML_FOOTER);?>
+
 
 <script src='/views/js/image_tools.js'></script>
 <script>
