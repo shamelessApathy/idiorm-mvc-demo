@@ -174,8 +174,23 @@ $(function(){
 			{
 				this.text_menu = document.getElementById('ie-text-menu');
 				$(this.text_menu).css({"visibility":"visible"});
+
+			}
+			this.defineSpace = function()
+			{
+
+			}
+			this.listeners = function()
+			{
+				$('#ie-text-color').change(function(){
+					console.log('color changed');
+				});
+				$('#ie-canvas').on('mousedown touchstart', function(){
+					console.log('listgening on canvas');
+				});
 			}
 			this.init();
+			this.listeners();
 		}
 		// All event listeners that need to be instantly instantiated are in this function
 		this.listeners = function()

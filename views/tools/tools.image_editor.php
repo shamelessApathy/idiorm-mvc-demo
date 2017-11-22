@@ -13,7 +13,7 @@
 			</div>
 		</div>
 		<div id='ie-text-menu'>
-			<input type="text" value="000" name="border-color" class="pick-a-color form-control">
+			<input type="text" value="000" name="ie-text-color" id='ie-text-color' class="pick-a-color form-control">
 		</div>
 		<canvas id='ie-canvas'>
 		</canvas>
