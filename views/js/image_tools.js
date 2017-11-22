@@ -4,6 +4,7 @@ var ctx = document.getElementById('ie-canvas').getContext('2d');
 var layer_counter = 0 ;
 $(function(){
 
+
 	console.log('loading image_tools.js');
 	var ImageTools = function()
 	{
@@ -19,6 +20,8 @@ $(function(){
 			this.hidden_input = document.getElementById('ie-file-input');
 			this.toolbar_left = document.getElementById('ie-toolbar-left');
 			this.toolbar_right = document.getElementById('ie-toolbar-right');
+
+			// Initilizating pick a color
 
 			// Filters
 			// This function is the beginning of figuring out filters

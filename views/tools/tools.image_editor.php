@@ -1,5 +1,7 @@
 <link href='/views/css/reset.css' rel='stylesheet' type='text/css'/>
 <?php require_once(HEADER);?>
+<link rel="stylesheet" href="/views/tools/pick-a-color-master/build/dependencies/bootstrap-3.0.0.min.css">
+<link rel="stylesheet" href="/views/tools/pick-a-color-master/build/1.2.3/css/pick-a-color-1.2.3.min.css">
 <link href='/views/css/image_editor.css' rel='stylesheet' type='text/css'/>
 
 	<h4 style='text-align:center;'>HTML5 Canvas Image Editor</h4>
@@ -10,7 +12,9 @@
 				<i class='fa fa-font'></i>
 			</div>
 		</div>
-		<div id='ie-text-menu'>Choose Color</div>
+		<div id='ie-text-menu'>
+			<input type="text" value="000" name="border-color" class="pick-a-color form-control">
+		</div>
 		<canvas id='ie-canvas'>
 		</canvas>
 		<div id='ie-file-input'>
@@ -38,10 +42,12 @@
 	</div>
 
 
-<?php require_once(FOOTER);?>
 
-
+<script src="/views/tools/pick-a-color-master/build/dependencies/jquery-1.9.1.min.js"></script>
+<script src="/views/tools/pick-a-color-master/build/dependencies/tinycolor-0.9.15.min.js"></script>
+<script src="/views/tools/pick-a-color-master/build/1.2.3/js/pick-a-color-1.2.3.min.js"></script>
 <script src='/views/js/image_tools.js'></script>
+
 <script>
 function download() {
 	canvas = document.getElementById('ie-canvas');
@@ -50,6 +56,10 @@ function download() {
 };
 downloadLnk.addEventListener('click', download, false);
 </script>
+<script>
+	document.addEventListener('DOMContentLoaded', function(){
+		$(".pick-a-color").pickAColor();
+	})
 </script>
-	
+
 <!--<script src='/views/js/filter.js'></script>  -->
