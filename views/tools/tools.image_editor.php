@@ -5,6 +5,12 @@
 	<h4 style='text-align:center;'>HTML5 Canvas Image Editor</h4>
 
 	<div id='ie-container'>
+		<div id='ie-toolbar-top'>
+			<div class='ie-icon' id='ie-text-editor'>
+				<i class='fa fa-font'></i>
+			</div>
+		</div>
+		<div id='ie-text-menu'>Choose Color</div>
 		<canvas id='ie-canvas'>
 		</canvas>
 		<div id='ie-file-input'>

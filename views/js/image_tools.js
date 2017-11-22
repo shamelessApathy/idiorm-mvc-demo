@@ -15,6 +15,7 @@ $(function(){
 			this.button_brightness_up = document.getElementById('ie-brighter');
 			this.button_brightness_down = document.getElementById('ie-darker');
 			this.button_download = document.getElementById('ie-download');
+			this.button_text_editor = document.getElementById('ie-text-editor');
 			this.hidden_input = document.getElementById('ie-file-input');
 			this.toolbar_left = document.getElementById('ie-toolbar-left');
 			this.toolbar_right = document.getElementById('ie-toolbar-right');
@@ -162,6 +163,17 @@ $(function(){
 		    return 'darker';
 		  }
 		}
+		// Makeing this a class
+		this.TextEditor = function()
+		{
+			// initializes certain needed functions for text editor to run
+			this.init = function()
+			{
+				this.text_menu = document.getElementById('ie-text-menu');
+				$(this.text_menu).css({"visibility":"visible"});
+			}
+			this.init();
+		}
 		// All event listeners that need to be instantly instantiated are in this function
 		this.listeners = function()
 		{
@@ -174,6 +186,11 @@ $(function(){
 			$(this.button_image_mount).on('click', function(){
 				console.log('mount button listener running!');
 			})
+			// Text Editor liostener
+			$(this.button_text_editor).on('mousedown touchstart', function(){
+				console.log('feeling the click in button text editor listneer');
+				this.TextEditor();
+			}.bind(this))
 			// Listen for file change here
 			$("#ie-image").change(function(e){
 				this.handleImage(e);
@@ -342,6 +359,7 @@ $(function(){
 		    	setInterval(this.animLoop, fps).bind(this);
 		    }
 	    }
+
 
 	
 		this.init();
