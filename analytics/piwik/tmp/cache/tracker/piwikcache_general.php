@@ -1,9 +1,9 @@
 <?php return array (
-  'lifetime' => 1511114522,
+  'lifetime' => 1511479500,
   'data' => 
   array (
     'isBrowserTriggerEnabled' => true,
-    'lastTrackerCronRun' => '1511114218',
+    'lastTrackerCronRun' => '1511479012',
     'allUrlsByHostAndIdSite' => 
     array (
       'dev.sharefuly.com' => 
