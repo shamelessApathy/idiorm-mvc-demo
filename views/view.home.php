@@ -9,6 +9,7 @@ $categories = $info['categories'];
 <div class='col-md-4'></div>
 <div class='col-md-4'>
 	<h1 class='font-color text-center'>sharefuly</h1>
+	<p style='text-align:center;'> <?php echo $info['count'];?> images and counting...</p>
 </div>
 <div class='col-md-4'></div>
 </div>

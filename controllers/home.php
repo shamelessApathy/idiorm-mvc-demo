@@ -8,9 +8,10 @@ class homeController extends Controller{
 		$cat_model = new Category();
 		$model = new Image();
 		$images = $model->get_newest();
+		$count = count($model->count_all());
 		$featured = $model->get_featured();
 		$categories = $cat_model->get_all();
-		$array = array('images' => $images, 'featured' => $featured, 'categories' => $categories);
+		$array = array('images' => $images, 'featured' => $featured, 'categories' => $categories, 'count' => $count);
 		return_view('view.home.php' , $array );	
 		if (isset($logout) && $logout = true)
 		{
