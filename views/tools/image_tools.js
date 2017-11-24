@@ -146,6 +146,8 @@ $(function(){
 				break;
 				case "darker" : this.makeDarker();
 				break;
+				case 'blackandwhite' :this.blackAndWhite();
+				break;
 			}
 		}
 
