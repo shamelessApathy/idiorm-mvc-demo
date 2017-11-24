@@ -140,6 +140,10 @@ $(function(){
 				var sCtx = sCanvas.getContext('2d');
 				sCtx.putImageData(demo,0,0);
 			}
+			this.blackAndWhite = function()
+			{
+				console.log('in the black and white function');
+			}
 			switch(action)
 			{
 				case "brighter": this.makeBrighter();
@@ -166,6 +170,8 @@ $(function(){
 		// All event listeners that need to be instantly instantiated are in this function
 		this.listeners = function()
 		{
+			// Click listener for Black and White
+			console.log('looking for change');
 			// Click listener for Upload Button
 			$(this.button_upload).on('click', function(){
 				console.log('running click loop');

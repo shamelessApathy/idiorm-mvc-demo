@@ -83,7 +83,9 @@ $(function(){
 			};
 			this.grayScale = function(pixels)
 			{
+				console.log(pixels);
 				var d = pixels.data;
+				console.log(d);
 				for (var i = 0; i < d.length; i+=4)
 				{
 					var r = d[i];
@@ -145,11 +147,22 @@ $(function(){
 				var sCtx = sCanvas.getContext('2d');
 				sCtx.putImageData(demo,0,0);
 			}
+			this.blackAndWhite = function()
+			{
+				console.log('inside blackAndWhite function()');
+				var preCan = this.convertCanvasToImage(interiorCanvas);
+				var demo = this.filterImage(this.grayScale, preCan);
+				var sCanvas = document.getElementById('ie-canvas');
+				var sCtx = sCanvas.getContext('2d');
+				sCtx.putImageData(demo,0,0);
+			}
 			switch(action)
 			{
 				case "brighter": this.makeBrighter();
 				break;
 				case "darker" : this.makeDarker();
+				break;
+				case "blackandwhite" : this.blackAndWhite();
 				break;
 			}
 		}
@@ -196,6 +209,10 @@ $(function(){
 		this.listeners = function()
 		{
 			// Click listener for Upload Button
+			$('#ie-black-and-white').on('click', function(){
+				console.log('in black and white listener');
+				this.Filters('blackandwhite');
+			}.bind(this))
 			$(this.button_upload).on('click', function(){
 				console.log('running click loop');
 				this.show_file_input();
@@ -313,6 +330,12 @@ $(function(){
 				    img_obj.src = i;
 				    return img_obj;
 				}
+				function updateSrc(e)
+				{
+            			$('#ie-current-image').attr('src', e.target.result);
+						console.log('updateSrc function() running'); 
+				}
+			updateSrc(event);
 
 			var canvas = document.getElementById('ie-canvas');
 			var context = canvas.getContext('2d');

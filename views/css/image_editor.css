@@ -33,6 +33,10 @@ canvas
 	width:100%;
 	background-color:#333;
 } 
+#ie-current-image
+{
+	visibility:hidden;
+}
 #downloadLnk
 {
 	color:white;
