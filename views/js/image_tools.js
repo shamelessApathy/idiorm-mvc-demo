@@ -335,7 +335,7 @@ $(function(){
             			$('#ie-current-image').attr('src', e.target.result);
 						console.log('updateSrc function() running'); 
 				}
-			updateSrc(event);
+	
 
 			var canvas = document.getElementById('ie-canvas');
 			var context = canvas.getContext('2d');

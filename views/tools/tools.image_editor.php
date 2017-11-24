@@ -9,7 +9,7 @@
 	<div id='ie-container'>
 		<div id='ie-toolbar-top'>
 			<div class='ie-icon' id='ie-black-and-white'>
-				Black and White
+				<i class='fa fa-adjust'></i>
 			</div>
 		</div>
 		<div id='ie-text-menu'>
@@ -61,6 +61,6 @@ downloadLnk.addEventListener('click', download, false);
 		$(".pick-a-color").pickAColor();
 	})
 </script>
-<img id='ie-current-image' src=''/>
+
 
 <!--<script src='/views/js/filter.js'></script>  -->
