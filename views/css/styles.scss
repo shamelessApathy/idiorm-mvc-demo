@@ -16,6 +16,13 @@ $sold-table-bg: #e6e6e6;
 {
 	display:none;
 }
+#tools-nav-bar
+{
+	background-color:$primary-bg;
+	color:$primary-font-color;
+	width:100%;
+	margin-top:65px;
+}
 .front-category-container
 {
 	display:flex;
@@ -1688,6 +1695,7 @@ could be simply that some of the other rules are being applied with a greater im
 	{
 		width:100%;
 	}
+
 	#navbar-options
 	{
 		float:none;

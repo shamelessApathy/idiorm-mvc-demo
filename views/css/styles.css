@@ -10,7 +10,21 @@
   display: block;
   float: left;
   margin-left: 10px; }
-
+#tools-nav-bar
+{
+  background-color:#333;
+  color:#ccc;
+  width:100%;
+  text-align:center;
+  margin-top:58px;
+  height:40px;
+}
+#tools-nav-bar a
+{
+  color:#ccc;
+  font-weight:700;
+  font-size:25px;
+}
 #nav-tools-link-holder {
   width: 100px;
   height: 59px;
