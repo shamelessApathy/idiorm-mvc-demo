@@ -1,0 +1,107 @@
+#ie-container
+{
+	width:90%;
+}
+canvas
+{
+	width:90%;
+	position:absolute;
+	z-index:0;
+}
+#ie-text-menu
+{
+	width:200px;
+	height:100px;
+	background-color:#333;
+	visibility:hidden;
+}
+#ie-toolbar-top
+{
+	position:absolute;
+	top:0;
+	z-index:10;
+	height:75px;
+	width:100%;
+	background-color:#333;
+} 
+#ie-toolbar-bottom 
+{
+	position:fixed;
+	bottom:0;
+	z-index:10;
+	height:75px;
+	width:100%;
+	background-color:#333;
+} 
+#ie-current-image
+{
+	visibility:hidden;
+}
+#downloadLnk
+{
+	color:white;
+}
+#ie-file-input
+{
+	visibility: hidden;
+	padding:15px;
+	margin:15px;
+	width:300px;
+	height:100px;
+	border:2px solid #333;
+	background-color:#333;
+	color:#ccc;
+	position:fixed;
+	bottom:80px;
+	left:10px;
+}
+#ie-darker
+{
+}
+#ie-brighter
+{
+	background-color:white;
+	color:#333;
+}
+.ie-icon
+{
+	margin-top:10px;
+	width:20%;
+	height:55px;
+	float:left;
+	color:white;
+	font-size:20px;
+	text-align:center;
+	padding:5px;
+	cursor:pointer;
+}
+
+/* W3 Schools Tooltips  */
+.tooltip 
+{
+    position: relative;
+    display: inline-block;
+    border-bottom: 1px dotted black; /* If you want dots under the hoverable text */
+}
+
+/* Tooltip text */
+.tooltip .tooltiptext 
+{
+    visibility: hidden;
+    width: 120px;
+    background-color: black;
+    color: #fff;
+    text-align: center;
+    padding: 5px 0; 
+    border-radius: 6px;
+ 
+    /* Position the tooltip text - see examples below! */
+    position: absolute;
+    z-index: 1;
+}
+
+/* Show the tooltip text when you mouse over the tooltip container */
+.tooltip:hover .tooltiptext 
+{
+    visibility: visible;
+}
