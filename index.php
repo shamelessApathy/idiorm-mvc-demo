@@ -2,15 +2,15 @@
 
 //require('vendor/j4mie/idiorm/idiorm.php');
 //require('vendor/j4mie/paris/paris.php');
-error_reporting(0);
-ini_set('display_errors', 0);
+//error_reporting(0);
+//ini_set('display_errors', 0);
 require('vendor/autoload.php');
 require('constants.php');
 require('globals.php');
 require('uri_router.php');
 $dotenv = new Dotenv\Dotenv(__DIR__);
 $dotenv->load();
-ORM::configure('mysql:host=localhost;dbname=idiorm_production');
+ORM::configure('mysql:host=localhost;dbname=dev_idiorm');
 ORM::configure('username', $_ENV['DB_USER']);
 ORM::configure('password', $_ENV['DB_PASS']);
 ORM::configure('logging', true);

@@ -61,7 +61,7 @@ foreach ($info['tags'] as $tag)
 <link href='/views/css/font-awesome-4.7.0/css/font-awesome.min.css' type='text/css' rel='stylesheet'/>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<?php require_once('piwik_head.php');?>
+<!--<?php // require_once('piwik_head.php');?>-->
 </head>
 <?php if (isset($_SESSION['user_info'])) {$user = $_SESSION['user_info'];} ?>
 <div class='nav-mod'>
