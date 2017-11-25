@@ -43,6 +43,12 @@ class Image extends Model
 		}
 		return $image_array;
 	}
+	public function count_all()
+	{
+		$images = ORM::for_table('image')->find_many();
+		$count = count($images);
+		return $count;
+	}
 	public function get_tags()
 	{
 		//$tags = ORM::for_table('image_to_tag')->where('image_id', $this->id)->find_many();
