@@ -98,6 +98,7 @@ foreach ($info['tags'] as $tag)
         </li>
         </ul>
             <span class="sr-only">(current)</span></li>
+            <div id='nav-tools-link-holder'><a id='nav-tools-link' href='/tools'><i class='fa fa-wrench'></i> Tools</a></div>
       <?php if (isset($user)):?>
         <ul class='nav navbar-nav' id='navbar-options'>
         <li class="dropdown">
