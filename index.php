@@ -10,7 +10,7 @@ require('globals.php');
 require('uri_router.php');
 $dotenv = new Dotenv\Dotenv(__DIR__);
 $dotenv->load();
-ORM::configure('mysql:host=localhost;dbname=dev_idiorm');
+ORM::configure('mysql:host=localhost;dbname=idiorm_production');
 ORM::configure('username', $_ENV['DB_USER']);
 ORM::configure('password', $_ENV['DB_PASS']);
 ORM::configure('logging', true);

@@ -17,6 +17,7 @@ $(function(){
 			this.button_brightness_down = document.getElementById('ie-darker');
 			this.button_download = document.getElementById('ie-download');
 			this.button_text_editor = document.getElementById('ie-text-editor');
+			this.button_black_and_white = document.getElementById('ie-black-and-white');
 			this.hidden_input = document.getElementById('ie-file-input');
 			this.toolbar_left = document.getElementById('ie-toolbar-left');
 			this.toolbar_right = document.getElementById('ie-toolbar-right');
@@ -24,30 +25,7 @@ $(function(){
 			// Initilizating pick a color
 
 			// Filters
-			// This function is the beginning of figuring out filters
-			this.checkAnimation = function()
-			{
-			  if (keys.indexOf('left') >= 0)
-			  {
-			    return 'left';
-			  }
-			  if (keys.indexOf('right') >= 0)
-			  {
-			    return 'right';
-			  }
-			  if (keys.indexOf('up') >= 0)
-			  {
-			    return 'up';
-			  }
-			  if (keys.indexOf('down') >= 0)
-			  {
-			    return 'down';
-			  }
-			  if (keys.indexOf('space') >= 0)
-			  {
-			    return 'space';
-			  }
-			}
+
 		this.Filters = function(action)
 		{
 			console.log('startFilters() started!');
@@ -167,136 +145,43 @@ $(function(){
 			}
 		}
 
-		}
-		this.checkButtonArray = function()
-		{
-		  if (keys.indexOf('brighter') >= 0)
-		  {
-		    return 'brighter';
-		  }
-		  if (keys.indexOf('darker') >= 0)
-		  {
-		    return 'darker';
-		  }
-		}
-		// Makeing this a class
-		this.TextEditor = function()
-		{
-			// initializes certain needed functions for text editor to run
-			this.init = function()
-			{
-				this.text_menu = document.getElementById('ie-text-menu');
-				$(this.text_menu).css({"visibility":"visible"});
-
-			}
-			this.defineSpace = function()
-			{
-
-			}
-			this.listeners = function()
-			{
-				$('#ie-text-color').change(function(){
-					console.log('color changed');
-				});
-				$('#ie-canvas').on('mousedown touchstart', function(){
-					console.log('listgening on canvas');
-				});
-			}
-			this.init();
-			this.listeners();
-		}
+	}
 		// All event listeners that need to be instantly instantiated are in this function
 		this.listeners = function()
 		{
 			// Click listener for Upload Button
-			$('#ie-black-and-white').on('click', function(){
+			this.button_black_and_white.addEventListener('click', function(){
 				console.log('in black and white listener');
 				this.Filters('blackandwhite');
 			}.bind(this))
-			$(this.button_upload).on('click', function(){
+			this.button_upload.addEventListener('click', function(){
 				console.log('running click loop');
 				this.show_file_input();
 			}.bind(this))
 			//Click listener for Image Mount button
-			$(this.button_image_mount).on('click', function(){
-				console.log('mount button listener running!');
-			})
-			// Text Editor liostener
-			$(this.button_text_editor).on('mousedown touchstart', function(){
-				console.log('feeling the click in button text editor listneer');
-				this.TextEditor();
-			}.bind(this))
 			// Listen for file change here
 			$("#ie-image").change(function(e){
 				this.handleImage(e);
 			}.bind(this))
 			// Listening for button_brightness button click
-			$(this.button_brightness_up).on('mousedown touchstart', function(){
-				this.startHandler('brighter', this.button_brightness_up);
+			this.button_brightness_up.addEventListener('click', function(){
+				this.Filters('brighter');
 				console.log('brightness UP running');
 				//this.Filters('makeBrighter');
 			}.bind(this))
 			// Listening for button_darkness click
-			$(this.button_brightness_down).on('mousedown touchstart', function(){
-				this.startHandler('darker', this.button_brightness_down);
+			this.button_brightness_down.addEventListener('click', function(){
+				this.Filters("darker");
 				console.log('click recognized for darker!');
 				//this.Filters('makeDarker');
 			}.bind(this))
-			$(this.button_brightness_up).on('mouseup touchend', function(){
-				console.log('brightness up mouseup function running');
-		       	this.endHandler('brighter',this.button_brightness_up);
-			}.bind(this))
-			$(this.button_brightness_down).on('mouseup touchend', function(){
-				console.log('darkness down mouseup function running');
-		        this.endHandler('brighter',this.button_brightness_up);
-			}.bind(this))
 			// Listening for button download click ## REALLY NEEDS HREF LINK INSTEAD ##
-			$(this.button_download).on('click', function(){
+			this.button_download.addEventListener('click', function(){
 				console.log('made it to the download function listener');
 				canvas = document.getElementById('ie-canvas');
 				var dataURL = canvas.toDataURL('image/jpeg');
     			$(this.button_download).href = dataURL;
 			}.bind(this))			
-			$(this.canvas).on('object:modified', function(event) {
-    		// the object that has been modified is in:
-    		console.log('canvas object modified running');
-			}.bind(this))
-			// Listens for click/touch on "NEw LAyer" button
-			$('#ie-layer').on('mousedown touchstart', function(){
-				this.createNewLayer();
-			}.bind(this))
-		}
-		// Creates a new canvas layer
-		this.createNewLayer = function()
-		{
-			var test_img = "https://i.pinimg.com/236x/a0/b9/41/a0b941ca87bc71d0fe6a2a5f456cb41e--salomon-snowboard-snowboards.jpg";
-			console.log('made it to the createNewLayer() function');
-			function objectifyImage(i) 
-			{
-			    var img_obj = new Image();
-			    img_obj.src = i;
-			    return img_obj;
-			}
-			layer_counter++;
-			var new_canvas = [];
-			new_canvas[layer_counter] = document.createElement('canvas');
-			$(new_canvas[layer_counter]).css({"top":0,"left":0,"z-index":"1",'position':'absolute'});
-			var layer_string = "ie-layer-"+layer_counter;
-			$(new_canvas[layer_counter]).attr('id', layer_string);
-			$(new_canvas[layer_counter]).attr('class', 'ie-new-layer');
-			document.getElementById('ie-container').appendChild(new_canvas[layer_counter]); // adds the canvas to #someBox
-			var context = new_canvas[layer_counter].getContext('2d');
-			i = objectifyImage(test_img);
-			var newC = new_canvas[layer_counter];
-			i.onload = function(newC) 
-			{
-    			newC.width = i.width;
-		    	newC.height = i.height;
-
-    			context.drawImage(i, 0, 0);
-			}
-			console.log(newC);
-
 		}
 		this.clearOpacity = function()
 		{
@@ -366,46 +251,12 @@ $(function(){
 			$(this.hidden_input).css({"visibility":"visible"});
 			$(this.hidden_input).css({"z-index":"10"});
 		}
-		// This funciton checks if buttons are in the keys array and then acts accordingly
-		this.checkButtons = function()
-		{
-			if (keys[0] != null)
-			{
-				var command = this.checkButtonArray();
-				switch (command)
-				{
-					case "brighter": this.Filters('brighter');
-					break;
-					case "darker": this.Filters('darker');
-					break;
-				}
-			}
-		}
-		// This is the main animation loop
-		this.animLoop = function()
-		{
-			this.checkButtons();
-		}
-		// Run loop fires the Anim loop and sets the FPS
-		this.runLoop = function()
-		{
-		    if (windowAnimFrame)
-		    {
-		    	this.animLoop();
-		    	windowAnimFrame(this.runLoop.bind(this));
-		    } 
-		    else 
-		    {
-		    	var fps = 1000 / 60; // 60 fps
-		    	setInterval(this.animLoop, fps).bind(this);
-		    }
-	    }
+
 
 
 	
 		this.init();
 		this.listeners();
-		this.runLoop();
 	}
 	var newTools = new ImageTools();
 })

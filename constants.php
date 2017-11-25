@@ -1,5 +1,5 @@
 <?php
-define('ROOT','/var/www/dev_idiorm/idiorm-mvc-demo');
+define('ROOT','/var/www/idiorm/idiorm-mvc-demo');
 define('CONTROLLERS', ROOT . '/controllers');
 define('CLASSES', ROOT . '/classes');
 define('MODELS', ROOT . '/models');

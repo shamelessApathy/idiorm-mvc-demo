@@ -1,19 +1,14 @@
 <link href='/views/css/reset.css' rel='stylesheet' type='text/css'/>
-<?php require_once(HEADER);?>
+<?php require_once('views/image_editor_header.php');?>
 <link rel="stylesheet" href="/views/tools/pick-a-color-master/build/dependencies/bootstrap-3.0.0.min.css">
 <link rel="stylesheet" href="/views/tools/pick-a-color-master/build/1.2.3/css/pick-a-color-1.2.3.min.css">
 <link href='/views/css/image_editor.css' rel='stylesheet' type='text/css'/>
 
-	<h4 style='text-align:center;'>HTML5 Canvas Image Editor</h4>
+	
 
 	<div id='ie-container'>
 		<div id='ie-toolbar-top'>
-			<div class='ie-icon' id='ie-black-and-white'>
-				<i class='fa fa-adjust'></i>
-			</div>
-		</div>
-		<div id='ie-text-menu'>
-			<input type="text" value="000" name="ie-text-color" id='ie-text-color' class="pick-a-color form-control">
+			<h4 style='text-align:center; color:#ccc; padding-top:10px;'>HTML5 Canvas Image Editor</h4>
 		</div>
 		<canvas id='ie-canvas'>
 		</canvas>
@@ -22,21 +17,21 @@
 			<input type='file' id='ie-image' name='ie-image'/>
 		</div>
 		<div id='ie-toolbar-bottom'>
-			<div class='ie-icon' id='ie-upload'>
+			<div title='Upload' class='ie-icon' id='ie-upload'>
 				<i class='fa fa-upload'></i>
 			</div>
-			<div class='ie-icon' id='ie-brighter'>
+			<div title='Brighter' class='ie-icon' id='ie-brighter'>
 				<i class='fa fa-lightbulb-o'></i>
 			</div>
-			<div class='ie-icon' id='ie-darker'>
+			<div title='Darker' class='ie-icon' id='ie-darker'>
 				<i class='fa fa-lightbulb-o'></i>
 			</div>
-			<div class='ie-icon' id='ie-download'>
+			<div title='Black and White' class='ie-icon' id='ie-black-and-white'>
+				<i class='fa fa-adjust'></i>
+			</div>
+			<div title='Download Image' class='ie-icon' id='ie-download'>
 				<?php $time = time();?>
 				<a id="downloadLnk" download="<?php echo $time . '.jpg';?>"><i class='fa fa-download'></i></a>
-			</div>
-			<div class='ie-icon' id='ie-layer'>
-				<i class='fa fa-plus'></i>
 			</div>
 		</div>
 	</div>
