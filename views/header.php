@@ -24,13 +24,13 @@ $cart2 = new Cart();
 <meta name="theme-color" content="#ffffff">
 <?php if (is_array($info) && isset($info['image'])) : ?>
   <?php $image = $info['image'];
-$image_url = "http://dev.sharefuly.com" . $image->thumbnail;
+$image_url = "http://www.sharefuly.com" . $image->thumbnail;
 $path = "/image/info?id=";
 $request =$_SERVER['REQUEST_URI'];
 $exploded = explode('/',$request);
 $second_explode = explode('?',$exploded[2]);
 $which = $second_explode[0];
-$page_url = "http://dev.sharefuly.com/image/info?id=".$image->id;
+$page_url = "http:/www.sharefuly.com/image/info?id=".$image->id;
 $description = "";
 foreach ($info['tags'] as $tag)
 {
