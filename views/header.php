@@ -109,6 +109,8 @@ foreach ($info['tags'] as $tag)
             <li role="separator" class="divider"></li>
             <li><a id='drop-color' href="/user/image_manager"><i class='fa fa-image'></i>  Image Manager</a></li>
             <li role="separator" class="divider"></li>
+            <li><a id='drop-color' href="/tools"><i class='fa fa-wrench'></i>  Tools</a></li>
+            <li role="separator" class="divider"></li>
             <?php if ($user->level === '1'):?>
               <li><a href='/admin/dashboard'>Admin Dashboard</a></li>
               <li role='separator' class='divider'></li>

@@ -37,6 +37,11 @@ if ($controller === 'home')
 	$home = new homeController();
 	$home->load();
 }
+if ($controller === 'tools' && !isset($method))
+{
+	return_view('tools/tools.main.php');
+	return;
+}
 if ($controller === 'cart' && !isset($method))
 {
 	require_once(CONTROLLERS . '/cart.php');
