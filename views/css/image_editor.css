@@ -4,7 +4,6 @@
 }
 canvas
 {
-	width:90%;
 	position:absolute;
 	z-index:0;
 }
@@ -29,10 +28,22 @@ canvas
 	position:fixed;
 	bottom:0;
 	z-index:10;
-	height:75px;
-	width:100%;
+	height:100px;
+	width:100%; 
 	background-color:#333;
 } 
+#ie-image-loading
+{
+	width:100%;
+	margin-top:150px;
+	text-align:center;
+	color:#ccc;
+	background-color:#333;
+	height:75px;
+	display:none;
+	padding-top:10px;
+	z-index:10;
+}
 #ie-current-image
 {
 	visibility:hidden;
@@ -65,7 +76,7 @@ canvas
 }
 .ie-icon
 {
-	margin-top:10px;
+	margin-top:20px;
 	width:20%;
 	height:55px;
 	float:left;
@@ -74,6 +85,10 @@ canvas
 	text-align:center;
 	padding:5px;
 	cursor:pointer;
+}
+.ie-icon p
+{
+	font-size:10px;
 }
 
 /* W3 Schools Tooltips  */
@@ -104,4 +119,10 @@ canvas
 .tooltip:hover .tooltiptext 
 {
     visibility: visible;
+} 
+@media only screen and (max-width: 600px) {
+	canvas
+	{
+		width:100%;
+	}
 }
