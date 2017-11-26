@@ -1,6 +1,61 @@
 <?php
 require_once(BASE_CONTROLLER);
 class adminController extends Controller {
+	// this will rotate image in given direction, also lookup watermarks and thumbnails and also rotate and resave them
+	public function rotate_image()
+	{
+		// Set variables from $_GET string
+		$image_id = $_GET['image_id'];
+		$direction = $_GET['direction'];
+		$uri = $_GET['uri'];
+		var_dump($uri);
+		// Change direction from words to degrees
+		if ($direction === 'clockwise')
+		{
+			$deg =  90;
+		}
+		if ($direction === 'counterclockwise')
+		{
+			$deg = -90;
+		} 
+
+		// Logic starts here
+
+		$image_model = require_once(MODELS . "/Image.php");
+		$image_model = Model::factory('Image')->find_one($image_id);
+		$raw = ROOT . "/". $image_model->path;
+		$thumbnail = ROOT . "/" . $image_model->thumbnail;
+		$watermark = ROOT . "/" . $image_model->watermark;
+		echo "<pre>";
+		print_r($image_model);
+		echo "</pre>";
+
+		// Need to rotate all three version of the image, thumbnail, watermark, and raw
+		// Rotate Raw
+		$raw_rotate = $this->rotate($deg, $raw);
+		$thumbnail_rotate = $this->rotate($deg, $thumbnail);
+		$watermark_rotate = $this->rotate($deg, $watermark);
+		if ($raw_rotate && $thumbnail_rotate && $watermark_rotate )
+		{
+			header("Location: $uri");			
+		}
+
+	}
+	public function rotate($deg, $file)
+	{
+		// this function differs slightly from main image controller, added the $file param
+		$pixel = new ImagickPixel('none');
+		$image = new Imagick($file);
+		$rotated = $image->rotateImage($pixel, $deg);
+		if ($image->writeImage($file))
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+	}
 	public function images_by_user($user_id)
 	{
 		$images = ORM::for_table('image')->where('user_id', $user_id)->find_many();
