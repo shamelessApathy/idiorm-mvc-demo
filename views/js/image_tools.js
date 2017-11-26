@@ -21,6 +21,7 @@ $(function(){
 			this.hidden_input = document.getElementById('ie-file-input');
 			this.toolbar_left = document.getElementById('ie-toolbar-left');
 			this.toolbar_right = document.getElementById('ie-toolbar-right');
+			this.waiting_div = document.getElementById('ie-image-loading');
 
 			// Initilizating pick a color
 
@@ -142,16 +143,41 @@ $(function(){
 				break;
 				case "blackandwhite" : this.blackAndWhite();
 				break;
+				case "convertcanvastoimage" : this.convertCanvasToImage(interiorCanvas);
+				break;
 			}
 		}
 
 	}
+		this.scaleImageToViewport = function()
+		{
+			var w = Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
+			var h = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
+			console.log('width:'+w);
+			console.log('height:'+h);
+			var img = this.Filters('convertcanvastoimage');
+			var hRatio = w / img.width    ;
+			var vRatio = h / img.height  ;
+			var ratio  = Math.min ( hRatio, vRatio );
+			var canvas = document.getElementById('ie-canvas');
+			var ctx = canvas.getcontext('2d');
+			ctx.drawImage(img, 0,0, img.width, img.height, 0,0,img.width*ratio, img.height*ratio);
+		}
+		this.waitingOn = function()
+		{
+			console.log('inside waitingOn function');
+			$(this.waiting_div).css({'display':'block'});
+		}
+		this.waitingOff = function()
+		{
+			$(this.waiting_div).css({'display':'none'});
+		}
 		// All event listeners that need to be instantly instantiated are in this function
 		this.listeners = function()
 		{
 			// Click listener for Upload Button
 			this.button_black_and_white.addEventListener('click', function(){
-				console.log('in black and white listener');
+				console.log('in black and white listener'); 
 				this.Filters('blackandwhite');
 			}.bind(this))
 			this.button_upload.addEventListener('click', function(){
