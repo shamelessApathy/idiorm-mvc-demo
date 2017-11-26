@@ -11,6 +11,7 @@ $categories = $info;
 <div class='row'>
 <div class='col-md-6'> 
 <div class='mobile-upload'>
+<div class='upload-warning'>Make sure your image is orientated properly, look at the preview <a href='#below'>below</a></div>
 <h3 class='upload-title'> Upload an Image</h3>
 <form enctype='multipart/form-data' action='/image/new_image' method="POST">
 <label class='image_file_label' for='image_file'>Choose an Image</label>
@@ -46,7 +47,7 @@ $categories = $info;
 	<i id='counterclockwise' class='fa fa-rotate-left' style='float:left;'></i>
 	<i id='clockwise' class='fa fa-rotate-right' style='float:right;'></i>
 	</div>
-	<div class='upload_preview_holder'>
+	<div  id='below' class='upload_preview_holder'>
 	<img width=300  id='upload_preview'/>
 	</div>
 
