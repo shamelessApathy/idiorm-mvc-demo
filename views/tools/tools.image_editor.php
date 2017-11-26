@@ -20,18 +20,23 @@
 		</div>
 		<div id='ie-toolbar-bottom'>
 			<button title='Upload' class='ie-icon' id='ie-upload'>
+				<p>Upload</p> 
 				<i class='fa fa-upload'></i>
 			</button>
 			<button title='Brighter' class='ie-icon' id='ie-brighter'>
+				<p>Brighter</p>
 				<i class='fa fa-lightbulb-o'></i>
 			</button>
 			<button title='Darker' class='ie-icon' id='ie-darker'>
+				<p>Darker</p>
 				<i class='fa fa-lightbulb-o'></i>
 			</button>
 			<button title='Black and White' class='ie-icon' id='ie-black-and-white'>
+				<p>B&W</p>
 				<i class='fa fa-adjust'></i>
 			</button>
 			<button title='Download Image' class='ie-icon' id='ie-download'>
+				<p>Download</p>
 				<?php $time = time();?>
 				<a id="downloadLnk" download="<?php echo $time . '.jpg';?>"><i class='fa fa-download'></i></a>
 			</button>
