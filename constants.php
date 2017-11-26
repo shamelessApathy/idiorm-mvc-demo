@@ -14,6 +14,6 @@ define('HTML_FOOTER', ROOT . '/views/html_footer.php');
 define('GLOBAL_PRICE', 5);
 define('SWIFT_MAILER', ROOT . '/vendor/swiftmailer/swiftmailer/lib/swift_required.php');
 define('MAILER', ROOT . '/classes/Mailer.php');
-define('STORE_URI', 'http://idiorm.dev');
+define('STORE_URI', 'http://sharefuly.com');
 
 ?>
