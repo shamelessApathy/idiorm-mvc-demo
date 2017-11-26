@@ -47,11 +47,12 @@ foreach ($info['tags'] as $tag)
 <?php else: ?>
   <?php $server = $_SERVER['SERVER_NAME']; 
   $main_image = "http://" . $server . '/sharefulynewlogo.png';
+  $description = $count . " images and counting, a stock photo website anyone can contribute to!";
   ?>
 <meta property="og:title" content="Sharefuly Stock Photography" />
 <meta property="og:type" content="website"/>  
 <meta property="og:image"              content="<?php echo $main_image;?>"/>
-<meta property="og:description"        content="Stock photo website anyone can contribute to!"/>
+<meta property="og:description"        content="<?php echo $description;?>"/>
 <meta property="og:site_name"              content="Sharefuly"/>
 <?php endif; ?>
 <!-- <meta name="viewport" content="width=device-width, initial-scale=1">-->

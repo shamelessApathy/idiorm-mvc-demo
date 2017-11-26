@@ -8,6 +8,7 @@
 		print_r($exif_data);
 		echo "</pre>";
 	?>
+
 </div>
 
 <?php require_once(FOOTER);?>
