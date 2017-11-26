@@ -2,29 +2,31 @@
 .mobile-front-category-container {
   display: none; }
 
+#tools-nav-bar {
+  background-color: #333;
+  color: #ccc;
+  width: 100%;
+  margin-top: 65px;
+  text-align: center; }
+
+#tools-nav-bar a {
+  color: #ccc; }
+
 .front-category-container {
   display: flex;
   justify-content: space-between; }
+
+.upload-warning {
+  border: 2px solid #333;
+  width: 300px;
+  display: none;
+  text-align: center; }
 
 .front-category {
   display: block;
   float: left;
   margin-left: 10px; }
-#tools-nav-bar
-{
-  background-color:#333;
-  color:#ccc;
-  width:100%;
-  text-align:center;
-  margin-top:58px;
-  height:40px;
-}
-#tools-nav-bar a
-{
-  color:#ccc;
-  font-weight:700;
-  font-size:25px;
-}
+
 #nav-tools-link-holder {
   width: 100px;
   height: 59px;

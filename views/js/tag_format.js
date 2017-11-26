@@ -126,8 +126,9 @@ $(function(){
             $('#mobile_upload_preview').css({'margin':"0 auto"});
             var height = $('#mobile_upload_preview').height();
             $('#mobile_upload_preview_holder').css({"height":height});
-            		$('.image-controls').css({'display':'block'});
-            		$('.mobile-image-controls').css({'display':'block'});
+            $('.image-controls').css({'display':'block'});
+            $('.mobile-image-controls').css({'display':'block'});
+            $('.upload-warning').css({'display':'block'});
         }
 
         reader.readAsDataURL(input.files[0]);
