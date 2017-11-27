@@ -18,6 +18,7 @@ $(function(){
 			this.button_download = document.getElementById('ie-download');
 			this.button_text_editor = document.getElementById('ie-text-editor');
 			this.button_black_and_white = document.getElementById('ie-black-and-white');
+			this.button_blue = document.getElementById('ie-blue');
 			this.button_sepia = document.getElementById('ie-sepia');
 			this.button_close = document.getElementById('ie-close');
 			this.hidden_input = document.getElementById('ie-file-input');
@@ -33,6 +34,26 @@ $(function(){
 		{
 			console.log('startFilters() started!');
 			var interiorCanvas = document.getElementById('ie-canvas');
+			// Tint blue function first attemp
+			this.tintBlue = function(pixels)
+			{
+				console.log(pixels);
+				var d = pixels.data;
+				console.log(d);
+				for (var i = 0; i < d.length; i+=4)
+				{
+					var r = d[i];
+					var g = d[i+1];
+					var b = d[i+2];
+				
+				// CIE luminance for the RGB
+	    		// The human eye is bad at seeing red and blue, so we de-emphasize them.
+	    		var v = 0.2126*r + 0.7152*g + 0.0722*b;
+	    		d[i] = d[i+1] = d[i+2] = v
+	    		}
+	    		return pixels;
+			}
+			// Makes image Sepia colored, spits it back out... not mine, different than other guy who had it break to pixels first?@?
 			this.processSepia = function(canvas) 
 			{
 				var r = [0, 0, 0, 1, 1, 2, 3, 3, 3, 4, 4, 4, 5, 5, 5, 6, 6, 7, 7, 7, 7, 8, 8, 8, 9, 9, 9, 9, 10, 10, 10, 10, 11, 11, 12, 12, 12, 12, 13, 13, 13, 14, 14, 15, 15, 16, 16, 17, 17, 17, 18, 19, 19, 20, 21, 22, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 39, 40, 41, 42, 44, 45, 47, 48, 49, 52, 54, 55, 57, 59, 60, 62, 65, 67, 69, 70, 72, 74, 77, 79, 81, 83, 86, 88, 90, 92, 94, 97, 99, 101, 103, 107, 109, 111, 112, 116, 118, 120, 124, 126, 127, 129, 133, 135, 136, 140, 142, 143, 145, 149, 150, 152, 155, 157, 159, 162, 163, 165, 167, 170, 171, 173, 176, 177, 178, 180, 183, 184, 185, 188, 189, 190, 192, 194, 195, 196, 198, 200, 201, 202, 203, 204, 206, 207, 208, 209, 211, 212, 213, 214, 215, 216, 218, 219, 219, 220, 221, 222, 223, 224, 225, 226, 227, 227, 228, 229, 229, 230, 231, 232, 232, 233, 234, 234, 235, 236, 236, 237, 238, 238, 239, 239, 240, 241, 241, 242, 242, 243, 244, 244, 245, 245, 245, 246, 247, 247, 248, 248, 249, 249, 249, 250, 251, 251, 252, 252, 252, 253, 254, 254, 254, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255],
@@ -168,6 +189,15 @@ $(function(){
 				var sCtx = sCanvas.getContext('2d');
 				sCtx.putImageData(demo,0,0);
 			}
+			this.makeBlue = function()
+			{
+				console.log('inside makeBlu');
+				var preCan = this.convertCanvasToImage(interiorCanvas);
+				var demo = this.filterImage(this.tintBlue, preCan);
+				var sCanvas = document.getElementById('ie-canvas');
+				var sCtx = sCanvas.getContext('2d');
+				sCtx.putImageData(demo,0,0);
+			}
 			switch(action)
 			{
 				case "brighter": this.makeBrighter();
@@ -179,6 +209,8 @@ $(function(){
 				case "convertcanvastoimage" : this.convertCanvasToImage(interiorCanvas);
 				break;
 				case "sepia" : this.processSepia(interiorCanvas);
+				break;
+				case 'blue' : this.makeBlue();
 				break;
 			}
 		}
@@ -210,6 +242,12 @@ $(function(){
 		// All event listeners that need to be instantly instantiated are in this function
 		this.listeners = function()
 		{
+			// Makes image more bklue scale
+			this.button_blue.addEventListener('click', function(){
+				console.log('in the blue listener');
+				this.Filters('blue');
+			}.bind(this))
+			// Makes image sepia colored
 			this.button_sepia.addEventListener('click', function(){
 				this.Filters('sepia');
 			}.bind(this))

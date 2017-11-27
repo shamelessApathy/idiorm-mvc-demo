@@ -11,6 +11,7 @@
 		<div id='ie-toolbar-top'>
 			<h4 style='text-align:center; color:#ccc; font-size:8px;'>HTML5 Canvas Image Editor</h4>
 			<button title='sepia' class='ie-icon-top' id='ie-sepia'><p>Sepia</p></button>
+			<button title='blue' class='ie-icon-top' id='ie-blue'><p>Blue</p></button>
 		</div>
 
 		<canvas id='ie-canvas'>
