@@ -9,12 +9,14 @@
 		<span class="sr-only">Loading...</span></div>
 	<div id='ie-container'>
 		<div id='ie-toolbar-top'>
-			<h4 style='text-align:center; color:#ccc; padding-top:10px;'>HTML5 Canvas Image Editor</h4>
+			<h4 style='text-align:center; color:#ccc; font-size:8px;'>HTML5 Canvas Image Editor</h4>
+			<button title='sepia' class='ie-icon-top' id='ie-sepia'><p>Sepia</p></button>
 		</div>
 
 		<canvas id='ie-canvas'>
 		</canvas>
 		<div id='ie-file-input'>
+			<span id='ie-close'><button>X</button></span>
 			<h4>Choose your image to edit</h4>
 			<input type='file' id='ie-image' name='ie-image'/>
 		</div>
