@@ -1,7 +1,5 @@
 var keys = [];
 var orig_image = new Image();
-var windowAnimFrame = window.requestAnimationFrame || window.webkitRequestAnimationFrame || window.mozRequestAnimationFrame || window.onRequestAnimationFrame || window.msRequestAnimationFrame || null;
-var ctx = document.getElementById('ie-canvas').getContext('2d');
 var layer_counter = 0 ;
 $(function(){
 
@@ -14,6 +12,7 @@ $(function(){
 			this.iframe = document.getElementById('ie-iframe');
 			this.canvas = document.getElementById('ie-canvas');
 			this.login_form = document.getElementById('ie-login-form');
+			this.save_form = document.getElementById('ie-save-form');
 			this.button_login = document.getElementById('ie-login');
 			this.button_upload = document.getElementById('ie-upload');
 			this.button_image_mount = document.getElementById('ie-image-mount');
@@ -313,10 +312,47 @@ $(function(){
 		}
 		this.saveImage = function()
 		{
+			
+			$(this.save_form).change(function(){
+				console.log('inside save_form function change!');
+			});
 			var test_login = session;
 			if (test_login === 1)
 			{
 				console.log('inside login test');
+				canvas = document.getElementById('ie-canvas');
+				var dataURL = canvas.toDataURL("image/png");
+				$('#ie-save-form-container').css({"display":"block", "z-index":'10'});
+				
+
+				/*var text = canvasData;
+      			$('<form class="hidden-form" action="/views/tools/tools.special_upload.php" method="post" style="display: none;"><input name="image" type="file"></form>')
+          		.appendTo('body');
+      			$('[name="image"]').val(text);
+      			$('.hidden-form').submit();*/
+
+
+      			/* This works to send asynchronously, add in modal to add tags and shit, you're golden */
+      			/*
+      			var blobBin = atob(dataURL.split(',')[1]);
+				var array = [];
+				for(var i = 0; i < blobBin.length; i++) {
+				    array.push(blobBin.charCodeAt(i));
+				}
+				var file=new Blob([new Uint8Array(array)], {type: 'image/png'});
+
+
+				var formdata = new FormData();
+				formdata.append("myNewFileName", file);
+				$.ajax({
+				   url: "/views/tools/tools.special_upload.php",
+				   type: "POST",
+				   data: formdata,
+				   processData: false,
+				   contentType: false,
+				}).done(function(respond){
+				  alert(respond);
+				});*/
 			}
 			else
 			{
@@ -346,11 +382,7 @@ $(function(){
 			this.button_sepia.addEventListener('click', function(){
 				this.Filters('sepia');
 			}.bind(this))
-			// Click listener to close box
-			this.button_close.addEventListener('click', function(e){
-				var parent = e.target.parentNode.parentNode;
-				$(parent).css({"visibility":"hidden","z-index":"0"});
-			});
+
 			// Click listener for Upload Button
 			this.button_black_and_white.addEventListener('click', function(){
 				console.log('in black and white listener'); 

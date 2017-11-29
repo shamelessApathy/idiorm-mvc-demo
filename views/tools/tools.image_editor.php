@@ -8,6 +8,10 @@
 <div id='ie-login-form'>
 <iframe id='ie-iframe' height=300 src='/views/tools/tools.special_login.php'></iframe>
 </div>
+
+<div id='ie-image-details'>
+	
+</div>
 		<div id="ie-image-loading"><i class="fa fa-cog fa-spin fa-3x fa-fw"></i>
 		<span class="sr-only">Loading...</span></div>
 	<div id='ie-container'>
@@ -17,6 +21,29 @@
 			<button title='sharpen' class='ie-icon-top' id='ie-sharpen'><p>Sharpen</p><i class='fa fa-diamond'></i></button>
 			<button title='refresh' class='ie-icon-top' id='ie-refresh'><p>Refresh</p><i class='fa fa-refresh'></i></button>
 			<button title='save' class='ie-icon-top' id='ie-save'><p>Save</p><i class='fa fa-floppy-o'></i></button>
+		</div>
+		<div id='ie-save-form-container'>
+			<form name='ie-save-form' id='ie-save-form'>
+			<label>Image Name:</label><br>
+			<input type='text' name='user_image_name'/><br>
+			<label>Category</label><br>
+			<select id='upload-category' name='category-id'>
+			<option>Choose a Category</option>
+			<?php foreach ($categories as $cat):?>
+			<!-- categories is apparrently global variable yea!! -->
+			<option value="<?php echo $cat->id;?>"><?php echo ucwords($cat->title);?>
+				
+			</option>
+			<?php endforeach;?>
+			<label>Tags</label><br>
+			<div id='tag_div'></div><br>
+			<input id='tag_holder' type='text' style='display:none;' name='tags' placeholder='Use tag editor to add tags' readonly/><br>
+			<label>Tag Editor</label><br>
+			<input id='new_tag'><button id='add_tag' type='button'>Add</button>
+			<br>
+			<input type='number' name='rotate' id='rotate' value='0' HIDDEN>
+					</select>
+				</form>
 		</div>
 
 		<canvas id='ie-canvas'>

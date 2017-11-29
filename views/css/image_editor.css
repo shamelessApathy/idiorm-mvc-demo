@@ -80,6 +80,17 @@ canvas
 	bottom:80px;
 	left:10px;
 }
+#ie-save-form-container
+{
+	width:300px;
+	height:600px;
+	background:#ccc;
+	border:2px solid #333;
+	display:none;
+	position:absolute;
+	top:300px;
+	left:100px;
+}
 #ie-darker
 {
 }
