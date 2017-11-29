@@ -5,8 +5,14 @@ class Controller {
 	* Checks to make sure an uploaded file what its supposed to be
 	* @params $check = file to be checked    $type = string
 	*/
-	public function validate($check, $type)
+	public function validate($check, $type, $name = null)
 	{
+		/**
+		*
+		* @param  $data (whatever is needing to be tested)
+		* @return boolen TRUE/FALSE
+		*/
+
 		function test_input($data) 
 		{
   			$data = trim($data);
@@ -21,7 +27,18 @@ class Controller {
 						$fileinfo = finfo_open();
 						$fileinfo = finfo_file($fileinfo, $check);
 						$fileinfo = explode(" ",$fileinfo);
-						if (in_array($fileinfo[0], $ext_array))
+						$extFind = strrpos($name, '.');
+						$extFind = $extFind + 1;
+						// I rewrote this, anything with more than one "." was having an error because it couldn't find the actual extension of the file
+						$ext = substr($name, $extFind);
+						$ext = strtoupper($ext);
+						$name = explode('.',$name);
+						if ($ext === 'JPG')
+						{
+							$ext = 'JPEG';
+						}
+						$test = ($fileinfo[0] === $ext);
+						if (in_array($fileinfo[0], $ext_array) && ($test))
 						{
 							return true;
 						}
@@ -39,9 +56,37 @@ class Controller {
 						{
 							return true;
 						}
+						break;
 		default : return 'default';
 
+		}
 	}
-}
+	/**
+		*
+		* @param none
+		* @return tells whether or not User is logged in
+		*/
+		function lockdown($admin = null)
+		{
+			if (!empty($admin))
+			{
+				if (isset($_SESSION['user_info']) && !empty($_SESSION['user_info'] && $_SESSION['user_info']['level'] == 1 ))
+				{
+					return TRUE;
+				}
+			}
+			if (isset($_SESSION['user_info']) && !empty($_SESSION['user_info']) && empty($admin))
+			{
+				return TRUE;
+			}
+			else
+			{
+				$reroute = $_SERVER['REQUEST_URI'];
+				return_view('view.login.php', $reroute);
+				sys_msg('Your must be logged in to view this page!');
+				exit();
+			}
+		}
+
 }
 

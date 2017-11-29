@@ -1,15 +1,20 @@
 
 <?php require_once(HEADER); ?>
 
-
+<div class='container'>
+<div class='style01-form-container'>
 <h1> Login</h1>
-<form action='verify' method='POST'>
-<label>Name:</label><input type='text' name='name'/>
-<label>Email:</label><input type='text' name='email'/>
-<label>Password:</label><input type='password' name='password'/>
+<form action='/user/verify' method='POST'>
+<label>Email</label><br>
+<input type='text' name='email'/><br>
+<label>Password</label><br>
+<input type='password' name='password'/><br>
+<input type='text' name='reroute' value= "<?php echo isset($info) ? $info : null;?>" HIDDEN><br>
 <button type='submit'>Submit</button>
 </form>
+<a id='mobile-register' href='/user/register'>Register</a>
+</div>
+</div>
 
-
-<a href='register'>Register</a>
+<?php require_once(HTML_FOOTER); ?>
 <?php require_once(FOOTER); ?>

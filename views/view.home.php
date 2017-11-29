@@ -1,27 +1,86 @@
-<?php require_once(HEADER); ?>
-<?php //var_dump($_SESSION['data']); ?>
-<?php if (!isset($_SESSION['user_info'])) :?>
-<div class='container'>
-<h1> This is the homepage </h1>
-<h2>Login</h2>
-<form action='/user/verify' method='POST'>
-<label>Email:</label><input type='text' name='email'/>
-<label>Password:</label><input type='password' name='password'/>
-<button type='submit'>Submit</button>
-</form>
-<a href='/user/register'>Need to Register?</a>
-<?php endif; ?>
-
-<?php 
-
+<?php require_once(HEADER); 
+$images = $info['images'];
+$featured = $info['featured'];
+$categories = $info['categories'];
+?>
+<link href='/views/css/featured.css' type='text/css' rel='stylesheet'/>
+<div class='container' >
+<div class='row'>
+<div class='col-md-4'></div>
+<div class='col-md-4'>
+	<h1 class='font-color text-center'>sharefuly</h1>
+	<p style='text-align:center;'><?php echo $info['count'];?> images and counting....</p>
+</div>
+<div class='col-md-4'></div>
+</div>
+	<div class='row'>
+		<div class='col-md-2'></div>
+		<div class='col-md-8'>
+			<form action='/tag/search_by_tag' method='GET'>
+				<input id='big_search'  type='text' name='query'>
+				<button type='submit' class='big-submit'>Search</button>
+			</form>
+		</div>
+		<div class='col-md-2'></div>
+	</div>
+	<div class='row'>
+		<div class='col-md-2'></div>
+		<div class='col-md-8'>
+		<div class='front-category-container'>
+			<?php foreach ($categories as $category):?>
+				<div class='front-category'><a href="/category/get_images?cat_id=<?php echo $category->id;?>"><?php echo strtoupper($category->title);?></a></div>
+			<?php endforeach;?>
+		</div>
+		<div style='display:none;' class='mobile-front-category-container'>
+		<sub>Browse by Category</sub>
+		<form style='margin-top:10px;' action='/category/get_images' method='GET'>
+			<select name="cat_id">
+			<?php foreach ($categories as $category):?>
+				<option  value="<?php echo $category->id;?>"><?php echo strtoupper($category->title);?></option></a>
+			<?php endforeach;?>
+			</select>
+			<button type='submit'>Go</button>
+			</form>
+			</div>
+		</div>
+		<div class='col-md-2'></div>
+	</div>
+<?php  
+ 
 if (isset($_SESSION['user_info']))
 {
 	$user = $_SESSION['user_info'];
-	echo "Welcome " . $user->name . '!';
 }
 
 ?>
+<div class='row'>
+<div class='col-md-12'>
 
-<?php if (isset($_SESSION['user_info'])):?><a href='/post/new_post'> Create a new post!</a><?php endif;?>
 </div>
+</div>
+<div class='row'>
+<div class='col-md-12'>
+<h3 class='text-center'>Recently Uploaded</h3><br>
+<div class='front-container'>
+<div class='scroll-hider'></div>
+<div class='extra-inside'>
+<?php 
+if (isset($info))
+{
+foreach ($images as $image)
+{
+	echo "<a href='/image/info?id=$image->id'><div class='looking-glass'><img class='aimg-responsive' src='$image->thumbnail'/></div></a>";
+}
+}
+?>
+</div>
+</div>
+</div>
+</div>
+<div class='row'>
+	<div style='width:100%; height:150px;'></div>
+</div>
+</div>
+<?php require_once(HTML_FOOTER); ?>
 <?php require_once(FOOTER); ?>
+<script src='/views/js/featured.js'></script>

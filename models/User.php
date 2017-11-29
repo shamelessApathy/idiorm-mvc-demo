@@ -1,32 +1,37 @@
 <?php
 
-class User {
+class User extends Model {
+	// Im not sure what this is being used for but I commented it out, maybe before I implemented Paris? You can instantiate using a user ID now
+	// and generally I just reach for the $_SESSION['user_info']['id'] variable manually in all my functions
+	/*public function id()
+	{
+		return $_SESSION['user_info']['id'];
+	}*/
+	public static $_id_column = 'id';
 	/*
 	*
 	* Creates new user
 	*
 	*/
-	public function create_new()
+	public function create_new($username,$email,$password)
 	{
 
-		//define post data
-		$username = $_POST['username'];
-		$email = $_POST['email'];
-		$password = $_POST['password'];
+
 		// password and salt function
 		$password = $password;
 		$password = hash('sha256', $password);
-		$salt = substr(md5(microtime()),rand(0,26),5);
+		$salt = random_bytes(8);
 		$password = $password . $salt;
 
 		// add new entry to database
-
-		$newPerson = ORM::for_table('users')->create();
+		$time = time();
+		$newPerson = ORM::for_table('user')->create();
 		$newPerson->email = $email;
 		$newPerson->password = $password;
 		$newPerson->salt = $salt;
 		$newPerson->username = $username;
 		$newPerson->level = 2;
+		$newPerson->created_at = $time;
 		if($newPerson->save())
 		{
 			return true;
@@ -37,41 +42,105 @@ class User {
 		}
 
 	}
+	/**
+	*
+	* @param User ID
+	* @return Token for Link
+	*
+	*/
+	public function create_token()
+	{
+		$user_id = $this->id;
+		$time = time();
+		$string = $time . $user_id;
+		$hash = hash("sha256", $string);
+		$entry = ORM::for_table('password_reset_token')->create();
+		$entry->user_id = $user_id;
+		$entry->token = $hash;
+		$entry->save();
+		return $hash;
+	}
+	/**
+	*
+	* @param $token to check against DB
+	* @return BOOL for whether or not it passes test
+	*/
+	public function validate_token($token)
+	{
+		$table_test = ORM::for_table('password_reset_token')->where('token', $token)->find_one();
+		if (!empty($table_test))
+		{
+			return $table_test; // It matched, send back the info with user_id
+		}
+		else
+		{
+			return false; // No match
+		}
+	}
+	public function subscription_count( $user_id = null)
+	{
+		if (empty($user_id))
+		{
+		$user_id = $this->id;
+		}
+		$sub = ORM::for_table('subscription_to_user')->where('user_id', $user_id)->find_one();
+		$details = ORM::for_table('subscription_details')->where('subscription_id', $sub->subscription_id)->find_one();
+		$number = $details->number;
+		//$initial = $sub->period_start;
+		$period_start = $sub->period_start;
+		$period_end = $sub->period_end;
+		//$time = time();
+		//$modulo = $time - $initial;
+		//$month = 86400*30;
+		//$howmany = floor($modulo/$month);
+		//$change = $month*$howmany;
+		//$change = $change + $initial;
+		//$after = $change + $month;
+		$purchases = ORM::for_table('subscription_purchase')->where('user_id', $user_id)->where_gt('created_at', $period_start)->where_lt('created_at',$period_end)->find_many();
+		$left = $number - count($purchases);
+		return $left;
+
+	}
 	/*
 	*
 	* Verifies user identity and checks salted password value against email
 	*
 	*/
-	public function verify()
+	public function verify($email,$password)
 	{
-		$name = $_POST['name'];
-		$email = $_POST['email'];
-		$password = $_POST['password'];
 		// hash password to match
 		$password = hash('sha256', $password);
 		// retrieve salt hash
-		$user = ORM::for_table('users')->where('email' , $email)->findOne();
-		$salt = $user->salt;
-		// concatenate salt with password
-		$password = $password . $salt;
-		if ($password === $user->password)
+		$user = ORM::for_table('user')->where('email' , $email)->findOne();
+		if ($user)
 		{
-			return $user;
+			$salt = $user->salt;
+			// concatenate salt with password
+			$password = $password . $salt;
+			if ($password === $user->password)
+			{
+				return $user;
+			}
+			else
+			{
+				return false;
+			}
 		}
 		else
 		{
-			return false;
-		}		
+			return_view('view.home.php');
+			sys_msg('That username or password doesn\'t exist!');
+		}			
 	}
 	/*
 	*
 	* Edits the user's profile 
 	*
 	*/
-	public function edit_profile()
+	public function edit_profile($id)
 	{
-		$id = $_SESSION['user_info']->id;
-		$profile = ORM::for_table('users')->where('id', $id)->find_one();
+		
+		$profile = ORM::for_table('user')->where('id', $id)->find_one();
 		if ($profile)
 		{
 			return $profile;
@@ -81,38 +150,8 @@ class User {
 			return false;
 		}
 	}
-	/*
-	*
-	* Deals with file handling for setting the user's avatar
-	* Although it is called from the edit_profile view
-	* It was easier to write it seperate from the rest of the
-	* edit profile function due to the file handling
-	*
-	*/
-	public function set_avatar()
-	{
-		var_dump($_FILES);
-		if (isset($_FILES['user_avatar']))
-		{
-			$orig = $_FILES['user_avatar']['name'];
-			$orig = explode('.',$orig);
-			$ext = '.' . $orig[1];
-			$save_path = ROOT . "/users/avatars";
-			$myname = strtolower($_FILES['user_avatar']['tmp_name']); //You are renaming the file here
-  			if(move_uploaded_file($_FILES['user_avatar']['tmp_name'], $save_path.$myname.$ext))
-  			{
-  				$avatar = ORM::for_table('users')->where('id', $_SESSION['user_info']->id)->find_one();
-  				$avatar->set('avatar', '/users/avatars'.$myname.$ext);
-  				$avatar->save();
-  				$_SESSION['user_info']->avatar = '/users/avatars'.$myname.$ext;
-  				return true;
-  			} 
-		}
-		else
-		{
-			echo "not making it";
-		}
-	}
+
+	
 	/*
 	*
 	* Gets all posts from user currently logged in
@@ -122,9 +161,9 @@ class User {
 	{
 		$author_id = $_SESSION['user_info']->id;
 		$id = intval($author_id);
-		$user = ORM::for_table('users')->where('id', $author_id)->findOne();
+		$user = ORM::for_table('user')->where('id', $author_id)->findOne();
 		$username = $user->username;
-		$posts = ORM::for_table('posts')->where('author_id', $author_id)->find_many();
+		$posts = ORM::for_table('post')->where('author_id', $author_id)->find_many();
 		$dataObject = ['posts'=>$posts, 'username'=> $username];
 		return $dataObject;
 	}
@@ -136,7 +175,7 @@ class User {
 	public function info($id)
 	{
 		$id = intval($id);
-		$info = ORM::for_table('users')->where('id', $id)->find_one();
+		$info = ORM::for_table('user')->where('id', $id)->find_one();
 		return $info;
 	}
 	/*
@@ -172,14 +211,127 @@ class User {
 	}
 	public function get_all()
 	{
-		$users = ORM::for_table('users')->select('username')->select('email')->select('level')->select('id')->find_many();
+		$users = ORM::for_table('user')->select('username')->select('email')->select('level')->select('id')->find_many();
 		foreach ($users as $user)
 		{
 			$id = $user->id;
-			$posts = ORM::for_table('posts')->where('author_id', $id)->find_many();
-			$number = count($posts);
-			$user->number_posts = $number;
+			$images = ORM::for_table('image')->where('user_id', $id)->find_many();
+			$number = count($images);
+			$user->number_images = $number;
 		}
 		return $users;
+	}
+	public function delete_token($token)
+	{
+		$entry = ORM::for_table('password_reset_token')->where('token', $token)->find_one();
+		$entry->delete();
+	}
+	public function change_password($user_id, $new_password)
+	{
+		$user = ORM::for_table('user')->where('id', $user_id)->find_one();
+		$password = hash('sha256', $new_password);
+		$salt = random_bytes(8);
+		$password = $password . $salt;
+		$user->password = $password;
+		$user->salt = $salt;
+		if($user->save())
+		{
+			return true; 
+		}
+	}
+	public function change_password_outside($new_password)
+	{
+		$password = hash('sha256', $new_password);
+		$salt = random_bytes(8);
+		$password = $password . $salt;
+		$this->password = $password;
+		$this->salt = $salt;
+		if($this->save())
+		{
+			return true; 
+		}
+	}
+	/*
+	*
+	* Adds new user subscription information to subscription_to_user table
+	*
+	*/
+	public function add_subscription($user_id, $subscription, $period_start, $period_end, $stripe_sub_id)
+	{
+		$table = ORM::for_table('subscription_to_user')->where('user_id', $user_id)->find_one();
+		if (!$table)
+		{
+			$table = ORM::for_table('subscription_to_user')->create();
+		}		
+		$time = time();
+		$table->user_id = $user_id;
+		$table->stripe_subscription_id = $stripe_sub_id;
+		$table->subscription_id = $subscription;
+		$table->period_start = $period_start;
+		$table->period_end = $period_end;
+		$table->created_at = $time;
+		if($table->save())
+		{
+			return true;
+		}
+	}
+	//new
+	public function profile()
+	{
+		return $this->has_one('Profile','user_id','id');
+	}
+	public function posts()
+	{
+		return $this->has_many('Post','author_id','id');
+	}
+	public function images()
+	{
+		return $this->has_many('Image','user_id');
+	}
+	public function store()
+	{
+		return $this->has_one('Store');
+	}
+	public function purchased()
+	{
+		$user_id = $this->id;
+		$table = ORM::for_table('images_owned')->where('user_id', $user_id)->where('status', 2)->find_many();
+		return $table;
+
+	}
+	/**
+	*
+	* @param none
+	* @return All images that have been sold by non-sub method (actual cash)
+	*/
+	public function get_sold_images()
+	{
+		$user_id = $_SESSION['user_info']['id'];
+		$images = ORM::for_table('purchase')->where('owner_id', $user_id)->find_many();
+		require_once(MODELS.'/Image.php');
+		foreach ($images as $image)
+		{
+			$current = Model::factory('Image')->find_one($image->image_id);
+			$image->preview = $current->watermark;
+		}
+		return $images;
+	}
+
+	/**
+	*
+	* @param none
+	* @return All images bought through subscription points
+	*/
+	public function get_sub_images()
+	{
+		$user_id = $_SESSION['user_info']['id'];
+		$images = ORM::for_table('subscription_purchase')->where('owner_id', $user_id)->find_many();
+		require_once(MODELS . "/Image.php");
+		foreach ($images as $image)
+		{
+			$current = Model::factory('Image')->find_one($image->image_id);
+			$image->preview = $current->watermark;
+		}
+		return $images;
 	}
 }
