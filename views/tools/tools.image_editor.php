@@ -10,8 +10,9 @@
 	<div id='ie-container'>
 		<div id='ie-toolbar-top'>
 			<button title='sepia'
-			class='ie-icon-top' id='ie-sepia'><p>Sepia</p></button>
+			class='ie-icon-top' id='ie-sepia'><p>Sepia</p></button> 
 			<button title='sharpen' class='ie-icon-top' id='ie-sharpen'><p>Sharpen</p><i class='fa fa-diamond'></i></button>
+			<button title='refresh' class='ie-icon-top' id='ie-refresh'><p>Refresh</p><i class='fa fa-refresh'></i></button>
 		</div>
 
 		<canvas id='ie-canvas'>

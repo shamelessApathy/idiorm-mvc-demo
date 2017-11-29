@@ -1,4 +1,5 @@
 var keys = [];
+var orig_image = new Image();
 var windowAnimFrame = window.requestAnimationFrame || window.webkitRequestAnimationFrame || window.mozRequestAnimationFrame || window.onRequestAnimationFrame || window.msRequestAnimationFrame || null;
 var ctx = document.getElementById('ie-canvas').getContext('2d');
 var layer_counter = 0 ;
@@ -17,6 +18,7 @@ $(function(){
 			this.button_brightness_down = document.getElementById('ie-darker');
 			this.button_download = document.getElementById('ie-download');
 			this.button_text_editor = document.getElementById('ie-text-editor');
+			this.button_refresh = document.getElementById('ie-refresh');
 			this.button_black_and_white = document.getElementById('ie-black-and-white');
 			this.button_sharpen = document.getElementById('ie-sharpen');
 			this.button_sepia = document.getElementById('ie-sepia');
@@ -298,9 +300,20 @@ $(function(){
 		{
 			$(this.waiting_div).css({'display':'none'});
 		}
+		// Refreshes original uploaded image onto the canvas
+		this.refreshOriginal = function()
+		{
+			var canvas = document.getElementById('ie-canvas');
+			var ctx = canvas.getContext('2d');
+			ctx.drawImage(orig_image,0,0);
+		}
 		// All event listeners that need to be instantly instantiated are in this function
 		this.listeners = function()
 		{
+			this.button_refresh.addEventListener('click', function(){
+				console.log('in the refresh listener!!!');
+				this.refreshOriginal();
+			}.bind(this))
 			// Makes image more bklue scale
 			this.button_sharpen.addEventListener('click', function(){
 				console.log('in the sharpen listener');
@@ -354,19 +367,6 @@ $(function(){
 		    $(this.button_brightness_up).css({'opacity':'1'});
 		    $(this.button_brightness_down).css({'opacity':'1'});
   		}
-		// this function adds to array Keys
-		   this.startHandler = function(button, buttonVar)
-		   {  
-		      $(buttonVar).css({'opacity':'0.8'});  
-		      keys.push(button);
-		   };
-		   // this function handles when buttons are released
-		   this.endHandler = function(button, buttonVar)
-		   {
-		          this.clearOpacity();
-		          var index = keys.indexOf(button);
-		          keys.splice(index, 1);
-		   };
 		// This function mounts image onto HMTL5 Canvas
 		this.handleImage = function(e)
 		{
@@ -379,6 +379,7 @@ $(function(){
 				{
 				    var img_obj = new Image();
 				    img_obj.src = i;
+				    orig_image = img_obj;
 				    return img_obj;
 				}
 				function updateSrc(e)
