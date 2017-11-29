@@ -4,7 +4,10 @@
 <link rel="stylesheet" href="/views/tools/pick-a-color-master/build/1.2.3/css/pick-a-color-1.2.3.min.css">
 <link href='/views/css/image_editor.css' rel='stylesheet' type='text/css'/>
 
-	
+<?php $logged_in = $_SESSION['user_info'] ?? null;?>
+<div id='ie-login-form'>
+<iframe id='ie-iframe' height=300 src='/views/tools/tools.special_login.php'></iframe>
+</div>
 		<div id="ie-image-loading"><i class="fa fa-cog fa-spin fa-3x fa-fw"></i>
 		<span class="sr-only">Loading...</span></div>
 	<div id='ie-container'>
@@ -13,6 +16,7 @@
 			class='ie-icon-top' id='ie-sepia'><p>Sepia</p></button> 
 			<button title='sharpen' class='ie-icon-top' id='ie-sharpen'><p>Sharpen</p><i class='fa fa-diamond'></i></button>
 			<button title='refresh' class='ie-icon-top' id='ie-refresh'><p>Refresh</p><i class='fa fa-refresh'></i></button>
+			<button title='save' class='ie-icon-top' id='ie-save'><p>Save</p><i class='fa fa-floppy-o'></i></button>
 		</div>
 
 		<canvas id='ie-canvas'>
@@ -48,7 +52,7 @@
 	</div>
 
 
-
+<div id='ie-session'><script> var session = <?php echo (isset($_SESSION['user_info'])) ? 1 : 0; ?> </script></div>
 <script src="/views/tools/pick-a-color-master/build/dependencies/jquery-1.9.1.min.js"></script>
 <script src="/views/tools/pick-a-color-master/build/dependencies/tinycolor-0.9.15.min.js"></script>
 <script src="/views/tools/pick-a-color-master/build/1.2.3/js/pick-a-color-1.2.3.min.js"></script>
@@ -67,6 +71,14 @@ downloadLnk.addEventListener('click', download, false);
 		$(".pick-a-color").pickAColor();
 	})
 </script>
- 
+<script>
+	function closeIFrame()
+	{
+		$('#ie-login-form').remove();
+		// setting session here now
+		$('#ie-session').remove();
+		session = 1;
+	}
+ </script>
 
 <!--<script src='/views/js/filter.js'></script>  -->

@@ -489,6 +489,44 @@ public function subscription_count($user_id)
 		$count = $model->subscription_count();
 		return $count;
 }
+// verifies simplified login via modal
+public function modal_verify()
+{
+	// Define User Email and Password
+	$email = $_POST['email'];
+	$password = $_POST['password'];
+	// Instantiate User class
+	require_once(MODELS . '/User.php');
+	$model = new User();
+	// Test to make sure Email and Password are actually filled in??? -- don't know why I didn't test up there where they're defined
+	if (!empty($email) && !empty($password))
+	{
+		// User Model verifies email/password combo
+		$user = $model->verify($email,$password);
+		// If there's a match continue	
+		if ($user)
+		{
+			// Sets session variables for the user   
+			$_SESSION['sub_count'] = $this->subscription_count($user->id);   //$_SESSION['sub_count'] is a point system for subscriptions
+			$_SESSION['user_info'] = $user;     // Should I have this set as only USER_ID and not all the fucking info?
+			$_SESSION['logged_in'] = 1;  // Easy way to see if someone is logged in, 
+			echo "<div id='ie-login-success'>success</div>";
+			echo "<script>parent.closeIFrame();</script>";
+		}
+		// no match? send back to login page, also include $reroute var, if it's null it won't matter right?
+		else
+		{
+			return_view('view.login.php');
+			sys_msg('Incorrect Credentials');
+		}
+	}
+	// Fields are empty send em back, include $reroute again
+	else
+	{
+		return_view('view.login.php');
+		sys_msg('One of the login fields is empty!');
+	}
+}
 
 /*
 *

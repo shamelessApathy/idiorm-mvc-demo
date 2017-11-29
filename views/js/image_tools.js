@@ -11,7 +11,10 @@ $(function(){
 	{
 		this.init = function()
 		{
+			this.iframe = document.getElementById('ie-iframe');
 			this.canvas = document.getElementById('ie-canvas');
+			this.login_form = document.getElementById('ie-login-form');
+			this.button_login = document.getElementById('ie-login');
 			this.button_upload = document.getElementById('ie-upload');
 			this.button_image_mount = document.getElementById('ie-image-mount');
 			this.button_brightness_up = document.getElementById('ie-brighter');
@@ -21,6 +24,7 @@ $(function(){
 			this.button_refresh = document.getElementById('ie-refresh');
 			this.button_black_and_white = document.getElementById('ie-black-and-white');
 			this.button_sharpen = document.getElementById('ie-sharpen');
+			this.button_save = document.getElementById('ie-save');
 			this.button_sepia = document.getElementById('ie-sepia');
 			this.button_close = document.getElementById('ie-close');
 			this.hidden_input = document.getElementById('ie-file-input');
@@ -307,9 +311,28 @@ $(function(){
 			var ctx = canvas.getContext('2d');
 			ctx.drawImage(orig_image,0,0);
 		}
+		this.saveImage = function()
+		{
+			var test_login = session;
+			if (test_login === 1)
+			{
+				console.log('inside login test');
+			}
+			else
+			{
+				console.log('inside else loop of saveImage()');
+				$(this.login_form).css({"display":'block',"z-index":'10'});
+			}
+			$(this.login_form).css({"visibility":"visible","z-index":"10"})
+		}.bind(this)
 		// All event listeners that need to be instantly instantiated are in this function
 		this.listeners = function()
 		{
+			// This listens for clicks on the Save button
+			this.button_save.addEventListener('click', function(){
+				this.saveImage();
+			}.bind(this))
+			// This listens for clicks on the refresh button
 			this.button_refresh.addEventListener('click', function(){
 				console.log('in the refresh listener!!!');
 				this.refreshOriginal();

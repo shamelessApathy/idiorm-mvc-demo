@@ -83,6 +83,15 @@ canvas
 #ie-darker
 {
 }
+#ie-login-form
+{
+	width:300px;
+	margin:0 auto;
+	padding-left:5px;
+	display:none;
+	z-index:-1;
+	border:2px solid #333;
+}
 #ie-brighter
 {
 	background-color:white;

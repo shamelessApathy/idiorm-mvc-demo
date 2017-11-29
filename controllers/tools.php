@@ -1,7 +1,10 @@
 <?php
 require_once(BASE_CONTROLLER);
 class toolsController extends Controller{
-
+	public function is_logged_in()
+	{
+		var_dump($_SESSION);
+	}
 	public function test()
 	{
 		return_view('tools/tools.test.php');
