@@ -16,6 +16,13 @@ $sold-table-bg: #e6e6e6;
 {
 	display:none;
 }
+#ie-brand-holder
+{
+	top:0;
+	border:1px solid $primary-font-color;
+	position:absolute;
+	left:45%;
+}
 #tools-nav-bar
 {
 	background-color:$primary-bg;

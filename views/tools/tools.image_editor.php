@@ -9,9 +9,9 @@
 		<span class="sr-only">Loading...</span></div>
 	<div id='ie-container'>
 		<div id='ie-toolbar-top'>
-			<h4 style='text-align:center; color:#ccc; font-size:8px;'>HTML5 Canvas Image Editor</h4>
-			<button title='sepia' class='ie-icon-top' id='ie-sepia'><p>Sepia</p></button>
-			<button title='blue' class='ie-icon-top' id='ie-blue'><p>Blue</p></button>
+			<button title='sepia'
+			class='ie-icon-top' id='ie-sepia'><p>Sepia</p></button>
+			<button title='sharpen' class='ie-icon-top' id='ie-sharpen'><p>Sharpen</p><i class='fa fa-diamond'></i></button>
 		</div>
 
 		<canvas id='ie-canvas'>
@@ -66,6 +66,6 @@ downloadLnk.addEventListener('click', download, false);
 		$(".pick-a-color").pickAColor();
 	})
 </script>
-
+ 
 
 <!--<script src='/views/js/filter.js'></script>  -->

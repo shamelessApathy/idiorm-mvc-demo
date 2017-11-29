@@ -2,6 +2,12 @@
 .mobile-front-category-container {
   display: none; }
 
+#ie-brand-holder {
+  top: 0;
+  border: 1px solid #ccc;
+  position: absolute;
+  left: 45%; }
+
 #tools-nav-bar {
   background-color: #333;
   color: #ccc;

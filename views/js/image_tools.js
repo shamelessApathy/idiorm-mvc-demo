@@ -18,7 +18,7 @@ $(function(){
 			this.button_download = document.getElementById('ie-download');
 			this.button_text_editor = document.getElementById('ie-text-editor');
 			this.button_black_and_white = document.getElementById('ie-black-and-white');
-			this.button_blue = document.getElementById('ie-blue');
+			this.button_sharpen = document.getElementById('ie-sharpen');
 			this.button_sepia = document.getElementById('ie-sepia');
 			this.button_close = document.getElementById('ie-close');
 			this.hidden_input = document.getElementById('ie-file-input');
@@ -189,15 +189,74 @@ $(function(){
 				var sCtx = sCanvas.getContext('2d');
 				sCtx.putImageData(demo,0,0);
 			}
-			this.makeBlue = function()
-			{
-				console.log('inside makeBlu');
+			this.makeSharper = function(){
+				console.log('in the make sharper cfunction');
 				var preCan = this.convertCanvasToImage(interiorCanvas);
-				var demo = this.filterImage(this.tintBlue, preCan);
+				var demo = this.filterImage(this.convolute, preCan, [  0, -1,  0,
+																	 -1,  5, -1,
+																	  0, -1,  0 ]);
 				var sCanvas = document.getElementById('ie-canvas');
 				var sCtx = sCanvas.getContext('2d');
 				sCtx.putImageData(demo,0,0);
+
 			}
+			/* All new stuff convultion andshit */
+
+
+			this.tmpCanvas = document.getElementById('ie-canvas');
+			this.tmpCtx = this.tmpCanvas.getContext('2d');
+
+			this.createImageData = function(w,h) {
+			  return this.tmpCtx.createImageData(w,h);
+			}.bind(this)
+
+			this.convolute = function(pixels, weights, opaque) 
+			{
+			  var side = Math.round(Math.sqrt(weights.length));
+			  var halfSide = Math.floor(side/2);
+			  var src = pixels.data;
+			  var sw = pixels.width;
+			  var sh = pixels.height;
+			  // pad output by the convolution matrix
+			  var w = sw;
+			  var h = sh;
+			  var output = this.createImageData(w, h);
+			  var dst = output.data;
+			  // go through the destination image pixels
+			  var alphaFac = opaque ? 1 : 0;
+			  for (var y=0; y<h; y++) {
+			    for (var x=0; x<w; x++) {
+			      var sy = y;
+			      var sx = x;
+			      var dstOff = (y*w+x)*4;
+			      // calculate the weighed sum of the source image pixels that
+			      // fall under the convolution matrix
+			      var r=0, g=0, b=0, a=0;
+			      for (var cy=0; cy<side; cy++) {
+			        for (var cx=0; cx<side; cx++) {
+			          var scy = sy + cy - halfSide;
+			          var scx = sx + cx - halfSide;
+			          if (scy >= 0 && scy < sh && scx >= 0 && scx < sw) {
+			            var srcOff = (scy*sw+scx)*4;
+			            var wt = weights[cy*side+cx];
+			            r += src[srcOff] * wt;
+			            g += src[srcOff+1] * wt;
+			            b += src[srcOff+2] * wt;
+			            a += src[srcOff+3] * wt;
+			          }
+			        }
+			      }
+			      dst[dstOff] = r;
+			      dst[dstOff+1] = g;
+			      dst[dstOff+2] = b;
+			      dst[dstOff+3] = a + alphaFac*(255-a);
+			    }
+			  }
+			  return output;
+			}.bind(this);
+
+
+
 			switch(action)
 			{
 				case "brighter": this.makeBrighter();
@@ -210,7 +269,7 @@ $(function(){
 				break;
 				case "sepia" : this.processSepia(interiorCanvas);
 				break;
-				case 'blue' : this.makeBlue();
+				case 'sharpen' : this.makeSharper();
 				break;
 			}
 		}
@@ -243,9 +302,9 @@ $(function(){
 		this.listeners = function()
 		{
 			// Makes image more bklue scale
-			this.button_blue.addEventListener('click', function(){
-				console.log('in the blue listener');
-				this.Filters('blue');
+			this.button_sharpen.addEventListener('click', function(){
+				console.log('in the sharpen listener');
+				this.Filters('sharpen');
 			}.bind(this))
 			// Makes image sepia colored
 			this.button_sepia.addEventListener('click', function(){
