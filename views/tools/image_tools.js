@@ -345,12 +345,13 @@ $(function(){
 
 
 				var formdata = new FormData();
-				formdata.append("canvas-file", file);
+				formdata.append("image", file);
 				formdata.append("category-id", category);
 				formdata.append("tags", all_tags);
+				formdata.append('rotate','0');
 				formdata.append("user_image_name", user_image_name);
 				$.ajax({
-				   url: "/views/tools/tools.special_upload.php",
+				   url: "/image/new_image/true",
 				   type: "POST",
 				   data: formdata,
 				   processData: false,

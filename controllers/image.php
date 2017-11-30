@@ -156,7 +156,7 @@ class imageController extends Controller {
 		}
 	}
 	// runs through list of everything that needs to be done and recorded to create an instance of an image
-	public function new_image()
+	public function new_image($spec = null)
 	{
 
 		
@@ -178,34 +178,16 @@ class imageController extends Controller {
 			sys_msg('You need a category and tags to submit the image!');
 			return;
 		}
-		// If price is set, it will be a premium image, handle accordingly
-		if ($_POST['price'] !== GLOBAL_PRICE)
-			{
-				$price = $_POST['price'];
-				$premium = 1;
-				if (!is_numeric($price))
-				{
-					require_once(CONTROLLERS . '/category.php');
-					$category = new categoryController();
-					$categories = $category->get_all();
-					return_view('view.upload_image.php', $categories);
-					sys_msg('Your price is not an integer!');
-					return;
-				}
-			}
-			// if not premium, set it to global price
-		else
-		{
-			$price = GLOBAL_PRICE;
-			$premium = 0; 
-		}
-
+		// Took store feautres away, everything 0 for GLOBAL_PRICE
+		
+		$price = GLOBAL_PRICE;
+		$premium = 0; 
 		$tags = explode('|', $tags);
 		array_pop($tags);
 		$type = 'image';
 		if (!empty($_POST['user_image_name']))
 		{
-		$user_image_name = $_POST['user_image_name'];
+			$user_image_name = $_POST['user_image_name'];
 		}
 		else
 		{
@@ -214,8 +196,9 @@ class imageController extends Controller {
 			return;
 		}
 		// Better Validate the file
-		if ($this->validate($check, $type, $name))
-		{
+		/*if ($this->validate($check, $type, $name))
+		{*/
+			echo "inside test";
 			$ext = explode('.',$name);
 			$ext = '.'. $ext[1];
 			$tmp_name = $_FILES['image']['tmp_name'];
@@ -265,11 +248,10 @@ class imageController extends Controller {
 			{
 				echo 'problem saving file';
 			}
-		}
-		else
+		/*else
 		{
 			echo 'false';
-		}
+		}*/
 	}
 	public function change_name()
 	{

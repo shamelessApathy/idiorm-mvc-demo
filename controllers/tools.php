@@ -49,6 +49,16 @@ class toolsController extends Controller{
 	{
 		return_view('tools/tools.image_editor.php');
 	}
+	public function special_upload()
+	{
+		echo "inside of special_upload function!!";
+		var_dump($_POST);
+		var_dump($_FILES);
+		if ($image_controller)
+		{
+			echo "run it!";
+		}
+	}
 
 }
 ?> 
