@@ -2,7 +2,7 @@
 <?php require_once('views/image_editor_header.php');?>
 <link rel="stylesheet" href="/views/tools/pick-a-color-master/build/dependencies/bootstrap-3.0.0.min.css">
 <link rel="stylesheet" href="/views/tools/pick-a-color-master/build/1.2.3/css/pick-a-color-1.2.3.min.css">
-<link href='/views/tools/image_editor.css' rel='stylesheet' type='text/css'/>
+<link href='/views/css/image_editor.css' rel='stylesheet' type='text/css'/>
 
 <?php $logged_in = $_SESSION['user_info'] ?? null;?>
 <div id='ie-login-form'>
@@ -17,33 +17,32 @@
 	<div id='ie-container'>
 		<div id='ie-toolbar-top'>
 			<button title='sepia'
-			class='ie-icon-top' id='ie-sepia'><p>Sepia</p><i class='fa fa-paint-brush'></i></button> 
+			class='ie-icon-top' id='ie-sepia'><p>Sepia</p></button> 
 			<button title='sharpen' class='ie-icon-top' id='ie-sharpen'><p>Sharpen</p><i class='fa fa-diamond'></i></button>
 			<button title='refresh' class='ie-icon-top' id='ie-refresh'><p>Refresh</p><i class='fa fa-refresh'></i></button>
 			<button title='save' class='ie-icon-top' id='ie-save'><p>Save</p><i class='fa fa-floppy-o'></i></button>
 		</div>
 		<div id='ie-save-form-container'>
-			<button class='ie-close'>X</button>
 			<form name='ie-save-form' id='ie-save-form'>
 			<label>Image Name:</label><br>
-			<input type='text' id='user_image_name' name='user_image_name'/><br>
+			<input type='text' name='user_image_name'/><br>
 			<label>Category</label><br>
-			<select id='category-id' name='category-id'>
+			<select id='upload-category' name='category-id'>
 			<option>Choose a Category</option>
 			<?php foreach ($categories as $cat):?>
 			<!-- categories is apparrently global variable yea!! -->
 			<option value="<?php echo $cat->id;?>"><?php echo ucwords($cat->title);?>
+				
 			</option>
 			<?php endforeach;?>
 			<label>Tags</label><br>
-			<input id='tag_holder' type='text' name='tags' placeholder='Use tag editor to add tags' value='' readonly/><br>
+			<div id='tag_div'></div><br>
+			<input id='tag_holder' type='text' style='display:none;' name='tags' placeholder='Use tag editor to add tags' readonly/><br>
 			<label>Tag Editor</label><br>
 			<input id='new_tag'><button id='add_tag' type='button'>Add</button>
 			<br>
 			<input type='number' name='rotate' id='rotate' value='0' HIDDEN>
 					</select>
-				<div id='ie-tag-div'></div>
-			<button id='ie-image-submit-button' type='button'>Submit</button>
 				</form>
 		</div>
 
@@ -84,7 +83,7 @@
 <script src="/views/tools/pick-a-color-master/build/dependencies/jquery-1.9.1.min.js"></script>
 <script src="/views/tools/pick-a-color-master/build/dependencies/tinycolor-0.9.15.min.js"></script>
 <script src="/views/tools/pick-a-color-master/build/1.2.3/js/pick-a-color-1.2.3.min.js"></script>
-<script src='/views/tools/image_tools.js'></script>
+<script src='/views/js/image_tools.js'></script>
 
 <script>
 function download() {
@@ -108,7 +107,5 @@ downloadLnk.addEventListener('click', download, false);
 		session = 1;
 	}
  </script>
-
-
 
 <!--<script src='/views/js/filter.js'></script>  -->

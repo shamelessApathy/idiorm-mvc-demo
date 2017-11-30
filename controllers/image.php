@@ -86,6 +86,10 @@ class imageController extends Controller {
 			return $image_to_tag;
 		}
 	}
+	public function test_special()
+	{
+		echo "inside test special!";
+	}
 	public function rotate($deg)
 	{
 		$pixel = new ImagickPixel('none');
