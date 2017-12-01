@@ -12,13 +12,12 @@ class Controller {
 		* @param  $data (whatever is needing to be tested)
 		* @return boolen TRUE/FALSE
 		*/
-
 		function test_input($data) 
 		{
   			$data = trim($data);
   			$data = stripslashes($data);
   			$data = htmlspecialchars($data);
-  			return $data;
+  			return $data; 
 		}
 		switch ($type)
 		{
@@ -56,6 +55,8 @@ class Controller {
 						{
 							return true;
 						}
+						break;
+		case 'special_upload' : return true;
 						break;
 		default : return 'default';
 

@@ -46,7 +46,6 @@
 			<button id='ie-image-submit-button' type='button'>Submit</button>
 				</form>
 		</div>
-
 		<canvas id='ie-canvas'>
 		</canvas>
 		<div id='ie-file-input'>

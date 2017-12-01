@@ -168,6 +168,7 @@ class imageController extends Controller {
 		$name = $_FILES['image']['name'];
 		$tags = $_POST['tags'];
 		$deg = $_POST['rotate'];
+		$special_upload = $_POST['special_upload'] ?? null;
 		// Make sure a tag and category are attached to image
 		if (empty($tags) || empty($cat_id))
 		{
@@ -179,12 +180,17 @@ class imageController extends Controller {
 			return;
 		}
 		// Took store feautres away, everything 0 for GLOBAL_PRICE
-		
+		$special_upload = $_POST['special_upload'];
 		$price = GLOBAL_PRICE;
 		$premium = 0; 
 		$tags = explode('|', $tags);
 		array_pop($tags);
 		$type = 'image';
+		if ($special_upload = true)
+		{
+			echo "inside test special_upload funciton";
+			$type='special_upload';
+		}
 		if (!empty($_POST['user_image_name']))
 		{
 			$user_image_name = $_POST['user_image_name'];
@@ -196,8 +202,8 @@ class imageController extends Controller {
 			return;
 		}
 		// Better Validate the file
-		/*if ($this->validate($check, $type, $name))
-		{*/
+		if ($this->validate($check, $type, $name))
+		{
 			echo "inside test";
 			$ext = explode('.',$name);
 			$ext = '.'. $ext[1];
@@ -237,7 +243,15 @@ class imageController extends Controller {
 					{
 						echo 'npot working';
 					}
-					header("Location:/image/upload_image?success=true");
+					// IF special_upload is coming from image editor, don't redirect traffic, send success signal to the javascript waiting for response
+					if ($special_upload = true)
+					{
+						echo true;
+					}
+					else
+					{
+						header("Location:/image/upload_image?success=true");
+					}
 				}
 				else
 				{
@@ -248,10 +262,7 @@ class imageController extends Controller {
 			{
 				echo 'problem saving file';
 			}
-		/*else
-		{
-			echo 'false';
-		}*/
+		}
 	}
 	public function change_name()
 	{

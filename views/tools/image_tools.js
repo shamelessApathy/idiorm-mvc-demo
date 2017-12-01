@@ -350,6 +350,7 @@ $(function(){
 				formdata.append("tags", all_tags);
 				formdata.append('rotate','0');
 				formdata.append("user_image_name", user_image_name);
+				formdata.append('special_upload', true);
 				$.ajax({
 				   url: "/image/new_image/true",
 				   type: "POST",
@@ -357,7 +358,11 @@ $(function(){
 				   processData: false,
 				   contentType: false,
 				   success:  function(results){
-				   	console.log(results);
+				   	if(results)
+				   	{
+				   		$('#ie-save-form-container').remove();
+				   		$('#ie-container').append("<div onclick='this.parentElement.setAttribute('style','display:none')'  class='user_msg'>Image uploaded successfully!!<i class='fa fa-close'></i></div>");
+				   	}
 				   }
 				});		
 				});
