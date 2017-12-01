@@ -410,7 +410,7 @@ $(function(){
 				if (value === undefined || value === null)
 				{
 					console.log('if running');
-					value = '';
+					return;
 				}
 				tags.value = (value + field.value + "|");
 				var new_tag = "<span class='tag'>" + field.value + "</span>";
