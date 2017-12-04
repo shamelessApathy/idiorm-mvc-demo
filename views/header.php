@@ -47,7 +47,14 @@ foreach ($info['tags'] as $tag)
 <?php else: ?>
   <?php $server = $_SERVER['SERVER_NAME']; 
   $main_image = "http://" . $server . '/sharefulynewlogo.png';
-  $description = $count . " images and counting, a stock photo website anyone can contribute to!";
+  if (isset($info['count']))
+  {
+    $description = $info['count'] . " images and counting, a stock photo website anyone can contribute to!";
+  }
+  else
+  {
+    $description = "";  
+  }
   ?>
 <meta property="og:title" content="Sharefuly Stock Photography" />
 <meta property="og:type" content="website"/>  
