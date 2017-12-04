@@ -30,11 +30,21 @@ $request =$_SERVER['REQUEST_URI'];
 $exploded = explode('/',$request);
 $second_explode = explode('?',$exploded[2]);
 $which = $second_explode[0];
-$page_url = "http:/www.sharefuly.com/image/info?id=".$image->id;
-$description = "";
-foreach ($info['tags'] as $tag)
+if (isset($image->id))
 {
-  $description = $description.$tag['text'].", ";
+  $page_url = "https:/www.sharefuly.com/image/info?id=".$image->id;
+}
+else
+{
+  $page_url = "https://sharefuly.com";
+}
+$description = "";
+if (isset($info['tags']))
+{
+  foreach ($info['tags'] as $tag)
+  {
+    $description = $description.$tag['text'].", ";
+  }
 }
 
    ?>

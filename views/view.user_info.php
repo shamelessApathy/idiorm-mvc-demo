@@ -5,6 +5,9 @@ $memberSince = date("F j, Y, g:i a");
 $user = $info['user'];
 $profile = $info['profile'];
 $user_link = "/image/user/$user->id";
+$images = $info['images'];
+
+
 ?>
 
 
@@ -29,12 +32,21 @@ $user_link = "/image/user/$user->id";
 	<div style='width:300px; margin:0 auto'><img style='max-width:300px;' src="<?php echo $user->avatar; ?>"/></div>
 </div>
 </div>
-<div class='row'>
+<div class='row' style='margin-top:20px;'>
+	<div class='col-md-12'>
+		<?php foreach ($images as $image):?>
+			<div class='user-info-recent-image-single'>
+				<a href="/image/info?id=<?php echo $image->id;?>"><img src="<?php echo $image->thumbnail;?>" class='user-info-recent-image'/></a>
+			</div>
+		<?php endforeach;?>
+	<div class='clear'></div>
+	<div id='user-info-more'>
 	<a style='text-decoration:none;' href="<?php echo $user_link;?>">
 	<div class='user-info-paragraph'>
 		<h3 style='text-align:center;'>Click to see all images available from <?php echo $user->username;?></h3>
 	</div>
 	</a>
+	</div>
 	<div class='user-info-paragraph'>
 		<h3>Artist Bio</h3>
 		<?php if (!empty($profile->bio)):?>
@@ -44,6 +56,7 @@ $user_link = "/image/user/$user->id";
 			<h4> This artist has not yet set up a bio!</h4>
 		<?php endif;?>
 	</div>
+</div>
 </div>
 </div>
 

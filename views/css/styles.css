@@ -1,6 +1,33 @@
+/*USER INFO FEED */
+#user-info-recent-image-holder {
+  margin: 0 auto;
+  width: 80%;
+  margin: 0 auto;
+  background: #333;
+  padding: 5px; }
+
+.user-info-recent-image {
+  height: 140px; }
+
+.user-info-recent-image-single {
+  margin-left: 10%;
+  height: 150px;
+  border: 1px solid #333;
+  box-style-type: border-box;
+  -moz-box-style-type: border-box;
+  -webkit-box-style-type: border-box;
+  -o-box-style-type: border-box;
+  float: left; }
+
 /* FRONT PAGE CATEGORY STYLINGS */
 .mobile-front-category-container {
   display: none; }
+
+#ie-brand-holder {
+  top: 0;
+  border: 1px solid #ccc;
+  position: absolute;
+  left: 45%; }
 
 #tools-nav-bar {
   background-color: #333;
