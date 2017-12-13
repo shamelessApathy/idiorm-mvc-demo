@@ -34,10 +34,18 @@ $images = $info['images'];
 </div>
 <div class='row' style='margin-top:20px;'>
 	<div class='col-md-12'>
-		<?php foreach ($images as $image):?>
+	</div>
+	<?php 
+		$image_counter = 0;
+
+		$count= count($images);
+	?>
+
+		<?php foreach ($images as $image):   ?>
 			<div class='user-info-recent-image-single'>
 				<a href="/image/info?id=<?php echo $image->id;?>"><img src="<?php echo $image->thumbnail;?>" class='user-info-recent-image'/></a>
 			</div>
+			<?php $image_counter++;?>
 		<?php endforeach;?>
 	<div class='clear'></div>
 	<div id='user-info-more'>

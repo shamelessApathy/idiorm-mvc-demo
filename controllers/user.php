@@ -331,10 +331,17 @@ public function info($id)
 	require_once(MODELS . '/Profile.php');
 	$user = Model::factory('User')->find_one($id);
 	$images = $user->images()->order_by_desc('created_at')->find_many();
-	$images = array($images[0],$images[1],$images[2]);
+	if (count($images) < 3)
+	{
+		$images = $images;
+	}
+	else
+	{
+		$images = array($images[0],$images[1],$images[2]);
+	}
 	$image_count = count($images);
 	$user->image_count = $image_count;
-	$profile = Model::factory('Profile')->find_one($id);
+	$profile = Model::factory('Profile')->find_one($id) ?? null;
 	$data = array('user'=>$user, 'profile'=>$profile, 'images'=>$images);
 	return_view('view.user_info.php',$data);
 }

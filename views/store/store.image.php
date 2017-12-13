@@ -29,7 +29,7 @@ $user_link = "/user/info/$user->id";
 			}
 			else 
 			{
-				$user_avatar_string = "";
+				$user_avatar_string = "<a href='user/info?id=<?php echo $user->id;??'><img class='user_avatar' src='users/avatar/profile_image_default.jpg;'>?>" +'</a>';
 			}
 			echo "
 				<li>Uploaded By: </li>
