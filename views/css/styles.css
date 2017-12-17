@@ -1011,7 +1011,11 @@ table.user-image-table tr {
 .image-details-holder {
   float: right;
   margin-right: 10px;
-  width: 100%; }
+  width: 100%;
+  text-align: center; }
+
+.image-details-holder {
+  max-height: 500px; }
 
 .image-details-hider {
   background-color: rgba(0, 0, 0, 0.1); }

@@ -42,6 +42,7 @@ echo "</pre>";*/
 			<div class='preview-thumb'> 
 				<a href="/image/info?id=<?php echo $image->id;?>" class='search-item-link'></a>
 			<img class='image-result' 
+				alt="<?php echo $image->user_image_name;?>"
 				data-user="<?php echo $image->user_id;?>"
 				data-avatar="<?php echo $image->user_avatar;?>"
 				data-price="<?php echo $image->price;?>"

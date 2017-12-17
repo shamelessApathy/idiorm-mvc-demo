@@ -2,6 +2,8 @@
 $images = $info['images'];
 $featured = $info['featured'];
 $categories = $info['categories'];
+
+
 ?>
 <link href='/views/css/featured.css' type='text/css' rel='stylesheet'/>
 <div class='container' >
@@ -69,7 +71,7 @@ if (isset($info))
 {
 foreach ($images as $image)
 {
-	echo "<a href='/image/info?id=$image->id'><div class='looking-glass'><img class='aimg-responsive' src='$image->thumbnail'/></div></a>";
+	echo "<a href='/image/info?id=$image->id'><div class='looking-glass'><img alt='$image->user_image_name' class='aimg-responsive' src='$image->thumbnail'/></div></a>";
 }
 }
 ?>

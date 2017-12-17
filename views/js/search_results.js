@@ -76,7 +76,7 @@ $(function(){
 		this.addDetails = function()
 		{
 			var sizing = .7*this.area.width() + "px";
-			var size_string = "max-width:"+sizing;
+			var size_string = "max-height:"+"500px";
 			this.img = document.createElement('img');
 			$(this.img).attr("style",size_string);
 			this.img.src = this.url;
