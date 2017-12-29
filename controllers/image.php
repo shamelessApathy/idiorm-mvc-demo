@@ -159,7 +159,10 @@ class imageController extends Controller {
 		$check = $_FILES['image']['tmp_name'];
 		// This can get used ONLY on JPEGs and TIFFs
 		//$exif = exif_read_data($check);
-		$user_id = $_SESSION['user_info']->id;
+		$user_id = $_SESSION['user_info'] ?? null;
+		if (!isset($user_id) || $user_id = null){
+			$user_id = $_POST['user_id'];
+		}
 		$cat_id = $_POST['category-id'];
 		$name = $_FILES['image']['name'];
 		$tags = $_POST['tags'];
@@ -175,26 +178,10 @@ class imageController extends Controller {
 			return;
 		}
 		// If price is set, it will be a premium image, handle accordingly
-		if ($_POST['price'] !== GLOBAL_PRICE)
-			{
-				$price = $_POST['price'];
-				$premium = 1;
-				if (!is_numeric($price))
-				{
-					require_once(CONTROLLERS . '/category.php');
-					$category = new categoryController();
-					$categories = $category->get_all();
-					return_view('view.upload_image.php', $categories);
-					sys_msg('Your price is not an integer!');
-					return;
-				}
-			}
-			// if not premium, set it to global price
-		else
-		{
+		
 			$price = GLOBAL_PRICE;
 			$premium = 0; 
-		}
+		
 
 		$tags = explode('|', $tags);
 		array_pop($tags);
@@ -205,9 +192,7 @@ class imageController extends Controller {
 		}
 		else
 		{
-			return_view('view.upload_image.php');
-			sys_msg('You need to name the image for tracking purposes!');
-			return;
+			$user_image_name = $_POST['image-name'];
 		}
 		// Better Validate the file
 		if ($this->validate($check, $type, $name))
@@ -250,7 +235,14 @@ class imageController extends Controller {
 					{
 						echo 'npot working';
 					}
-					header("Location:/image/upload_image?success=true");
+					if ( $_POST['app'] === "true")
+					{
+						echo "true";
+					}
+					else
+					{
+						header("Location:/image/upload_image?success=true");
+					}
 				}
 				else
 				{
