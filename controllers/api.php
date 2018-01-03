@@ -5,8 +5,7 @@ require(BASE_CONTROLLER);
 
 class apiController extends Controller{
 	public function test(){
-			$file =  $_FILES['file'];
-			var_dump($file);
+		var_dump($_POST);
 	}
 	private function verify($email,$password)
 	{

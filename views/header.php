@@ -48,6 +48,7 @@ if (isset($info['tags']))
 }
 
    ?>
+<meta property="fb:app_id" content="136953163651981" />   
 <meta property="og:title" content="<?php echo $image->user_image_name;?>" />
 <meta property="og:type" content="website"/>  
 <meta property="og:image"              content="<?php echo $image_url;?>"/>
@@ -67,7 +68,8 @@ if (isset($info['tags']))
   }
   ?>
 <meta property="og:title" content="Sharefuly Stock Photography" />
-<meta property="og:type" content="website"/>  
+<meta property="og:type" content="website"/> 
+<meta property="fb:app_id" content="136953163651981" />   
 <meta property="og:image"              content="<?php echo $main_image;?>"/>
 <meta property="og:description"        content="<?php echo $description;?>"/>
 <meta property="og:site_name"              content="Sharefuly"/>

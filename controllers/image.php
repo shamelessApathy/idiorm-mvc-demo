@@ -151,17 +151,29 @@ class imageController extends Controller {
 			return false;
 		}
 	}
+	/**
+	*	Function that takes info sent from the Sharefuly APP then prepares it for use on the php server
+	* 
+	*
+	*
+	*/
+	public function new_image_api()
+	{
+		$user_id = $_POST['user_id'];
+		$add_api_image = $this->new_image($user_id);
+		var_dump($add_api_image);	
+	}
 	// runs through list of everything that needs to be done and recorded to create an instance of an image
-	public function new_image()
+	public function new_image($user_id=null)
 	{
 
 		
 		$check = $_FILES['image']['tmp_name'];
 		// This can get used ONLY on JPEGs and TIFFs
 		//$exif = exif_read_data($check);
-		$user_id = $_SESSION['user_info'] ?? null;
-		if (!isset($user_id) || $user_id = null){
-			$user_id = $_POST['user_id'];
+		if ($user_id = null)
+		{
+			$user_id = $_SESSION['user_info']['id'];
 		}
 		$cat_id = $_POST['category-id'];
 		$name = $_FILES['image']['name'];
