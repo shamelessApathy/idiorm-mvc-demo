@@ -79,7 +79,7 @@ foreach ($images as $image)
 </div>
 </div>
 </div>
-<<?php var_dump($_SESSION);?>
+
 <div class='row'>
 	<div style='width:100%; height:150px;'></div>
 </div>
