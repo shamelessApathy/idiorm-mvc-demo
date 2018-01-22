@@ -159,22 +159,21 @@ class imageController extends Controller {
 	*/
 	public function new_image_api()
 	{
-		$user_id = $_POST['user_id'];
-		$add_api_image = $this->new_image($user_id);
-		var_dump($add_api_image);	
+		//$user_id = $_POST['user_id'];
+		//$add_api_image = $this->new_image($user_id);
+		//var_dump($add_api_image);	
+		var_dump($_POST);
 	}
 	// runs through list of everything that needs to be done and recorded to create an instance of an image
-	public function new_image($user_id=null)
+	public function new_image()
 	{
 
 		
 		$check = $_FILES['image']['tmp_name'];
 		// This can get used ONLY on JPEGs and TIFFs
 		//$exif = exif_read_data($check);
-		if ($user_id = null)
-		{
-			$user_id = $_SESSION['user_info']['id'];
-		}
+
+		$user_id = $_SESSION['user_info']['id'] ?? $_POST['user_id'];
 		$cat_id = $_POST['category-id'];
 		$name = $_FILES['image']['name'];
 		$tags = $_POST['tags'];
@@ -185,7 +184,7 @@ class imageController extends Controller {
 			require_once(CONTROLLERS . '/category.php');
 			$category = new categoryController();
 			$categories = $category->get_all();
-			return_view('view.upload_image.php', $categories);
+			return_view('bview.upload_image.php', $categories);
 			sys_msg('You need a category and tags to submit the image!');
 			return;
 		}

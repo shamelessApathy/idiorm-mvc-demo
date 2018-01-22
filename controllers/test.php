@@ -180,4 +180,9 @@ class testController extends Controller {
 		echo "$file <br>";
 		var_dump($sha);
 	}
+	public function app($info)
+	{
+		echo $info . "<br>";
+		echo "you are in the app function";
+	}
 }
