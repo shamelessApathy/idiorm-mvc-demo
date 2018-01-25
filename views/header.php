@@ -1,10 +1,26 @@
 
-<?php
-require('app/libraries/cart.php');
-$cart2 = new Cart();
- ?>
 <html>
 <head>
+  <?php if (is_array($info) && isset($info['image'])) : ?>
+<?php require_once(VIEWS . '/view.image-og.php');?>
+<?php else: ?>
+  <?php $server = $_SERVER['SERVER_NAME']; 
+  $main_image = "http://" . $server . '/sharefulynewlogo.png';
+  if (is_array($info) && isset($info['count']))
+  {
+    $description = $info['count'] . " images and counting, a stock photo website anyone can contribute to!";
+  }
+  else
+  {
+    $description = "";  
+  }
+  ?>
+<meta property="og:title" content="Sharefuly Stock Photography" />
+<meta property="og:type" content="website"/> 
+<meta property="og:image"              content="<?php echo $main_image;?>"/>
+<meta property="og:description"        content="<?php echo $description;?>"/>
+<meta property="og:site_name"              content="Sharefuly"/>
+<?php endif; ?>
   <!-- Global site tag (gtag.js) - Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-102224291-2"></script>
 <script>
@@ -32,58 +48,7 @@ $cart2 = new Cart();
 <meta name="msapplication-TileColor" content="#ffffff">
 <meta name="msapplication-TileImage" content="/ms-icon-144x144.png">
 <meta name="theme-color" content="#ffffff">
-<?php if (is_array($info) && isset($info['image'])) : ?>
-  <?php $image = $info['image'];
-$image_url = "http://www.sharefuly.com" . $image->thumbnail;
-$path = "/image/info?id=";
-$request =$_SERVER['REQUEST_URI'];
-$exploded = explode('/',$request);
-$second_explode = explode('?',$exploded[2]);
-$which = $second_explode[0];
-if (isset($image->id))
-{
-  $page_url = "https://www.sharefuly.com/image/info?id=".$image->id;
-}
-else
-{
-  $page_url = "https://sharefuly.com";
-}
-$description = "";
-if (isset($info['tags']))
-{
-  foreach ($info['tags'] as $tag)
-  {
-    $description = $description.$tag['text'].", ";
-  }
-}
 
-   ?>
-<meta property="fb:app_id" content="136953163651981" />   
-<meta property="og:title" content="<?php echo $image->user_image_name;?>" />
-<meta property="og:type" content="website"/>  
-<meta property="og:image"              content="<?php echo $image_url;?>"/>
-<meta property="og:url"              content="<?php echo $page_url;?>"/>
-<meta property="og:description"        content="<?php echo $description;?>"/>
-<meta property="og:site_name"              content="Sharefuly"/>
-<?php else: ?>
-  <?php $server = $_SERVER['SERVER_NAME']; 
-  $main_image = "http://" . $server . '/sharefulynewlogo.png';
-  if (isset($info['count']))
-  {
-    $description = $info['count'] . " images and counting, a stock photo website anyone can contribute to!";
-  }
-  else
-  {
-    $description = "";  
-  }
-  ?>
-<meta property="og:title" content="Sharefuly Stock Photography" />
-<meta property="og:type" content="website"/> 
-<meta property="fb:app_id" content="136953163651981" />   
-<meta property="og:image"              content="<?php echo $main_image;?>"/>
-<meta property="og:description"        content="<?php echo $description;?>"/>
-<meta property="og:site_name"              content="Sharefuly"/>
-<?php endif; ?>
 <!-- <meta name="viewport" content="width=device-width, initial-scale=1">-->
 <link href="<?php echo '/views/bootstrap/css/bootstrap.css';?>" rel='stylesheet' type='text/css'/>
 <link href='/views/js/jquery-ui-1.12.1/jquery-ui.css' rel='stylesheet' type='text/css'/>
