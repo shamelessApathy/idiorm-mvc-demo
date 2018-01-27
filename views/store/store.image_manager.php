@@ -3,10 +3,10 @@
 <div class='container'>
 <div class='row'>
 	<div class='col-md-6'>
-		<a href='/image/upload_image'><button class='image-manager-button' type='button'>Upload</button></a><br>
+		<a href='/user/get_images'><button class='image-manager-button' type='button'><i class='fa fa-image'></i><br>Manage Images</button></a><br>
 	</div>
 	<div class='col-md-6'>
-		<a href='/user/get_images'><button class='image-manager-button' type='button'><i class='fa fa-image'></i><br>Manage Images</button></a><br>
+		<a href='/image/upload_image'><button class='image-manager-button' type='button'>Upload</button></a><br>
 	</div>
 </div>
 </div>
