@@ -10,6 +10,44 @@ $(function(){
 	var premium_mobile = $('#premium-mobile');
 	var premium_cancel = $('#premium-cancel');
 
+	// Removes the graphic tag as well as the hidden readonly portion 
+	var removeTag = function(tag)
+	{
+		console.log('inside removeTag()');
+		tag_name = tag.innerHTML;
+		hidden_tags = tags.value;
+		exploded = hidden_tags.split('|');
+		
+		for (var i = 0; i < exploded.length; i++)
+		{
+			if (exploded[i] === tag_name)
+			{
+				exploded.splice( exploded.indexOf(tag_name), 1 );
+				exploded.pop();
+			}
+		}
+		var new_tag_string = '';
+		for (var i =0; i < exploded.length; i++)
+		{
+			new_tag_string += exploded[i] + "|";
+		}
+		console.log(new_tag_string);
+		tags.value = new_tag_string;
+		$(tag).remove();
+	}
+	document.addEventListener('click', function(e){
+	var target = e.target;
+	var type = target.className;
+	if (type === 'tag')
+	{
+		tag_name = target.innerHTML;
+		removeTag(target);
+	}
+	else
+	{
+		return;
+	}
+});
 	var add_tags = function(){
 		myvalue =  function()
 		{
@@ -44,8 +82,11 @@ $(function(){
 			value = '';
 		}
 		mobile_tags.value = (value + mobile_field.value + "|");
-		var new_tag = "<span class='tag'>" + mobile_field.value + "</span>";
-		mobile_tag_div.innerHTML += new_tag;
+		var new_tag = jQuery("<span class='tag'>" + mobile_field.value + "</span>");
+		mobile_tag_div.appendChild(new_tag.get(0));
+		$(new_tag).on('click', function(){
+			console.log('tag has been clicked');
+		})
 		mobile_field.value = "";
 
 	}
