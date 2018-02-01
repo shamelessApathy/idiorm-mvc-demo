@@ -8,6 +8,7 @@ require('vendor/autoload.php');
 require('constants.php');
 require('globals.php');
 require('uri_router.php');
+error_reporting(0);
 $dotenv = new Dotenv\Dotenv(__DIR__);
 $dotenv->load();
 ORM::configure('mysql:host=localhost;dbname=idiorm_production');
