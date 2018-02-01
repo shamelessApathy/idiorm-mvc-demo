@@ -52,6 +52,13 @@ $(function(){
 		}
 		this.open = function()
 		{
+			var old_img_container = document.getElementsByClassName('image-details-holder')[0];
+			var old_img = $(old_img_container).find('img');
+			// Feb1 2018 added remove function if someone is browsing and clicks on another image it has to remove it from current container
+			if (old_img[0])
+				{
+					$(old_img[0]).remove();
+				}
 			var width = .9*window.innerWidth;
 			$('body').width(window.innerWidth);
 			var tenpercent = -(.2 * width);

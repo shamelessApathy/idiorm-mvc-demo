@@ -58,7 +58,16 @@ $user_link = "/user/info/$user->id";
 <a href='/login'><button type='button' class='login-button'>Login to Download</button></a>
 <?php endif; ?>
 			</div>
+			<a class="twitter-share-button"
+  href="https://twitter.com/intent/tweet">
+Tweet</a>
+			<?php $fb_share_link = "https://sharefuly.com/image/info?id=" . $image->id;?>
+			 <div class="fb-share-button" 
+    data-href="<?php echo $fb_share_link;?>" 
+    data-layout="button_count">
 			</div>
+
+  </div>
 		<div class='col-md-8'>
 			<div class='watermark-container'>
 			<div class='mobile-nav-arrows'>
@@ -121,3 +130,12 @@ $user_link = "/user/info/$user->id";
 <?php require_once(HTML_FOOTER);?>
 <?php require(FOOTER);?>
 <script src='/views/js/single.js' rel='javascript' type='text/javascript'></script>
+  <!-- Load Facebook SDK for JavaScript -->
+  <div id="fb-root"></div>
+  <script>(function(d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return;
+    js = d.createElement(s); js.id = id;
+    js.src = "https://connect.facebook.net/en_US/sdk.js#xfbml=1";
+    fjs.parentNode.insertBefore(js, fjs);
+  }(document, 'script', 'facebook-jssdk'));</script>
