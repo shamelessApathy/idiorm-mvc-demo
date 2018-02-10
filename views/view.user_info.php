@@ -24,7 +24,7 @@ $images = $info['images'];
 	<li><strong>User</strong><br> <?php echo "$user->username" ;?></li>
 	<li><strong>Since</strong><br> <?php echo $memberSince; ?></li>
 	<li><strong>Website</strong><br> <?php echo (!empty($profile->website)) ? "<a href='$profile->website'>".$profile->website."</a>" : 'No Website Set' ?></li>
-	<li><strong>Images</strong><br> <?php echo $user->image_count; ?></li>
+	<li><strong>Images</strong><br> <?php echo $info['image_count']; ?></li>
 </ul>
 </div>
 </div>

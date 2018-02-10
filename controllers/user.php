@@ -331,6 +331,7 @@ public function info($id)
 	require_once(MODELS . '/Profile.php');
 	$user = Model::factory('User')->find_one($id);
 	$images = $user->images()->order_by_desc('created_at')->find_many();
+	$image_count = count($images);
 	if (count($images) < 3)
 	{
 		$images = $images;
@@ -339,10 +340,9 @@ public function info($id)
 	{
 		$images = array($images[0],$images[1],$images[2]);
 	}
-	$image_count = count($images);
 	$user->image_count = $image_count;
 	$profile = Model::factory('Profile')->find_one($id) ?? null;
-	$data = array('user'=>$user, 'profile'=>$profile, 'images'=>$images);
+	$data = array('user'=>$user, 'profile'=>$profile, 'images'=>$images, 'image_count'=>$image_count);
 	return_view('view.user_info.php',$data);
 }
 /*

@@ -16,7 +16,6 @@ class profileController extends Controller {
 		require_once(MODELS . '/Profile.php');
 		$model = new Profile();
 		$result = $model->create($profile_info);
-		var_dump($result);
 	}
 	public function profile_create()
 	{
