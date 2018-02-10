@@ -59,7 +59,7 @@ $images = $info['images'];
 		<h3>Artist Bio</h3>
 		<?php if (!empty($profile->bio)):?>
 			<?php echo $profile->bio;?>
-			<p>stuff</p>
+			
 		<?php else: ?>
 			<h4> This artist has not yet set up a bio!</h4>
 		<?php endif;?>
