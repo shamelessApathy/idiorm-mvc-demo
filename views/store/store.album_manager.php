@@ -32,7 +32,6 @@ if (isset($info['categories']))
 				<ul>
 					<li id='focus_name'></li>
 					<li id='focus_edit_name'><input id='edit_name'><button id='save_name'>save</button></li>
-					<li id='focus_price'></li>
 					<li id='focus_width'></li>
 					<li id='focus_height'></li>
 					<li><strong>Tags:</strong></li>

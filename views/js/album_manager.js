@@ -48,11 +48,8 @@ $(function(){
 				var name = $(image).attr('data-name');
 				var width = $(image).attr('data-width');
 				var height = $(image).attr('data-height');
-				var price = $(image).attr('data-price');
 				var category = $(image).attr('data-category');
-				var price_string = ('<strong>Price:</strong>' + '   ' + price);
 				var download_string = "<a href='/image/download/"+ this.id + "'><button id='download_image'>DOWNLOAD</button></a>";
-				$('#focus_price').html(price_string);
 				$(download).html(download_string);
 				$('.focus_image').html('<img  id="the_image" data-id='+ this.id +' class="img-responsive" src="'+ watermark +'"/>');
 				$('#focus_name').html('<strong>Name:</strong>' + name + "  <sup><a href='#' class='tiny_link'>edit</a></sup>");
