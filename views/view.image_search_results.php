@@ -18,9 +18,8 @@ if (!empty($info['images']))
 <?php if (is_array($info) && !empty($info['images'])):?>
 <?php foreach($images as $image):?>
 <div class='search-item'>
-	<a href="/image/info?id=<?php echo $image->id;?>" class='search-item-link'>
+	<a href="/image/info?id=<?php echo $image->info->id;?>" class='search-item-link'>
 		<div class='preview-thumb'>
-			<a href="/image/info?id=<?php echo $image->info->id;?>" class='search-item-link'>
 			<img class='image-result' 
 				data-price="<?php echo $image->info->price;?>" 
 				data-filetype="<?php echo $image->info->mime_type;?>" 
