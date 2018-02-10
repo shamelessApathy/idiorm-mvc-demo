@@ -951,9 +951,7 @@ table.user-image-table tr {
 /* SEARCH RESULTS*/
 .search-item-link {
   width: 100%;
-  height: 100%;
-  display: none;
-  position: absolute; }
+  height: 100%; }
 
 .image-button-holder {
   float: left;
