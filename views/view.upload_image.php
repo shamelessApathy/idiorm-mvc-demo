@@ -32,7 +32,7 @@ $categories = $info;
 <input id='new_tag'><button id='add_tag' type='button'>Add</button>
 <br>
 <input type='number' name='rotate' id='rotate' value='0' HIDDEN>
-<label>Check here for Premium &nbsp</label><input id='premium' type='checkbox' name='premium'><br>
+<label style='display:none;'>Check here for Premium &nbsp</label><input HIDDEN id='premium' type='checkbox' name='premium'><br>
 <div id='upload_price'><label>Price</label><span style='font-size:8px; color:red;'>  Format like 10.99 no "$"</span><br>
 <input type='text' id='input_price' value='5' name='price'>
 </div>
