@@ -341,7 +341,7 @@ public function info($id)
 		$images = array($images[0],$images[1],$images[2]);
 	}
 	$user->image_count = $image_count;
-	$profile = Model::factory('Profile')->find_one($id) ?? null;
+	$profile = ORM::for_table('profile')->where('user_id', $id)->find_one();
 	$data = array('user'=>$user, 'profile'=>$profile, 'images'=>$images, 'image_count'=>$image_count);
 	return_view('view.user_info.php',$data);
 }

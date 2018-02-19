@@ -7,7 +7,6 @@ $profile = $info['profile'];
 $user_link = "/image/user/$user->id";
 $images = $info['images'];
 
-
 ?>
 
 
