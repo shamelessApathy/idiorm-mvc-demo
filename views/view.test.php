@@ -1,16 +1,21 @@
 <?php
 require(HEADER);
 ?>
-<form action='/test/send_mail' method='POST'>
-<label>Email</label><input type='text' name='email'><br>
-<label>Body</label><br>
-<input type='text' name='text'><br>
-<button type='submit'>Send</button>
+<h1>You are in the batch upload test area</h1>
+
+<form enctype='multipart/form-data' name='test-batch' id='test-batch' method="POST" action='/test/catch_batch'>
+	<input type='file' name='batch-file' id='batch-file' multiple/>
+	<button type='submit'>Submit</button>
 </form>
 
 
+<div id='file-names'>
+	
+</div>
 
 <?php 
 require_once(HTML_FOOTER);
 require(FOOTER);
 ?>
+
+<script src='/views/js/batch.js'></script>

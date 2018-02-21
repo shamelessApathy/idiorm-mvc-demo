@@ -185,4 +185,12 @@ class testController extends Controller {
 		echo $info . "<br>";
 		echo "you are in the app function";
 	}
+	public function batch()
+	{
+		return_view('view.test.php');
+	}
+	public function catch_batch()
+	{
+		var_dump($_FILES);
+	}
 }
