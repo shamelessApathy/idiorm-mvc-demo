@@ -5,17 +5,22 @@ require(HEADER);
 
 <form enctype='multipart/form-data' name='test-batch' id='test-batch' method="POST" action='/test/catch_batch'>
 	<input type='file' name='batch-file' id='batch-file' multiple/>
-	<button type='submit'>Submit</button>
+	<div class='batch-upload-card-holder'></div>
+	<button type='button'>Submit</button>
 </form>
 
 
-<div id='file-names'>
-	
+<div id='files'>
+
 </div>
+
+
+
+
 
 <?php 
 require_once(HTML_FOOTER);
 require(FOOTER);
 ?>
 
-<script src='/views/js/batch.js'></script>
+<script src='/views/js/batch.js'></script> 

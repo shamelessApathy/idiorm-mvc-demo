@@ -1,3 +1,20 @@
+.batch-upload-card {
+  width: 600px;
+  height: 400px;
+  border: 1px solid black;
+  margin-left: 5px;
+  display: block; }
+
+.batch-img-holder {
+  width: 300px;
+  float: left; }
+
+.batch-image-info {
+  width: 295px;
+  height: 390px;
+  border: 1px solid red;
+  float: left; }
+
 /*USER INFO FEED */
 #user-info-recent-image-holder {
   margin: 0 auto;
@@ -1437,11 +1454,6 @@ could be simply that some of the other rules are being applied with a greater im
   .collection-thumb {
     display: block;
     margin: 0 auto; }
-
-  .search-item-link {
-    height: 100%;
-    width: 100%;
-    display: block; }
 
   .search-item {
     float: none;

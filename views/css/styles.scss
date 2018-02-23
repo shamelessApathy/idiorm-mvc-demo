@@ -11,6 +11,28 @@ $secondary-hover-font-color:#333;
 $tag-bg:#ffffe6;
 $sold-table-bg: #e6e6e6;  
 
+
+
+.batch-upload-card
+{
+	width:600px;
+	height:400px;
+	border:1px solid black;
+	margin-left:5px;
+	display:block;
+}
+.batch-img-holder
+{
+	width:300px;
+	float:left;
+}
+.batch-image-info
+{
+	width:295px;
+	height:390px;
+	border:1px solid red;
+	float:left;
+}
 /*USER INFO FEED */
 
 #user-info-recent-image-holder
