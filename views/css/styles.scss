@@ -12,7 +12,10 @@ $tag-bg:#ffffe6;
 $sold-table-bg: #e6e6e6;  
 
 
-
+#batch-upload-iframe
+{
+	visibility:hidden;
+}
 .batch-upload-card
 {
 	width:600px;
