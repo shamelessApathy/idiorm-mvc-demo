@@ -191,6 +191,33 @@ class testController extends Controller {
 	}
 	public function catch_batch()
 	{
-		var_dump($_FILES);
+		$big_array = $_FILES;
+		$count = count($big_array['batch-file']['name']);
+		$simple_array = array();
+
+		for ($i=0; $i < $count; $i++)
+		{
+			$name = ["name" => $big_array['batch-file']['name'][$i], "type" => $big_array['batch-file']['type'][$i],"tmp_name" => $big_array['batch-file']['tmp_name'][$i], "size"=> $big_array['batch-file']['size'][$i]];
+			array_push($simple_array, $name);
+		}
+		// from here we create new images and store them in the DB, need RAW, Watermark, and Thumbnail
+		function create_raw($image)
+		{
+			require_once(MODELS . '/Image.php');
+			$model = new Image();
+			$tmp_name = $image['tmp_name'];
+			$user_id = 1;
+			$newpath;
+			// need to fill in all of these params
+			$return = $model->create_new($tmp_name, $user_id, $newpath, $width, $height, $size_string, $mime_type, $user_image_name, $watermark, $thumbnail, $price, $premium);
+		}
+		function thumbnail($image)
+		{
+			//
+		}
+		function watermark($image)
+		{
+			// 
+		}
 	}
 }
