@@ -177,7 +177,8 @@ class testController extends Controller {
 			$path  = $this->thumbnail($image); 
 			array_push($path_holder, $path);	
 		}
-		var_dump($path_holder);
+		$json_ready = json_encode($path_holder);
+		echo $json_ready;
 	}
 		// from here we create new images and store them in the DB, need RAW, Watermark, and Thumbnail
 
