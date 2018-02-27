@@ -69,35 +69,6 @@ class testController extends Controller {
 			$this->move($image);
 		}
 	}
-	public function thumbnail($path)
-	{
- 		$type = 'image';
-		$nodir = explode('/', $path);
-		$nodir = $nodir[4];
-		$ext = explode('.', $nodir);
-		var_dump($ext);
-		if ($ext[1] === 'jpg')
-		{
-			$ext = 'jpeg';
-		}
-		else
-		{
-			$ext = $ext[1];
-		}
-		$ext = '.' . $ext;
-		$save_path = '/var/www/idiorm/idiorm-mvc-demo/users/images/thumbnails/' . $nodir . $ext;
-		$new_path = '/users/images/thumbnails/' . $nodir . $ext;
-		$image = new Imagick('/var/www/idiorm/idiorm-mvc-demo' . $path);
-		$image->thumbnailImage(300,300, true);
-		if ($image->writeImage($save_path))
-		{
-			return $new_path;
-		}
-		else
-		{
-			return false;
-		}
-	}
 	public function start_mail()
 	{
 		return_view('view.test.php');
@@ -194,30 +165,51 @@ class testController extends Controller {
 		$big_array = $_FILES;
 		$count = count($big_array['batch-file']['name']);
 		$simple_array = array();
+		$path_holder = array();
 
 		for ($i=0; $i < $count; $i++)
 		{
 			$name = ["name" => $big_array['batch-file']['name'][$i], "type" => $big_array['batch-file']['type'][$i],"tmp_name" => $big_array['batch-file']['tmp_name'][$i], "size"=> $big_array['batch-file']['size'][$i]];
 			array_push($simple_array, $name);
 		}
+		foreach ($simple_array as $image)
+		{
+			$path  = $this->thumbnail($image); 
+			array_push($path_holder, $path);	
+		}
+		var_dump($path_holder);
+	}
 		// from here we create new images and store them in the DB, need RAW, Watermark, and Thumbnail
-		function create_raw($image)
+
+	public function thumbnail($image)
+	{
+		$file = $image['tmp_name'];
+ 		$name = $image['name'];
+ 		$type = 'image';
+		$nodir = explode('/', $file);
+		$nodir = $nodir[2];
+		$ext = explode('.', $name);
+		if ($ext[1] === 'jpg')
 		{
-			require_once(MODELS . '/Image.php');
-			$model = new Image();
-			$tmp_name = $image['tmp_name'];
-			$user_id = 1;
-			$newpath;
-			// need to fill in all of these params
-			$return = $model->create_new($tmp_name, $user_id, $newpath, $width, $height, $size_string, $mime_type, $user_image_name, $watermark, $thumbnail, $price, $premium);
+			$ext = 'jpeg';
 		}
-		function thumbnail($image)
+		else
 		{
-			//
+			$ext = $ext[1];
 		}
-		function watermark($image)
+		$ext2 = $ext;
+		$ext = '.' . $ext;
+		$save_path = '/var/www/idiorm/idiorm-mvc-demo/users/images/thumbnails/' . $nodir . $ext;
+		$new_path = '/users/images/thumbnails/' . $nodir . $ext;
+		$image_real = new Imagick($file);
+		$image_real->thumbnailImage(600,600, true);
+		if ($image_real->writeImage($save_path))
 		{
-			// 
+			return $new_path;
+		}
+		else
+		{
+			return false;
 		}
 	}
 }
