@@ -11,13 +11,17 @@ $secondary-hover-font-color:#333;
 $tag-bg:#ffffe6;
 $sold-table-bg: #e6e6e6;  
 
-
+.invisible
+{
+	display:none;
+}
 #batch-upload-iframe
 {
 	visibility:hidden;
 }
 .batch-upload-card
 {
+	padding-left:5px;
 	width:600px;
 	height:400px;
 	border:1px solid black;
