@@ -1,5 +1,9 @@
 <?php
 require(HEADER);
+
+echo "<pre>";
+print_r($info);
+echo "</pre>";
 ?>
 <h1>You are in the batch upload test area</h1>
 

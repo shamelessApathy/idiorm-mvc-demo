@@ -24,7 +24,7 @@ $(function(){
 			for ( var i = 0; i < return_final.length; i++)
 			{
 				var id = return_final[i]['id'];
-				var string = "<div class='batch-upload-card' data-id='"+return_final[i]['id']+"''><div class='batch-img-holder'><img style='max-width:100%; max-height:100%;' src='"+return_final[i]['path']+"'/></div><input type='number' name='images["+id+"]' value='"+id+"' HIDDEN/><label>Image Name</label><br><input type='text' name='images["+id+"][name]'/></div>";
+				var string = "<div class='batch-upload-card' data-id='"+return_final[i]['id']+"''><div class='batch-img-holder'><img style='max-width:100%; max-height:100%;' src='"+return_final[i]['path']+"'/></div><input type='number' name='images["+id+"]' value='"+id+"' HIDDEN/><label>Image Name</label><br><input type='text' name='images["+id+"][name]'/><input type='text' name='images["+id+"][tags]' HIDDEN/><br><label>Tags:</label><br><br><textarea id='tag-input'></textarea><button type='button'>Add Tag</button></div>";
 				card_holder.innerHTML += string; 
 			}
 			var final_button = document.getElementById('final-cut-button');
