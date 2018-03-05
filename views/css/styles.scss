@@ -10,7 +10,13 @@ $primary-hover-bg: #ccc;
 $secondary-hover-font-color:#333;
 $tag-bg:#ffffe6;
 $sold-table-bg: #e6e6e6;  
-
+.card-template
+{
+	width:300px;
+	height:400px;
+	border:1px solid black;
+	margin-left:10px;
+}
 .invisible
 {
 	display:none;

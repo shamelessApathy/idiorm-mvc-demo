@@ -1,9 +1,15 @@
 <?php
 require(HEADER);
+$json_array = array();
+foreach($info as $category)
+{
+	$temp_array = array("id"=> $category->id, "title" => $category->title);
+	array_push($json_array, $temp_array);
+}
 
-echo "<pre>";
-print_r($info);
-echo "</pre>";
+
+$encoded_array = json_encode($json_array);
+
 ?>
 <h1>You are in the batch upload test area</h1>
 
@@ -24,6 +30,23 @@ echo "</pre>";
 <iframe name="batch-upload-iframe" id="batch-upload-iframe"></iframe>
 
 
+<div class='invisible' id='json-categories'><?php echo $encoded_array;?></div>
+<div class='card-template'>
+	<div class='batch-img-holder'>
+		<img style='max-width:100%; max-height:100%;' src='/demo-image.jpg'/>
+	</div>
+	<label>Image Name</label><br>
+	<input type='text' name='images[][name]'/><br>
+	<label>Category</label>
+	<select name='images[][category]'>
+			<option value=''>Pick One</option>
+		<?php foreach($info as $category):?>
+			<option value="<?php echo $category->id;?>"><?php echo $category->title;?></option>
+		<?php endforeach;?>
+	</select><br>
+	<label>Tags</label><br>
+	<input type='text' name='images[][tags]'/><button type='button' id='add-tag'>Add</button><br>
+</div>
 <?php 
 require_once(HTML_FOOTER);
 require(FOOTER);

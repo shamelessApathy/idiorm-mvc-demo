@@ -21,6 +21,10 @@ $(function(){
 			var return_final = JSON.parse(body);
 			var card_holder = document.getElementById('files');
 			console.log(return_final);
+			var category_json_holder = document.getElementById('json-categories');
+			var cats = $(category_json_holder).html();
+			var decoded = JSON.parse(cats);
+			console.log(decoded);
 			for ( var i = 0; i < return_final.length; i++)
 			{
 				var id = return_final[i]['id'];
