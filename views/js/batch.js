@@ -14,6 +14,8 @@ $(function(){
 		}.bind(this)
 		this.findInfo = function()
 		{
+			var cardTemplate = $('.card-template');
+			console.log(cardTemplate);
 			var iframe = document.getElementById('batch-upload-iframe');
 			var doc = $(iframe).contents();
 			var return_data = $(doc).children().children()[1];
@@ -21,16 +23,22 @@ $(function(){
 			var return_final = JSON.parse(body);
 			var card_holder = document.getElementById('files');
 			console.log(return_final);
+			for (var i = 0; i < return_final.length; i++)
+			{
+				var template = $(cardTemplate).clone();
+				var path = return_final[i]['path'];
+				var thumbnail = $(template).find('.batch-thumbnail');
+				console.log(path);
+				console.log('template: ' + template);
+				console.log('thumbnail: ' + thumbnail);
+				//
+				$(thumbnail).attr('src', path);
+				$(card_holder).append(template);
+			}
 			var category_json_holder = document.getElementById('json-categories');
 			var cats = $(category_json_holder).html();
 			var decoded = JSON.parse(cats);
 			console.log(decoded);
-			for ( var i = 0; i < return_final.length; i++)
-			{
-				var id = return_final[i]['id'];
-				var string = "<div class='batch-upload-card' data-id='"+return_final[i]['id']+"''><div class='batch-img-holder'><img style='max-width:100%; max-height:100%;' src='"+return_final[i]['path']+"'/></div><input type='number' name='images["+id+"]' value='"+id+"' HIDDEN/><label>Image Name</label><br><input type='text' name='images["+id+"][name]'/><input type='text' name='images["+id+"][tags]' HIDDEN/><br><label>Tags:</label><br><br><textarea id='tag-input'></textarea><button type='button'>Add Tag</button></div>";
-				card_holder.innerHTML += string; 
-			}
 			var final_button = document.getElementById('final-cut-button');
 			var first_button = document.getElementById('first-submit');
 			first_button.classList.add('invisible');

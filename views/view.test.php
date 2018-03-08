@@ -33,7 +33,7 @@ $encoded_array = json_encode($json_array);
 <div class='invisible' id='json-categories'><?php echo $encoded_array;?></div>
 <div class='card-template'>
 	<div class='batch-img-holder'>
-		<img style='max-width:100%; max-height:100%;' src='/demo-image.jpg'/>
+		<img class='batch-thumbnail' style='max-width:100%; max-height:100%;' src='/demo-image.jpg'/>
 	</div>
 	<label>Image Name</label><br>
 	<input type='text' name='images[][name]'/><br>
