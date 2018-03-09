@@ -200,8 +200,8 @@ class testController extends Controller {
 		}
 		$ext2 = $ext;
 		$ext = '.' . $ext;
-		$save_path = '/var/www/idiorm/idiorm-mvc-demo/users/images/thumbnails/' . $nodir . $ext;
-		$new_path = '/users/images/thumbnails/' . $nodir . $ext;
+		$save_path = '/var/www/idiorm/idiorm-mvc-demo/users/images/batch/thumb_' . $nodir . $ext;
+		$new_path = '/users/images/batch/thumb_' . $nodir . $ext;
 		$image_real = new Imagick($file);
 		$image_real->thumbnailImage(600,600, true);
 		if ($image_real->writeImage($save_path))
